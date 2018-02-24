@@ -11,6 +11,7 @@ import Foundation
 enum S {
 
     enum Symbols {
+        static let photons = "mł"
         static let lites = "ł"
         static let ltc = "Ł"
         static let narrowSpace = "\u{2009}"
