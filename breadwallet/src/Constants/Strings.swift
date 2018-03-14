@@ -11,21 +11,22 @@ import Foundation
 enum S {
 
     enum Symbols {
-        static let bits = "ł"
-        static let btc = "Ł"
+        static let photons = "mł"
+        static let lites = "ł"
+        static let ltc = "Ł"
         static let narrowSpace = "\u{2009}"
         static let lock = "\u{1F512}"
         static let redX = "\u{274C}"
         static func currencyButtonTitle(maxDigits: Int) -> String {
             switch maxDigits {
             case 2:
-                return "photons\(S.Symbols.narrowSpace)(m\(S.Symbols.bits))"
+                return "photons\(S.Symbols.narrowSpace)(m\(S.Symbols.lites))"
             case 5:
-                return "lites\(S.Symbols.narrowSpace)(\(S.Symbols.bits))"
+                return "lites\(S.Symbols.narrowSpace)(\(S.Symbols.lites))"
             case 8:
-                return "LTC\(S.Symbols.narrowSpace)(\(S.Symbols.btc))"
+                return "LTC\(S.Symbols.narrowSpace)(\(S.Symbols.ltc))"
             default:
-                return "lites\(S.Symbols.narrowSpace)(\(S.Symbols.bits))"
+                return "lites\(S.Symbols.narrowSpace)(\(S.Symbols.lites))"
             }
         }
     }
@@ -278,11 +279,11 @@ enum S {
 
     enum About {
         static let title = NSLocalizedString("About.title", value:"About", comment: "About screen title")
-        static let blog = NSLocalizedString("About.blog", value:"Blog", comment: "About screen blog label")
+        static let blog = NSLocalizedString("About.blog", value:"Website", comment: "About screen website label")
         static let twitter = NSLocalizedString("About.twitter", value:"Twitter", comment: "About screen twitter label")
         static let reddit = NSLocalizedString("About.reddit", value:"Reddit", comment: "About screen reddit label")
         static let privacy = NSLocalizedString("About.privacy", value:"Privacy Policy", comment: "Privay Policy button label")
-        static let footer = NSLocalizedString("About.footer", value:"Made by the global LoafWallet team. Version %1$@", comment: "About screen footer")
+        static let footer = NSLocalizedString("About.footer", value:"Made by Charlie Lee (the creator of Litecoin)\n and the global LoafWallet team.\nVersion %1$@", comment: "About screen footer")
     }
 
     enum PushNotifications {
