@@ -33,7 +33,7 @@ class StartViewController : UIViewController {
         return image
     }()
     private var faq: UIButton
-
+    private let version = UILabel(font: .customMedium(size: 12), color: .whiteTint)
     override func viewDidLoad() {
         view.backgroundColor = .white
         setData()
@@ -48,6 +48,8 @@ class StartViewController : UIViewController {
         message.numberOfLines = 0
         message.textAlignment = .center
         faq.tintColor = .whiteTint
+        version.text = AppVersion.string
+        version.textAlignment = .left
     }
 
     private func addSubviews() {
@@ -57,6 +59,7 @@ class StartViewController : UIViewController {
         view.addSubview(create)
         view.addSubview(recover)
         view.addSubview(faq)
+        view.addSubview(version)
     }
 
     private func addConstraints() {
@@ -84,13 +87,17 @@ class StartViewController : UIViewController {
             faq.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -C.padding[2]),
             faq.widthAnchor.constraint(equalToConstant: 44.0),
             faq.heightAnchor.constraint(equalToConstant: 44.0) ])
+        version.constrain([
+            version.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: C.padding[2]),
+            version.constraint(.leading, toView: view, constant: C.padding[2]),
+            version.heightAnchor.constraint(equalToConstant: 44.0) ])
     }
 
     private func addButtonActions() {
         recover.tap = didTapRecover
         create.tap = didTapCreate
     }
-
+ 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1B3F74231FFB106200CCA50C /* BiometricsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F74211FFB106200CCA50C /* BiometricsSettingsViewController.swift */; };
 		1B3F74241FFB106200CCA50C /* BiometricsSpendingLimitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F74221FFB106200CCA50C /* BiometricsSpendingLimitViewController.swift */; };
+		1BA74B87206AD60A0083BD2A /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BA74B85206AD60A0083BD2A /* Fabric.framework */; };
+		1BA74B88206AD60A0083BD2A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BA74B86206AD60A0083BD2A /* Crashlytics.framework */; };
 		1BBAEC841F8025C10047DEA8 /* BRTransaction.c in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAEC051F80237B0047DEA8 /* BRTransaction.c */; };
 		1BBAEC851F8025C90047DEA8 /* BRPeer.c in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAEBFF1F80237B0047DEA8 /* BRPeer.c */; };
 		1BBAEC861F8025D20047DEA8 /* BRBIP38Key.c in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAEBEF1F80237B0047DEA8 /* BRBIP38Key.c */; };
@@ -70,6 +72,256 @@
 		22C431341DF89DFE0017CAEA /* BRCoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C431331DF89DFE0017CAEA /* BRCoderTests.swift */; };
 		22C431361DF8A6DF0017CAEA /* BRAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C431351DF8A6DF0017CAEA /* BRAPIClientTests.swift */; };
 		22E773041EE7813000397E0E /* Bonjour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E773031EE7813000397E0E /* Bonjour.swift */; };
+		241A70D8206F4464004A6F28 /* UIImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CE916E301EDA7F1400D641D6 /* UIImage+Utils.m */; };
+		241A70D9206F4464004A6F28 /* BRBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE916E2D1EDA7ED000D641D6 /* BRBubbleView.m */; };
+		241A70DA206F4464004A6F28 /* BRTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE916E361EDA855800D641D6 /* BRTodayViewController.m */; };
+		241A70DC206F4464004A6F28 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75A2A8091DA5936F00A983D8 /* NotificationCenter.framework */; };
+		241A70DE206F4464004A6F28 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE916E291EDA7E4400D641D6 /* Media.xcassets */; };
+		241A70DF206F4464004A6F28 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75A2A80E1DA5936F00A983D8 /* MainInterface.storyboard */; };
+		241A70E8206F4493004A6F28 /* TodayExtension-Development.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 241A70E6206F4464004A6F28 /* TodayExtension-Development.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		241A70ED206F44A5004A6F28 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A2A81E1DA5938500A983D8 /* NotificationService.swift */; };
+		241A70F8206F44C9004A6F28 /* NotificationServiceExtension-Development.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 241A70F6206F44A5004A6F28 /* NotificationServiceExtension-Development.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		245CEDA3206F52DF00CE1E43 /* LoafWallet WatchKit App-Development.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 24AD45FB206F496E0000E978 /* LoafWallet WatchKit App-Development.app */; };
+		2460F1C8206F2D5F00097680 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF292F1EF9D76F005C330A /* Environment.swift */; };
+		2460F1C9206F2D5F00097680 /* ModalDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6AA4C1DF0741100EE5AFD /* ModalDisplayable.swift */; };
+		2460F1CA206F2D5F00097680 /* WatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30F0EB1EB28542004B8EE5 /* WatchData.swift */; };
+		2460F1CB206F2D5F00097680 /* PinTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0EF511EBD14B60018DB36 /* PinTransitioningDelegate.swift */; };
+		2460F1CC206F2D5F00097680 /* KVStoreCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE45C1FC1E7650F5002C3847 /* KVStoreCoordinator.swift */; };
+		2460F1CD206F2D5F00097680 /* BRCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754AE0BB1DFE8A46007FD001 /* BRCore.swift */; };
+		2460F1CE206F2D5F00097680 /* BRCameraPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9361DF61945000F0016 /* BRCameraPlugin.swift */; };
+		2460F1CF206F2D5F00097680 /* CGRect+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6AA3A1DEE4EB000EE5AFD /* CGRect+Additions.swift */; };
+		2460F1D0206F2D5F00097680 /* WalletInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE45C1FA1E74F89C002C3847 /* WalletInfo.swift */; };
+		2460F1D1206F2D5F00097680 /* TransactionDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14E40A1E4D881500AEA83A /* TransactionDetailCollectionViewCell.swift */; };
+		2460F1D2206F2D5F00097680 /* RetryTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE659E61F65A936001FF29D /* RetryTimer.swift */; };
+		2460F1D3206F2D5F00097680 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9057191DFF18B2006BA848 /* ScanViewController.swift */; };
+		2460F1D4206F2D5F00097680 /* UIViewController+BRWAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20C8F51DBAF77D00C8397A /* UIViewController+BRWAdditions.swift */; };
+		2460F1D5206F2D5F00097680 /* BRBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222319AF1F27985A00008F20 /* BRBrowserViewController.swift */; };
+		2460F1D6206F2D5F00097680 /* ExchangeUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74F58C1E3BA85600ED5FA9 /* ExchangeUpdater.swift */; };
+		2460F1D7206F2D5F00097680 /* UIControl+Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DCC241E6001E50044257B /* UIControl+Callback.swift */; };
+		2460F1D8206F2D5F00097680 /* BRSocketHelpers.c in Sources */ = {isa = PBXBuildFile; fileRef = 223DB2171DF691260076A151 /* BRSocketHelpers.c */; };
+		2460F1D9206F2D5F00097680 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF3E82C1DE528BF007C0A9E /* AlertView.swift */; };
+		2460F1DA206F2D5F00097680 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF32F81DDD193500348FC6 /* TransactionTableViewCell.swift */; };
+		2460F1DB206F2D5F00097680 /* GradientCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF3E82A1DE51612007C0A9E /* GradientCircle.swift */; };
+		2460F1DC206F2D5F00097680 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE124CFD1E68F57700DFA146 /* Async.swift */; };
+		2460F1DD206F2D5F00097680 /* BRAPIClient+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2218BD761E8F55430091D5E8 /* BRAPIClient+Assets.swift */; };
+		2460F1DE206F2D5F00097680 /* BRAPIClient+Features.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2228734C1E916F7C0044BA15 /* BRAPIClient+Features.swift */; };
+		2460F1DF206F2D5F00097680 /* BRHTTPFileMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9391DF61945000F0016 /* BRHTTPFileMiddleware.swift */; };
+		2460F1E0206F2D5F00097680 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8644241F2C160200033129 /* ConfirmationViewController.swift */; };
+		2460F1E1206F2D5F00097680 /* BCashTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44BA1C1F35102D00392A1A /* BCashTransactionViewController.swift */; };
+		2460F1E2206F2D5F00097680 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF32EF1DDCD30600348FC6 /* AccountViewController.swift */; };
+		2460F1E3206F2D5F00097680 /* ModalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1F5621DF13E5A00D733AD /* ModalHeaderView.swift */; };
+		2460F1E4206F2D5F00097680 /* LoginTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5F21DA1E4A93A500C47B8E /* LoginTransitionDelegate.swift */; };
+		2460F1E5206F2D5F00097680 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE659E81F664C73001FF29D /* WelcomeViewController.swift */; };
+		2460F1E6206F2D5F00097680 /* BRAPIClient+Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2228734E1E916FC30044BA15 /* BRAPIClient+Wallet.swift */; };
+		2460F1E7206F2D5F00097680 /* PinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA9EA71DC3342E0066731D /* PinView.swift */; };
+		2460F1E8206F2D5F00097680 /* UIBarButtonItem+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D84B51EAEB2F4002A5D7B /* UIBarButtonItem+Additions.swift */; };
+		2460F1E9206F2D5F00097680 /* SupportCenterContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E6C951EB8CCF500A476DB /* SupportCenterContainer.swift */; };
+		2460F1EA206F2D5F00097680 /* WalletCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4B6C191E219CA600CF935B /* WalletCoordinator.swift */; };
+		2460F1EB206F2D5F00097680 /* KeyboardNotificationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D0E5B1E14BFA600137DF1 /* KeyboardNotificationInfo.swift */; };
+		2460F1EC206F2D5F00097680 /* FeeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA05CC21F21B53C00D850F0 /* FeeSelector.swift */; };
+		2460F1ED206F2D5F00097680 /* ApplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20C8F11DBAF71500C8397A /* ApplicationController.swift */; };
+		2460F1EE206F2D5F00097680 /* BiometricsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F74211FFB106200CCA50C /* BiometricsSettingsViewController.swift */; };
+		2460F1EF206F2D5F00097680 /* StartWipeWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC4CF061F0C48DD00E5C82E /* StartWipeWalletViewController.swift */; };
+		2460F1F0206F2D5F00097680 /* PaymentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7528D2971ECF655500925DBC /* PaymentProtocol.swift */; };
+		2460F1F1206F2D5F00097680 /* BRBSPatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9351DF61945000F0016 /* BRBSPatch.swift */; };
+		2460F1F2206F2D5F00097680 /* UIViewControllerContextTransitioning+BRAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92F9F51DEDF6890046B516 /* UIViewControllerContextTransitioning+BRAdditions.swift */; };
+		2460F1F3206F2D5F00097680 /* CameraGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA362671E00EE320061FC0E /* CameraGuideView.swift */; };
+		2460F1F4206F2D5F00097680 /* SimpleUTXO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE03EC731EF256AC0038E3A8 /* SimpleUTXO.swift */; };
+		2460F1F5206F2D5F00097680 /* TransactionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF32F51DDCEAF900348FC6 /* TransactionsTableViewController.swift */; };
+		2460F1F6206F2D5F00097680 /* FeeUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE124CFB1E68932C00DFA146 /* FeeUpdater.swift */; };
+		2460F1F7206F2D5F00097680 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE20C371EA5B4680086F724 /* Strings.swift */; };
+		2460F1F8206F2D5F00097680 /* InViewAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25BF8C1DF3B8A500BC67B6 /* InViewAlert.swift */; };
+		2460F1F9206F2D5F00097680 /* TxMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A93D1DF61945000F0016 /* TxMetaData.swift */; };
+		2460F1FA206F2D5F00097680 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CD8E01E31976800785E02 /* LoginViewController.swift */; };
+		2460F1FB206F2D5F00097680 /* UINavigationController+BRAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6AA381DEE10BA00EE5AFD /* UINavigationController+BRAdditions.swift */; };
+		2460F1FC206F2D5F00097680 /* GenericPinPadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCE5AA1E038C9900D99448 /* GenericPinPadCell.swift */; };
+		2460F1FD206F2D5F00097680 /* DescriptionSendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCE5AF1E04AD7600D99448 /* DescriptionSendCell.swift */; };
+		2460F1FE206F2D5F00097680 /* NodeSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44BA1A1F33BFC500392A1A /* NodeSelectorViewController.swift */; };
+		2460F1FF206F2D5F00097680 /* ClearNumberPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3645491E7B426B0079D0CF /* ClearNumberPad.swift */; };
+		2460F200206F2D5F00097680 /* SyncingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE124CFF1E69170900DFA146 /* SyncingView.swift */; };
+		2460F201206F2D5F00097680 /* UIView+BRWAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20C90D1DBE52B000C8397A /* UIView+BRWAdditions.swift */; };
+		2460F202206F2D5F00097680 /* UIView+InitAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6314821E08E5BB00D4AFE0 /* UIView+InitAdditions.swift */; };
+		2460F203206F2D5F00097680 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6AA3F1DEFC87300EE5AFD /* SendViewController.swift */; };
+		2460F204206F2D5F00097680 /* StartPaperPhraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA9E8E1DC074410066731D /* StartPaperPhraseViewController.swift */; };
+		2460F205206F2D5F00097680 /* BiometricsSpendingLimitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F74221FFB106200CCA50C /* BiometricsSpendingLimitViewController.swift */; };
+		2460F206206F2D5F00097680 /* PaymentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6F8441E886723000795B8 /* PaymentRequest.swift */; };
+		2460F207206F2D5F00097680 /* URLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C1CC71ED88B600063E184 /* URLController.swift */; };
+		2460F208206F2D5F00097680 /* UIButton+BRWAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20C9161DBE6F2A00C8397A /* UIButton+BRWAdditions.swift */; };
+		2460F209206F2D5F00097680 /* WritePaperPhraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA9E921DC110E70066731D /* WritePaperPhraseViewController.swift */; };
+		2460F20A206F2D5F00097680 /* UIView+AnimationAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92F9F31DED59E80046B516 /* UIView+AnimationAdditions.swift */; };
+		2460F20B206F2D5F00097680 /* DefaultCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC70931E96A24F00EF788E /* DefaultCurrencyViewController.swift */; };
+		2460F20C206F2D5F00097680 /* LoginBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB9DB51E4985CE0081A172 /* LoginBackgroundView.swift */; };
+		2460F20D206F2D5F00097680 /* DispatchQueue+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE628291EA98B6D001035AA /* DispatchQueue+Additions.swift */; };
+		2460F20E206F2D5F00097680 /* RadialGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6AA3C1DEE687000EE5AFD /* RadialGradientView.swift */; };
+		2460F20F206F2D5F00097680 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC70911E95DA4400EF788E /* GradientSwitch.swift */; };
+		2460F210206F2D5F00097680 /* ModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0CD1581DBFBCF5004023DA /* ModalPresenter.swift */; };
+		2460F211206F2D5F00097680 /* BlinkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE20C2E1EA3E5820086F724 /* BlinkingView.swift */; };
+		2460F212206F2D5F00097680 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6AA431DEFCDE900EE5AFD /* ModalViewController.swift */; };
+		2460F213206F2D5F00097680 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC70821E90C07C00EF788E /* Setting.swift */; };
+		2460F214206F2D5F00097680 /* LoadingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4B6C1B1E21A96D00CF935B /* LoadingProgressView.swift */; };
+		2460F215206F2D5F00097680 /* ManageWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE45C1F81E74B400002C3847 /* ManageWalletViewController.swift */; };
+		2460F216206F2D5F00097680 /* String+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE03EC711EF193800038E3A8 /* String+Keys.swift */; };
+		2460F217206F2D5F00097680 /* PresentModalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92F9EF1DED0C790046B516 /* PresentModalAnimator.swift */; };
+		2460F218206F2D5F00097680 /* UILabel+BRWAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA9E941DC1659F0066731D /* UILabel+BRWAdditions.swift */; };
+		2460F219206F2D5F00097680 /* LightWeightAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF292D1EF99E55005C330A /* LightWeightAlert.swift */; };
+		2460F21A206F2D5F00097680 /* ShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF32ED1DDBC30000348FC6 /* ShadowButton.swift */; };
+		2460F21B206F2D5F00097680 /* EnterPhraseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB909F61E5FE654001804DC /* EnterPhraseCollectionViewController.swift */; };
+		2460F21C206F2D5F00097680 /* LAContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF3D2DC1E8CBA790070178E /* LAContext+Extensions.swift */; };
+		2460F21D206F2D5F00097680 /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCE5AD1E04AD6300D99448 /* AddressCell.swift */; };
+		2460F21E206F2D5F00097680 /* CustomTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6BCF5C1EE9E89A0029849C /* CustomTitleView.swift */; };
+		2460F21F206F2D5F00097680 /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DC1381EBC36EE000FE727 /* Prompt.swift */; };
+		2460F220206F2D5F00097680 /* SendAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83DE291E9EB7F600D07636 /* SendAmountCell.swift */; };
+		2460F221206F2D5F00097680 /* BRKVStorePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A93E1DF61945000F0016 /* BRKVStorePlugin.swift */; };
+		2460F222206F2D5F00097680 /* SegmentedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFC8601E5D5B0500E4FD06 /* SegmentedButton.swift */; };
+		2460F223206F2D5F00097680 /* PhoneWCSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30F0E51EB27844004B8EE5 /* PhoneWCSessionManager.swift */; };
+		2460F224206F2D5F00097680 /* WalletManager+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7503773C1DF57428005EB8AE /* WalletManager+Auth.swift */; };
+		2460F225206F2D5F00097680 /* BRWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9441DF61945000F0016 /* BRWebViewController.swift */; };
+		2460F226206F2D5F00097680 /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC4CF081F0C84AB00E5C82E /* UIViewController+Alerts.swift */; };
+		2460F227206F2D5F00097680 /* Amount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE27F9581E2C8EA300F7F7F2 /* Amount.swift */; };
+		2460F228206F2D5F00097680 /* Date+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1280F51EEA855C00D27649 /* Date+Additions.swift */; };
+		2460F229206F2D5F00097680 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED82D4D1E575A5500507A9B /* main.swift */; };
+		2460F22A206F2D5F00097680 /* AboutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC708D1E954AAB00EF788E /* AboutCell.swift */; };
+		2460F22B206F2D5F00097680 /* BRAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9321DF61945000F0016 /* BRAPIClient.swift */; };
+		2460F22C206F2D5F00097680 /* ConfirmPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA9E9A1DC2B9320066731D /* ConfirmPhrase.swift */; };
+		2460F22D206F2D5F00097680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A2A7931DA5934300A983D8 /* AppDelegate.swift */; };
+		2460F22E206F2D5F00097680 /* PushNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC708F1E95D5C100EF788E /* PushNotificationsViewController.swift */; };
+		2460F22F206F2D5F00097680 /* BRAPIClient+KV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222C424F1E90492800078EB5 /* BRAPIClient+KV.swift */; };
+		2460F230206F2D5F00097680 /* WalletDisabledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E6C931EB7964900A476DB /* WalletDisabledView.swift */; };
+		2460F231206F2D5F00097680 /* AnimatableIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF3E8331DE57166007C0A9E /* AnimatableIcon.swift */; };
+		2460F232206F2D5F00097680 /* NumberFormatter+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF61B151ED2056D00C7EA6A /* NumberFormatter+Additions.swift */; };
+		2460F233206F2D5F00097680 /* CheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF3E8311DE55540007C0A9E /* CheckView.swift */; };
+		2460F234206F2D5F00097680 /* PinPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCE5A81E0378FB00D99448 /* PinPadViewController.swift */; };
+		2460F235206F2D5F00097680 /* UISlider+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF3D2DA1E8B55C80070178E /* UISlider+Gradient.swift */; };
+		2460F236206F2D5F00097680 /* MenuButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6AA4A1DEFD24C00EE5AFD /* MenuButtonType.swift */; };
+		2460F237206F2D5F00097680 /* BRActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4CA7BB1EE3649100373F11 /* BRActivityView.swift */; };
+		2460F238206F2D5F00097680 /* ReceiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6AA411DEFC88F00EE5AFD /* ReceiveViewController.swift */; };
+		2460F239206F2D5F00097680 /* UpdatingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE20C2C1EA288FA0086F724 /* UpdatingLabel.swift */; };
+		2460F23A206F2D5F00097680 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D4C581EF743EF0016B1C8 /* Functions.swift */; };
+		2460F23B206F2D5F00097680 /* ArticleIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE20C331EA5B4550086F724 /* ArticleIds.swift */; };
+		2460F23C206F2D5F00097680 /* Rate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE65DEF1E39056F0002994D /* Rate.swift */; };
+		2460F23D206F2D5F00097680 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE20C351EA5B4620086F724 /* Constants.swift */; };
+		2460F23E206F2D5F00097680 /* RoundedContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3754AE1DDE6E2E0045B0CB /* RoundedContainer.swift */; };
+		2460F23F206F2D5F00097680 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6AA451DEFCE9200EE5AFD /* MenuViewController.swift */; };
+		2460F240206F2D5F00097680 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC707E1E8D6B4100EF788E /* SettingsViewController.swift */; };
+		2460F241206F2D5F00097680 /* RequestAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE92F01EBA7CBA00B7AC9C /* RequestAmountViewController.swift */; };
+		2460F242206F2D5F00097680 /* VerifyPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CD8DE1E2E825000785E02 /* VerifyPinViewController.swift */; };
+		2460F243206F2D5F00097680 /* UserDefaultsUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE916E321EDA800E00D641D6 /* UserDefaultsUpdater.swift */; };
+		2460F244206F2D5F00097680 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20C9101DBE5B6F00C8397A /* Circle.swift */; };
+		2460F245206F2D5F00097680 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20C9061DBC587200C8397A /* StartViewController.swift */; };
+		2460F246206F2D5F00097680 /* WalletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75519F331DC7D20500EDF66C /* WalletManager.swift */; };
+		2460F247206F2D5F00097680 /* BRHTTPIndexMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A93A1DF61945000F0016 /* BRHTTPIndexMiddleware.swift */; };
+		2460F248206F2D5F00097680 /* TransactionDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE124CF71E67A8E500DFA146 /* TransactionDirection.swift */; };
+		2460F249206F2D5F00097680 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CD8DC1E2D9EF200785E02 /* Sender.swift */; };
+		2460F24A206F2D5F00097680 /* ReScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4DFB2B1E9BE5880014009E /* ReScanViewController.swift */; };
+		2460F24B206F2D5F00097680 /* WalletManager+BCash.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44BA1E1F353AB200392A1A /* WalletManager+BCash.swift */; };
+		2460F24C206F2D5F00097680 /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F0AE21EB91BB500AA7642 /* SearchHeaderView.swift */; };
+		2460F24D206F2D5F00097680 /* BRTar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9411DF61945000F0016 /* BRTar.swift */; };
+		2460F24E206F2D5F00097680 /* TransactionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14E4081E4D506000AEA83A /* TransactionDetailsViewController.swift */; };
+		2460F24F206F2D5F00097680 /* PhraseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA9E961DC18E1F0066731D /* PhraseView.swift */; };
+		2460F250206F2D5F00097680 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF3E82E1DE534C5007C0A9E /* GradientView.swift */; };
+		2460F251206F2D5F00097680 /* DismissModalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D0F981DE8B75900BD4BCF /* DismissModalAnimator.swift */; };
+		2460F252206F2D5F00097680 /* DrawableCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C1CC51ED65D830063E184 /* DrawableCircle.swift */; };
+		2460F253206F2D5F00097680 /* LoginBackgroundTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CD8E21E31978100785E02 /* LoginBackgroundTriangle.swift */; };
+		2460F254206F2D5F00097680 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC708B1E95461A00EF788E /* AboutViewController.swift */; };
+		2460F255206F2D5F00097680 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF61B131ED0D10000C7EA6A /* Types.swift */; };
+		2460F256206F2D5F00097680 /* UnEditableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC70891E945E3B00EF788E /* UnEditableTextView.swift */; };
+		2460F257206F2D5F00097680 /* WhiteNumberPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3645471E7B424D0079D0CF /* WhiteNumberPad.swift */; };
+		2460F258206F2D5F00097680 /* ConfirmPaperPhraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA9E981DC262800066731D /* ConfirmPaperPhraseViewController.swift */; };
+		2460F259206F2D5F00097680 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9451DF61945000F0016 /* Extensions.swift */; };
+		2460F25A206F2D5F00097680 /* BRGeoLocationPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9381DF61945000F0016 /* BRGeoLocationPlugin.swift */; };
+		2460F25B206F2D5F00097680 /* StartNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA9EA51DC3246F0066731D /* StartNavigationDelegate.swift */; };
+		2460F25C206F2D5F00097680 /* BRCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9371DF61945000F0016 /* BRCoding.swift */; };
+		2460F25D206F2D5F00097680 /* BRWalletPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9421DF61945000F0016 /* BRWalletPlugin.swift */; };
+		2460F25E206F2D5F00097680 /* ModalNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF3E8351DE60222007C0A9E /* ModalNavigationController.swift */; };
+		2460F25F206F2D5F00097680 /* WatchTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED811A51EB29692003A8D1E /* WatchTransaction.swift */; };
+		2460F260206F2D5F00097680 /* RecoverWalletIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB909F91E5FF242001804DC /* RecoverWalletIntroViewController.swift */; };
+		2460F261206F2D5F00097680 /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25BF901DF9ADE700BC67B6 /* UIImage+Utils.swift */; };
+		2460F262206F2D5F00097680 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF33031DDE17A600348FC6 /* Transaction.swift */; };
+		2460F263206F2D5F00097680 /* UIViewPropertyAnimator+BRWAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA9E901DC0FDFE0066731D /* UIViewPropertyAnimator+BRWAdditions.swift */; };
+		2460F264206F2D5F00097680 /* Bonjour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E773031EE7813000397E0E /* Bonjour.swift */; };
+		2460F265206F2D5F00097680 /* UIFont+BRWAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA9E9F1DC2F9F50066731D /* UIFont+BRWAdditions.swift */; };
+		2460F266206F2D5F00097680 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6AA481DEFD00100EE5AFD /* MenuButton.swift */; };
+		2460F267206F2D5F00097680 /* AmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF61B111ECF52C700C7EA6A /* AmountViewController.swift */; };
+		2460F268206F2D5F00097680 /* AccountHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF32F11DDCE10D00348FC6 /* AccountHeaderView.swift */; };
+		2460F269206F2D5F00097680 /* SendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCE5B11E04B00D00D99448 /* SendCell.swift */; };
+		2460F26A206F2D5F00097680 /* NonScrollingCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DCC2F1E6666470044257B /* NonScrollingCollectionView.swift */; };
+		2460F26B206F2D5F00097680 /* BRAPIProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9331DF61945000F0016 /* BRAPIProxy.swift */; };
+		2460F26C206F2D5F00097680 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20C9001DBBFFF800C8397A /* Actions.swift */; };
+		2460F26D206F2D5F00097680 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20C9181DBE7B8200C8397A /* State.swift */; };
+		2460F26E206F2D5F00097680 /* SeparatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC70801E90C04700EF788E /* SeparatorCell.swift */; };
+		2460F26F206F2D5F00097680 /* SimpleRedux.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20C8FD1DBB133A00C8397A /* SimpleRedux.swift */; };
+		2460F270206F2D5F00097680 /* BRAPIClient+Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22122B711F0B8996000E9AB9 /* BRAPIClient+Events.swift */; };
+		2460F271206F2D5F00097680 /* UITableView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4B6C1F1E233C2C00CF935B /* UITableView+Additions.swift */; };
+		2460F272206F2D5F00097680 /* SecurityCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE760EDA1E561DF900EFAC2B /* SecurityCenterViewController.swift */; };
+		2460F273206F2D5F00097680 /* UserDefaults+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC70851E94397D00EF788E /* UserDefaults+Additions.swift */; };
+		2460F274206F2D5F00097680 /* BRHTTPServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A93C1DF61945000F0016 /* BRHTTPServer.swift */; };
+		2460F275206F2D5F00097680 /* BRLinkPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A93F1DF61945000F0016 /* BRLinkPlugin.swift */; };
+		2460F276206F2D5F00097680 /* ReachabilityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D4C561EF5D5740016B1C8 /* ReachabilityMonitor.swift */; };
+		2460F277206F2D5F00097680 /* BRWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9431DF61945000F0016 /* BRWebSocket.swift */; };
+		2460F278206F2D5F00097680 /* ShareDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4DFB2D1E9C26DA0014009E /* ShareDataViewController.swift */; };
+		2460F279206F2D5F00097680 /* StartImportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E5F251EF083A600BD0F72 /* StartImportViewController.swift */; };
+		2460F27A206F2D5F00097680 /* MessageUIPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25BF921DFDA7A500BC67B6 /* MessageUIPresenter.swift */; };
+		2460F27B206F2D5F00097680 /* StartFlowPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20C90B1DBC59E600C8397A /* StartFlowPresenter.swift */; };
+		2460F27C206F2D5F00097680 /* UIColor+BRWAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20C8FB1DBB0F3A00C8397A /* UIColor+BRWAdditions.swift */; };
+		2460F27D206F2D5F00097680 /* CGContext+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA362691E01150D0061FC0E /* CGContext+Additions.swift */; };
+		2460F27E206F2D5F00097680 /* BRReplicatedKVStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9401DF61945000F0016 /* BRReplicatedKVStore.swift */; };
+		2460F27F206F2D5F00097680 /* SecurityCenterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B6B491E54C0CA00B31405 /* SecurityCenterCell.swift */; };
+		2460F280206F2D5F00097680 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30F0E91EB282C8004B8EE5 /* SharedConstants.swift */; };
+		2460F281206F2D5F00097680 /* WhiteDecimalPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE36454B1E7B42850079D0CF /* WhiteDecimalPad.swift */; };
+		2460F282206F2D5F00097680 /* DismissLoginAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5F21D81E4A922700C47B8E /* DismissLoginAnimator.swift */; };
+		2460F283206F2D5F00097680 /* UIView+FrameChangeBlocking.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCE5A41E02408300D99448 /* UIView+FrameChangeBlocking.swift */; };
+		2460F284206F2D5F00097680 /* BRHTTPRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A93B1DF61945000F0016 /* BRHTTPRouter.swift */; };
+		2460F285206F2D5F00097680 /* EnterPhraseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DCC261E6108D50044257B /* EnterPhraseCell.swift */; };
+		2460F286206F2D5F00097680 /* UpdatePinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE760EDB1E561DF900EFAC2B /* UpdatePinViewController.swift */; };
+		2460F287206F2D5F00097680 /* BRBitID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9341DF61945000F0016 /* BRBitID.swift */; };
+		2460F288206F2D5F00097680 /* AccountFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF32F31DDCE12900348FC6 /* AccountFooterView.swift */; };
+		2460F289206F2D5F00097680 /* String+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9057171DFF0FA8006BA848 /* String+Additions.swift */; };
+		2460F28A206F2D5F00097680 /* InAppAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED341321EF5A5C00014912A /* InAppAlert.swift */; };
+		2460F28B206F2D5F00097680 /* UIScreen+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47A8DF1F7DA54000FF35BA /* UIScreen+Additions.swift */; };
+		2460F28C206F2D5F00097680 /* MaskedShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3754AC1DDE6E080045B0CB /* MaskedShadow.swift */; };
+		2460F28D206F2D5F00097680 /* AssociatedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222C42511E904C5000078EB5 /* AssociatedObject.swift */; };
+		2460F28E206F2D5F00097680 /* EnterPhraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB909F41E5FE63D001804DC /* EnterPhraseViewController.swift */; };
+		2460F28F206F2D5F00097680 /* ModalTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D0F961DE8B73A00BD4BCF /* ModalTransitionDelegate.swift */; };
+		2460F291206F2D5F00097680 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A9A9651DF61FEE000F0016 /* WebKit.framework */; };
+		2460F292206F2D5F00097680 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A9A9631DF61FE7000F0016 /* Security.framework */; };
+		2460F293206F2D5F00097680 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A9A9611DF61FE0000F0016 /* SystemConfiguration.framework */; };
+		2460F294206F2D5F00097680 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A9A95F1DF61FD8000F0016 /* CoreLocation.framework */; };
+		2460F295206F2D5F00097680 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A9A95D1DF61FD0000F0016 /* PushKit.framework */; };
+		2460F296206F2D5F00097680 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BA74B85206AD60A0083BD2A /* Fabric.framework */; };
+		2460F297206F2D5F00097680 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BA74B86206AD60A0083BD2A /* Crashlytics.framework */; };
+		2460F298206F2D5F00097680 /* libbz2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A9A9961DF63426000F0016 /* libbz2.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		2460F299206F2D5F00097680 /* sqlite3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 752FB04A1DF8BE6B009086FB /* sqlite3.framework */; };
+		2460F29A206F2D5F00097680 /* libBRCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 755CD9D11DAA197C0075898E /* libBRCore.a */; };
+		2460F29C206F2D5F00097680 /* BIP39Words.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE4C1CD21ED8BCC70063E184 /* BIP39Words.plist */; };
+		2460F29D206F2D5F00097680 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75A2A79C1DA5934300A983D8 /* LaunchScreen.storyboard */; };
+		2460F29E206F2D5F00097680 /* CircularPro-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = CEAA9EA11DC2FC700066731D /* CircularPro-Book.otf */; };
+		2460F29F206F2D5F00097680 /* POSTBouncer.html in Resources */ = {isa = PBXBuildFile; fileRef = 222319B11F279B3C00008F20 /* POSTBouncer.html */; };
+		2460F2A0206F2D5F00097680 /* coinflip.aiff in Resources */ = {isa = PBXBuildFile; fileRef = CE473D7B1F042F1E00C0ACFD /* coinflip.aiff */; };
+		2460F2A1206F2D5F00097680 /* Icon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE5E6C991EB9135000A476DB /* Icon.xcassets */; };
+		2460F2A2206F2D5F00097680 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE29901C1EFD6DE50093A0F2 /* Localizable.strings */; };
+		2460F2A3206F2D5F00097680 /* AssetBundles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2218BD781E8F6CBA0091D5E8 /* AssetBundles.plist */; };
+		2460F2A4206F2D5F00097680 /* CircularPro-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = CEAA9EA21DC2FC700066731D /* CircularPro-Medium.otf */; };
+		2460F2A5206F2D5F00097680 /* CircularPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CEAA9E9D1DC2F90C0066731D /* CircularPro-Bold.otf */; };
+		2460F2A6206F2D5F00097680 /* bread-frontend.tar in Resources */ = {isa = PBXBuildFile; fileRef = CED486DD1F70A179007406D3 /* bread-frontend.tar */; };
+		2460F2A7206F2D5F00097680 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75A2A79A1DA5934300A983D8 /* Assets.xcassets */; };
+		2460F2AE206F2D5F00097680 /* libbz2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22A9A9961DF63426000F0016 /* libbz2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2460F2AF206F2D5F00097680 /* sqlite3.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 752FB04A1DF8BE6B009086FB /* sqlite3.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		24AD45F0206F496E0000E978 /* LoadingIndicator.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEFFA2D01EB3BD730085C5D1 /* LoadingIndicator.xcassets */; };
+		24AD45F1206F496E0000E978 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75A2A7C01DA5934300A983D8 /* Assets.xcassets */; };
+		24AD45F2206F496E0000E978 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75A2A7BD1DA5934300A983D8 /* Interface.storyboard */; };
+		24AD45FF206F498A0000E978 /* ReceiveInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED811E41EB30846003A8D1E /* ReceiveInterfaceController.swift */; };
+		24AD4600206F498A0000E978 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE20C371EA5B4680086F724 /* Strings.swift */; };
+		24AD4601206F498A0000E978 /* BRAWWeakTimerTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED811AB1EB2BCDE003A8D1E /* BRAWWeakTimerTarget.swift */; };
+		24AD4602206F498A0000E978 /* WatchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30F0E71EB27FA2004B8EE5 /* WatchDataManager.swift */; };
+		24AD4603206F498A0000E978 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A2A7D21DA5934300A983D8 /* NotificationController.swift */; };
+		24AD4604206F498A0000E978 /* WatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30F0EB1EB28542004B8EE5 /* WatchData.swift */; };
+		24AD4605206F498A0000E978 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A2A7D41DA5934300A983D8 /* ComplicationController.swift */; };
+		24AD4606206F498A0000E978 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A2A7D01DA5934300A983D8 /* ExtensionDelegate.swift */; };
+		24AD4607206F498A0000E978 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30F0E91EB282C8004B8EE5 /* SharedConstants.swift */; };
+		24AD4608206F498A0000E978 /* BalanceInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A2A7CE1DA5934300A983D8 /* BalanceInterfaceController.swift */; };
+		24AD4609206F498A0000E978 /* WatchTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED811A51EB29692003A8D1E /* WatchTransaction.swift */; };
+		24AD460C206F498A0000E978 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75A2A7D61DA5934300A983D8 /* Assets.xcassets */; };
+		24FAF14B2071AAF90020BF9D /* LoafWallet WatchKit Extension-Development.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 24AD4614206F498A0000E978 /* LoafWallet WatchKit Extension-Development.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7503773D1DF57428005EB8AE /* WalletManager+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7503773C1DF57428005EB8AE /* WalletManager+Auth.swift */; };
 		751734B91DAC941E00193C87 /* sec-sub-1.c in Sources */ = {isa = PBXBuildFile; fileRef = 755CD8BE1DAA16820075898E /* sec-sub-1.c */; };
 		752438751DAAC50800844BEC /* alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 755CD6761DAA0E400075898E /* alloc.c */; };
@@ -426,6 +678,55 @@
 			remoteGlobalIDString = 22A9A9951DF63426000F0016;
 			remoteInfo = libbz2;
 		};
+		241A70E9206F4493004A6F28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75A2A7881DA5934300A983D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 241A70D6206F4464004A6F28;
+			remoteInfo = "TodayExtension-Development";
+		};
+		241A70F9206F44C9004A6F28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75A2A7881DA5934300A983D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 241A70EB206F44A5004A6F28;
+			remoteInfo = "NotificationServiceExtension-Development";
+		};
+		244AD27D206F4FE2002CED63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75A2A7881DA5934300A983D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 24AD45EC206F496E0000E978;
+			remoteInfo = "LoafWallet WatchKit App-Development";
+		};
+		2460F1BC206F2D5F00097680 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75A2A7881DA5934300A983D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 755CD9D01DAA197C0075898E;
+			remoteInfo = BRCore;
+		};
+		2460F1C4206F2D5F00097680 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75A2A7881DA5934300A983D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22A9A9951DF63426000F0016;
+			remoteInfo = libbz2;
+		};
+		2460F1C6206F2D5F00097680 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75A2A7881DA5934300A983D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 752FB0411DF8BE6B009086FB;
+			remoteInfo = libsqlite3;
+		};
+		24FAF14C2071AAF90020BF9D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75A2A7881DA5934300A983D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 24AD45FD206F498A0000E978;
+			remoteInfo = "LoafWallet WatchKit Extension-Development";
+		};
 		752FB04E1DF8BF5C009086FB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 75A2A7881DA5934300A983D8 /* Project object */;
@@ -525,6 +826,62 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2460F2A8206F2D5F00097680 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				245CEDA3206F52DF00CE1E43 /* LoafWallet WatchKit App-Development.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2460F2AA206F2D5F00097680 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				241A70E8206F4493004A6F28 /* TodayExtension-Development.appex in Embed App Extensions */,
+				241A70F8206F44C9004A6F28 /* NotificationServiceExtension-Development.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2460F2AD206F2D5F00097680 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2460F2AE206F2D5F00097680 /* libbz2.framework in Embed Frameworks */,
+				2460F2AF206F2D5F00097680 /* sqlite3.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24AD460D206F498A0000E978 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24FAF14A2071AA160020BF9D /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				24FAF14B2071AAF90020BF9D /* LoafWallet WatchKit Extension-Development.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		755CD9C21DAA18420075898E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -601,6 +958,8 @@
 /* Begin PBXFileReference section */
 		1B3F74211FFB106200CCA50C /* BiometricsSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BiometricsSettingsViewController.swift; path = src/ViewControllers/BiometricsSettingsViewController.swift; sourceTree = "<group>"; };
 		1B3F74221FFB106200CCA50C /* BiometricsSpendingLimitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BiometricsSpendingLimitViewController.swift; path = src/ViewControllers/BiometricsSpendingLimitViewController.swift; sourceTree = "<group>"; };
+		1BA74B85206AD60A0083BD2A /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		1BA74B86206AD60A0083BD2A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		1BBAEBE81F80237B0047DEA8 /* BRAddress.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = BRAddress.c; sourceTree = "<group>"; };
 		1BBAEBE91F80237B0047DEA8 /* BRAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRAddress.h; sourceTree = "<group>"; };
 		1BBAEBEA1F80237B0047DEA8 /* BRArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRArray.h; sourceTree = "<group>"; };
@@ -772,6 +1131,17 @@
 		22C431331DF89DFE0017CAEA /* BRCoderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRCoderTests.swift; sourceTree = "<group>"; };
 		22C431351DF8A6DF0017CAEA /* BRAPIClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRAPIClientTests.swift; sourceTree = "<group>"; };
 		22E773031EE7813000397E0E /* Bonjour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bonjour.swift; sourceTree = "<group>"; };
+		241A70E6206F4464004A6F28 /* TodayExtension-Development.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "TodayExtension-Development.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		241A70F6206F44A5004A6F28 /* NotificationServiceExtension-Development.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "NotificationServiceExtension-Development.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2460F2B8206F2D5F00097680 /* LoafWallet-Development.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LoafWallet-Development.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2460F2B9206F2D5F00097680 /* App-Dev-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "App-Dev-Info.plist"; path = "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-ios/breadwallet/App-Dev-Info.plist"; sourceTree = "<absolute>"; };
+		2460F2C6206F331F00097680 /* Development-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Development-Info.plist"; path = "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-ios/NotificationServiceExtension/Development-Info.plist"; sourceTree = "<absolute>"; };
+		2460F2D6206F34CB00097680 /* Development-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Development-Info.plist"; path = "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-ios/MessagesExtension/Development-Info.plist"; sourceTree = "<absolute>"; };
+		2460F2E8206F34D100097680 /* Development-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Development-Info.plist"; path = "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-ios/TodayExtension/Development-Info.plist"; sourceTree = "<absolute>"; };
+		2460F301206F34D400097680 /* Development-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Development-Info.plist"; path = "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-ios/breadwallet WatchKit Extension/Development-Info.plist"; sourceTree = "<absolute>"; };
+		24AD45FB206F496E0000E978 /* LoafWallet WatchKit App-Development.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LoafWallet WatchKit App-Development.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		24AD45FC206F496F0000E978 /* Development-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Development-Info.plist"; path = "/Users/grunt/Documents/crypto_projects/lf-projects/loafwallet-ios/breadwallet WatchKit App/Development-Info.plist"; sourceTree = "<absolute>"; };
+		24AD4614206F498A0000E978 /* LoafWallet WatchKit Extension-Development.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "LoafWallet WatchKit Extension-Development.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7503773C1DF57428005EB8AE /* WalletManager+Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "WalletManager+Auth.swift"; path = "src/WalletManager+Auth.swift"; sourceTree = "<group>"; };
 		7528D2971ECF655500925DBC /* PaymentProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaymentProtocol.swift; path = src/PaymentProtocol.swift; sourceTree = "<group>"; };
 		752FB03B1DF8BE4B009086FB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1663,6 +2033,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		241A70DB206F4464004A6F28 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				241A70DC206F4464004A6F28 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		241A70EE206F44A5004A6F28 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2460F290206F2D5F00097680 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2460F291206F2D5F00097680 /* WebKit.framework in Frameworks */,
+				2460F292206F2D5F00097680 /* Security.framework in Frameworks */,
+				2460F293206F2D5F00097680 /* SystemConfiguration.framework in Frameworks */,
+				2460F294206F2D5F00097680 /* CoreLocation.framework in Frameworks */,
+				2460F295206F2D5F00097680 /* PushKit.framework in Frameworks */,
+				2460F296206F2D5F00097680 /* Fabric.framework in Frameworks */,
+				2460F297206F2D5F00097680 /* Crashlytics.framework in Frameworks */,
+				2460F298206F2D5F00097680 /* libbz2.framework in Frameworks */,
+				2460F299206F2D5F00097680 /* sqlite3.framework in Frameworks */,
+				2460F29A206F2D5F00097680 /* libBRCore.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24AD460A206F498A0000E978 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		752FB0431DF8BE6B009086FB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1694,6 +2103,8 @@
 				22A9A9621DF61FE0000F0016 /* SystemConfiguration.framework in Frameworks */,
 				22A9A9601DF61FD8000F0016 /* CoreLocation.framework in Frameworks */,
 				22A9A95E1DF61FD0000F0016 /* PushKit.framework in Frameworks */,
+				1BA74B87206AD60A0083BD2A /* Fabric.framework in Frameworks */,
+				1BA74B88206AD60A0083BD2A /* Crashlytics.framework in Frameworks */,
 				223DB21B1DF69F0F0076A151 /* libbz2.framework in Frameworks */,
 				752FB04D1DF8BF4B009086FB /* sqlite3.framework in Frameworks */,
 				759DA0BE1DAC36A3008CC49B /* libBRCore.a in Frameworks */,
@@ -2804,6 +3215,11 @@
 				22A9A9961DF63426000F0016 /* libbz2.framework */,
 				752FB04A1DF8BE6B009086FB /* sqlite3.framework */,
 				CEA7E67B1F09A9D2001F8C27 /* Screenshots.xctest */,
+				2460F2B8206F2D5F00097680 /* LoafWallet-Development.app */,
+				241A70E6206F4464004A6F28 /* TodayExtension-Development.appex */,
+				241A70F6206F44A5004A6F28 /* NotificationServiceExtension-Development.appex */,
+				24AD45FB206F496E0000E978 /* LoafWallet WatchKit App-Development.app */,
+				24AD4614206F498A0000E978 /* LoafWallet WatchKit Extension-Development.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2848,6 +3264,7 @@
 				75A2A79A1DA5934300A983D8 /* Assets.xcassets */,
 				CE5E6C991EB9135000A476DB /* Icon.xcassets */,
 				75A2A79C1DA5934300A983D8 /* LaunchScreen.storyboard */,
+				2460F2B9206F2D5F00097680 /* App-Dev-Info.plist */,
 				75A2A79F1DA5934300A983D8 /* Info.plist */,
 			);
 			path = breadwallet;
@@ -2885,6 +3302,7 @@
 			children = (
 				75A2A7BD1DA5934300A983D8 /* Interface.storyboard */,
 				75A2A7C01DA5934300A983D8 /* Assets.xcassets */,
+				24AD45FC206F496F0000E978 /* Development-Info.plist */,
 				75A2A7C21DA5934300A983D8 /* Info.plist */,
 				CEFFA2D01EB3BD730085C5D1 /* LoadingIndicator.xcassets */,
 			);
@@ -2903,6 +3321,7 @@
 				CE30F0E91EB282C8004B8EE5 /* SharedConstants.swift */,
 				CED811AB1EB2BCDE003A8D1E /* BRAWWeakTimerTarget.swift */,
 				75A2A7D61DA5934300A983D8 /* Assets.xcassets */,
+				2460F301206F34D400097680 /* Development-Info.plist */,
 				75A2A7D81DA5934400A983D8 /* Info.plist */,
 				75A2A7CC1DA5934300A983D8 /* Supporting Files */,
 			);
@@ -2921,6 +3340,8 @@
 			isa = PBXGroup;
 			children = (
 				22A9A9671DF61FF8000F0016 /* libbz2.tbd */,
+				1BA74B86206AD60A0083BD2A /* Crashlytics.framework */,
+				1BA74B85206AD60A0083BD2A /* Fabric.framework */,
 				22A9A9651DF61FEE000F0016 /* WebKit.framework */,
 				22A9A9631DF61FE7000F0016 /* Security.framework */,
 				22A9A9611DF61FE0000F0016 /* SystemConfiguration.framework */,
@@ -2939,6 +3360,7 @@
 				75A2A7F51DA5935F00A983D8 /* MessagesViewController.swift */,
 				75A2A7F71DA5935F00A983D8 /* MainInterface.storyboard */,
 				75A2A7FA1DA5935F00A983D8 /* Assets.xcassets */,
+				2460F2D6206F34CB00097680 /* Development-Info.plist */,
 				75A2A7FC1DA5935F00A983D8 /* Info.plist */,
 			);
 			path = MessagesExtension;
@@ -2956,6 +3378,7 @@
 				CE916E2F1EDA7F1400D641D6 /* UIImage+Utils.h */,
 				CE916E301EDA7F1400D641D6 /* UIImage+Utils.m */,
 				75A2A80E1DA5936F00A983D8 /* MainInterface.storyboard */,
+				2460F2E8206F34D100097680 /* Development-Info.plist */,
 				75A2A8111DA5936F00A983D8 /* Info.plist */,
 				CE916E291EDA7E4400D641D6 /* Media.xcassets */,
 			);
@@ -2966,6 +3389,7 @@
 			isa = PBXGroup;
 			children = (
 				75A2A81E1DA5938500A983D8 /* NotificationService.swift */,
+				2460F2C6206F331F00097680 /* Development-Info.plist */,
 				75A2A8201DA5938500A983D8 /* Info.plist */,
 			);
 			path = NotificationServiceExtension;
@@ -3395,6 +3819,104 @@
 			productReference = 22A9A9961DF63426000F0016 /* libbz2.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		241A70D6206F4464004A6F28 /* TodayExtension-Development */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 241A70E0206F4464004A6F28 /* Build configuration list for PBXNativeTarget "TodayExtension-Development" */;
+			buildPhases = (
+				241A70D7206F4464004A6F28 /* Sources */,
+				241A70DB206F4464004A6F28 /* Frameworks */,
+				241A70DD206F4464004A6F28 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TodayExtension-Development";
+			productName = TodayExtension;
+			productReference = 241A70E6206F4464004A6F28 /* TodayExtension-Development.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		241A70EB206F44A5004A6F28 /* NotificationServiceExtension-Development */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 241A70F0206F44A5004A6F28 /* Build configuration list for PBXNativeTarget "NotificationServiceExtension-Development" */;
+			buildPhases = (
+				241A70EC206F44A5004A6F28 /* Sources */,
+				241A70EE206F44A5004A6F28 /* Frameworks */,
+				241A70EF206F44A5004A6F28 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "NotificationServiceExtension-Development";
+			productName = NotificationServiceExtension;
+			productReference = 241A70F6206F44A5004A6F28 /* NotificationServiceExtension-Development.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		2460F1BA206F2D5F00097680 /* LoafWallet-Development */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2460F2B2206F2D5F00097680 /* Build configuration list for PBXNativeTarget "LoafWallet-Development" */;
+			buildPhases = (
+				2460F1C7206F2D5F00097680 /* Sources */,
+				2460F290206F2D5F00097680 /* Frameworks */,
+				2460F29B206F2D5F00097680 /* Resources */,
+				2460F2A8206F2D5F00097680 /* Embed Watch Content */,
+				2460F2AA206F2D5F00097680 /* Embed App Extensions */,
+				2460F2AD206F2D5F00097680 /* Embed Frameworks */,
+				2460F2B0206F2D5F00097680 /* Icon Versioning */,
+				2460F2B1206F2D5F00097680 /* Run Fabric Script */,
+				2498D3832073587A0038F338 /* Run Increment Version */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				244AD27E206F4FE2002CED63 /* PBXTargetDependency */,
+				241A70EA206F4493004A6F28 /* PBXTargetDependency */,
+				241A70FA206F44C9004A6F28 /* PBXTargetDependency */,
+				2460F1BB206F2D5F00097680 /* PBXTargetDependency */,
+				2460F1C3206F2D5F00097680 /* PBXTargetDependency */,
+				2460F1C5206F2D5F00097680 /* PBXTargetDependency */,
+			);
+			name = "LoafWallet-Development";
+			productName = breadwallet;
+			productReference = 2460F2B8206F2D5F00097680 /* LoafWallet-Development.app */;
+			productType = "com.apple.product-type.application";
+		};
+		24AD45EC206F496E0000E978 /* LoafWallet WatchKit App-Development */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24AD45F5206F496E0000E978 /* Build configuration list for PBXNativeTarget "LoafWallet WatchKit App-Development" */;
+			buildPhases = (
+				24AD45EF206F496E0000E978 /* Resources */,
+				24FAF14A2071AA160020BF9D /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				24FAF14D2071AAF90020BF9D /* PBXTargetDependency */,
+			);
+			name = "LoafWallet WatchKit App-Development";
+			productName = "breadwallet WatchKit App";
+			productReference = 24AD45FB206F496E0000E978 /* LoafWallet WatchKit App-Development.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		24AD45FD206F498A0000E978 /* LoafWallet WatchKit Extension-Development */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24AD460E206F498A0000E978 /* Build configuration list for PBXNativeTarget "LoafWallet WatchKit Extension-Development" */;
+			buildPhases = (
+				24AD45FE206F498A0000E978 /* Sources */,
+				24AD460A206F498A0000E978 /* Frameworks */,
+				24AD460B206F498A0000E978 /* Resources */,
+				24AD460D206F498A0000E978 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "LoafWallet WatchKit Extension-Development";
+			productName = "breadwallet WatchKit Extension";
+			productReference = 24AD4614206F498A0000E978 /* LoafWallet WatchKit Extension-Development.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		752FB0411DF8BE6B009086FB /* sqlite3 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 752FB0471DF8BE6B009086FB /* Build configuration list for PBXNativeTarget "sqlite3" */;
@@ -3460,6 +3982,7 @@
 				75A2A8031DA5935F00A983D8 /* Embed App Extensions */,
 				22A9A9831DF63288000F0016 /* Embed Frameworks */,
 				CEE0EF531EBF8C8A0018DB36 /* Icon Versioning */,
+				1BA74B89206AD75E0083BD2A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -3642,12 +4165,23 @@
 			attributes = {
 				CLASSPREFIX = BR;
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "breadwallet LLC";
 				TargetAttributes = {
 					22A9A9951DF63426000F0016 = {
 						CreatedOnToolsVersion = 8.1;
 						ProvisioningStyle = Automatic;
+					};
+					2460F1BA206F2D5F00097680 = {
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.DataProtection = {
+								enabled = 1;
+							};
+						};
 					};
 					752FB0411DF8BE6B009086FB = {
 						ProvisioningStyle = Automatic;
@@ -3759,9 +4293,14 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				75A2A78F1DA5934300A983D8 /* breadwallet */,
+				2460F1BA206F2D5F00097680 /* LoafWallet-Development */,
+				24AD45EC206F496E0000E978 /* LoafWallet WatchKit App-Development */,
+				24AD45FD206F498A0000E978 /* LoafWallet WatchKit Extension-Development */,
+				241A70D6206F4464004A6F28 /* TodayExtension-Development */,
+				241A70EB206F44A5004A6F28 /* NotificationServiceExtension-Development */,
 				75A2A7A31DA5934300A983D8 /* breadwalletTests */,
 				75A2A7AE1DA5934300A983D8 /* breadwalletUITests */,
+				75A2A78F1DA5934300A983D8 /* breadwallet */,
 				75A2A7B71DA5934300A983D8 /* breadwallet WatchKit App */,
 				75A2A7C61DA5934300A983D8 /* breadwallet WatchKit Extension */,
 				75A2A7EF1DA5935F00A983D8 /* MessagesExtension */,
@@ -3783,6 +4322,59 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		241A70DD206F4464004A6F28 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				241A70DE206F4464004A6F28 /* Media.xcassets in Resources */,
+				241A70DF206F4464004A6F28 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		241A70EF206F44A5004A6F28 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2460F29B206F2D5F00097680 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2460F29C206F2D5F00097680 /* BIP39Words.plist in Resources */,
+				2460F29D206F2D5F00097680 /* LaunchScreen.storyboard in Resources */,
+				2460F29E206F2D5F00097680 /* CircularPro-Book.otf in Resources */,
+				2460F29F206F2D5F00097680 /* POSTBouncer.html in Resources */,
+				2460F2A0206F2D5F00097680 /* coinflip.aiff in Resources */,
+				2460F2A1206F2D5F00097680 /* Icon.xcassets in Resources */,
+				2460F2A2206F2D5F00097680 /* Localizable.strings in Resources */,
+				2460F2A3206F2D5F00097680 /* AssetBundles.plist in Resources */,
+				2460F2A4206F2D5F00097680 /* CircularPro-Medium.otf in Resources */,
+				2460F2A5206F2D5F00097680 /* CircularPro-Bold.otf in Resources */,
+				2460F2A6206F2D5F00097680 /* bread-frontend.tar in Resources */,
+				2460F2A7206F2D5F00097680 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24AD45EF206F496E0000E978 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24AD45F0206F496E0000E978 /* LoadingIndicator.xcassets in Resources */,
+				24AD45F1206F496E0000E978 /* Assets.xcassets in Resources */,
+				24AD45F2206F496E0000E978 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24AD460B206F498A0000E978 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24AD460C206F498A0000E978 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3879,6 +4471,61 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1BA74B89206AD75E0083BD2A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PROJECT_DIR}/Fabric.framework/run\" 78c3ed0b9b087639aa7e73b6164c0f48ad274d01 ff62ab2e24be9a2dc54861dbc6746397e2d27b707af424fde890d98fb71b127f";
+		};
+		2460F2B0206F2D5F00097680 /* Icon Versioning */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Icon Versioning";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/icon_versioning.sh\"";
+		};
+		2460F2B1206F2D5F00097680 /* Run Fabric Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Fabric Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PROJECT_DIR}/Fabric.framework/run\" 78c3ed0b9b087639aa7e73b6164c0f48ad274d01 ff62ab2e24be9a2dc54861dbc6746397e2d27b707af424fde890d98fb71b127f";
+		};
+		2498D3832073587A0038F338 /* Run Increment Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Increment Version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/build-phases/increment-build.sh";
+		};
 		CEE0EF531EBF8C8A0018DB36 /* Icon Versioning */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3900,6 +4547,249 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		241A70D7206F4464004A6F28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				241A70D8206F4464004A6F28 /* UIImage+Utils.m in Sources */,
+				241A70D9206F4464004A6F28 /* BRBubbleView.m in Sources */,
+				241A70DA206F4464004A6F28 /* BRTodayViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		241A70EC206F44A5004A6F28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				241A70ED206F44A5004A6F28 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2460F1C7206F2D5F00097680 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2460F1C8206F2D5F00097680 /* Environment.swift in Sources */,
+				2460F1C9206F2D5F00097680 /* ModalDisplayable.swift in Sources */,
+				2460F1CA206F2D5F00097680 /* WatchData.swift in Sources */,
+				2460F1CB206F2D5F00097680 /* PinTransitioningDelegate.swift in Sources */,
+				2460F1CC206F2D5F00097680 /* KVStoreCoordinator.swift in Sources */,
+				2460F1CD206F2D5F00097680 /* BRCore.swift in Sources */,
+				2460F1CE206F2D5F00097680 /* BRCameraPlugin.swift in Sources */,
+				2460F1CF206F2D5F00097680 /* CGRect+Additions.swift in Sources */,
+				2460F1D0206F2D5F00097680 /* WalletInfo.swift in Sources */,
+				2460F1D1206F2D5F00097680 /* TransactionDetailCollectionViewCell.swift in Sources */,
+				2460F1D2206F2D5F00097680 /* RetryTimer.swift in Sources */,
+				2460F1D3206F2D5F00097680 /* ScanViewController.swift in Sources */,
+				2460F1D4206F2D5F00097680 /* UIViewController+BRWAdditions.swift in Sources */,
+				2460F1D5206F2D5F00097680 /* BRBrowserViewController.swift in Sources */,
+				2460F1D6206F2D5F00097680 /* ExchangeUpdater.swift in Sources */,
+				2460F1D7206F2D5F00097680 /* UIControl+Callback.swift in Sources */,
+				2460F1D8206F2D5F00097680 /* BRSocketHelpers.c in Sources */,
+				2460F1D9206F2D5F00097680 /* AlertView.swift in Sources */,
+				2460F1DA206F2D5F00097680 /* TransactionTableViewCell.swift in Sources */,
+				2460F1DB206F2D5F00097680 /* GradientCircle.swift in Sources */,
+				2460F1DC206F2D5F00097680 /* Async.swift in Sources */,
+				2460F1DD206F2D5F00097680 /* BRAPIClient+Assets.swift in Sources */,
+				2460F1DE206F2D5F00097680 /* BRAPIClient+Features.swift in Sources */,
+				2460F1DF206F2D5F00097680 /* BRHTTPFileMiddleware.swift in Sources */,
+				2460F1E0206F2D5F00097680 /* ConfirmationViewController.swift in Sources */,
+				2460F1E1206F2D5F00097680 /* BCashTransactionViewController.swift in Sources */,
+				2460F1E2206F2D5F00097680 /* AccountViewController.swift in Sources */,
+				2460F1E3206F2D5F00097680 /* ModalHeaderView.swift in Sources */,
+				2460F1E4206F2D5F00097680 /* LoginTransitionDelegate.swift in Sources */,
+				2460F1E5206F2D5F00097680 /* WelcomeViewController.swift in Sources */,
+				2460F1E6206F2D5F00097680 /* BRAPIClient+Wallet.swift in Sources */,
+				2460F1E7206F2D5F00097680 /* PinView.swift in Sources */,
+				2460F1E8206F2D5F00097680 /* UIBarButtonItem+Additions.swift in Sources */,
+				2460F1E9206F2D5F00097680 /* SupportCenterContainer.swift in Sources */,
+				2460F1EA206F2D5F00097680 /* WalletCoordinator.swift in Sources */,
+				2460F1EB206F2D5F00097680 /* KeyboardNotificationInfo.swift in Sources */,
+				2460F1EC206F2D5F00097680 /* FeeSelector.swift in Sources */,
+				2460F1ED206F2D5F00097680 /* ApplicationController.swift in Sources */,
+				2460F1EE206F2D5F00097680 /* BiometricsSettingsViewController.swift in Sources */,
+				2460F1EF206F2D5F00097680 /* StartWipeWalletViewController.swift in Sources */,
+				2460F1F0206F2D5F00097680 /* PaymentProtocol.swift in Sources */,
+				2460F1F1206F2D5F00097680 /* BRBSPatch.swift in Sources */,
+				2460F1F2206F2D5F00097680 /* UIViewControllerContextTransitioning+BRAdditions.swift in Sources */,
+				2460F1F3206F2D5F00097680 /* CameraGuideView.swift in Sources */,
+				2460F1F4206F2D5F00097680 /* SimpleUTXO.swift in Sources */,
+				2460F1F5206F2D5F00097680 /* TransactionsTableViewController.swift in Sources */,
+				2460F1F6206F2D5F00097680 /* FeeUpdater.swift in Sources */,
+				2460F1F7206F2D5F00097680 /* Strings.swift in Sources */,
+				2460F1F8206F2D5F00097680 /* InViewAlert.swift in Sources */,
+				2460F1F9206F2D5F00097680 /* TxMetaData.swift in Sources */,
+				2460F1FA206F2D5F00097680 /* LoginViewController.swift in Sources */,
+				2460F1FB206F2D5F00097680 /* UINavigationController+BRAdditions.swift in Sources */,
+				2460F1FC206F2D5F00097680 /* GenericPinPadCell.swift in Sources */,
+				2460F1FD206F2D5F00097680 /* DescriptionSendCell.swift in Sources */,
+				2460F1FE206F2D5F00097680 /* NodeSelectorViewController.swift in Sources */,
+				2460F1FF206F2D5F00097680 /* ClearNumberPad.swift in Sources */,
+				2460F200206F2D5F00097680 /* SyncingView.swift in Sources */,
+				2460F201206F2D5F00097680 /* UIView+BRWAdditions.swift in Sources */,
+				2460F202206F2D5F00097680 /* UIView+InitAdditions.swift in Sources */,
+				2460F203206F2D5F00097680 /* SendViewController.swift in Sources */,
+				2460F204206F2D5F00097680 /* StartPaperPhraseViewController.swift in Sources */,
+				2460F205206F2D5F00097680 /* BiometricsSpendingLimitViewController.swift in Sources */,
+				2460F206206F2D5F00097680 /* PaymentRequest.swift in Sources */,
+				2460F207206F2D5F00097680 /* URLController.swift in Sources */,
+				2460F208206F2D5F00097680 /* UIButton+BRWAdditions.swift in Sources */,
+				2460F209206F2D5F00097680 /* WritePaperPhraseViewController.swift in Sources */,
+				2460F20A206F2D5F00097680 /* UIView+AnimationAdditions.swift in Sources */,
+				2460F20B206F2D5F00097680 /* DefaultCurrencyViewController.swift in Sources */,
+				2460F20C206F2D5F00097680 /* LoginBackgroundView.swift in Sources */,
+				2460F20D206F2D5F00097680 /* DispatchQueue+Additions.swift in Sources */,
+				2460F20E206F2D5F00097680 /* RadialGradientView.swift in Sources */,
+				2460F20F206F2D5F00097680 /* GradientSwitch.swift in Sources */,
+				2460F210206F2D5F00097680 /* ModalPresenter.swift in Sources */,
+				2460F211206F2D5F00097680 /* BlinkingView.swift in Sources */,
+				2460F212206F2D5F00097680 /* ModalViewController.swift in Sources */,
+				2460F213206F2D5F00097680 /* Setting.swift in Sources */,
+				2460F214206F2D5F00097680 /* LoadingProgressView.swift in Sources */,
+				2460F215206F2D5F00097680 /* ManageWalletViewController.swift in Sources */,
+				2460F216206F2D5F00097680 /* String+Keys.swift in Sources */,
+				2460F217206F2D5F00097680 /* PresentModalAnimator.swift in Sources */,
+				2460F218206F2D5F00097680 /* UILabel+BRWAdditions.swift in Sources */,
+				2460F219206F2D5F00097680 /* LightWeightAlert.swift in Sources */,
+				2460F21A206F2D5F00097680 /* ShadowButton.swift in Sources */,
+				2460F21B206F2D5F00097680 /* EnterPhraseCollectionViewController.swift in Sources */,
+				2460F21C206F2D5F00097680 /* LAContext+Extensions.swift in Sources */,
+				2460F21D206F2D5F00097680 /* AddressCell.swift in Sources */,
+				2460F21E206F2D5F00097680 /* CustomTitleView.swift in Sources */,
+				2460F21F206F2D5F00097680 /* Prompt.swift in Sources */,
+				2460F220206F2D5F00097680 /* SendAmountCell.swift in Sources */,
+				2460F221206F2D5F00097680 /* BRKVStorePlugin.swift in Sources */,
+				2460F222206F2D5F00097680 /* SegmentedButton.swift in Sources */,
+				2460F223206F2D5F00097680 /* PhoneWCSessionManager.swift in Sources */,
+				2460F224206F2D5F00097680 /* WalletManager+Auth.swift in Sources */,
+				2460F225206F2D5F00097680 /* BRWebViewController.swift in Sources */,
+				2460F226206F2D5F00097680 /* UIViewController+Alerts.swift in Sources */,
+				2460F227206F2D5F00097680 /* Amount.swift in Sources */,
+				2460F228206F2D5F00097680 /* Date+Additions.swift in Sources */,
+				2460F229206F2D5F00097680 /* main.swift in Sources */,
+				2460F22A206F2D5F00097680 /* AboutCell.swift in Sources */,
+				2460F22B206F2D5F00097680 /* BRAPIClient.swift in Sources */,
+				2460F22C206F2D5F00097680 /* ConfirmPhrase.swift in Sources */,
+				2460F22D206F2D5F00097680 /* AppDelegate.swift in Sources */,
+				2460F22E206F2D5F00097680 /* PushNotificationsViewController.swift in Sources */,
+				2460F22F206F2D5F00097680 /* BRAPIClient+KV.swift in Sources */,
+				2460F230206F2D5F00097680 /* WalletDisabledView.swift in Sources */,
+				2460F231206F2D5F00097680 /* AnimatableIcon.swift in Sources */,
+				2460F232206F2D5F00097680 /* NumberFormatter+Additions.swift in Sources */,
+				2460F233206F2D5F00097680 /* CheckView.swift in Sources */,
+				2460F234206F2D5F00097680 /* PinPadViewController.swift in Sources */,
+				2460F235206F2D5F00097680 /* UISlider+Gradient.swift in Sources */,
+				2460F236206F2D5F00097680 /* MenuButtonType.swift in Sources */,
+				2460F237206F2D5F00097680 /* BRActivityView.swift in Sources */,
+				2460F238206F2D5F00097680 /* ReceiveViewController.swift in Sources */,
+				2460F239206F2D5F00097680 /* UpdatingLabel.swift in Sources */,
+				2460F23A206F2D5F00097680 /* Functions.swift in Sources */,
+				2460F23B206F2D5F00097680 /* ArticleIds.swift in Sources */,
+				2460F23C206F2D5F00097680 /* Rate.swift in Sources */,
+				2460F23D206F2D5F00097680 /* Constants.swift in Sources */,
+				2460F23E206F2D5F00097680 /* RoundedContainer.swift in Sources */,
+				2460F23F206F2D5F00097680 /* MenuViewController.swift in Sources */,
+				2460F240206F2D5F00097680 /* SettingsViewController.swift in Sources */,
+				2460F241206F2D5F00097680 /* RequestAmountViewController.swift in Sources */,
+				2460F242206F2D5F00097680 /* VerifyPinViewController.swift in Sources */,
+				2460F243206F2D5F00097680 /* UserDefaultsUpdater.swift in Sources */,
+				2460F244206F2D5F00097680 /* Circle.swift in Sources */,
+				2460F245206F2D5F00097680 /* StartViewController.swift in Sources */,
+				2460F246206F2D5F00097680 /* WalletManager.swift in Sources */,
+				2460F247206F2D5F00097680 /* BRHTTPIndexMiddleware.swift in Sources */,
+				2460F248206F2D5F00097680 /* TransactionDirection.swift in Sources */,
+				2460F249206F2D5F00097680 /* Sender.swift in Sources */,
+				2460F24A206F2D5F00097680 /* ReScanViewController.swift in Sources */,
+				2460F24B206F2D5F00097680 /* WalletManager+BCash.swift in Sources */,
+				2460F24C206F2D5F00097680 /* SearchHeaderView.swift in Sources */,
+				2460F24D206F2D5F00097680 /* BRTar.swift in Sources */,
+				2460F24E206F2D5F00097680 /* TransactionDetailsViewController.swift in Sources */,
+				2460F24F206F2D5F00097680 /* PhraseView.swift in Sources */,
+				2460F250206F2D5F00097680 /* GradientView.swift in Sources */,
+				2460F251206F2D5F00097680 /* DismissModalAnimator.swift in Sources */,
+				2460F252206F2D5F00097680 /* DrawableCircle.swift in Sources */,
+				2460F253206F2D5F00097680 /* LoginBackgroundTriangle.swift in Sources */,
+				2460F254206F2D5F00097680 /* AboutViewController.swift in Sources */,
+				2460F255206F2D5F00097680 /* Types.swift in Sources */,
+				2460F256206F2D5F00097680 /* UnEditableTextView.swift in Sources */,
+				2460F257206F2D5F00097680 /* WhiteNumberPad.swift in Sources */,
+				2460F258206F2D5F00097680 /* ConfirmPaperPhraseViewController.swift in Sources */,
+				2460F259206F2D5F00097680 /* Extensions.swift in Sources */,
+				2460F25A206F2D5F00097680 /* BRGeoLocationPlugin.swift in Sources */,
+				2460F25B206F2D5F00097680 /* StartNavigationDelegate.swift in Sources */,
+				2460F25C206F2D5F00097680 /* BRCoding.swift in Sources */,
+				2460F25D206F2D5F00097680 /* BRWalletPlugin.swift in Sources */,
+				2460F25E206F2D5F00097680 /* ModalNavigationController.swift in Sources */,
+				2460F25F206F2D5F00097680 /* WatchTransaction.swift in Sources */,
+				2460F260206F2D5F00097680 /* RecoverWalletIntroViewController.swift in Sources */,
+				2460F261206F2D5F00097680 /* UIImage+Utils.swift in Sources */,
+				2460F262206F2D5F00097680 /* Transaction.swift in Sources */,
+				2460F263206F2D5F00097680 /* UIViewPropertyAnimator+BRWAdditions.swift in Sources */,
+				2460F264206F2D5F00097680 /* Bonjour.swift in Sources */,
+				2460F265206F2D5F00097680 /* UIFont+BRWAdditions.swift in Sources */,
+				2460F266206F2D5F00097680 /* MenuButton.swift in Sources */,
+				2460F267206F2D5F00097680 /* AmountViewController.swift in Sources */,
+				2460F268206F2D5F00097680 /* AccountHeaderView.swift in Sources */,
+				2460F269206F2D5F00097680 /* SendCell.swift in Sources */,
+				2460F26A206F2D5F00097680 /* NonScrollingCollectionView.swift in Sources */,
+				2460F26B206F2D5F00097680 /* BRAPIProxy.swift in Sources */,
+				2460F26C206F2D5F00097680 /* Actions.swift in Sources */,
+				2460F26D206F2D5F00097680 /* State.swift in Sources */,
+				2460F26E206F2D5F00097680 /* SeparatorCell.swift in Sources */,
+				2460F26F206F2D5F00097680 /* SimpleRedux.swift in Sources */,
+				2460F270206F2D5F00097680 /* BRAPIClient+Events.swift in Sources */,
+				2460F271206F2D5F00097680 /* UITableView+Additions.swift in Sources */,
+				2460F272206F2D5F00097680 /* SecurityCenterViewController.swift in Sources */,
+				2460F273206F2D5F00097680 /* UserDefaults+Additions.swift in Sources */,
+				2460F274206F2D5F00097680 /* BRHTTPServer.swift in Sources */,
+				2460F275206F2D5F00097680 /* BRLinkPlugin.swift in Sources */,
+				2460F276206F2D5F00097680 /* ReachabilityMonitor.swift in Sources */,
+				2460F277206F2D5F00097680 /* BRWebSocket.swift in Sources */,
+				2460F278206F2D5F00097680 /* ShareDataViewController.swift in Sources */,
+				2460F279206F2D5F00097680 /* StartImportViewController.swift in Sources */,
+				2460F27A206F2D5F00097680 /* MessageUIPresenter.swift in Sources */,
+				2460F27B206F2D5F00097680 /* StartFlowPresenter.swift in Sources */,
+				2460F27C206F2D5F00097680 /* UIColor+BRWAdditions.swift in Sources */,
+				2460F27D206F2D5F00097680 /* CGContext+Additions.swift in Sources */,
+				2460F27E206F2D5F00097680 /* BRReplicatedKVStore.swift in Sources */,
+				2460F27F206F2D5F00097680 /* SecurityCenterCell.swift in Sources */,
+				2460F280206F2D5F00097680 /* SharedConstants.swift in Sources */,
+				2460F281206F2D5F00097680 /* WhiteDecimalPad.swift in Sources */,
+				2460F282206F2D5F00097680 /* DismissLoginAnimator.swift in Sources */,
+				2460F283206F2D5F00097680 /* UIView+FrameChangeBlocking.swift in Sources */,
+				2460F284206F2D5F00097680 /* BRHTTPRouter.swift in Sources */,
+				2460F285206F2D5F00097680 /* EnterPhraseCell.swift in Sources */,
+				2460F286206F2D5F00097680 /* UpdatePinViewController.swift in Sources */,
+				2460F287206F2D5F00097680 /* BRBitID.swift in Sources */,
+				2460F288206F2D5F00097680 /* AccountFooterView.swift in Sources */,
+				2460F289206F2D5F00097680 /* String+Additions.swift in Sources */,
+				2460F28A206F2D5F00097680 /* InAppAlert.swift in Sources */,
+				2460F28B206F2D5F00097680 /* UIScreen+Additions.swift in Sources */,
+				2460F28C206F2D5F00097680 /* MaskedShadow.swift in Sources */,
+				2460F28D206F2D5F00097680 /* AssociatedObject.swift in Sources */,
+				2460F28E206F2D5F00097680 /* EnterPhraseViewController.swift in Sources */,
+				2460F28F206F2D5F00097680 /* ModalTransitionDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24AD45FE206F498A0000E978 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24AD45FF206F498A0000E978 /* ReceiveInterfaceController.swift in Sources */,
+				24AD4600206F498A0000E978 /* Strings.swift in Sources */,
+				24AD4601206F498A0000E978 /* BRAWWeakTimerTarget.swift in Sources */,
+				24AD4602206F498A0000E978 /* WatchDataManager.swift in Sources */,
+				24AD4603206F498A0000E978 /* NotificationController.swift in Sources */,
+				24AD4604206F498A0000E978 /* WatchData.swift in Sources */,
+				24AD4605206F498A0000E978 /* ComplicationController.swift in Sources */,
+				24AD4606206F498A0000E978 /* ExtensionDelegate.swift in Sources */,
+				24AD4607206F498A0000E978 /* SharedConstants.swift in Sources */,
+				24AD4608206F498A0000E978 /* BalanceInterfaceController.swift in Sources */,
+				24AD4609206F498A0000E978 /* WatchTransaction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4366,6 +5256,41 @@
 			target = 22A9A9951DF63426000F0016 /* libbz2 */;
 			targetProxy = 22A9A99B1DF63426000F0016 /* PBXContainerItemProxy */;
 		};
+		241A70EA206F4493004A6F28 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 241A70D6206F4464004A6F28 /* TodayExtension-Development */;
+			targetProxy = 241A70E9206F4493004A6F28 /* PBXContainerItemProxy */;
+		};
+		241A70FA206F44C9004A6F28 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 241A70EB206F44A5004A6F28 /* NotificationServiceExtension-Development */;
+			targetProxy = 241A70F9206F44C9004A6F28 /* PBXContainerItemProxy */;
+		};
+		244AD27E206F4FE2002CED63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 24AD45EC206F496E0000E978 /* LoafWallet WatchKit App-Development */;
+			targetProxy = 244AD27D206F4FE2002CED63 /* PBXContainerItemProxy */;
+		};
+		2460F1BB206F2D5F00097680 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 755CD9D01DAA197C0075898E /* BRCore */;
+			targetProxy = 2460F1BC206F2D5F00097680 /* PBXContainerItemProxy */;
+		};
+		2460F1C3206F2D5F00097680 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22A9A9951DF63426000F0016 /* libbz2 */;
+			targetProxy = 2460F1C4206F2D5F00097680 /* PBXContainerItemProxy */;
+		};
+		2460F1C5206F2D5F00097680 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 752FB0411DF8BE6B009086FB /* sqlite3 */;
+			targetProxy = 2460F1C6206F2D5F00097680 /* PBXContainerItemProxy */;
+		};
+		24FAF14D2071AAF90020BF9D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 24AD45FD206F498A0000E978 /* LoafWallet WatchKit Extension-Development */;
+			targetProxy = 24FAF14C2071AAF90020BF9D /* PBXContainerItemProxy */;
+		};
 		752FB04F1DF8BF5C009086FB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 752FB0411DF8BE6B009086FB /* sqlite3 */;
@@ -4549,7 +5474,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		22A9A9A01DF63426000F0016 /* Debug */ = {
+		22A9A9A01DF63426000F0016 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -4572,7 +5497,7 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Development;
 		};
 		22A9A9A11DF63426000F0016 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -4599,7 +5524,465 @@
 			};
 			name = Release;
 		};
-		752FB0481DF8BE6B009086FB /* Debug */ = {
+		241A70E1206F4464004A6F28 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				INFOPLIST_FILE = "$(SRCROOT)/TodayExtension/Development-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.TodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Development;
+		};
+		241A70E2206F4464004A6F28 /* Testnet */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				INFOPLIST_FILE = "$(SRCROOT)/TodayExtension/Development-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.TodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Testnet;
+		};
+		241A70E3206F4464004A6F28 /* Screenshots */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				INFOPLIST_FILE = "$(SRCROOT)/TodayExtension/Development-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.TodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Screenshots;
+		};
+		241A70E4206F4464004A6F28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				INFOPLIST_FILE = "$(SRCROOT)/TodayExtension/Development-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.TodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		241A70E5206F4464004A6F28 /* Testflight */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				INFOPLIST_FILE = "$(SRCROOT)/TodayExtension/Development-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.TodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Testflight;
+		};
+		241A70F1206F44A5004A6F28 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				INFOPLIST_FILE = "$(SRCROOT)/NotificationServiceExtension/Development-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.NotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Development;
+		};
+		241A70F2206F44A5004A6F28 /* Testnet */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				INFOPLIST_FILE = "$(SRCROOT)/NotificationServiceExtension/Development-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.NotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Testnet;
+		};
+		241A70F3206F44A5004A6F28 /* Screenshots */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				INFOPLIST_FILE = "$(SRCROOT)/NotificationServiceExtension/Development-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.NotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Screenshots;
+		};
+		241A70F4206F44A5004A6F28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				INFOPLIST_FILE = "$(SRCROOT)/NotificationServiceExtension/Development-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.NotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		241A70F5206F44A5004A6F28 /* Testflight */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				INFOPLIST_FILE = "$(SRCROOT)/NotificationServiceExtension/Development-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.NotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Testflight;
+		};
+		2460F2B3206F2D5F00097680 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.development;
+				BUNDLE_ID_CONFIG = com.litecoin.loafwallet.development;
+				BUNDLE_ID_SUFFIX = .development;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/breadwallet/App-Dev-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DDebug";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Development;
+		};
+		2460F2B4206F2D5F00097680 /* Testnet */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.development;
+				BUNDLE_ID_CONFIG = com.litecoin.loafwallet;
+				BUNDLE_ID_SUFFIX = .testnet;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/breadwallet/App-Dev-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DDebug -DTestnet";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Testnet;
+		};
+		2460F2B5206F2D5F00097680 /* Screenshots */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.development;
+				BUNDLE_ID_CONFIG = com.litecoin.loafwallet;
+				BUNDLE_ID_SUFFIX = .scrn;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/breadwallet/App-Dev-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DDebug -DScreenshots -DTestnet";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Screenshots;
+		};
+		2460F2B6206F2D5F00097680 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.development;
+				BUNDLE_ID_CONFIG = com.litecoin.loafwallet;
+				BUNDLE_ID_SUFFIX = "";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/breadwallet/App-Dev-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		2460F2B7206F2D5F00097680 /* Testflight */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.development;
+				BUNDLE_ID_CONFIG = com.litecoin.loafwallet;
+				BUNDLE_ID_SUFFIX = .testflight;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/breadwallet/App-Dev-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DTestflight -DDebug";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Testflight;
+		};
+		24AD45F6206F496E0000E978 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.development;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				IBSC_MODULE = breadwallet_WatchKit_Extension;
+				INFOPLIST_FILE = "$(SRCROOT)/breadwallet WatchKit App/Development-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Development;
+		};
+		24AD45F7206F496E0000E978 /* Testnet */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.development;
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				IBSC_MODULE = breadwallet_WatchKit_Extension;
+				INFOPLIST_FILE = "$(SRCROOT)/breadwallet WatchKit App/Development-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Testnet;
+		};
+		24AD45F8206F496E0000E978 /* Screenshots */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.development;
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				IBSC_MODULE = breadwallet_WatchKit_Extension;
+				INFOPLIST_FILE = "$(SRCROOT)/breadwallet WatchKit App/Development-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Screenshots;
+		};
+		24AD45F9206F496E0000E978 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.development;
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				IBSC_MODULE = breadwallet_WatchKit_Extension;
+				INFOPLIST_FILE = "$(SRCROOT)/breadwallet WatchKit App/Development-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Release;
+		};
+		24AD45FA206F496E0000E978 /* Testflight */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.development;
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				IBSC_MODULE = breadwallet_WatchKit_Extension;
+				INFOPLIST_FILE = "$(SRCROOT)/breadwallet WatchKit App/Development-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Testflight;
+		};
+		24AD460F206F498A0000E978 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				INFOPLIST_FILE = "$(SRCROOT)/breadwallet WatchKit Extension/Development-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Development;
+		};
+		24AD4610206F498A0000E978 /* Testnet */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				INFOPLIST_FILE = "$(SRCROOT)/breadwallet WatchKit Extension/Development-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Testnet;
+		};
+		24AD4611206F498A0000E978 /* Screenshots */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				INFOPLIST_FILE = "$(SRCROOT)/breadwallet WatchKit Extension/Development-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Screenshots;
+		};
+		24AD4612206F498A0000E978 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				INFOPLIST_FILE = "$(SRCROOT)/breadwallet WatchKit Extension/Development-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Release;
+		};
+		24AD4613206F498A0000E978 /* Testflight */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				INFOPLIST_FILE = "$(SRCROOT)/breadwallet WatchKit Extension/Development-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litecoin.loafwallet.development.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Testflight;
+		};
+		752FB0481DF8BE6B009086FB /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -4622,7 +6005,7 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Development;
 		};
 		752FB0491DF8BE6B009086FB /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -4649,7 +6032,7 @@
 			};
 			name = Release;
 		};
-		755CD9CB1DAA18420075898E /* Debug */ = {
+		755CD9CB1DAA18420075898E /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 4R7S6N88W9;
@@ -4661,7 +6044,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
-			name = Debug;
+			name = Development;
 		};
 		755CD9CC1DAA18420075898E /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -4677,7 +6060,7 @@
 			};
 			name = Release;
 		};
-		755CD9D81DAA197D0075898E /* Debug */ = {
+		755CD9D81DAA197D0075898E /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_COMMA = NO;
@@ -4693,7 +6076,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
-			name = Debug;
+			name = Development;
 		};
 		755CD9D91DAA197D0075898E /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -4709,11 +6092,11 @@
 			};
 			name = Release;
 		};
-		759DA0D81DAC8668008CC49B /* Debug */ = {
+		759DA0D81DAC8668008CC49B /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
-			name = Debug;
+			name = Development;
 		};
 		759DA0D91DAC8668008CC49B /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -4721,7 +6104,7 @@
 			};
 			name = Release;
 		};
-		75A2A7D91DA5934400A983D8 /* Debug */ = {
+		75A2A7D91DA5934400A983D8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -4735,6 +6118,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -4742,6 +6126,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -4780,7 +6165,7 @@
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = Development;
 		};
 		75A2A7DA1DA5934400A983D8 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -4796,6 +6181,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -4803,6 +6189,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -4836,7 +6223,7 @@
 			};
 			name = Release;
 		};
-		75A2A7DC1DA5934400A983D8 /* Debug */ = {
+		75A2A7DC1DA5934400A983D8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
@@ -4851,7 +6238,7 @@
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
-			name = Debug;
+			name = Development;
 		};
 		75A2A7DD1DA5934400A983D8 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -4870,7 +6257,7 @@
 			};
 			name = Release;
 		};
-		75A2A7E01DA5934400A983D8 /* Debug */ = {
+		75A2A7E01DA5934400A983D8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -4885,7 +6272,7 @@
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
-			name = Debug;
+			name = Development;
 		};
 		75A2A7E11DA5934400A983D8 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -4904,7 +6291,7 @@
 			};
 			name = Release;
 		};
-		75A2A7E41DA5934400A983D8 /* Debug */ = {
+		75A2A7E41DA5934400A983D8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -4912,7 +6299,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
 				DEVELOPMENT_TEAM = ZV7987N2ZC;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DDebug";
@@ -4922,7 +6312,7 @@
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
-			name = Debug;
+			name = Development;
 		};
 		75A2A7E51DA5934400A983D8 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -4932,7 +6322,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
 				DEVELOPMENT_TEAM = ZV7987N2ZC;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
@@ -4943,7 +6336,7 @@
 			};
 			name = Release;
 		};
-		75A2A7E71DA5934400A983D8 /* Debug */ = {
+		75A2A7E71DA5934400A983D8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -4956,7 +6349,7 @@
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/breadwallet.app/breadwallet";
 			};
-			name = Debug;
+			name = Development;
 		};
 		75A2A7E81DA5934400A983D8 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -4973,7 +6366,7 @@
 			};
 			name = Release;
 		};
-		75A2A7EA1DA5934400A983D8 /* Debug */ = {
+		75A2A7EA1DA5934400A983D8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -4985,7 +6378,7 @@
 				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = breadwallet;
 			};
-			name = Debug;
+			name = Development;
 		};
 		75A2A7EB1DA5934400A983D8 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -5001,7 +6394,7 @@
 			};
 			name = Release;
 		};
-		75A2A8011DA5935F00A983D8 /* Debug */ = {
+		75A2A8011DA5935F00A983D8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
@@ -5013,7 +6406,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
-			name = Debug;
+			name = Development;
 		};
 		75A2A8021DA5935F00A983D8 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -5029,7 +6422,7 @@
 			};
 			name = Release;
 		};
-		75A2A8161DA5936F00A983D8 /* Debug */ = {
+		75A2A8161DA5936F00A983D8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
@@ -5040,7 +6433,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
-			name = Debug;
+			name = Development;
 		};
 		75A2A8171DA5936F00A983D8 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -5055,7 +6448,7 @@
 			};
 			name = Release;
 		};
-		75A2A8251DA5938500A983D8 /* Debug */ = {
+		75A2A8251DA5938500A983D8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = ZV7987N2ZC;
@@ -5067,7 +6460,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 			};
-			name = Debug;
+			name = Development;
 		};
 		75A2A8261DA5938500A983D8 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -5083,7 +6476,7 @@
 			};
 			name = Release;
 		};
-		75C735B61DAA1C9F00251ECF /* Debug */ = {
+		75C735B61DAA1C9F00251ECF /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 4R7S6N88W9;
@@ -5094,7 +6487,7 @@
 				SKIP_INSTALL = YES;
 				USE_HEADERMAP = NO;
 			};
-			name = Debug;
+			name = Development;
 		};
 		75C735B71DAA1C9F00251ECF /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -5109,7 +6502,7 @@
 			};
 			name = Release;
 		};
-		CEA7E6821F09A9D2001F8C27 /* Debug */ = {
+		CEA7E6821F09A9D2001F8C27 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -5122,7 +6515,7 @@
 				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = breadwallet;
 			};
-			name = Debug;
+			name = Development;
 		};
 		CEA7E6831F09A9D2001F8C27 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -5168,6 +6561,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -5175,6 +6569,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -5223,7 +6618,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
 				DEVELOPMENT_TEAM = ZV7987N2ZC;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DDebug -DScreenshots -DTestnet";
@@ -5470,6 +6868,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -5477,6 +6876,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -5525,7 +6925,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
 				DEVELOPMENT_TEAM = ZV7987N2ZC;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DDebug -DTestnet";
@@ -5772,6 +7175,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -5779,6 +7183,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -5820,7 +7225,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
 				DEVELOPMENT_TEAM = ZV7987N2ZC;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DTestflight -DDebug";
@@ -6038,7 +7446,7 @@
 		22A9A99F1DF63426000F0016 /* Build configuration list for PBXNativeTarget "libbz2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				22A9A9A01DF63426000F0016 /* Debug */,
+				22A9A9A01DF63426000F0016 /* Development */,
 				CEA7E6A81F0AAA84001F8C27 /* Testnet */,
 				CEA7E6951F09AC6A001F8C27 /* Screenshots */,
 				22A9A9A11DF63426000F0016 /* Release */,
@@ -6047,10 +7455,70 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		241A70E0206F4464004A6F28 /* Build configuration list for PBXNativeTarget "TodayExtension-Development" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				241A70E1206F4464004A6F28 /* Development */,
+				241A70E2206F4464004A6F28 /* Testnet */,
+				241A70E3206F4464004A6F28 /* Screenshots */,
+				241A70E4206F4464004A6F28 /* Release */,
+				241A70E5206F4464004A6F28 /* Testflight */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		241A70F0206F44A5004A6F28 /* Build configuration list for PBXNativeTarget "NotificationServiceExtension-Development" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				241A70F1206F44A5004A6F28 /* Development */,
+				241A70F2206F44A5004A6F28 /* Testnet */,
+				241A70F3206F44A5004A6F28 /* Screenshots */,
+				241A70F4206F44A5004A6F28 /* Release */,
+				241A70F5206F44A5004A6F28 /* Testflight */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2460F2B2206F2D5F00097680 /* Build configuration list for PBXNativeTarget "LoafWallet-Development" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2460F2B3206F2D5F00097680 /* Development */,
+				2460F2B4206F2D5F00097680 /* Testnet */,
+				2460F2B5206F2D5F00097680 /* Screenshots */,
+				2460F2B6206F2D5F00097680 /* Release */,
+				2460F2B7206F2D5F00097680 /* Testflight */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24AD45F5206F496E0000E978 /* Build configuration list for PBXNativeTarget "LoafWallet WatchKit App-Development" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24AD45F6206F496E0000E978 /* Development */,
+				24AD45F7206F496E0000E978 /* Testnet */,
+				24AD45F8206F496E0000E978 /* Screenshots */,
+				24AD45F9206F496E0000E978 /* Release */,
+				24AD45FA206F496E0000E978 /* Testflight */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24AD460E206F498A0000E978 /* Build configuration list for PBXNativeTarget "LoafWallet WatchKit Extension-Development" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24AD460F206F498A0000E978 /* Development */,
+				24AD4610206F498A0000E978 /* Testnet */,
+				24AD4611206F498A0000E978 /* Screenshots */,
+				24AD4612206F498A0000E978 /* Release */,
+				24AD4613206F498A0000E978 /* Testflight */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		752FB0471DF8BE6B009086FB /* Build configuration list for PBXNativeTarget "sqlite3" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				752FB0481DF8BE6B009086FB /* Debug */,
+				752FB0481DF8BE6B009086FB /* Development */,
 				CEA7E6A91F0AAA84001F8C27 /* Testnet */,
 				CEA7E6961F09AC6A001F8C27 /* Screenshots */,
 				752FB0491DF8BE6B009086FB /* Release */,
@@ -6062,7 +7530,7 @@
 		755CD9CA1DAA18420075898E /* Build configuration list for PBXNativeTarget "unbound" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				755CD9CB1DAA18420075898E /* Debug */,
+				755CD9CB1DAA18420075898E /* Development */,
 				CEA7E6A41F0AAA84001F8C27 /* Testnet */,
 				CEA7E6911F09AC6A001F8C27 /* Screenshots */,
 				755CD9CC1DAA18420075898E /* Release */,
@@ -6074,7 +7542,7 @@
 		755CD9D71DAA197D0075898E /* Build configuration list for PBXNativeTarget "BRCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				755CD9D81DAA197D0075898E /* Debug */,
+				755CD9D81DAA197D0075898E /* Development */,
 				CEA7E6A51F0AAA84001F8C27 /* Testnet */,
 				CEA7E6921F09AC6A001F8C27 /* Screenshots */,
 				755CD9D91DAA197D0075898E /* Release */,
@@ -6086,7 +7554,7 @@
 		759DA0DA1DAC8668008CC49B /* Build configuration list for PBXLegacyTarget "submodules" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				759DA0D81DAC8668008CC49B /* Debug */,
+				759DA0D81DAC8668008CC49B /* Development */,
 				CEA7E6A71F0AAA84001F8C27 /* Testnet */,
 				CEA7E6941F09AC6A001F8C27 /* Screenshots */,
 				759DA0D91DAC8668008CC49B /* Release */,
@@ -6098,7 +7566,7 @@
 		75A2A78B1DA5934300A983D8 /* Build configuration list for PBXProject "breadwallet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				75A2A7D91DA5934400A983D8 /* Debug */,
+				75A2A7D91DA5934400A983D8 /* Development */,
 				CEA7E69B1F0AAA84001F8C27 /* Testnet */,
 				CEA7E6881F09AC6A001F8C27 /* Screenshots */,
 				75A2A7DA1DA5934400A983D8 /* Release */,
@@ -6110,7 +7578,7 @@
 		75A2A7DB1DA5934400A983D8 /* Build configuration list for PBXNativeTarget "breadwallet WatchKit Extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				75A2A7DC1DA5934400A983D8 /* Debug */,
+				75A2A7DC1DA5934400A983D8 /* Development */,
 				CEA7E6A01F0AAA84001F8C27 /* Testnet */,
 				CEA7E68D1F09AC6A001F8C27 /* Screenshots */,
 				75A2A7DD1DA5934400A983D8 /* Release */,
@@ -6122,7 +7590,7 @@
 		75A2A7DF1DA5934400A983D8 /* Build configuration list for PBXNativeTarget "breadwallet WatchKit App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				75A2A7E01DA5934400A983D8 /* Debug */,
+				75A2A7E01DA5934400A983D8 /* Development */,
 				CEA7E69F1F0AAA84001F8C27 /* Testnet */,
 				CEA7E68C1F09AC6A001F8C27 /* Screenshots */,
 				75A2A7E11DA5934400A983D8 /* Release */,
@@ -6134,7 +7602,7 @@
 		75A2A7E31DA5934400A983D8 /* Build configuration list for PBXNativeTarget "breadwallet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				75A2A7E41DA5934400A983D8 /* Debug */,
+				75A2A7E41DA5934400A983D8 /* Development */,
 				CEA7E69C1F0AAA84001F8C27 /* Testnet */,
 				CEA7E6891F09AC6A001F8C27 /* Screenshots */,
 				75A2A7E51DA5934400A983D8 /* Release */,
@@ -6146,7 +7614,7 @@
 		75A2A7E61DA5934400A983D8 /* Build configuration list for PBXNativeTarget "breadwalletTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				75A2A7E71DA5934400A983D8 /* Debug */,
+				75A2A7E71DA5934400A983D8 /* Development */,
 				CEA7E69D1F0AAA84001F8C27 /* Testnet */,
 				CEA7E68A1F09AC6A001F8C27 /* Screenshots */,
 				75A2A7E81DA5934400A983D8 /* Release */,
@@ -6158,7 +7626,7 @@
 		75A2A7E91DA5934400A983D8 /* Build configuration list for PBXNativeTarget "breadwalletUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				75A2A7EA1DA5934400A983D8 /* Debug */,
+				75A2A7EA1DA5934400A983D8 /* Development */,
 				CEA7E69E1F0AAA84001F8C27 /* Testnet */,
 				CEA7E68B1F09AC6A001F8C27 /* Screenshots */,
 				75A2A7EB1DA5934400A983D8 /* Release */,
@@ -6170,7 +7638,7 @@
 		75A2A8001DA5935F00A983D8 /* Build configuration list for PBXNativeTarget "MessagesExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				75A2A8011DA5935F00A983D8 /* Debug */,
+				75A2A8011DA5935F00A983D8 /* Development */,
 				CEA7E6A11F0AAA84001F8C27 /* Testnet */,
 				CEA7E68E1F09AC6A001F8C27 /* Screenshots */,
 				75A2A8021DA5935F00A983D8 /* Release */,
@@ -6182,7 +7650,7 @@
 		75A2A8151DA5936F00A983D8 /* Build configuration list for PBXNativeTarget "TodayExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				75A2A8161DA5936F00A983D8 /* Debug */,
+				75A2A8161DA5936F00A983D8 /* Development */,
 				CEA7E6A21F0AAA84001F8C27 /* Testnet */,
 				CEA7E68F1F09AC6A001F8C27 /* Screenshots */,
 				75A2A8171DA5936F00A983D8 /* Release */,
@@ -6194,7 +7662,7 @@
 		75A2A8241DA5938500A983D8 /* Build configuration list for PBXNativeTarget "NotificationServiceExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				75A2A8251DA5938500A983D8 /* Debug */,
+				75A2A8251DA5938500A983D8 /* Development */,
 				CEA7E6A31F0AAA84001F8C27 /* Testnet */,
 				CEA7E6901F09AC6A001F8C27 /* Screenshots */,
 				75A2A8261DA5938500A983D8 /* Release */,
@@ -6206,7 +7674,7 @@
 		75C735B51DAA1C9F00251ECF /* Build configuration list for PBXNativeTarget "nettle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				75C735B61DAA1C9F00251ECF /* Debug */,
+				75C735B61DAA1C9F00251ECF /* Development */,
 				CEA7E6A61F0AAA84001F8C27 /* Testnet */,
 				CEA7E6931F09AC6A001F8C27 /* Screenshots */,
 				75C735B71DAA1C9F00251ECF /* Release */,
@@ -6218,7 +7686,7 @@
 		CEA7E6851F09A9D2001F8C27 /* Build configuration list for PBXNativeTarget "Screenshots" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CEA7E6821F09A9D2001F8C27 /* Debug */,
+				CEA7E6821F09A9D2001F8C27 /* Development */,
 				CEA7E6AA1F0AAA84001F8C27 /* Testnet */,
 				CEA7E6971F09AC6A001F8C27 /* Screenshots */,
 				CEA7E6831F09A9D2001F8C27 /* Release */,
