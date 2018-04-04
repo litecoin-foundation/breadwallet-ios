@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Dev-LoafWallet</string>
+	<string>LoafWallet-Dev</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -85,7 +85,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>10</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>

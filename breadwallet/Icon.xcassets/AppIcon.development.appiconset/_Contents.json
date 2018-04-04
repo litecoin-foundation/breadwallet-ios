@@ -2,6 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "ltcdev.png",
       "scale" : "1x"
     },
     {
