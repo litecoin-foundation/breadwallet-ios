@@ -1,0 +1,73 @@
+# This file contains the fastlane.tools configuration
+# You can find # More documentation can be found here:
+# https://docs.fastlane.tools
+fastlane_version "2.68.0"
+
+# This value helps us track success metrics for Fastfiles
+# we automatically generate. Feel free to remove this line
+# once you get things running smoothly!
+generated_fastfile_id "e68eaeaa-8332-438c-acc0-69caaf2adbae"
+
+update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  before_all do |lane, options|
+      create_keychain(
+          name: ENV["MATCH_KEYCHAIN_NAME"],
+          password: ENV["MATCH_PASSWORD"],
+          default_keychain: true,
+          unlock: true,
+          timeout: 3600,
+          add_to_search_list: true,
+          verbose: true
+      )
+  end
+  desc "Build a LoafWallet development ipa"
+  lane :development_build do
+    generateProfiles(type: "development", identifier: "com.grunt.litecoin.loafwallet")
+    disable_automatic_code_signing(path: "LitecoinFoundation.xcworkspace")    
+    gym(scheme:"LoafWallet-Development",export_method: "development")
+    enable_automatic_code_signing(path: "LitecoinFoundation.xcworkspace")
+
+    # upload to Beta by Crashlytics
+    crashlytics(
+      # keys for organization: Litecoin Foundation Ltd.
+      api_token: "78c3ed0b9b087639aa7e73b6164c0f48ad274d01",
+      build_secret: "ff62ab2e24be9a2dc54861dbc6746397e2d27b707af424fde890d98fb71b127f"
+    )
+    private_lane :generateProfiles do |options|
+            type = options[:type]
+            identifier = options[:identifier]
+            match(
+                type: type,
+                app_identifier: identifier + ".development",
+                keychain_name: ENV["MATCH_KEYCHAIN_NAME"],
+                keychain_password: ENV["MATCH_PASSWORD"],
+                readonly: false,
+                verbose: true,
+                force_for_new_devices: true
+            )
+            match(
+                type: type,
+                app_identifier: identifier + ".development" + ".watchkitapp",
+                keychain_name: ENV["MATCH_KEYCHAIN_NAME"],
+                keychain_password: ENV["MATCH_PASSWORD"],
+                readonly: false,
+                verbose: false,
+                force_for_new_devices: true
+            )
+        end
+    after_all do |lane|
+            delete_keychain(
+                name: ENV["MATCH_KEYCHAIN_NAME"]
+            )
+        end
+    # slack(
+    #   slack_url: "https://hooks.slack.com/services/IDS"
+    # )
+  end
+  
+  
+end 

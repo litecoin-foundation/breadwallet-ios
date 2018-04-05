@@ -1,0 +1,7 @@
+git_url("https://github.com/litecoin-foundation/iOS-certs-profiles")
+type("development") # The default type, can be: appstore, adhoc, enterprise or development
+app_identifier("[[com.litecoin.loafwallet.development]]") # The bundle identifier of your app
+apple_id("litecoin.foundation.ios.agent@gmail.com") # Your Apple email address
+
+# For all available options run `fastlane match --help`
+# Remove the # in the beginning of the line to enable the other options
