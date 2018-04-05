@@ -8,7 +8,7 @@ require 'xcodeproj'
 project_path = './breadwallet.xcodeproj'
 project = Xcodeproj::Project.open(project_path)
 
-desiredTargets = ['breadwallet', 'breadwallet WatchKit Extension', 'breadwallet WatchKit App', 'TodayExtension', 'NotificationServiceExtension', 'MessagesExtension']
+desiredTargets = ['breadwallet', 'breadwallet WatchKit Extension', 'breadwallet WatchKit App', 'TodayExtension', 'NotificationServiceExtension', 'MessagesExtension',',LoafWallet-Development', 'LoafWallet WatchKit Extension-Development', 'LoafWallet WatchKit App-Development', 'TodayExtension-Development', 'NotificationServiceExtension-Development']
 targets = project.native_targets.select do |target|
   desiredTargets.include? target.name
 end
