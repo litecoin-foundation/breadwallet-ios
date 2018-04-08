@@ -20,7 +20,7 @@ or alternatively using `brew cask install fastlane`
 ```
 fastlane ios development_build
 ```
-Description of what the lane does
+Build a LoafWallet development ipa
 
 ----
 

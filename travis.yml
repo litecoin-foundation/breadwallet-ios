@@ -1,2 +1,11 @@
 language: swift
 osx_image: xcode9.3
+
+cache:
+  - bundler
+before_install:
+  - bundle install
+  - bundle update
+  - bundle exec pod repo update --silent
+script:
+  - fastlane ios development_build
