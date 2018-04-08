@@ -1,0 +1,10 @@
+language: swift
+osx_image: xcode9.3
+
+notifications:
+  email: true
+install:
+   - bundle install	   
+   - bundle update fastlane	   
+script:
+  - fastlane ios development_build
