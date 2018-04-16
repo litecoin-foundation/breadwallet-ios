@@ -28,7 +28,13 @@ platform :ios do
   lane :development_build do
     generateProfiles(type: "development", identifier: "com.grunt.litecoin.loafwallet")
     disable_automatic_code_signing(path: "LitecoinFoundation.xcworkspace")    
-    gym(scheme:"LoafWallet-Development",export_method: "development")
+    gym(scheme:"LoafWallet-Development",
+	export_method: "development",
+	export_options: {
+		provisioninProfiles: {
+		"com.grunt.litecoin.loafwallet.development => "profile_com_litecoin_loafwallet_development"}
+        }
+    )
     enable_automatic_code_signing(path: "LitecoinFoundation.xcworkspace")
 
     # upload to Beta by Crashlytics

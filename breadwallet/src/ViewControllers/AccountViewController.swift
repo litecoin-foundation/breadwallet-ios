@@ -25,7 +25,7 @@ class AccountViewController : UIViewController, Subscriber {
     var menuCallback: (() -> Void)? {
         didSet { footerView.menuCallback = menuCallback }
     }
-
+    
     var walletManager: WalletManager? {
         didSet {
             guard let walletManager = walletManager else { return }
@@ -44,6 +44,7 @@ class AccountViewController : UIViewController, Subscriber {
             headerView.isWatchOnly = walletManager.isWatchOnly
         }
     }
+    
 
     init(store: Store, didSelectTransaction: @escaping ([Transaction], Int) -> Void) {
         self.store = store
@@ -57,7 +58,7 @@ class AccountViewController : UIViewController, Subscriber {
     //MARK: - Private
     private let store: Store
     private let headerView: AccountHeaderView
-    private let footerView = AccountFooterView()
+    private var footerView = AccountFooterView()
     private let transactionsLoadingView = LoadingProgressView()
     private let transactionsTableView: TransactionsTableViewController
     private let footerHeight: CGFloat = 56.0
@@ -103,6 +104,13 @@ class AccountViewController : UIViewController, Subscriber {
                 self.showJailbreakWarnings(isJailbroken: isJailbroken)
             }
             showJailbreakWarnings(isJailbroken: isJailbroken)
+            
+            NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: nil) { _ in
+                if UserDefaults.writePaperPhraseDate != nil {
+                    self.footerView.refeshButtonStatus()
+                }
+            }
+        
         }
 
         addTransactionsView()

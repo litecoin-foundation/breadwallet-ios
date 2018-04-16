@@ -36,7 +36,6 @@ class StartFlowPresenter : Subscriber {
         }
         return button
     }
-
     private func addSubscriptions() {
         store.subscribe(self,
                         selector: { $0.isStartFlowVisible != $1.isStartFlowVisible },
@@ -148,13 +147,14 @@ class StartFlowPresenter : Subscriber {
     }
 
     private func pushStartPaperPhraseCreationViewController(pin: String) {
+        
         let paperPhraseViewController = StartPaperPhraseViewController(store: store, callback: { [weak self] in
             self?.pushWritePaperPhraseViewController(pin: pin)
         })
         paperPhraseViewController.title = S.SecurityCenter.Cells.paperKeyTitle
         paperPhraseViewController.navigationItem.setHidesBackButton(true, animated: false)
-        paperPhraseViewController.navigationItem.leftBarButtonItems = [UIBarButtonItem.negativePadding, UIBarButtonItem(customView: closeButton)]
-
+        paperPhraseViewController.hideCloseNavigationItem()//Removed close button to force paper key registration
+        
         let faqButton = UIButton.buildFaqButton(store: store, articleId: ArticleIds.paperKey)
         faqButton.tintColor = .white
         paperPhraseViewController.navigationItem.rightBarButtonItems = [UIBarButtonItem.negativePadding, UIBarButtonItem(customView: faqButton)]
@@ -171,7 +171,8 @@ class StartFlowPresenter : Subscriber {
             self?.pushConfirmPaperPhraseViewController(pin: pin)
         })
         writeViewController.title = S.SecurityCenter.Cells.paperKeyTitle
-        writeViewController.navigationItem.leftBarButtonItems = [UIBarButtonItem.negativePadding, UIBarButtonItem(customView: closeButton)]
+        writeViewController.hideCloseNavigationItem()
+       
         navigationController?.pushViewController(writeViewController, animated: true)
     }
 

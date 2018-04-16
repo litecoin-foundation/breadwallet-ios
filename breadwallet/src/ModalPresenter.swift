@@ -563,7 +563,7 @@ class ModalPresenter : Subscriber, Trackable {
                             paperPhraseNavigationController.pushViewController(confirm, animated: true)
                         }
                     })
-                    write?.addCloseNavigationItem(tintColor: .white)
+                    write?.hideCloseNavigationItem()
                     write?.navigationItem.title = S.SecurityCenter.Cells.paperKeyTitle
 
                     vc.dismiss(animated: true, completion: {
@@ -580,11 +580,16 @@ class ModalPresenter : Subscriber, Trackable {
             verify.modalPresentationCapturesStatusBarAppearance = true
             paperPhraseNavigationController.present(verify, animated: true, completion: nil)
         })
-        start.addCloseNavigationItem(tintColor: .white)
         start.navigationItem.title = S.SecurityCenter.Cells.paperKeyTitle
         let faqButton = UIButton.buildFaqButton(store: store, articleId: ArticleIds.paperKey)
+        let closeButton = UIButton.close
         faqButton.tintColor = .white
         start.navigationItem.rightBarButtonItems = [UIBarButtonItem.negativePadding, UIBarButtonItem(customView: faqButton)]
+        if let writePaperPhraseDate = UserDefaults.writePaperPhraseDate {
+            start.addCloseNavigationItem(tintColor: .white)
+        } else {
+            start.hideCloseNavigationItem()//Removed close button to force paper key registration
+        }
         paperPhraseNavigationController.viewControllers = [start]
         vc.present(paperPhraseNavigationController, animated: true, completion: nil)
     }
