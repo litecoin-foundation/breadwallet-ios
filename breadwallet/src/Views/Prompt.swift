@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import LocalAuthentication
-
+import LocalAuthentication 
 enum PromptType {
     case biometrics
     case paperKey
@@ -101,7 +100,6 @@ class Prompt : UIView {
     private func setup() {
         addSubview(title)
         addSubview(body)
-        addSubview(close)
         title.constrain([
             title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: C.padding[2]),
             title.topAnchor.constraint(equalTo: topAnchor, constant: C.padding[2]) ])
@@ -109,10 +107,14 @@ class Prompt : UIView {
             body.leadingAnchor.constraint(equalTo: title.leadingAnchor),
             body.topAnchor.constraint(equalTo: title.bottomAnchor),
             body.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -C.padding[2]) ])
+        
+        if type != .paperKey {
+        addSubview(close)
         close.constrain([
             close.topAnchor.constraint(equalTo: topAnchor),
             close.trailingAnchor.constraint(equalTo: trailingAnchor) ])
         close.pin(toSize: CGSize(width: 44.0, height: 44.0))
+        }
         title.text = type.title
         body.text = type.body
     }

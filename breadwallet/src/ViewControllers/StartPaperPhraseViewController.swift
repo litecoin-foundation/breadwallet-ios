@@ -9,7 +9,7 @@
 import UIKit
 
 class StartPaperPhraseViewController : UIViewController {
-
+///KCW This vc is shown from Settings
     init(store: Store, callback: @escaping () -> Void) {
         self.store = store
         self.callback = callback
@@ -39,6 +39,7 @@ class StartPaperPhraseViewController : UIViewController {
             let df = DateFormatter()
             df.setLocalizedDateFormatFromTemplate("MMMM d, yyyy")
             footer.text = String(format: S.StartPaperPhrase.date, df.string(from: writePaperPhraseDate))
+            footer.textAlignment = .center
         }
     }
 

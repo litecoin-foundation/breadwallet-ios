@@ -32,4 +32,10 @@ extension UIViewController {
         }
         navigationItem.leftBarButtonItems = [UIBarButtonItem.negativePadding, UIBarButtonItem(customView: close)]
     }
+    
+    func hideCloseNavigationItem() {
+        navigationItem.leftBarButtonItems = [UIBarButtonItem.negativePadding, UIBarButtonItem(customView: UIView())]
+    }
+    
+    
 }
