@@ -4,4 +4,3 @@ app_identifier("[[com.litecoin.loafwallet.development]]") # The bundle identifie
 apple_id("litecoin.foundation.ios.agent@gmail.com") # Your Apple email address
 
 # For all available options run `fastlane match --help`
-
