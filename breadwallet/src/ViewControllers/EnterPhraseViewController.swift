@@ -12,6 +12,7 @@ enum PhraseEntryReason {
     case setSeed(EnterPhraseCallback)
     case validateForResettingPin(EnterPhraseCallback)
     case validateForWipingWallet(()->Void)
+    case validateForCreatingWallet(()->Void)
 }
 
 typealias EnterPhraseCallback = (String) -> Void
@@ -32,6 +33,8 @@ class EnterPhraseViewController : UIViewController, UIScrollViewDelegate, Custom
             self.customTitle = S.RecoverWallet.headerResetPin
         case .validateForWipingWallet(_):
             self.customTitle = S.WipeWallet.title
+        case .validateForCreatingWallet(_):
+            self.customTitle = S.StartPaperPhrase.buttonTitle
         }
 
         super.init(nibName: nil, bundle: nil)
@@ -150,6 +153,10 @@ class EnterPhraseViewController : UIViewController, UIScrollViewDelegate, Custom
             saveEvent("enterPhrase.wipeWallet")
             titleLabel.text = S.WipeWallet.title
             subheader.text = S.WipeWallet.instruction
+        case .validateForCreatingWallet(_):
+            saveEvent("enterPhrase.createWallet")
+            titleLabel.text = S.StartPaperPhrase.buttonTitle
+            subheader.text = S.StartPaperPhrase.body
         }
 
         scrollView.delegate = self
@@ -177,6 +184,9 @@ class EnterPhraseViewController : UIViewController, UIScrollViewDelegate, Custom
             UserDefaults.writePaperPhraseDate = Date()
             return callback(phrase)
         case .validateForWipingWallet(let callback):
+            guard self.walletManager.authenticate(phrase: phrase) else { errorLabel.isHidden = false; return }
+            return callback()
+        case .validateForCreatingWallet(let callback):
             guard self.walletManager.authenticate(phrase: phrase) else { errorLabel.isHidden = false; return }
             return callback()
         }

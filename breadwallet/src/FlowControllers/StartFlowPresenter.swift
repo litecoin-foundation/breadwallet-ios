@@ -176,15 +176,10 @@ class StartFlowPresenter : Subscriber {
     }
 
     private func pushConfirmPaperPhraseViewController(pin: String) {
-        let confirmViewController = ConfirmPaperPhraseViewController(store: store, walletManager: walletManager, pin: pin, callback: { [weak self] in
-            guard let myself = self else { return }
-            myself.store.perform(action: Alert.Show(.paperKeySet(callback: {
-                self?.store.perform(action: HideStartFlow())
-            })))
-        })
-        confirmViewController.title = S.SecurityCenter.Cells.paperKeyTitle
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.pushViewController(confirmViewController, animated: true)
+        let recoverWalletViewController = EnterPhraseViewController(store: store, walletManager: walletManager, reason: .validateForCreatingWallet({
+            self.store.perform(action: HideStartFlow())
+        }))
+        navigationController?.pushViewController(recoverWalletViewController, animated: true)
     }
 
     private func presentLoginFlow(isPresentedForLock: Bool) {
