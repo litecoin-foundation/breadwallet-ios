@@ -11,13 +11,13 @@ import UIKit
 private let circleRadius: CGFloat = 12.0
 
 class ConfirmPhrase: UIView {
-
+    
+    let word: String
     let textField = UITextField()
     var callback: (() -> Void)?
     var doneCallback: (() -> Void)?
     var isEditingCallback: (() -> Void)?
-
-
+ 
     init(text: String, word: String) {
         self.word = word
         super.init(frame: CGRect())
@@ -26,7 +26,6 @@ class ConfirmPhrase: UIView {
         setupSubviews()
     }
  
-    internal let word: String
     private let label = UILabel()
     private let separator = UIView()
     private let circle = DrawableCircle()
@@ -85,12 +84,9 @@ class ConfirmPhrase: UIView {
             circle.show()
             textField.isEnabled = false
         }
-        print("XXX\(self.textField.frame)")
         callback?()
     }
-    
-    
-    
+     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

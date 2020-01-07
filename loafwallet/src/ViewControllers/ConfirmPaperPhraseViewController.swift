@@ -1,9 +1,8 @@
 //
 //  ConfirmPaperPhraseViewController.swift
-//  breadwallet
 //
-//  Created by Adrian Corscadden on 2016-10-27.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
+//  Created by Kerry Washington on 11/27/19.
+//  Copyright © 2019 Litecoin Foundation. All rights reserved.
 //
 
 import UIKit
@@ -45,6 +44,7 @@ class ConfirmPaperPhraseViewController : UITableViewController {
         return phraseString.components(separatedBy: " ")
     }()
     
+    
     lazy private var confirmFirstPhrase: ConfirmPhrase = { ConfirmPhrase(text: String(format:S.ConfirmPaperPhrase.word, "\(self.fourIndices.0 + 1)"), word: self.words[self.fourIndices.0]) }()
     lazy private var confirmSecondPhrase: ConfirmPhrase = { ConfirmPhrase(text: String(format:S.ConfirmPaperPhrase.word, "\(self.fourIndices.1 + 1)"), word: self.words[self.fourIndices.1]) }()
     lazy private var confirmThirdPhrase: ConfirmPhrase = { ConfirmPhrase(text: String(format:S.ConfirmPaperPhrase.word, "\(self.fourIndices.2 + 1)"), word: self.words[self.fourIndices.2]) }()
@@ -75,12 +75,6 @@ class ConfirmPaperPhraseViewController : UITableViewController {
         NotificationCenter.default.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] note in
             self?.dismiss(animated: true, completion: nil)
         }
-        NotificationCenter.default.addObserver(forName: .UIKeyboardWillShow, object: nil, queue:nil) { note in
-            print(self.currentResponder?.frame.origin)
-            if let firstResponder = self.view.window?.firstResponder {
-                print(firstResponder.frame.origin)
-            }
-        }
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -95,7 +89,6 @@ class ConfirmPaperPhraseViewController : UITableViewController {
         radiantView.frame = headerView.frame
         headerView.addSubview(radiantView)
         headerView.sendSubview(toBack: radiantView)
-        backButton.setImage(UIImage(named: "LeftArrow"), for: .normal)
         headerTitleLabel.font = UIFont.barloweBold(size: 18.0)
         headerDescriptionLabel.font = UIFont.barloweRegular(size: 14.0)
         
@@ -124,7 +117,7 @@ class ConfirmPaperPhraseViewController : UITableViewController {
                                   withVisualFormat: "|-[confirmFourthPhrase]-|", options: [], metrics: nil,
                                   views: ["confirmFourthPhrase": confirmFourthPhrase]))
 
-                     
+        backButton.addTarget(self, action: #selector(dismissController), for: .touchUpInside)
         submitButton.setTitle(S.Button.submit, for: .normal)
         submitButton.titleLabel?.font = UIFont.barloweBold(size: 18.0)
         submitButton.backgroundColor = .liteWalletBlue
@@ -159,19 +152,20 @@ class ConfirmPaperPhraseViewController : UITableViewController {
         }
         confirmThirdPhrase.isEditingCallback = { [weak self] in
            self?.adjustScrollView(set: 3)
-
         }
-        
         confirmFourthPhrase.isEditingCallback = { [weak self] in
             self?.adjustScrollView(set: 4)
         }
     }
     
     private func adjustScrollView(set:Int) {
-        
         let constant = 20.0
         let offset = CGFloat(constant) * CGFloat(set)
-        tableView.contentOffset = CGPoint(x: 0, y: offset);
+        tableView.setContentOffset(CGPoint(x: 0, y: offset), animated: true)
+    }
+    
+    @objc private func dismissController() {
+        self.dismiss(animated: true)
     }
     
     @objc private func checkPhrases() {
@@ -181,7 +175,12 @@ class ConfirmPaperPhraseViewController : UITableViewController {
             return
         }
         
-        if firstWordCell.confirmPhraseView?.textField.text == words[fourIndices.0] &&
+        print("first: \(String(describing:firstWordCell.confirmPhraseView?.textField.text)) vs words \(words[fourIndices.0])\n")
+        print("second: \(String(describing:secondWordCell.confirmPhraseView?.textField.text)) vs words \(words[fourIndices.1])\n")
+        print("third: \(String(describing:thirdWordCell.confirmPhraseView?.textField.text)) vs words \(words[fourIndices.2])\n")
+        print("fourth: \(String(describing:fourthWordCell.confirmPhraseView?.textField.text)) vs words \(words[fourIndices.3])\n")
+
+        if  firstWordCell.confirmPhraseView?.textField.text == words[fourIndices.0] &&
             secondWordCell.confirmPhraseView?.textField.text == words[fourIndices.1] &&
             thirdWordCell.confirmPhraseView?.textField.text == words[fourIndices.2] &&
             fourthWordCell.confirmPhraseView?.textField.text == words[fourIndices.3] {

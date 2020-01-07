@@ -19,13 +19,15 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ers-X3-F0t">
-                                    <rect key="frame" x="20" y="20" width="60" height="30"/>
+                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ers-X3-F0t">
+                                    <rect key="frame" x="20" y="10" width="40" height="40"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="60" id="4tT-rj-gsV"/>
-                                        <constraint firstAttribute="height" constant="30" id="6FV-8T-oOH"/>
+                                        <constraint firstAttribute="width" constant="40" id="4tT-rj-gsV"/>
+                                        <constraint firstAttribute="height" constant="40" id="6FV-8T-oOH"/>
                                     </constraints>
-                                    <state key="normal" image="LeftArrow"/>
+                                    <state key="normal" image="whiteleftarrow">
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                    </state>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQb-VL-NIS">
                                     <rect key="frame" x="107" y="10" width="200" height="30"/>
@@ -55,7 +57,7 @@
                                 <constraint firstAttribute="trailing" secondItem="r6D-qZ-6g0" secondAttribute="trailing" constant="20" id="n8D-Lb-vwE"/>
                                 <constraint firstItem="CQb-VL-NIS" firstAttribute="top" secondItem="N57-7f-Fob" secondAttribute="top" constant="10" id="oa0-dj-kLF"/>
                                 <constraint firstItem="ers-X3-F0t" firstAttribute="leading" secondItem="N57-7f-Fob" secondAttribute="leading" constant="20" id="uHW-tQ-oZs"/>
-                                <constraint firstItem="ers-X3-F0t" firstAttribute="top" secondItem="N57-7f-Fob" secondAttribute="top" constant="20" id="vka-20-0UI"/>
+                                <constraint firstItem="ers-X3-F0t" firstAttribute="top" secondItem="N57-7f-Fob" secondAttribute="top" constant="10" id="vka-20-0UI"/>
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="p1g-xX-RH1">
@@ -143,6 +145,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LeftArrow" width="7" height="12"/>
+        <image name="whiteleftarrow" width="100" height="100"/>
     </resources>
 </document>
