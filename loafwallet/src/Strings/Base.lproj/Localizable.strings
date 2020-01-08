@@ -1218,3 +1218,6 @@
 
 /* Languages label */
 "Settings.languages" = "Languages";
+
+/* Label to pick fiat */
+"DefaultCurrency.chooseFiatLabel" = "Choose:";

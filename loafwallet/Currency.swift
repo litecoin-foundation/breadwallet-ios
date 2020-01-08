@@ -28,3 +28,32 @@ class Currency {
   }
     
 }
+
+enum PartnerFiatOptions: Int, CustomStringConvertible {
+    case cad
+    case eur
+    case jpy
+    case usd
+    
+    public var description: String {
+        return code
+    }
+     
+    private var code: String {
+        switch self {
+        case .cad: return "CAD"
+        case .eur: return "EUR"
+        case .jpy: return "JPY"
+        case .usd: return "USD"
+        }
+    }
+    
+    public var index: Int {
+        switch self {
+        case .cad: return 0
+        case .eur: return 1
+        case .jpy: return 2
+        case .usd: return 3
+        }
+    }
+}

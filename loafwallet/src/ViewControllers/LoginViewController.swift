@@ -313,6 +313,7 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
         label.textColor = .white
         label.text = S.UnlockScreen.unlocked
         let lock = UIImageView(image: #imageLiteral(resourceName: "unlock"))
+        lock.transform = .init(scaleX: 0.6, y: 0.6)
          
         if let _pinView = self.pinView {
             enterPINLabel.removeFromSuperview()

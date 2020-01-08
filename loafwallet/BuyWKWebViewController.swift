@@ -25,11 +25,7 @@ class BuyWKWebViewController: UIViewController, WKNavigationDelegate, WKScriptMe
     private let currentWalletAddress : String = {
         return WalletManager.sharedInstance.wallet?.receiveAddress ?? ""
     }()
-    private let currencyCode : String = {
-        let localeCode = Locale.current.currencyCode ?? "USD"
-        return Currency.returnSimplexSupportedFiat(givenCode: localeCode)
-    }()
- 
+
     private let appInstallDate : Date = {
          if let documentsFolder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last {
                 if let installDate = try! FileManager.default.attributesOfItem(atPath: documentsFolder.path)[.creationDate] as? Date {
@@ -40,8 +36,8 @@ class BuyWKWebViewController: UIViewController, WKNavigationDelegate, WKScriptMe
     }()
     
     private let wkProcessPool = WKProcessPool()
-    var partnerPrefixString : String?
-     
+    var partnerPrefixString: String?
+    var currencyCode: String = "USD"
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()

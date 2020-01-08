@@ -243,6 +243,9 @@
 /* Litecoin denomination picker label */
 "DefaultCurrency.bitcoinLabel" = "Unidad de visualización Litecoin";
 
+/* Label to pick fiat */
+"DefaultCurrency.chooseFiatLabel" = "Escoger:";
+
 /* Exchange rate label */
 "DefaultCurrency.rateLabel" = "Tasa de cambio";
 

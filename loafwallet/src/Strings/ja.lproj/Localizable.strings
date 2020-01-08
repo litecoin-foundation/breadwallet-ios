@@ -242,6 +242,9 @@
 /* Litecoin denomination picker label */
 "DefaultCurrency.bitcoinLabel" = "リテコインの表示単位";
 
+/* Label to pick fiat */
+"DefaultCurrency.chooseFiatLabel" = "選ぶ:";
+
 /* Exchange rate label */
 "DefaultCurrency.rateLabel" = "為替レート";
 

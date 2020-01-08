@@ -242,6 +242,9 @@
 /* Litecoin denomination picker label */
 "DefaultCurrency.bitcoinLabel" = "萊特幣顯示單位";
 
+/* Label to pick fiat */
+"DefaultCurrency.chooseFiatLabel" = "選擇:";
+
 /* Exchange rate label */
 "DefaultCurrency.rateLabel" = "匯率";
 

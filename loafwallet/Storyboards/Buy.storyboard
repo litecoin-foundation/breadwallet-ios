@@ -111,6 +111,51 @@
                                         <color key="backgroundColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="44" id="dx7-ld-3lB" userLabel="Choose Currency Cell">
+                                        <rect key="frame" x="0.0" y="163" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dx7-ld-3lB" id="DPo-16-Dlo">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="3" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dbv-v7-8b2">
+                                                    <rect key="frame" x="212" y="0.0" width="187" height="32"/>
+                                                    <segments>
+                                                        <segment title="CAD"/>
+                                                        <segment title="EUR"/>
+                                                        <segment title="JPY"/>
+                                                        <segment title="USD"/>
+                                                    </segments>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </segmentedControl>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mXB-Ay-nw2">
+                                                    <rect key="frame" x="0.0" y="43" width="414" height="1"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="4rN-nc-f9t"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Fiat:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Vx-14-6sF">
+                                                    <rect key="frame" x="128" y="6.5" width="74" height="18"/>
+                                                    <fontDescription key="fontDescription" name="BarlowSemiCondensed-Medium" family="Barlow Semi Condensed Medium" pointSize="15"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <gestureRecognizers/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="mXB-Ay-nw2" secondAttribute="trailing" id="1W1-MV-aYh"/>
+                                                <constraint firstItem="dbv-v7-8b2" firstAttribute="leading" secondItem="8Vx-14-6sF" secondAttribute="trailing" constant="10" id="2CD-Sy-Qwp"/>
+                                                <constraint firstAttribute="trailing" secondItem="dbv-v7-8b2" secondAttribute="trailing" constant="15" id="DAC-87-xrs"/>
+                                                <constraint firstItem="mXB-Ay-nw2" firstAttribute="leading" secondItem="DPo-16-Dlo" secondAttribute="leading" id="a3r-1g-WCT"/>
+                                                <constraint firstItem="dbv-v7-8b2" firstAttribute="centerY" secondItem="8Vx-14-6sF" secondAttribute="centerY" id="fNv-wY-340"/>
+                                                <constraint firstItem="dbv-v7-8b2" firstAttribute="top" secondItem="DPo-16-Dlo" secondAttribute="top" id="k0m-6I-R3R"/>
+                                                <constraint firstAttribute="bottom" secondItem="mXB-Ay-nw2" secondAttribute="bottom" id="uzb-PB-NcE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <gestureRecognizers/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -120,6 +165,8 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="chooseFiatLabel" destination="8Vx-14-6sF" id="sr9-9k-wCn"/>
+                        <outlet property="currencySegmentedControl" destination="dbv-v7-8b2" id="RVA-6s-Gwr"/>
                         <outlet property="simplexCellContainerView" destination="Krb-ZF-yM2" id="Mbq-CV-het"/>
                         <outlet property="simplexDetailsLabel" destination="lu8-PU-mmm" id="zav-BB-s36"/>
                         <outlet property="simplexHeaderLabel" destination="6fw-a4-pvs" id="9mG-CE-tUk"/>
