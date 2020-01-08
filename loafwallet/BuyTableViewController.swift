@@ -58,7 +58,6 @@ class BuyTableViewController: UITableViewController {
         
         currencySegmentedControl.addTarget(self, action: #selector(didChangeCurrency), for: .valueChanged)
         currencySegmentedControl.selectedSegmentIndex = PartnerFiatOptions.usd.index
-         
         setupData()
     }
     
@@ -80,7 +79,4 @@ class BuyTableViewController: UITableViewController {
             self.currencyCode = code
         }
     }
-    
-    
-
 }
