@@ -58,8 +58,6 @@ class ConfirmPaperPhraseViewController : UITableViewController {
     var walletManager: WalletManager?
     var pin: String?
     
-    private var currentResponder: UITextField?
-     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -130,7 +128,6 @@ class ConfirmPaperPhraseViewController : UITableViewController {
         submitButton.addTarget(self, action: #selector(checkPhrases), for: .touchUpInside)
         
         confirmFirstPhrase.callback = { [weak self] in
-            self?.currentResponder = self?.confirmFirstPhrase.textField
             if self?.confirmFirstPhrase.textField.text == self?.confirmFirstPhrase.word {
                 self?.confirmSecondPhrase.textField.becomeFirstResponder()
             }
@@ -139,7 +136,6 @@ class ConfirmPaperPhraseViewController : UITableViewController {
             self?.adjustScrollView(set: 1)
         }
         confirmSecondPhrase.callback = { [weak self] in
-            self?.currentResponder = self?.confirmSecondPhrase.textField
             if self?.confirmSecondPhrase.textField.text == self?.confirmSecondPhrase.word {
                 self?.confirmThirdPhrase.textField.becomeFirstResponder()
             }
@@ -148,10 +144,8 @@ class ConfirmPaperPhraseViewController : UITableViewController {
             self?.adjustScrollView(set: 2)
         }
         confirmThirdPhrase.callback = { [weak self] in
-            self?.currentResponder = self?.confirmThirdPhrase.textField
             if self?.confirmThirdPhrase.textField.text == self?.confirmThirdPhrase.word {
                 self?.confirmFourthPhrase.textField.becomeFirstResponder()
-                self?.currentResponder = self?.confirmFourthPhrase.textField
             }
         }
         confirmThirdPhrase.isEditingCallback = { [weak self] in

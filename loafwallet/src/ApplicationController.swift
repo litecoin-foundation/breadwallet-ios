@@ -369,8 +369,7 @@ class ApplicationController : Subscriber, Trackable {
     extension ApplicationController {
         func listenForPushNotificationRequest() {
             store.subscribe(self, name: .registerForPushNotificationToken, callback: { _ in
-                //TODO: Refactor, APNS is not setup
-                //FIXME: Hih
+                //TODO: Refactor, APNS is not setup 
                  let settings = UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil)
                   self.application?.registerUserNotificationSettings(settings)
             })

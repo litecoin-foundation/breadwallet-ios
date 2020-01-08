@@ -46,7 +46,7 @@
 @end
 
 @implementation BRTodayViewController
-//TODO: TO REFACTOR TO SWIFT
+//TODO: TO REFACTOR TO SWIFT to add Mixpanel test point
 - (void)viewDidLoad
 {
     [super viewDidLoad];
