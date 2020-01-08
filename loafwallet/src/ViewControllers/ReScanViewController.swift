@@ -80,7 +80,6 @@ class ReScanViewController : UIViewController, Subscriber {
         alert.addAction(UIAlertAction(title: S.Button.cancel, style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: S.ReScan.alertAction, style: .default, handler: { _ in
             self.store.trigger(name: .rescan)
-            print("XXY START: \(Date())") 
             self.dismiss(animated: true, completion: nil)
         }))
         present(alert, animated: true, completion: nil)

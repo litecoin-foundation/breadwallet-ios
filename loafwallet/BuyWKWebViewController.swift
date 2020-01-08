@@ -72,6 +72,7 @@ class BuyWKWebViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         
         let timestamp = Int(appInstallDate.timeIntervalSince1970)
         let urlString =  "https://buy.loafwallet.org/?address=\(currentWalletAddress)&code=\(currencyCode)&idate=\(timestamp)&uid=\(uuidString)"
+        //https://buy.loafwallet.org/?address=LZhz8NvsWHFdAK1H85dEDQiVhFGUJo9rsk&code=USD&idate=1578376166&uid=5DE36BF9-73A8-4B84-8229-2C60FABC5E25
         guard let url = URL(string: urlString) else {
         NSLog("ERROR: URL not initialized")
             return

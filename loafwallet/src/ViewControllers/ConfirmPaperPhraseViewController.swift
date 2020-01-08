@@ -35,20 +35,24 @@ class ConfirmPaperPhraseViewController : UITableViewController {
     }()
     
     lazy private var words: [String] = {
-        
         guard let pin = self.pin,
             let phraseString = self.walletManager?.seedPhrase(pin: pin) else {
                 NSLog("Error: Phrase string empty")
                 return []
         }
-        return phraseString.components(separatedBy: " ")
+        var wordArray = phraseString.components(separatedBy:" ")
+        let lastWord = wordArray.last
+        if let trimmed = lastWord?.replacingOccurrences(of: "\0", with: "") {
+            wordArray[11] = trimmed //This end line \0 is being read as an element...removing it
+        }
+        return wordArray
     }()
     
-    
-    lazy private var confirmFirstPhrase: ConfirmPhrase = { ConfirmPhrase(text: String(format:S.ConfirmPaperPhrase.word, "\(self.fourIndices.0 + 1)"), word: self.words[self.fourIndices.0]) }()
-    lazy private var confirmSecondPhrase: ConfirmPhrase = { ConfirmPhrase(text: String(format:S.ConfirmPaperPhrase.word, "\(self.fourIndices.1 + 1)"), word: self.words[self.fourIndices.1]) }()
-    lazy private var confirmThirdPhrase: ConfirmPhrase = { ConfirmPhrase(text: String(format:S.ConfirmPaperPhrase.word, "\(self.fourIndices.2 + 1)"), word: self.words[self.fourIndices.2]) }()
-    lazy private var confirmFourthPhrase: ConfirmPhrase = { ConfirmPhrase(text: String(format:S.ConfirmPaperPhrase.word, "\(self.fourIndices.3 + 1)"), word: self.words[self.fourIndices.3]) }()
+    lazy private var confirmFirstPhrase: ConfirmPhrase = { ConfirmPhrase(text: String(format:S.ConfirmPaperPhrase.word, "\(self.fourIndices.0+1)"), word: self.words[self.fourIndices.0])
+    }()
+    lazy private var confirmSecondPhrase: ConfirmPhrase = { ConfirmPhrase(text: String(format:S.ConfirmPaperPhrase.word, "\(self.fourIndices.1+1)"), word: self.words[self.fourIndices.1]) }()
+    lazy private var confirmThirdPhrase: ConfirmPhrase = { ConfirmPhrase(text: String(format:S.ConfirmPaperPhrase.word, "\(self.fourIndices.2+1)"), word: self.words[self.fourIndices.2]) }()
+    lazy private var confirmFourthPhrase: ConfirmPhrase = { ConfirmPhrase(text: String(format:S.ConfirmPaperPhrase.word, "\(self.fourIndices.3+1)"), word: self.words[self.fourIndices.3]) }()
      
     var store: Store?
     var walletManager: WalletManager?
@@ -175,11 +179,6 @@ class ConfirmPaperPhraseViewController : UITableViewController {
             return
         }
         
-        print("first: \(String(describing:firstWordCell.confirmPhraseView?.textField.text)) vs words \(words[fourIndices.0])\n")
-        print("second: \(String(describing:secondWordCell.confirmPhraseView?.textField.text)) vs words \(words[fourIndices.1])\n")
-        print("third: \(String(describing:thirdWordCell.confirmPhraseView?.textField.text)) vs words \(words[fourIndices.2])\n")
-        print("fourth: \(String(describing:fourthWordCell.confirmPhraseView?.textField.text)) vs words \(words[fourIndices.3])\n")
-
         if  firstWordCell.confirmPhraseView?.textField.text == words[fourIndices.0] &&
             secondWordCell.confirmPhraseView?.textField.text == words[fourIndices.1] &&
             thirdWordCell.confirmPhraseView?.textField.text == words[fourIndices.2] &&

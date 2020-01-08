@@ -70,8 +70,6 @@ class ConfirmPhrase: UIView {
     }
 
     func validate() {
-        
-        print("XXTEXT:\(textField.text) vs WORD:\(word)")
         if textField.text != word {
             textField.textColor = .cameraGuideNegative //.red
         }
