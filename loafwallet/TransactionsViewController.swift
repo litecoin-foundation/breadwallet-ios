@@ -103,7 +103,10 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
          
         store.subscribe(self, selector: { $0.walletState.syncProgress != $1.walletState.syncProgress },
                         callback: { state in
-
+        store.subscribe(self, name:.showStatusBar) { (didShowStatusBar) in
+           self.reload() //May fix where the action view persists after confirming pin
+        }
+                            
         if state.walletState.isRescanning {
             self.syncingHeaderView?.isRescanning = state.walletState.isRescanning
             self.syncingHeaderView?.noSendImageView.alpha = 1.0

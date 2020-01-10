@@ -60,10 +60,13 @@ class BuyWKWebViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         config.processPool = wkProcessPool
         config.userContentController = contentController
         
-        let wkWebView = WKWebView(frame: self.wkWebContainerView.bounds, configuration: config)
+        let wkWithFooter = CGRect(x: 0, y: 0, width: self.wkWebContainerView.bounds.width, height: self.wkWebContainerView.bounds.height-100)
+        let wkWebView = WKWebView(frame:wkWithFooter, configuration: config)
         wkWebView.navigationDelegate = self
         wkWebView.allowsBackForwardNavigationGestures = true
-        wkWebView.scrollView.contentInset = UIEdgeInsetsMake(-70, 0, -70, 0)
+        wkWebView.scrollView.contentInset = UIEdgeInsetsMake(-50, 0, 0, 0)
+
+        wkWebView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.wkWebContainerView.addSubview(wkWebView)
         
         let timestamp = Int(appInstallDate.timeIntervalSince1970)
@@ -114,10 +117,28 @@ extension BuyWKWebViewController {
         return decisionHandler(.allow)
     }
     
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) { }
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        webView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
+            if complete != nil {
+                
+//                document.documentElement.scrollHeight,
+//                document.body.offsetHeight,
+//                document.documentElement.offsetHeight,
+//                document.documentElement.clientHeight
+//                webView.evaluateJavaScript("document.body.scrollHeight",
+//                completionHandler: { (height, error) in
+//                 })
+//
+//                webView.evaluateJavaScript("document.documentElement.scrollWidth",
+//                completionHandler: { (width, error) in
+//                  })
+            }
+            })
+    }
      
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         guard let response = message.body as? String else { return }
+        print(response)
         guard let url = URL(string: "https://checkout.simplexcc.com/payments/new") else { return }
         
         var req = URLRequest(url: url)
