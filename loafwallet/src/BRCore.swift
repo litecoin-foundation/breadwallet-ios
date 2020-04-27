@@ -532,12 +532,18 @@ protocol BRPeerManagerListener {
 class BRPeerManager {
     let cPtr: OpaquePointer
     let listener: BRPeerManagerListener
-    let mainNetParams = [BRMainNetParams]
+    
+    #if Testnet
+        let params = [BRTestNetParams]
+    #else
+        let params = [BRMainNetParams]
+    #endif
     
     init?(wallet: BRWallet, earliestKeyTime: TimeInterval, blocks: [BRBlockRef?], peers: [BRPeer],
           listener: BRPeerManagerListener) {
         var blockRefs = blocks
-        guard let cPtr = BRPeerManagerNew(mainNetParams, wallet.cPtr, UInt32(earliestKeyTime + NSTimeIntervalSince1970),
+        
+        guard let cPtr = BRPeerManagerNew(params, wallet.cPtr, UInt32(earliestKeyTime + NSTimeIntervalSince1970),
                                           &blockRefs, blockRefs.count, peers, peers.count) else { return nil }
         self.listener = listener
         self.cPtr = cPtr
@@ -663,7 +669,6 @@ class BRPeerManager {
         } else {
             BRPeerManagerSetFixedPeer(cPtr, UInt128(), 0)
         }
-
     }
     
     deinit {
@@ -680,9 +685,15 @@ class BRPeerManager {
     }
     
     //hack to keep the swift compiler happy
-    let a = BRMainNetDNSSeeds
-    let b = BRMainNetCheckpoints
-    let c = BRMainNetVerifyDifficulty
+    #if Testnet
+        let d = BRTestNetDNSSeeds
+        let e = BRTestNetCheckpoints
+        let f = BRTestNetVerifyDifficulty
+    #else
+        let a = BRMainNetDNSSeeds
+        let b = BRMainNetCheckpoints
+        let c = BRMainNetVerifyDifficulty
+    #endif
 }
 
 extension UInt256 : CustomStringConvertible {
