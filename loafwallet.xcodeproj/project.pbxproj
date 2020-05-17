@@ -78,6 +78,8 @@
 		240D61B82471E58F00F3D0F3 /* LFAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61B62471E58F00F3D0F3 /* LFAlertViewController.swift */; };
 		240D61BB2471E5EE00F3D0F3 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61BA2471E5EE00F3D0F3 /* APIManager.swift */; };
 		240D61BD2471E8C700F3D0F3 /* LFModalReceiveQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61BC2471E8C700F3D0F3 /* LFModalReceiveQRViewController.swift */; };
+		240D61BF2471EA6B00F3D0F3 /* Province.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61BE2471EA6B00F3D0F3 /* Province.swift */; };
+		240D61C12471EA8700F3D0F3 /* UABuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61C02471EA8700F3D0F3 /* UABuilder.swift */; };
 		2427342D2381C21800E2D22F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2427342B2381C21800E2D22F /* MainViewController.swift */; };
 		24306797238F3DF900EBEA99 /* BartyCrouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24306796238F3DF900EBEA99 /* BartyCrouch.swift */; };
 		2430A80D23FCCB47002463B5 /* DynamicDonation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2430A80C23FCCB47002463B5 /* DynamicDonation.storyboard */; };
@@ -831,6 +833,8 @@
 		240D61B62471E58F00F3D0F3 /* LFAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFAlertViewController.swift; sourceTree = "<group>"; };
 		240D61BA2471E5EE00F3D0F3 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		240D61BC2471E8C700F3D0F3 /* LFModalReceiveQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFModalReceiveQRViewController.swift; sourceTree = "<group>"; };
+		240D61BE2471EA6B00F3D0F3 /* Province.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Province.swift; sourceTree = "<group>"; };
+		240D61C02471EA8700F3D0F3 /* UABuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UABuilder.swift; sourceTree = "<group>"; };
 		2427342B2381C21800E2D22F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		24306796238F3DF900EBEA99 /* BartyCrouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartyCrouch.swift; sourceTree = "<group>"; };
 		24306799238F479500EBEA99 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -3498,6 +3502,8 @@
 		CE6D0E5A1E14BF8400137DF1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				240D61C02471EA8700F3D0F3 /* UABuilder.swift */,
+				240D61BE2471EA6B00F3D0F3 /* Province.swift */,
 				240D61BA2471E5EE00F3D0F3 /* APIManager.swift */,
 				240D61AA2471DF3300F3D0F3 /* StructsEnums.swift */,
 				CE20C8FF1DBBFFDD00C8397A /* SimpleRedux */,
@@ -4564,6 +4570,7 @@
 				CECB9DB61E4985CE0081A172 /* LoginBackgroundView.swift in Sources */,
 				CEE6282A1EA98B6D001035AA /* DispatchQueue+Additions.swift in Sources */,
 				240D61AB2471DF3300F3D0F3 /* StructsEnums.swift in Sources */,
+				240D61BF2471EA6B00F3D0F3 /* Province.swift in Sources */,
 				CEC6AA3D1DEE687000EE5AFD /* RadialGradientView.swift in Sources */,
 				2494038123AF208F00369261 /* PromptModalViewController.swift in Sources */,
 				CEEC70921E95DA4400EF788E /* GradientSwitch.swift in Sources */,
@@ -4701,6 +4708,7 @@
 				CED341331EF5A5C00014912A /* InAppAlert.swift in Sources */,
 				CE47A8E01F7DA54000FF35BA /* UIScreen+Additions.swift in Sources */,
 				CE3754AD1DDE6E080045B0CB /* MaskedShadow.swift in Sources */,
+				240D61C12471EA8700F3D0F3 /* UABuilder.swift in Sources */,
 				222C42521E904C5000078EB5 /* AssociatedObject.swift in Sources */,
 				CEB909F51E5FE63D001804DC /* EnterPhraseViewController.swift in Sources */,
 				CE6D0F971DE8B73A00BD4BCF /* ModalTransitionDelegate.swift in Sources */,
