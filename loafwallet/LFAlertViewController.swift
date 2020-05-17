@@ -41,7 +41,7 @@ class LFAlertViewController: UIViewController {
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blurEffectView)
-        view.sendSubviewToBack(blurEffectView)
+        view.sendSubview(toBack: blurEffectView)
         
         activityIndicatorView.startAnimating()
         alertModalView.layer.cornerRadius = 15

@@ -55,15 +55,22 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     override func viewDidLoad() {
     self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     self.automaticallyAdjustsScrollViewInsets = false
+    
     setupModelData()
     super.viewDidLoad()
     setupSubViews()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-               
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(dismissAlertView(notification:)), name: kDidReceiveNewTernioData , object: nil)
+      
+        //        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        //
+        //        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        //
+        //        NotificationCenter.default.addObserver(self, selector: #selector(dismissAlertView(notification:)), name: kDidReceiveNewTernioData , object: nil)
+        
+        
     }
     
     private func setupModelData() {
