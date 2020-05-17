@@ -167,6 +167,38 @@ enum S {
         static let blockHeightLabel = NSLocalizedString("Transaction.blockHeightLabel", value: "**Transaction blockHeightLabel**", comment: "Static blockHeight Label")
         static let commentLabel = NSLocalizedString("Transaction.commentLabel", value: "**Transaction comment label**", comment: "Static comment Label")
     }
+    
+    enum BlockCard {
+        static let title = NSLocalizedString("Card.title", value: "Register your Litewallet Card", comment: "Title for Card ViewController")
+        static let kycSSN = NSLocalizedString("Blockcard.kycSSN", value:"Social Security Number", comment: "Blockcard US SSN")
+        static let kycDriversLicense = NSLocalizedString("Blockcard.kycDriversLicense", value:"Driver's License", comment: "Blockcard users driver's license")
+        static let kycPassport = NSLocalizedString("Blockcard.kycPassport", value:"Passport Number", comment: "Blockcard users passport")
+        static let kycIDOptionsPlaceholder = NSLocalizedString("Blockcard.kycIDOptions", value:"DL or Passport Number", comment: "Blockcard users DL or passport")
+        static let kycIDType = NSLocalizedString("Blockcard.kycIDType", value:"ID Type", comment: "Blockcard ID Type")
+        static let emailPlaceholder = NSLocalizedString("Card.email.placeholder", value: "Email address", comment: "Email address placeholder")
+        static let emailFailedPlaceholder = NSLocalizedString("Card.email.failed.placeholder", value: "Enter a valid email address", comment: "FailedEmail address placeholder")
+        static let passwordPlaceholder = NSLocalizedString("Card.password.placeholder", value: "Password", comment: "Password placeholder")
+        static let passwordFailedPlaceholder = NSLocalizedString("Card.password.failed.placeholder", value: "Enter 6 characters, 1 number, lower and uppercase", comment: "FailedPassword placeholder")
+        static let confirmPasswordPlaceholder = NSLocalizedString("Card.confirmed.password.placeholder", value: "Confirm password", comment: "Confirm Password placeholder")
+        static let confirmPasswordFailedPlaceholder = NSLocalizedString("Card.confirmed.password.failed.placeholder", value: "Must match the password", comment: "FailedPassword placeholder")
+        static let firstNamePlaceholder = NSLocalizedString("Card.firstName.placeholder", value: "First name", comment: "First name placeholder")
+        static let firstNameFailedPlaceholder = NSLocalizedString("Card.firstName.failed.placeholder", value: "Enter a first name", comment: "First name failed placeholder")
+        static let lastNamePlaceholder = NSLocalizedString("Card.lastName.placeholder", value: "Last name", comment: "Last name placeholder")
+        static let lastNameFailedPlaceholder = NSLocalizedString("Card.lastName.failed.placeholder", value: "Enter a family name", comment: "Last name failed placeholder")
+        static let addressPlaceholder = NSLocalizedString("Card.address.placeholder", value: "Address", comment: "Address placeholder")
+        static let addressFailedPlaceholder = NSLocalizedString("Card.address.failed.placeholder", value: "Please enter an address", comment: "Failed Address placeholder")
+        static let cityPlaceholder = NSLocalizedString("Card.city.placeholder", value: "City", comment: "City placeholder")
+        static let cityFailedPlaceholder = NSLocalizedString("Card.city.failed.placeholder", value: "Please enter a city", comment: "Failed City placeholder")
+        static let statePlaceholder = NSLocalizedString("Card.state.placeholder", value: "State", comment: "State placeholder")
+        static let stateFailedPlaceholder = NSLocalizedString("Card.state.failed.placeholder", value: "Enter a state", comment: "Failed state placeholder")
+        static let countryPlaceholder = NSLocalizedString("Card.country.placeholder", value: "Country", comment: "Country placeholder")
+        static let postalPlaceholder = NSLocalizedString("Card.postal.placeholder", value: "Postal code", comment: "Postal code placeholder")
+        static let postalFailedPlaceholder = NSLocalizedString("Card.postal.failed.placeholder", value: "Enter a postal code", comment: "Postal code placeholder")
+        static let mobileNumberPlaceholder = NSLocalizedString("Card.mobile.placeholder", value: "Mobile number", comment: "Mobile number placeholder")
+        static let mobileNumberFailedPlaceholder = NSLocalizedString("Card.mobile.failed.placeholder", value: "Enter a mobile number", comment: "Failed Mobile number placeholder")
+        static let registerButtonTitle = NSLocalizedString("Card.registerButton.title", value: "Register", comment: "Register button title")
+        static let USStates = NSLocalizedString("Card.USStates", value: "United States", comment: "US country")
+    }
 
     enum TransactionDetails {
         static let title = NSLocalizedString("TransactionDetails.title", value: "**Transaction Details**", comment: "Transaction Details Title")

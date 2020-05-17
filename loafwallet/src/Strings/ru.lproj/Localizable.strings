@@ -1265,5 +1265,92 @@
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d из %2$d";
 
+/* Blockcard users driver's license */
+"Blockcard.kycDriversLicense" = "";
+
+/* Blockcard users DL or passport */
+"Blockcard.kycIDOptions" = "";
+
+/* Blockcard ID Type */
+"Blockcard.kycIDType" = "";
+
+/* Blockcard users passport */
+"Blockcard.kycPassport" = "";
+
+/* Blockcard US SSN */
+"Blockcard.kycSSN" = "";
+
+/* Failed Address placeholder */
+"Card.address.failed.placeholder" = "";
+
+/* Address placeholder */
+"Card.address.placeholder" = "";
+
+/* Failed City placeholder */
+"Card.city.failed.placeholder" = "";
+
+/* City placeholder */
+"Card.city.placeholder" = "";
+
+/* FailedPassword placeholder */
+"Card.confirmed.password.failed.placeholder" = "";
+
+/* Confirm Password placeholder */
+"Card.confirmed.password.placeholder" = "";
+
+/* Country placeholder */
+"Card.country.placeholder" = "";
+
+/* FailedEmail address placeholder */
+"Card.email.failed.placeholder" = "";
+
+/* Email address placeholder */
+"Card.email.placeholder" = "";
+
+/* First name failed placeholder */
+"Card.firstName.failed.placeholder" = "";
+
+/* First name placeholder */
+"Card.firstName.placeholder" = "";
+
+/* Last name failed placeholder */
+"Card.lastName.failed.placeholder" = "";
+
+/* Last name placeholder */
+"Card.lastName.placeholder" = "";
+
+/* Failed Mobile number placeholder */
+"Card.mobile.failed.placeholder" = "";
+
+/* Mobile number placeholder */
+"Card.mobile.placeholder" = "";
+
+/* FailedPassword placeholder */
+"Card.password.failed.placeholder" = "";
+
+/* Password placeholder */
+"Card.password.placeholder" = "";
+
+/* Postal code placeholder */
+"Card.postal.failed.placeholder" = "";
+
+/* Postal code placeholder */
+"Card.postal.placeholder" = "";
+
+/* Register button title */
+"Card.registerButton.title" = "";
+
+/* Failed state placeholder */
+"Card.state.failed.placeholder" = "";
+
+/* State placeholder */
+"Card.state.placeholder" = "";
+
+/* Title for Card ViewController */
+"Card.title" = "";
+
+/* US country */
+"Card.USStates" = "";
+
 /* Spend Bar Item Title */
 "Spend.barItemTitle" = "";
