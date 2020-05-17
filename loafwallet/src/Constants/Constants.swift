@@ -9,6 +9,8 @@
 import UIKit
 
 let π: CGFloat = .pi
+let kDidReceiveNewTernioData : Notification.Name = Notification.Name(rawValue: "com.litewallet.didreceivenewterniodata")
+let timeSinceLastBlockcardRequest = "com.litewallet.timesincelastblockcardrequest"
 let kDonationAmount: UInt64 = 1800000
 let kDonationAmountInDouble: Double = Double(kDonationAmount) / Double(100000000)
   

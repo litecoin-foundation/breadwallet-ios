@@ -263,13 +263,15 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     
     @objc private func adjustForKeyboard(notification: NSNotification) {
-        
-        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-        
-        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+   
+        guard let keyboardValue = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+         
+        let keyboardScreenEndFrame = keyboardValue
         let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
     
-        if notification.name == UIResponder.keyboardWillHideNotification {
+        if notification.name == NSNotification.Name.UIKeyboardWillHide {
             scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         } else {
  
