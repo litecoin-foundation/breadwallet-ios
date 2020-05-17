@@ -71,6 +71,10 @@
 		240D61A82471C76700F3D0F3 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61A62471C76600F3D0F3 /* CardViewController.swift */; };
 		240D61A92471C76700F3D0F3 /* SpendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61A72471C76600F3D0F3 /* SpendViewController.swift */; };
 		240D61AB2471DF3300F3D0F3 /* StructsEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61AA2471DF3300F3D0F3 /* StructsEnums.swift */; };
+		240D61B12471E4D200F3D0F3 /* Countries+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61AD2471E4D200F3D0F3 /* Countries+Name.swift */; };
+		240D61B22471E4D200F3D0F3 /* CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61AE2471E4D200F3D0F3 /* CustomStringConvertible.swift */; };
+		240D61B32471E4D200F3D0F3 /* Countries+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61AF2471E4D200F3D0F3 /* Countries+String.swift */; };
+		240D61B42471E4D200F3D0F3 /* Countries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61B02471E4D200F3D0F3 /* Countries.swift */; };
 		2427342D2381C21800E2D22F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2427342B2381C21800E2D22F /* MainViewController.swift */; };
 		24306797238F3DF900EBEA99 /* BartyCrouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24306796238F3DF900EBEA99 /* BartyCrouch.swift */; };
 		2430A80D23FCCB47002463B5 /* DynamicDonation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2430A80C23FCCB47002463B5 /* DynamicDonation.storyboard */; };
@@ -818,6 +822,10 @@
 		240D61A62471C76600F3D0F3 /* CardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		240D61A72471C76600F3D0F3 /* SpendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpendViewController.swift; sourceTree = "<group>"; };
 		240D61AA2471DF3300F3D0F3 /* StructsEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructsEnums.swift; sourceTree = "<group>"; };
+		240D61AD2471E4D200F3D0F3 /* Countries+Name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Countries+Name.swift"; sourceTree = "<group>"; };
+		240D61AE2471E4D200F3D0F3 /* CustomStringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomStringConvertible.swift; sourceTree = "<group>"; };
+		240D61AF2471E4D200F3D0F3 /* Countries+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Countries+String.swift"; sourceTree = "<group>"; };
+		240D61B02471E4D200F3D0F3 /* Countries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Countries.swift; sourceTree = "<group>"; };
 		2427342B2381C21800E2D22F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		24306796238F3DF900EBEA99 /* BartyCrouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartyCrouch.swift; sourceTree = "<group>"; };
 		24306799238F479500EBEA99 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2186,6 +2194,17 @@
 			name = Card;
 			sourceTree = "<group>";
 		};
+		240D61AC2471E49400F3D0F3 /* Countries */ = {
+			isa = PBXGroup;
+			children = (
+				240D61B02471E4D200F3D0F3 /* Countries.swift */,
+				240D61AD2471E4D200F3D0F3 /* Countries+Name.swift */,
+				240D61AF2471E4D200F3D0F3 /* Countries+String.swift */,
+				240D61AE2471E4D200F3D0F3 /* CustomStringConvertible.swift */,
+			);
+			name = Countries;
+			sourceTree = "<group>";
+		};
 		2412367B24035B7F00FFA499 /* Emitters */ = {
 			isa = PBXGroup;
 			children = (
@@ -3118,6 +3137,7 @@
 		75A2A7921DA5934300A983D8 /* loafwallet */ = {
 			isa = PBXGroup;
 			children = (
+				240D61AC2471E49400F3D0F3 /* Countries */,
 				75A2A87C1DA59E4E00A983D8 /* loafwallet.entitlements */,
 				75A2A7931DA5934300A983D8 /* AppDelegate.swift */,
 				CE20C8F11DBAF71500C8397A /* ApplicationController.swift */,
@@ -4477,6 +4497,7 @@
 				CE124CFE1E68F57700DFA146 /* Async.swift in Sources */,
 				1BEA7DDB2142CAA00081602F /* WebViewContainer.swift in Sources */,
 				2218BD771E8F55430091D5E8 /* BRAPIClient+Assets.swift in Sources */,
+				240D61B42471E4D200F3D0F3 /* Countries.swift in Sources */,
 				2228734D1E916F7C0044BA15 /* BRAPIClient+Features.swift in Sources */,
 				22A9A94D1DF61945000F0016 /* BRHTTPFileMiddleware.swift in Sources */,
 				CE8644251F2C160200033129 /* ConfirmationViewController.swift in Sources */,
@@ -4534,6 +4555,7 @@
 				CEEC70921E95DA4400EF788E /* GradientSwitch.swift in Sources */,
 				24B8FAC12160497C00A155B1 /* BuyCenterTableViewController.swift in Sources */,
 				CE0CD1591DBFBCF5004023DA /* ModalPresenter.swift in Sources */,
+				240D61B32471E4D200F3D0F3 /* Countries+String.swift in Sources */,
 				CEE20C2F1EA3E5820086F724 /* BlinkingView.swift in Sources */,
 				CEC6AA441DEFCDE900EE5AFD /* ModalViewController.swift in Sources */,
 				24313C8423820C4B00A83F69 /* ReceiveLTCViewController.swift in Sources */,
@@ -4608,6 +4630,7 @@
 				CEEC708A1E945E3B00EF788E /* UnEditableTextView.swift in Sources */,
 				CEAA9E991DC262800066731D /* ConfirmPaperPhraseViewController.swift in Sources */,
 				22A9A9591DF61945000F0016 /* Extensions.swift in Sources */,
+				240D61B22471E4D200F3D0F3 /* CustomStringConvertible.swift in Sources */,
 				24470E4723A6B6E900ADDA27 /* MockSeeds.swift in Sources */,
 				22A9A94C1DF61945000F0016 /* BRGeoLocationPlugin.swift in Sources */,
 				CEAA9EA61DC3246F0066731D /* StartNavigationDelegate.swift in Sources */,
@@ -4624,6 +4647,7 @@
 				240D61A82471C76700F3D0F3 /* CardViewController.swift in Sources */,
 				CEC6AA491DEFD00100EE5AFD /* MenuButton.swift in Sources */,
 				CEF61B121ECF52C700C7EA6A /* AmountViewController.swift in Sources */,
+				240D61B12471E4D200F3D0F3 /* Countries+Name.swift in Sources */,
 				CECCE5B21E04B00D00D99448 /* SendCell.swift in Sources */,
 				24B8FAD22162B10200A155B1 /* BuyCenterWebViewController.swift in Sources */,
 				CE6DCC301E6666470044257B /* NonScrollingCollectionView.swift in Sources */,
