@@ -14,13 +14,14 @@ enum TabViewControllerIndex: Int {
     case send = 1
     case buy = 2
     case receive = 3
+    case spend = 4
 }
  
 protocol MainTabBarControllerDelegate {
     func alertViewShouldDismiss()
 }
 
-class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDelegate {
+class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDelegate, CardViewDelegate {
       
     let kInitialChildViewControllerIndex = 0 // TransactionsViewController
     @IBOutlet weak var headerView: UIView!
@@ -44,11 +45,12 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     private var regularConstraints: [NSLayoutConstraint] = []
     private var swappedConstraints: [NSLayoutConstraint] = []
     private let currencyTapView = UIView()
-    private let storyboardNames:[String] = ["Transactions","Send","Receive","Buy"]
-    var storyboardIDs:[String] = ["TransactionsViewController","SendLTCViewController","ReceiveLTCViewController","BuyTableViewController"]
+      private let storyboardNames:[String] = ["Transactions","Send","Buy","Receive","Spend"]
+    var storyboardIDs:[String] = ["TransactionsViewController","SendLTCViewController", "BuyTableViewController","ReceiveLTCViewController","SpendViewController"]
     var viewControllers:[UIViewController] = []
     var activeController:UIViewController? = nil
     
+    var spendViewController: SpendViewController?
     var delegate: MainTabBarControllerDelegate?
     
     var updateTimer: Timer?
@@ -87,15 +89,26 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
             viewControllers.append(controller)
         }
         
+        // Init early to keep delegate alive at runtime
+        if userDoesNotHaveCard() {
+            self.spendViewController = UIStoryboard.init(name: "Spend", bundle: nil).instantiateViewController(withIdentifier: "SpendViewController") as? SpendViewController
+        } else {
+            let mockJSON = JSON.init(rawValue: ["firstname":"M"])!
+            let ternioData = TernioAccountData(json: mockJSON)
+            self.didReceiveTernioAccount(account: ternioData)
+        }
+        
         self.updateTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { timer in
             self.setBalances()
         }
         
-        guard let array = self.tabBar.items else {
+        guard let array = self.tabBar.items as? [UITabBarItem] else {
             NSLog("ERROR: no items found")
             return
         }
+        
         self.tabBar.selectedItem = array[kInitialChildViewControllerIndex]
+        
     }
     
     deinit {
@@ -297,7 +310,7 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
 
         super.viewWillAppear(animated)
         
-        guard let array = self.tabBar.items else {
+        guard let array = self.tabBar.items as? [UITabBarItem] else {
             NSLog("ERROR: no items found")
             return
         }
@@ -307,8 +320,9 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
             switch item.tag {
             case 0: item.title = S.History.barItemTitle
             case 1: item.title = S.Send.barItemTitle
-            case 2: item.title = S.Receive.barItemTitle
-            case 3: item.title = S.BuyCenter.barItemTitle
+            case 2: item.title = S.BuyCenter.barItemTitle
+            case 3: item.title = S.Receive.barItemTitle
+            case 4: item.title = S.Spend.barItemTitle
             default:
                 item.title = "XXXXXX"
                 NSLog("ERROR: UITabbar item count is wrong")
@@ -319,6 +333,29 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.displayContentController(contentController: viewControllers[kInitialChildViewControllerIndex])
+    }
+    
+    func didReceiveTernioAccount(account: TernioAccountData) {
+        var cardViewIndex = 0
+        
+        for (index, spendVC) in viewControllers.enumerated() {
+            if NSStringFromClass(spendVC.classForCoder) == "loafwallet.SpendViewController" {
+                viewControllers.remove(at: index)
+                cardViewIndex = index
+            }
+        }
+        
+        if let cardVC = UIStoryboard.init(name: "Spend", bundle: nil).instantiateViewController(withIdentifier: "CardViewController") as? CardViewController {
+            cardVC.ternioAccountData = account
+            viewControllers.append(cardVC)
+        }
+        
+        self.displayContentController(contentController: viewControllers[cardViewIndex])
+        NotificationCenter.default.post(name: kDidReceiveNewTernioData, object: nil)
+    }
+    
+    func ternioAccountExists(error: TernioErrorData) {
+        
     }
  
     func displayContentController(contentController:UIViewController) {
@@ -378,6 +415,17 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
             self.hideContentController(contentController: tempActiveController)
         }
         self.displayContentController(contentController: viewControllers[item.tag])
+    }
+    
+    private func userDoesNotHaveCard() -> Bool {
+    //TODO: Remove to have Card working
+    //        if let _ = UserDefaults.standard.string(forKey:timeSinceLastBlockcardRequest) {
+    //            return false
+    //        } else {
+    //            return true
+    //        }
+            
+            return true
     }
 }
 
