@@ -1264,3 +1264,6 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d из %2$d";
+
+/* Spend Bar Item Title */
+"Spend.barItemTitle" = "";

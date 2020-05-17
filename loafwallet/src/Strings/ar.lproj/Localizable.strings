@@ -1253,6 +1253,9 @@
 /* Message for luxury fee */
 "FeeSelector.luxuryMessage" = "";
 
+/* Spend Bar Item Title */
+"Spend.barItemTitle" = "";
+
 /* Delete database title */
 "WipeWallet.alertDeleteTitle" = "";
 

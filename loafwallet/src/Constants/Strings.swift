@@ -107,6 +107,10 @@ enum S {
         static let barItemTitle = NSLocalizedString("Receive.barItemTitle", value: "**Receive**", comment: "Receive Bar Item Title")
     }
     
+    enum Spend {
+        static let barItemTitle = NSLocalizedString("Spend.barItemTitle", value:"Spend", comment: "Spend Bar Item Title")
+    }
+    
     enum Account {
         static let loadingMessage = NSLocalizedString("Account.loadingMessage", value: "**Loading Wallet**", comment: "Loading Wallet Message")
     }
