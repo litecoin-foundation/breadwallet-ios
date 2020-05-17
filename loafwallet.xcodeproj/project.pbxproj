@@ -75,6 +75,9 @@
 		240D61B22471E4D200F3D0F3 /* CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61AE2471E4D200F3D0F3 /* CustomStringConvertible.swift */; };
 		240D61B32471E4D200F3D0F3 /* Countries+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61AF2471E4D200F3D0F3 /* Countries+String.swift */; };
 		240D61B42471E4D200F3D0F3 /* Countries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61B02471E4D200F3D0F3 /* Countries.swift */; };
+		240D61B82471E58F00F3D0F3 /* LFAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61B62471E58F00F3D0F3 /* LFAlertViewController.swift */; };
+		240D61BB2471E5EE00F3D0F3 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61BA2471E5EE00F3D0F3 /* APIManager.swift */; };
+		240D61BD2471E8C700F3D0F3 /* LFModalReceiveQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61BC2471E8C700F3D0F3 /* LFModalReceiveQRViewController.swift */; };
 		2427342D2381C21800E2D22F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2427342B2381C21800E2D22F /* MainViewController.swift */; };
 		24306797238F3DF900EBEA99 /* BartyCrouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24306796238F3DF900EBEA99 /* BartyCrouch.swift */; };
 		2430A80D23FCCB47002463B5 /* DynamicDonation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2430A80C23FCCB47002463B5 /* DynamicDonation.storyboard */; };
@@ -85,7 +88,6 @@
 		24313C7E23820C1900A83F69 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24313C7C23820C1900A83F69 /* TransactionsViewController.swift */; };
 		24313C8423820C4B00A83F69 /* ReceiveLTCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24313C8223820C4B00A83F69 /* ReceiveLTCViewController.swift */; };
 		24313C8723821B8C00A83F69 /* TransactionTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24313C8523821B8C00A83F69 /* TransactionTableViewCells.swift */; };
-		24313C922382433700A83F69 /* LFModalReceiveQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24313C902382433700A83F69 /* LFModalReceiveQRViewController.swift */; };
 		24313C9B23824F5800A83F69 /* Transactions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24313C9323824F5700A83F69 /* Transactions.storyboard */; };
 		24313C9D23824F5800A83F69 /* Alerts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24313C9423824F5700A83F69 /* Alerts.storyboard */; };
 		24313C9F23824F5800A83F69 /* Animate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24313C9523824F5700A83F69 /* Animate.storyboard */; };
@@ -826,6 +828,9 @@
 		240D61AE2471E4D200F3D0F3 /* CustomStringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomStringConvertible.swift; sourceTree = "<group>"; };
 		240D61AF2471E4D200F3D0F3 /* Countries+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Countries+String.swift"; sourceTree = "<group>"; };
 		240D61B02471E4D200F3D0F3 /* Countries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Countries.swift; sourceTree = "<group>"; };
+		240D61B62471E58F00F3D0F3 /* LFAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFAlertViewController.swift; sourceTree = "<group>"; };
+		240D61BA2471E5EE00F3D0F3 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		240D61BC2471E8C700F3D0F3 /* LFModalReceiveQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFModalReceiveQRViewController.swift; sourceTree = "<group>"; };
 		2427342B2381C21800E2D22F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		24306796238F3DF900EBEA99 /* BartyCrouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartyCrouch.swift; sourceTree = "<group>"; };
 		24306799238F479500EBEA99 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -838,7 +843,6 @@
 		24313C7C23820C1900A83F69 /* TransactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
 		24313C8223820C4B00A83F69 /* ReceiveLTCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveLTCViewController.swift; sourceTree = "<group>"; };
 		24313C8523821B8C00A83F69 /* TransactionTableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCells.swift; sourceTree = "<group>"; };
-		24313C902382433700A83F69 /* LFModalReceiveQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFModalReceiveQRViewController.swift; sourceTree = "<group>"; };
 		24313C9323824F5700A83F69 /* Transactions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Transactions.storyboard; sourceTree = "<group>"; };
 		24313C9423824F5700A83F69 /* Alerts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Alerts.storyboard; sourceTree = "<group>"; };
 		24313C9523824F5700A83F69 /* Animate.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Animate.storyboard; sourceTree = "<group>"; };
@@ -2205,6 +2209,15 @@
 			name = Countries;
 			sourceTree = "<group>";
 		};
+		240D61B52471E56D00F3D0F3 /* Alert Modal */ = {
+			isa = PBXGroup;
+			children = (
+				240D61BC2471E8C700F3D0F3 /* LFModalReceiveQRViewController.swift */,
+				240D61B62471E58F00F3D0F3 /* LFAlertViewController.swift */,
+			);
+			name = "Alert Modal";
+			sourceTree = "<group>";
+		};
 		2412367B24035B7F00FFA499 /* Emitters */ = {
 			isa = PBXGroup;
 			children = (
@@ -2224,7 +2237,6 @@
 			isa = PBXGroup;
 			children = (
 				24313C8223820C4B00A83F69 /* ReceiveLTCViewController.swift */,
-				24313C902382433700A83F69 /* LFModalReceiveQRViewController.swift */,
 			);
 			name = Receive;
 			sourceTree = "<group>";
@@ -3137,6 +3149,7 @@
 		75A2A7921DA5934300A983D8 /* loafwallet */ = {
 			isa = PBXGroup;
 			children = (
+				240D61B52471E56D00F3D0F3 /* Alert Modal */,
 				240D61AC2471E49400F3D0F3 /* Countries */,
 				75A2A87C1DA59E4E00A983D8 /* loafwallet.entitlements */,
 				75A2A7931DA5934300A983D8 /* AppDelegate.swift */,
@@ -3485,6 +3498,7 @@
 		CE6D0E5A1E14BF8400137DF1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				240D61BA2471E5EE00F3D0F3 /* APIManager.swift */,
 				240D61AA2471DF3300F3D0F3 /* StructsEnums.swift */,
 				CE20C8FF1DBBFFDD00C8397A /* SimpleRedux */,
 				CE6D0E5B1E14BFA600137DF1 /* KeyboardNotificationInfo.swift */,
@@ -4475,6 +4489,7 @@
 				CEC6AA4D1DF0741100EE5AFD /* ModalDisplayable.swift in Sources */,
 				CED811E11EB302DA003A8D1E /* WatchData.swift in Sources */,
 				CEE0EF521EBD14B60018DB36 /* PinTransitioningDelegate.swift in Sources */,
+				240D61BB2471E5EE00F3D0F3 /* APIManager.swift in Sources */,
 				CE45C1FD1E7650F5002C3847 /* KVStoreCoordinator.swift in Sources */,
 				754AE0BC1DFE8A46007FD001 /* BRCore.swift in Sources */,
 				2430A80F23FCCE1A002463B5 /* DynamicDonationViewController.swift in Sources */,
@@ -4539,7 +4554,6 @@
 				1B3F74241FFB106200CCA50C /* BiometricsSpendingLimitViewController.swift in Sources */,
 				CEC6F8451E886723000795B8 /* PaymentRequest.swift in Sources */,
 				CE4C1CC81ED88B600063E184 /* URLController.swift in Sources */,
-				24313C922382433700A83F69 /* LFModalReceiveQRViewController.swift in Sources */,
 				CE20C9171DBE6F2A00C8397A /* UIButton+BRWAdditions.swift in Sources */,
 				240D61A92471C76700F3D0F3 /* SpendViewController.swift in Sources */,
 				CEAA9E931DC110E70066731D /* WritePaperPhraseViewController.swift in Sources */,
@@ -4632,6 +4646,7 @@
 				22A9A9591DF61945000F0016 /* Extensions.swift in Sources */,
 				240D61B22471E4D200F3D0F3 /* CustomStringConvertible.swift in Sources */,
 				24470E4723A6B6E900ADDA27 /* MockSeeds.swift in Sources */,
+				240D61B82471E58F00F3D0F3 /* LFAlertViewController.swift in Sources */,
 				22A9A94C1DF61945000F0016 /* BRGeoLocationPlugin.swift in Sources */,
 				CEAA9EA61DC3246F0066731D /* StartNavigationDelegate.swift in Sources */,
 				22A9A94B1DF61945000F0016 /* BRCoding.swift in Sources */,
@@ -4680,6 +4695,7 @@
 				CE6DCC271E6108D50044257B /* EnterPhraseCell.swift in Sources */,
 				CE760EDD1E561DF900EFAC2B /* UpdatePinViewController.swift in Sources */,
 				22A9A9481DF61945000F0016 /* BRBitID.swift in Sources */,
+				240D61BD2471E8C700F3D0F3 /* LFModalReceiveQRViewController.swift in Sources */,
 				24BA90C62410129E001E3825 /* FeeSelectorView.swift in Sources */,
 				CE9057181DFF0FA8006BA848 /* String+Additions.swift in Sources */,
 				CED341331EF5A5C00014912A /* InAppAlert.swift in Sources */,
