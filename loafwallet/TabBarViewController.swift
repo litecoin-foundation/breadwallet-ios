@@ -12,9 +12,9 @@ import SwiftyJSON
 enum TabViewControllerIndex: Int {
     case transactions = 0
     case send = 1
-    case buy = 2
+    case spend = 2
     case receive = 3
-    case spend = 4
+    case buy = 4
 }
  
 protocol MainTabBarControllerDelegate {
@@ -45,8 +45,8 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     private var regularConstraints: [NSLayoutConstraint] = []
     private var swappedConstraints: [NSLayoutConstraint] = []
     private let currencyTapView = UIView()
-      private let storyboardNames:[String] = ["Transactions","Send","Buy","Receive","Spend"]
-    var storyboardIDs:[String] = ["TransactionsViewController","SendLTCViewController", "BuyTableViewController","ReceiveLTCViewController","SpendViewController"]
+      private let storyboardNames:[String] = ["Transactions","Send","Spend","Receive","Buy"]
+    var storyboardIDs:[String] = ["TransactionsViewController","SendLTCViewController", "SpendViewController","ReceiveLTCViewController","BuyTableViewController"]
     var viewControllers:[UIViewController] = []
     var activeController:UIViewController? = nil
     
@@ -320,9 +320,9 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
             switch item.tag {
             case 0: item.title = S.History.barItemTitle
             case 1: item.title = S.Send.barItemTitle
-            case 2: item.title = S.BuyCenter.barItemTitle
+            case 2: item.title = S.Spend.barItemTitle
             case 3: item.title = S.Receive.barItemTitle
-            case 4: item.title = S.Spend.barItemTitle
+            case 4: item.title = S.BuyCenter.barItemTitle
             default:
                 item.title = "XXXXXX"
                 NSLog("ERROR: UITabbar item count is wrong")

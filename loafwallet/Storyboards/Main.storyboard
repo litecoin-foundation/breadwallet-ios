@@ -38,6 +38,7 @@
                                 <items>
                                     <tabBarItem title="History" image="historyIcon" selectedImage="historyIcon" id="qwA-9l-CfE" userLabel="History"/>
                                     <tabBarItem tag="1" title="Send" image="SendButtonIcon" selectedImage="SendButtonIcon" id="Idu-CT-kfl" userLabel="Send"/>
+                                    <tabBarItem title="Spend" image="card_icon" selectedImage="card_icon" id="tV5-pr-ANc"/>
                                     <tabBarItem tag="2" title="Receive" image="ReceiveButtonIcon" selectedImage="ReceiveButtonIcon" id="1Ar-eJ-M87" userLabel="Receive"/>
                                     <tabBarItem tag="3" title="Buy" image="litecoin_cutout24" selectedImage="litecoin_cutout24" id="spP-38-fzY" userLabel="Buy"/>
                                 </items>
@@ -136,7 +137,7 @@
             <objects>
                 <viewController id="0H7-tx-uMf" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z4T-ui-Ve5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="578"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="529"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="UuX-cb-qOU"/>
@@ -366,6 +367,7 @@
         <image name="FaceId" width="24" height="24"/>
         <image name="ReceiveButtonIcon" width="20" height="24"/>
         <image name="SendButtonIcon" width="20" height="24"/>
+        <image name="card_icon" width="24" height="24"/>
         <image name="coinBlueWhite" width="230" height="230"/>
         <image name="historyIcon" width="32" height="32"/>
         <image name="litecoin_cutout24" width="24" height="24"/>
