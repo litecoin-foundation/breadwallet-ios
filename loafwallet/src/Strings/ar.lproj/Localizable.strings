@@ -1238,21 +1238,6 @@
 /* Corruption Error alert title */
 "Alert.corruptionMessage" = "";
 
-/* Blockcard users driver's license */
-"Blockcard.kycDriversLicense" = "";
-
-/* Blockcard users DL or passport */
-"Blockcard.kycIDOptions" = "";
-
-/* Blockcard ID Type */
-"Blockcard.kycIDType" = "";
-
-/* Blockcard users passport */
-"Blockcard.kycPassport" = "";
-
-/* Blockcard US SSN */
-"Blockcard.kycSSN" = "";
-
 /* Failed Address placeholder */
 "Card.address.failed.placeholder" = "";
 
@@ -1339,6 +1324,21 @@
 
 /* Message for luxury fee */
 "FeeSelector.luxuryMessage" = "";
+
+/* LitecoinCard users driver's license */
+"LitecoinCard.kycDriversLicense" = "";
+
+/* LitecoinCard users DL or passport */
+"LitecoinCard.kycIDOptions" = "";
+
+/* LitecoinCard ID Type */
+"LitecoinCard.kycIDType" = "";
+
+/* LitecoinCard users passport */
+"LitecoinCard.kycPassport" = "";
+
+/* LitecoinCard US SSN */
+"LitecoinCard.kycSSN" = "";
 
 /* Spend Bar Item Title */
 "Spend.barItemTitle" = "";

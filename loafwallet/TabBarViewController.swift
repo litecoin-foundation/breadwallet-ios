@@ -22,8 +22,15 @@ protocol MainTabBarControllerDelegate {
 }
 
 class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDelegate, CardViewDelegate {
+    
+    
+    func floatingRegistrationHeader(shouldHide: Bool) {
+         
+         floatingRegistrationView.isHidden = shouldHide
+    }
+    
       
-    let kInitialChildViewControllerIndex = 0 // TransactionsViewController
+    let kInitialChildViewControllerIndex = 0 // History  VC
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var tabBar: UITabBar!
@@ -33,6 +40,8 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     @IBOutlet weak var timeStampStackView: UIStackView!
     @IBOutlet weak var timeStampStackViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var floatingRegistrationView: UIView!
+    @IBOutlet weak var registrationTitleLabel: UILabel!
     
     
     var primaryBalanceLabel: UpdatingLabel?
@@ -87,6 +96,7 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
         for (index, storyboardID) in self.storyboardIDs.enumerated() {
             let controller = UIStoryboard.init(name: storyboardNames[index], bundle: nil).instantiateViewController(withIdentifier: storyboardID)
             viewControllers.append(controller)
+            
         }
         
         // Init early to keep delegate alive at runtime
@@ -129,6 +139,11 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
             containerView.backgroundColor = .liteWalletBlue
             self.view.backgroundColor = .liteWalletBlue
        }
+        
+        registrationTitleLabel.text = S.LitecoinCard.title
+        registrationTitleLabel.layer.cornerRadius = 10.0
+        registrationTitleLabel.clipsToBounds = true
+        floatingRegistrationView.isHidden = true
     }
     
     private func configurePriceLabels() {
@@ -370,27 +385,31 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
             transactionVC.store = self.store
             transactionVC.walletManager = self.walletManager
             transactionVC.isLtcSwapped = self.store?.state.isLtcSwapped
-        
-        case "loafwallet.BuyTableViewController":
-                guard let buyVC = contentController as? BuyTableViewController else  {
-                    return
-            }
-            buyVC.store = self.store
-            buyVC.walletManager = self.walletManager
-            
+             
         case "loafwallet.SendLTCViewController":
             guard let sendVC = contentController as? SendLTCViewController else  {
                 return
             }
-            
             sendVC.store = self.store
-            
+        
+        case "loafwallet.SpendViewController":
+            guard let spendVC = contentController as? SpendViewController else  {
+                return
+            }
+            spendVC.delegate = self
+              
         case "loafwallet.ReceiveLTCViewController":
             guard let receiveVC = contentController as? ReceiveLTCViewController else  {
                 return
             }
             receiveVC.store = self.store
             
+        case "loafwallet.BuyTableViewController":
+                guard let buyVC = contentController as? BuyTableViewController else  {
+                    return
+            }
+            buyVC.store = self.store
+            buyVC.walletManager = self.walletManager
         default:
             fatalError("Tab viewController not set")
         }
@@ -401,6 +420,8 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
         self.view.addSubview(contentController.view)
         contentController.didMove(toParentViewController: self)
         self.activeController = contentController
+        self.view.bringSubview(toFront: floatingRegistrationView)
+
     }
     
     func hideContentController(contentController:UIViewController) {
@@ -419,7 +440,7 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     
     private func userDoesNotHaveCard() -> Bool {
     //TODO: Remove to have Card working
-    //        if let _ = UserDefaults.standard.string(forKey:timeSinceLastBlockcardRequest) {
+    //        if let _ = UserDefaults.standard.string(forKey:timeSinceLastLitecoinCardRequest) {
     //            return false
     //        } else {
     //            return true

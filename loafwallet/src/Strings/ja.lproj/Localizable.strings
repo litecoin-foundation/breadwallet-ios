@@ -194,6 +194,72 @@
 /* Camera plugin instruction */
 "CameraPlugin.centerInstruction" = "ご自身のIDをこのボックス内で中央に配置してください";
 
+/* Failed Address placeholder */
+"Card.address.failed.placeholder" = "住所";
+
+/* Address placeholder */
+"Card.address.placeholder" = "住所";
+
+/* Failed City placeholder */
+"Card.city.failed.placeholder" = "市";
+
+/* City placeholder */
+"Card.city.placeholder" = "市";
+
+/* FailedPassword placeholder */
+"Card.confirmed.password.failed.placeholder" = "パスワードの確認";
+
+/* Confirm Password placeholder */
+"Card.confirmed.password.placeholder" = "パスワードの確認";
+
+/* Country placeholder */
+"Card.country.placeholder" = "国";
+
+/* FailedEmail address placeholder */
+"Card.email.failed.placeholder" = "電子メール";
+
+/* Email address placeholder */
+"Card.email.placeholder" = "電子メール";
+
+/* First name failed placeholder */
+"Card.firstName.failed.placeholder" = "名";
+
+/* First name placeholder */
+"Card.firstName.placeholder" = "名";
+
+/* Last name failed placeholder */
+"Card.lastName.failed.placeholder" = "姓";
+
+/* Last name placeholder */
+"Card.lastName.placeholder" = "姓";
+
+/* Failed Mobile number placeholder */
+"Card.mobile.failed.placeholder" = "携帯電話番号";
+
+/* Mobile number placeholder */
+"Card.mobile.placeholder" = "携帯電話番号";
+
+/* FailedPassword placeholder */
+"Card.password.failed.placeholder" = "パスワード";
+
+/* Password placeholder */
+"Card.password.placeholder" = "パスワード";
+
+/* Postal code placeholder */
+"Card.postal.failed.placeholder" = "郵便番号";
+
+/* Postal code placeholder */
+"Card.postal.placeholder" = "郵便番号";
+
+/* Register button title */
+"Card.registerButton.title" = "登録";
+
+/* Failed state placeholder */
+"Card.state.failed.placeholder" = "州";
+
+/* State placeholder */
+"Card.state.placeholder" = "州";
+
 /* $53.09/L + 1.07% */
 "Confirmation.amountDetailLabel" = "交換の詳細：";
 
@@ -415,6 +481,21 @@
 
 /* Wipe wallet button */
 "JailbreakWarnings.wipe" = "完全削除";
+
+/* LitecoinCard users driver's license */
+"LitecoinCard.kycDriversLicense" = "運転免許証";
+
+/* LitecoinCard users DL or passport */
+"LitecoinCard.kycIDOptions" = "DL or Passport Number";
+
+/* LitecoinCard ID Type */
+"LitecoinCard.kycIDType" = "ID Type";
+
+/* LitecoinCard users passport */
+"LitecoinCard.kycPassport" = "パスポート番号";
+
+/* LitecoinCard US SSN */
+"LitecoinCard.kycSSN" = "Social Security Number";
 
 /* Location services disabled error */
 "LocationPlugin.disabled" = "位置情報サービスが無効化されています。";
@@ -893,6 +974,9 @@
 /* Share data switch label. */
 "ShareData.toggleLabel" = "匿名データをシェアしますか?";
 
+/* Spend Bar Item Title */
+"Spend.barItemTitle" = "費やす";
+
 /* Current spending limit: */
 "SpendingLimit.title" = "現在の支出制限：";
 
@@ -1265,92 +1349,8 @@
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%2$dの%1$d";
 
-/* Blockcard users driver's license */
-"Blockcard.kycDriversLicense" = "";
-
-/* Blockcard users DL or passport */
-"Blockcard.kycIDOptions" = "";
-
-/* Blockcard ID Type */
-"Blockcard.kycIDType" = "";
-
-/* Blockcard users passport */
-"Blockcard.kycPassport" = "";
-
-/* Blockcard US SSN */
-"Blockcard.kycSSN" = "";
-
-/* Failed Address placeholder */
-"Card.address.failed.placeholder" = "";
-
-/* Address placeholder */
-"Card.address.placeholder" = "";
-
-/* Failed City placeholder */
-"Card.city.failed.placeholder" = "";
-
-/* City placeholder */
-"Card.city.placeholder" = "";
-
-/* FailedPassword placeholder */
-"Card.confirmed.password.failed.placeholder" = "";
-
-/* Confirm Password placeholder */
-"Card.confirmed.password.placeholder" = "";
-
-/* Country placeholder */
-"Card.country.placeholder" = "";
-
-/* FailedEmail address placeholder */
-"Card.email.failed.placeholder" = "";
-
-/* Email address placeholder */
-"Card.email.placeholder" = "";
-
-/* First name failed placeholder */
-"Card.firstName.failed.placeholder" = "";
-
-/* First name placeholder */
-"Card.firstName.placeholder" = "";
-
-/* Last name failed placeholder */
-"Card.lastName.failed.placeholder" = "";
-
-/* Last name placeholder */
-"Card.lastName.placeholder" = "";
-
-/* Failed Mobile number placeholder */
-"Card.mobile.failed.placeholder" = "";
-
-/* Mobile number placeholder */
-"Card.mobile.placeholder" = "";
-
-/* FailedPassword placeholder */
-"Card.password.failed.placeholder" = "";
-
-/* Password placeholder */
-"Card.password.placeholder" = "";
-
-/* Postal code placeholder */
-"Card.postal.failed.placeholder" = "";
-
-/* Postal code placeholder */
-"Card.postal.placeholder" = "";
-
-/* Register button title */
-"Card.registerButton.title" = "";
-
-/* Failed state placeholder */
-"Card.state.failed.placeholder" = "";
-
-/* State placeholder */
-"Card.state.placeholder" = "";
-
 /* Title for Card ViewController */
 "Card.title" = "";
 
 /* US country */
 "Card.USStates" = "";
-
-/* Spend Bar Item Title */
-"Spend.barItemTitle" = "";

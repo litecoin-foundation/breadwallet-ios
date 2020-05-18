@@ -12,14 +12,13 @@ import Security
 protocol CardViewDelegate {
     func didReceiveTernioAccount(account: TernioAccountData)
     func ternioAccountExists(error: TernioErrorData)
+    func floatingRegistrationHeader(shouldHide:Bool)
 }
   
 class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UIScrollViewDelegate, LFAlertViewDelegate {
     
     static let serviceName = "com.litewallet.blockcard.service"
 
-    @IBOutlet weak var titleView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var emailTextField: UITextField!
@@ -43,7 +42,7 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     var pickerView: UIPickerView?
     var countries = [String]()
-    let idTypes = [S.BlockCard.kycDriversLicense, S.BlockCard.kycPassport]
+    let idTypes = [S.LitecoinCard.kycDriversLicense, S.LitecoinCard.kycPassport]
     
     let attrSilver = [NSAttributedString.Key.foregroundColor: UIColor.litecoinSilver]
     let attrOrange = [NSAttributedString.Key.foregroundColor: UIColor.litecoinOrange]
@@ -54,7 +53,7 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     override func viewDidLoad() {
     self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    self.automaticallyAdjustsScrollViewInsets = false
+    self.automaticallyAdjustsScrollViewInsets = true
     
     setupModelData()
     super.viewDidLoad()
@@ -63,14 +62,6 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(dismissAlertView(notification:)), name: kDidReceiveNewTernioData , object: nil)
-      
-        //        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        //
-        //        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        //
-        //        NotificationCenter.default.addObserver(self, selector: #selector(dismissAlertView(notification:)), name: kDidReceiveNewTernioData , object: nil)
-        
-        
     }
     
     private func setupModelData() {
@@ -90,23 +81,22 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         self.scrollView.delegate = self
         self.scrollView.isScrollEnabled = true
     
-        titleLabel.text = S.BlockCard.title
-        emailTextField.placeholder = S.BlockCard.emailPlaceholder
-        passwordTextField.placeholder = S.BlockCard.passwordPlaceholder
-        confirmPasswordTextField.placeholder = S.BlockCard.confirmPasswordPlaceholder
-        firstNameTextField.placeholder = S.BlockCard.firstNamePlaceholder
-        lastNameTextField.placeholder = S.BlockCard.lastNamePlaceholder
-        addressTextField.placeholder = S.BlockCard.addressPlaceholder
-        cityTextField.placeholder = S.BlockCard.cityPlaceholder
-        stateTextField.placeholder = S.BlockCard.statePlaceholder
-        postalCodeTextField.placeholder = S.BlockCard.postalPlaceholder
-        mobileTextField.placeholder = S.BlockCard.mobileNumberPlaceholder
-        kycSSNTextField.placeholder = S.BlockCard.kycSSN
-        kycCustomerIDTextField.placeholder = S.BlockCard.kycIDOptionsPlaceholder
-        kycIDTypeTextField.placeholder = S.BlockCard.kycIDType
-        registerButton.setTitle(S.BlockCard.registerButtonTitle, for: .normal)
+        emailTextField.placeholder = S.LitecoinCard.emailPlaceholder
+        passwordTextField.placeholder = S.LitecoinCard.passwordPlaceholder
+        confirmPasswordTextField.placeholder = S.LitecoinCard.confirmPasswordPlaceholder
+        firstNameTextField.placeholder = S.LitecoinCard.firstNamePlaceholder
+        lastNameTextField.placeholder = S.LitecoinCard.lastNamePlaceholder
+        addressTextField.placeholder = S.LitecoinCard.addressPlaceholder
+        cityTextField.placeholder = S.LitecoinCard.cityPlaceholder
+        stateTextField.placeholder = S.LitecoinCard.statePlaceholder
+        postalCodeTextField.placeholder = S.LitecoinCard.postalPlaceholder
+        mobileTextField.placeholder = S.LitecoinCard.mobileNumberPlaceholder
+        kycSSNTextField.placeholder = S.LitecoinCard.kycSSN
+        kycCustomerIDTextField.placeholder = S.LitecoinCard.kycIDOptionsPlaceholder
+        kycIDTypeTextField.placeholder = S.LitecoinCard.kycIDType
+        registerButton.setTitle(S.LitecoinCard.registerButtonTitle, for: .normal)
     
-        countryTextField.text = S.BlockCard.USStates
+        countryTextField.text = S.LitecoinCard.USStates
         registerButton.layer.cornerRadius = 5.0
     
         let textFields = [emailTextField, firstNameTextField, lastNameTextField, passwordTextField, confirmPasswordTextField, addressTextField, cityTextField, stateTextField, countryTextField, mobileTextField, postalCodeTextField, kycIDTypeTextField, kycSSNTextField, kycCustomerIDTextField]
@@ -160,7 +150,6 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     func showRegistrationAlert(data: RegistrationData) {
         
-        
         let username = data.email
         let password = data.password.data(using: String.Encoding.utf8)!
         
@@ -193,10 +182,8 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                     NSLog("ERROR: LFToken not retreived")
                     return
                 }
-            
-            print(tokenObject)
-            
                 self.fetchTernioAccount(registrationData: data, tokenObject: tokenObject)
+                
             }
         }
     }
@@ -218,10 +205,11 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 self.alertModal?.activityIndicatorView.isHidden = true
                 self.alertModal?.cancelButton.setTitle("Ok", for: .normal)
                 self.delegate?.ternioAccountExists(error: error)
+                self.delegate?.floatingRegistrationHeader(shouldHide: self.userNotRegistered)
             }
             
             //TODO: Uncomment to show the card after launch
-            //  UserDefaults.standard.set(ternioAccountData?.creationTimestampString, forKey: timeSinceLastBlockcardRequest)
+            //  UserDefaults.standard.set(ternioAccountData?.creationTimestampString, forKey: timeSinceLastLitecoinCardRequest)
             //  UserDefaults.standard.synchronize()
         }
     }

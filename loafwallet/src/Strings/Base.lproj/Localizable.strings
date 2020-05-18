@@ -1265,91 +1265,91 @@
 "FeeSelector.luxuryMessage" = "This option virtually guarantees acceptance of your transaction though you are paying a premium.";
 
 /* Spend Bar Item Title */
-"Spend.barItemTitle" = "";
+"Spend.barItemTitle" = "SPEND";
 
-/* Blockcard users driver's license */
-"Blockcard.kycDriversLicense" = "";
+/* LitecoinCard users driver's license */
+"LitecoinCard.kycDriversLicense" = "Driver's License";
 
-/* Blockcard users DL or passport */
-"Blockcard.kycIDOptions" = "";
+/* LitecoinCard users DL or passport */
+"LitecoinCard.kycIDOptions" = "DL or Passport Number";
 
-/* Blockcard ID Type */
-"Blockcard.kycIDType" = "";
+/* LitecoinCard ID Type */
+"LitecoinCard.kycIDType" = "ID Type";
 
-/* Blockcard users passport */
-"Blockcard.kycPassport" = "";
+/* LitecoinCard users passport */
+"LitecoinCard.kycPassport" = "Passport Number";
 
-/* Blockcard US SSN */
-"Blockcard.kycSSN" = "";
+/* LitecoinCard US SSN */
+"LitecoinCard.kycSSN" = "Social Security Number";
 
 /* Failed Address placeholder */
-"Card.address.failed.placeholder" = "";
+"Card.address.failed.placeholder" = "Address";
 
 /* Address placeholder */
-"Card.address.placeholder" = "";
+"Card.address.placeholder" = "Address";
 
 /* Failed City placeholder */
-"Card.city.failed.placeholder" = "";
+"Card.city.failed.placeholder" = "City";
 
 /* City placeholder */
-"Card.city.placeholder" = "";
+"Card.city.placeholder" = "City";
 
 /* FailedPassword placeholder */
-"Card.confirmed.password.failed.placeholder" = "";
+"Card.confirmed.password.failed.placeholder" = "Confirmed password";
 
 /* Confirm Password placeholder */
-"Card.confirmed.password.placeholder" = "";
+"Card.confirmed.password.placeholder" = "Confirmed password";
 
 /* Country placeholder */
-"Card.country.placeholder" = "";
+"Card.country.placeholder" = "Country";
 
 /* FailedEmail address placeholder */
-"Card.email.failed.placeholder" = "";
+"Card.email.failed.placeholder" = "Email";
 
 /* Email address placeholder */
-"Card.email.placeholder" = "";
+"Card.email.placeholder" = "Email";
 
 /* First name failed placeholder */
-"Card.firstName.failed.placeholder" = "";
+"Card.firstName.failed.placeholder" = "First name";
 
 /* First name placeholder */
-"Card.firstName.placeholder" = "";
+"Card.firstName.placeholder" = "First name";
 
 /* Last name failed placeholder */
-"Card.lastName.failed.placeholder" = "";
+"Card.lastName.failed.placeholder" = "Last name";
 
 /* Last name placeholder */
-"Card.lastName.placeholder" = "";
+"Card.lastName.placeholder" = "Last name";
 
 /* Failed Mobile number placeholder */
-"Card.mobile.failed.placeholder" = "";
+"Card.mobile.failed.placeholder" = "Mobile number";
 
 /* Mobile number placeholder */
-"Card.mobile.placeholder" = "";
+"Card.mobile.placeholder" = "Mobile number";
 
 /* FailedPassword placeholder */
-"Card.password.failed.placeholder" = "";
+"Card.password.failed.placeholder" = "Password";
 
 /* Password placeholder */
-"Card.password.placeholder" = "";
+"Card.password.placeholder" = "Password";
 
 /* Postal code placeholder */
-"Card.postal.failed.placeholder" = "";
+"Card.postal.failed.placeholder" = "Postal code";
 
 /* Postal code placeholder */
-"Card.postal.placeholder" = "";
+"Card.postal.placeholder" = "Postal code";
 
 /* Register button title */
-"Card.registerButton.title" = "";
+"Card.registerButton.title" = "Register";
 
 /* Failed state placeholder */
-"Card.state.failed.placeholder" = "";
+"Card.state.failed.placeholder" = "State";
 
 /* State placeholder */
-"Card.state.placeholder" = "";
+"Card.state.placeholder" = "State";
 
 /* Title for Card ViewController */
-"Card.title" = "";
+"Card.title" = "Register your LitecoinCard";
 
 /* US country */
-"Card.USStates" = "";
+"Card.USStates" = "Country";

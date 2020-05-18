@@ -195,6 +195,9 @@
 /* Camera plugin instruction */
 "CameraPlugin.centerInstruction" = "Centre a sua ID na caixa";
 
+/* Register button title */
+"Card.registerButton.title" = "Registro";
+
 /* $53.09/L + 1.07% */
 "Confirmation.amountDetailLabel" = "Exchange details:";
 
@@ -416,6 +419,21 @@
 
 /* Wipe wallet button */
 "JailbreakWarnings.wipe" = "Apagar";
+
+/* LitecoinCard users driver's license */
+"LitecoinCard.kycDriversLicense" = "Carteira de motorista";
+
+/* LitecoinCard users DL or passport */
+"LitecoinCard.kycIDOptions" = "DL or Passport Number";
+
+/* LitecoinCard ID Type */
+"LitecoinCard.kycIDType" = "ID Type";
+
+/* LitecoinCard users passport */
+"LitecoinCard.kycPassport" = "Número do Passaporte";
+
+/* LitecoinCard US SSN */
+"LitecoinCard.kycSSN" = "Social Security Number";
 
 /* Location services disabled error */
 "LocationPlugin.disabled" = "Os serviços de localização estão desativados.";
@@ -894,6 +912,9 @@
 /* Share data switch label. */
 "ShareData.toggleLabel" = "Partilhar Dados Anónimos?";
 
+/* Spend Bar Item Title */
+"Spend.barItemTitle" = "GASTAR";
+
 /* Current spending limit: */
 "SpendingLimit.title" = "Limite de gastos atual:";
 
@@ -1266,21 +1287,6 @@
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d de %2$d";
 
-/* Blockcard users driver's license */
-"Blockcard.kycDriversLicense" = "";
-
-/* Blockcard users DL or passport */
-"Blockcard.kycIDOptions" = "";
-
-/* Blockcard ID Type */
-"Blockcard.kycIDType" = "";
-
-/* Blockcard users passport */
-"Blockcard.kycPassport" = "";
-
-/* Blockcard US SSN */
-"Blockcard.kycSSN" = "";
-
 /* Failed Address placeholder */
 "Card.address.failed.placeholder" = "";
 
@@ -1338,9 +1344,6 @@
 /* Postal code placeholder */
 "Card.postal.placeholder" = "";
 
-/* Register button title */
-"Card.registerButton.title" = "";
-
 /* Failed state placeholder */
 "Card.state.failed.placeholder" = "";
 
@@ -1352,6 +1355,3 @@
 
 /* US country */
 "Card.USStates" = "";
-
-/* Spend Bar Item Title */
-"Spend.barItemTitle" = "";

@@ -194,6 +194,72 @@
 /* Camera plugin instruction */
 "CameraPlugin.centerInstruction" = "Zentriere deinen Ausweis im Rechteck";
 
+/* Failed Address placeholder */
+"Card.address.failed.placeholder" = "Adresse";
+
+/* Address placeholder */
+"Card.address.placeholder" = "Adresse";
+
+/* Failed City placeholder */
+"Card.city.failed.placeholder" = "Stadt";
+
+/* City placeholder */
+"Card.city.placeholder" = "Stadt";
+
+/* FailedPassword placeholder */
+"Card.confirmed.password.failed.placeholder" = "Passwort bestätigen";
+
+/* Confirm Password placeholder */
+"Card.confirmed.password.placeholder" = "Passwort bestätigen";
+
+/* Country placeholder */
+"Card.country.placeholder" = "Land";
+
+/* FailedEmail address placeholder */
+"Card.email.failed.placeholder" = "E-mail";
+
+/* Email address placeholder */
+"Card.email.placeholder" = "E-mail";
+
+/* First name failed placeholder */
+"Card.firstName.failed.placeholder" = "Vorname";
+
+/* First name placeholder */
+"Card.firstName.placeholder" = "Vorname";
+
+/* Last name failed placeholder */
+"Card.lastName.failed.placeholder" = "Nachname";
+
+/* Last name placeholder */
+"Card.lastName.placeholder" = "Nachname";
+
+/* Failed Mobile number placeholder */
+"Card.mobile.failed.placeholder" = "Handynummer";
+
+/* Mobile number placeholder */
+"Card.mobile.placeholder" = "Handynummer";
+
+/* FailedPassword placeholder */
+"Card.password.failed.placeholder" = "Passwort";
+
+/* Password placeholder */
+"Card.password.placeholder" = "Passwort";
+
+/* Postal code placeholder */
+"Card.postal.failed.placeholder" = "Postleitzahl";
+
+/* Postal code placeholder */
+"Card.postal.placeholder" = "Postleitzahl";
+
+/* Register button title */
+"Card.registerButton.title" = "Registrieren";
+
+/* Failed state placeholder */
+"Card.state.failed.placeholder" = "Bundesland";
+
+/* State placeholder */
+"Card.state.placeholder" = "Bundesland";
+
 /* $53.09/L + 1.07% */
 "Confirmation.amountDetailLabel" = "Austauschdetails:";
 
@@ -415,6 +481,21 @@
 
 /* Wipe wallet button */
 "JailbreakWarnings.wipe" = "Löschen";
+
+/* LitecoinCard users driver's license */
+"LitecoinCard.kycDriversLicense" = "Führerschein";
+
+/* LitecoinCard users DL or passport */
+"LitecoinCard.kycIDOptions" = "DL or Passport Number";
+
+/* LitecoinCard ID Type */
+"LitecoinCard.kycIDType" = "ID Type";
+
+/* LitecoinCard users passport */
+"LitecoinCard.kycPassport" = "Ausweisnummer";
+
+/* LitecoinCard US SSN */
+"LitecoinCard.kycSSN" = "Social Security Number";
 
 /* Location services disabled error */
 "LocationPlugin.disabled" = "Standortdienste sind deaktiviert";
@@ -893,6 +974,9 @@
 /* Share data switch label. */
 "ShareData.toggleLabel" = "Anonyme Nutzungsdaten übermitteln?";
 
+/* Spend Bar Item Title */
+"Spend.barItemTitle" = "VERBRINGEN";
+
 /* Current spending limit: */
 "SpendingLimit.title" = "Aktuelles Ausgabenlimit:";
 
@@ -1265,92 +1349,8 @@
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d von %2$d";
 
-/* Blockcard users driver's license */
-"Blockcard.kycDriversLicense" = "";
-
-/* Blockcard users DL or passport */
-"Blockcard.kycIDOptions" = "";
-
-/* Blockcard ID Type */
-"Blockcard.kycIDType" = "";
-
-/* Blockcard users passport */
-"Blockcard.kycPassport" = "";
-
-/* Blockcard US SSN */
-"Blockcard.kycSSN" = "";
-
-/* Failed Address placeholder */
-"Card.address.failed.placeholder" = "";
-
-/* Address placeholder */
-"Card.address.placeholder" = "";
-
-/* Failed City placeholder */
-"Card.city.failed.placeholder" = "";
-
-/* City placeholder */
-"Card.city.placeholder" = "";
-
-/* FailedPassword placeholder */
-"Card.confirmed.password.failed.placeholder" = "";
-
-/* Confirm Password placeholder */
-"Card.confirmed.password.placeholder" = "";
-
-/* Country placeholder */
-"Card.country.placeholder" = "";
-
-/* FailedEmail address placeholder */
-"Card.email.failed.placeholder" = "";
-
-/* Email address placeholder */
-"Card.email.placeholder" = "";
-
-/* First name failed placeholder */
-"Card.firstName.failed.placeholder" = "";
-
-/* First name placeholder */
-"Card.firstName.placeholder" = "";
-
-/* Last name failed placeholder */
-"Card.lastName.failed.placeholder" = "";
-
-/* Last name placeholder */
-"Card.lastName.placeholder" = "";
-
-/* Failed Mobile number placeholder */
-"Card.mobile.failed.placeholder" = "";
-
-/* Mobile number placeholder */
-"Card.mobile.placeholder" = "";
-
-/* FailedPassword placeholder */
-"Card.password.failed.placeholder" = "";
-
-/* Password placeholder */
-"Card.password.placeholder" = "";
-
-/* Postal code placeholder */
-"Card.postal.failed.placeholder" = "";
-
-/* Postal code placeholder */
-"Card.postal.placeholder" = "";
-
-/* Register button title */
-"Card.registerButton.title" = "";
-
-/* Failed state placeholder */
-"Card.state.failed.placeholder" = "";
-
-/* State placeholder */
-"Card.state.placeholder" = "";
-
 /* Title for Card ViewController */
 "Card.title" = "";
 
 /* US country */
 "Card.USStates" = "";
-
-/* Spend Bar Item Title */
-"Spend.barItemTitle" = "";

@@ -32,15 +32,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tabBar contentMode="redraw" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3Z-Gw-zod">
-                                <rect key="frame" x="0.0" y="638" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="589" width="414" height="98"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <viewLayoutGuide key="safeArea" id="TzC-tl-jAG"/>
                                 <items>
                                     <tabBarItem title="History" image="historyIcon" selectedImage="historyIcon" id="qwA-9l-CfE" userLabel="History"/>
                                     <tabBarItem tag="1" title="Send" image="SendButtonIcon" selectedImage="SendButtonIcon" id="Idu-CT-kfl" userLabel="Send"/>
-                                    <tabBarItem title="Spend" image="card_icon" selectedImage="card_icon" id="tV5-pr-ANc"/>
-                                    <tabBarItem tag="2" title="Receive" image="ReceiveButtonIcon" selectedImage="ReceiveButtonIcon" id="1Ar-eJ-M87" userLabel="Receive"/>
-                                    <tabBarItem tag="3" title="Buy" image="litecoin_cutout24" selectedImage="litecoin_cutout24" id="spP-38-fzY" userLabel="Buy"/>
+                                    <tabBarItem tag="2" title="Spend" image="card_icon" selectedImage="card_icon" id="tV5-pr-ANc"/>
+                                    <tabBarItem tag="3" title="Receive" image="ReceiveButtonIcon" selectedImage="ReceiveButtonIcon" id="1Ar-eJ-M87" userLabel="Receive"/>
+                                    <tabBarItem tag="4" title="Buy" image="litecoin_cutout24" selectedImage="litecoin_cutout24" id="spP-38-fzY" userLabel="Buy"/>
                                 </items>
                                 <connections>
                                     <outlet property="delegate" destination="x3n-5i-KbR" id="9hM-1p-ODS"/>
@@ -92,8 +92,27 @@
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="81g-U6-NOG"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6MU-3M-6MJ">
+                                <rect key="frame" x="0.0" y="60" width="414" height="80"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Register your LitecoinCard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIq-MR-OqZ">
+                                        <rect key="frame" x="15" y="15" width="384" height="50"/>
+                                        <color key="backgroundColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="BarlowSemiCondensed-SemiBold" family="Barlow Semi Condensed SemiBold" pointSize="19"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="VIq-MR-OqZ" firstAttribute="leading" secondItem="6MU-3M-6MJ" secondAttribute="leading" constant="15" id="3Ja-th-eaW"/>
+                                    <constraint firstAttribute="bottom" secondItem="VIq-MR-OqZ" secondAttribute="bottom" constant="15" id="DdU-Bq-tDJ"/>
+                                    <constraint firstItem="VIq-MR-OqZ" firstAttribute="top" secondItem="6MU-3M-6MJ" secondAttribute="top" constant="15" id="Gye-Zq-S45"/>
+                                    <constraint firstAttribute="height" constant="80" id="QmD-25-Adx"/>
+                                    <constraint firstAttribute="trailing" secondItem="VIq-MR-OqZ" secondAttribute="trailing" constant="15" id="eXp-7H-0ff"/>
+                                </constraints>
+                            </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="euD-bi-teC">
-                                <rect key="frame" x="0.0" y="60" width="414" height="578"/>
+                                <rect key="frame" x="0.0" y="60" width="414" height="529"/>
                                 <viewLayoutGuide key="safeArea" id="spi-yc-QnP"/>
                                 <connections>
                                     <segue destination="0H7-tx-uMf" kind="embed" id="RDN-fw-P5V"/>
@@ -104,13 +123,16 @@
                         <constraints>
                             <constraint firstItem="hBW-LI-2Ec" firstAttribute="trailing" secondItem="ZHZ-G5-6k8" secondAttribute="trailing" id="1NP-ep-2dC"/>
                             <constraint firstItem="ZHZ-G5-6k8" firstAttribute="top" secondItem="hBW-LI-2Ec" secondAttribute="top" id="3Md-Ke-jFm"/>
+                            <constraint firstItem="6MU-3M-6MJ" firstAttribute="top" secondItem="ZHZ-G5-6k8" secondAttribute="bottom" id="CgI-6T-9YS"/>
                             <constraint firstItem="j3Z-Gw-zod" firstAttribute="trailing" secondItem="hBW-LI-2Ec" secondAttribute="trailing" id="Kym-mA-0Mc"/>
                             <constraint firstItem="euD-bi-teC" firstAttribute="leading" secondItem="hBW-LI-2Ec" secondAttribute="leading" id="LKb-BN-dBt"/>
                             <constraint firstItem="j3Z-Gw-zod" firstAttribute="bottom" secondItem="hBW-LI-2Ec" secondAttribute="bottom" id="MTs-Oo-5Ze"/>
                             <constraint firstItem="hBW-LI-2Ec" firstAttribute="trailing" secondItem="euD-bi-teC" secondAttribute="trailing" id="VXb-tK-gtJ"/>
                             <constraint firstItem="j3Z-Gw-zod" firstAttribute="top" secondItem="euD-bi-teC" secondAttribute="bottom" id="bIJ-17-50u"/>
                             <constraint firstItem="euD-bi-teC" firstAttribute="top" secondItem="ZHZ-G5-6k8" secondAttribute="bottom" id="m3D-PJ-Alh"/>
+                            <constraint firstItem="hBW-LI-2Ec" firstAttribute="trailing" secondItem="6MU-3M-6MJ" secondAttribute="trailing" id="mDA-k6-Nqn"/>
                             <constraint firstItem="ZHZ-G5-6k8" firstAttribute="leading" secondItem="hBW-LI-2Ec" secondAttribute="leading" id="qTh-4T-6Zi"/>
+                            <constraint firstItem="6MU-3M-6MJ" firstAttribute="leading" secondItem="hBW-LI-2Ec" secondAttribute="leading" id="ueY-oQ-Foy"/>
                             <constraint firstItem="j3Z-Gw-zod" firstAttribute="leading" secondItem="hBW-LI-2Ec" secondAttribute="leading" id="upq-Lf-nte"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hBW-LI-2Ec"/>
@@ -120,7 +142,9 @@
                     <connections>
                         <outlet property="containerView" destination="euD-bi-teC" id="8Hi-tB-iI4"/>
                         <outlet property="currentLTCPriceLabel" destination="dET-GI-JeX" id="6nV-rL-53D"/>
+                        <outlet property="floatingRegistrationView" destination="6MU-3M-6MJ" id="lQ0-mH-ClZ"/>
                         <outlet property="headerView" destination="ZHZ-G5-6k8" id="eca-ki-lm4"/>
+                        <outlet property="registrationTitleLabel" destination="VIq-MR-OqZ" id="7tj-eh-kZG"/>
                         <outlet property="settingsButton" destination="zmH-Ee-H6k" id="k3e-rQ-MBP"/>
                         <outlet property="tabBar" destination="j3Z-Gw-zod" id="PpH-h0-AQX"/>
                         <outlet property="timeStampLabel" destination="eVZ-9F-hgM" id="s8z-9v-5Gc"/>
@@ -137,7 +161,7 @@
             <objects>
                 <viewController id="0H7-tx-uMf" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z4T-ui-Ve5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="529"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="578"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="UuX-cb-qOU"/>

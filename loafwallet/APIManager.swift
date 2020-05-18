@@ -216,17 +216,17 @@ class APIManager: NSObject {
         return userWallet
     }
     
-//    func fetchBlockcardDetails(ternioAccount: TernioAccountData, tokenObject: LFTokenObject) -> JSON? {
+//    func fetchLitecoinCardDetails(ternioAccount: TernioAccountData, tokenObject: LFTokenObject) -> JSON? {
 //        //GET /user/:user_id/card
 //        
 //    }
 //    
-//    func fetchBlockcardVirtualImage(ternioAccount: TernioAccountData, tokenObject: LFTokenObject) -> JSON? {
+//    func fetchLitecoinCardVirtualImage(ternioAccount: TernioAccountData, tokenObject: LFTokenObject) -> JSON? {
 //        //GET /user/:user_id/card/image
 //        
 //    }
 //    
-//    func subscribeToBlockcardPlan(ternioAccount: TernioAccountData, tokenObject: LFTokenObject) -> JSON? {
+//    func subscribeToLitecoinCardPlan(ternioAccount: TernioAccountData, tokenObject: LFTokenObject) -> JSON? {
 //        
 //    }
 

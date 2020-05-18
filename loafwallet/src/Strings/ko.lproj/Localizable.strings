@@ -194,6 +194,9 @@
 /* Camera plugin instruction */
 "CameraPlugin.centerInstruction" = "박스안에 귀하의 ID를 중앙에 두세요";
 
+/* Register button title */
+"Card.registerButton.title" = "레지스터";
+
 /* $53.09/L + 1.07% */
 "Confirmation.amountDetailLabel" = "교환 내용";
 
@@ -415,6 +418,21 @@
 
 /* Wipe wallet button */
 "JailbreakWarnings.wipe" = "초기화";
+
+/* LitecoinCard users driver's license */
+"LitecoinCard.kycDriversLicense" = "운전 면허증";
+
+/* LitecoinCard users DL or passport */
+"LitecoinCard.kycIDOptions" = "DL or Passport Number";
+
+/* LitecoinCard ID Type */
+"LitecoinCard.kycIDType" = "ID Type";
+
+/* LitecoinCard users passport */
+"LitecoinCard.kycPassport" = "여권 번호";
+
+/* LitecoinCard US SSN */
+"LitecoinCard.kycSSN" = "Social Security Number";
 
 /* Location services disabled error */
 "LocationPlugin.disabled" = "위치 서비스가 꺼졌습니다.";
@@ -893,6 +911,9 @@
 /* Share data switch label. */
 "ShareData.toggleLabel" = "익명 데이터를 공유하시겠습니까?";
 
+/* Spend Bar Item Title */
+"Spend.barItemTitle" = "보내다";
+
 /* Current spending limit: */
 "SpendingLimit.title" = "현재 지출 한도";
 
@@ -1265,21 +1286,6 @@
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%2$d의 %1$d";
 
-/* Blockcard users driver's license */
-"Blockcard.kycDriversLicense" = "";
-
-/* Blockcard users DL or passport */
-"Blockcard.kycIDOptions" = "";
-
-/* Blockcard ID Type */
-"Blockcard.kycIDType" = "";
-
-/* Blockcard users passport */
-"Blockcard.kycPassport" = "";
-
-/* Blockcard US SSN */
-"Blockcard.kycSSN" = "";
-
 /* Failed Address placeholder */
 "Card.address.failed.placeholder" = "";
 
@@ -1337,9 +1343,6 @@
 /* Postal code placeholder */
 "Card.postal.placeholder" = "";
 
-/* Register button title */
-"Card.registerButton.title" = "";
-
 /* Failed state placeholder */
 "Card.state.failed.placeholder" = "";
 
@@ -1351,6 +1354,3 @@
 
 /* US country */
 "Card.USStates" = "";
-
-/* Spend Bar Item Title */
-"Spend.barItemTitle" = "";

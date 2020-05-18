@@ -194,6 +194,9 @@
 /* Camera plugin instruction */
 "CameraPlugin.centerInstruction" = "將您的 ID 在方塊置中";
 
+/* Register button title */
+"Card.registerButton.title" = "寄存器";
+
 /* $53.09/L + 1.07% */
 "Confirmation.amountDetailLabel" = "交易所詳情：";
 
@@ -415,6 +418,21 @@
 
 /* Wipe wallet button */
 "JailbreakWarnings.wipe" = "抹除";
+
+/* LitecoinCard users driver's license */
+"LitecoinCard.kycDriversLicense" = "駕駛執照";
+
+/* LitecoinCard users DL or passport */
+"LitecoinCard.kycIDOptions" = "DL or Passport Number";
+
+/* LitecoinCard ID Type */
+"LitecoinCard.kycIDType" = "ID Type";
+
+/* LitecoinCard users passport */
+"LitecoinCard.kycPassport" = "護照號碼";
+
+/* LitecoinCard US SSN */
+"LitecoinCard.kycSSN" = "Social Security Number";
 
 /* Location services disabled error */
 "LocationPlugin.disabled" = "定位服務已停用。";
@@ -893,6 +911,9 @@
 /* Share data switch label. */
 "ShareData.toggleLabel" = "分享匿名資料？";
 
+/* Spend Bar Item Title */
+"Spend.barItemTitle" = "花";
+
 /* Current spending limit: */
 "SpendingLimit.title" = "當前支出限額：";
 
@@ -1265,21 +1286,6 @@
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%2$d 之 %1$d";
 
-/* Blockcard users driver's license */
-"Blockcard.kycDriversLicense" = "";
-
-/* Blockcard users DL or passport */
-"Blockcard.kycIDOptions" = "";
-
-/* Blockcard ID Type */
-"Blockcard.kycIDType" = "";
-
-/* Blockcard users passport */
-"Blockcard.kycPassport" = "";
-
-/* Blockcard US SSN */
-"Blockcard.kycSSN" = "";
-
 /* Failed Address placeholder */
 "Card.address.failed.placeholder" = "";
 
@@ -1337,9 +1343,6 @@
 /* Postal code placeholder */
 "Card.postal.placeholder" = "";
 
-/* Register button title */
-"Card.registerButton.title" = "";
-
 /* Failed state placeholder */
 "Card.state.failed.placeholder" = "";
 
@@ -1351,6 +1354,3 @@
 
 /* US country */
 "Card.USStates" = "";
-
-/* Spend Bar Item Title */
-"Spend.barItemTitle" = "";

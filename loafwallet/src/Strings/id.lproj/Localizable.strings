@@ -194,6 +194,9 @@
 /* Camera plugin instruction */
 "CameraPlugin.centerInstruction" = "Pusatkan ID Anda di dalam Kotak";
 
+/* Register button title */
+"Card.registerButton.title" = "Daftar";
+
 /* $53.09/L + 1.07% */
 "Confirmation.amountDetailLabel" = "Detail pertukaran:";
 
@@ -415,6 +418,21 @@
 
 /* Wipe wallet button */
 "JailbreakWarnings.wipe" = "Hapus";
+
+/* LitecoinCard users driver's license */
+"LitecoinCard.kycDriversLicense" = "Surat izin Mengemudi";
+
+/* LitecoinCard users DL or passport */
+"LitecoinCard.kycIDOptions" = "DL or Passport Number";
+
+/* LitecoinCard ID Type */
+"LitecoinCard.kycIDType" = "ID Type";
+
+/* LitecoinCard users passport */
+"LitecoinCard.kycPassport" = "Nomor paspor";
+
+/* LitecoinCard US SSN */
+"LitecoinCard.kycSSN" = "Social Security Number";
 
 /* Location services disabled error */
 "LocationPlugin.disabled" = "Layanan lokasi dinonaktifkan.";
@@ -893,6 +911,9 @@
 /* Share data switch label. */
 "ShareData.toggleLabel" = "Bagikan Data Anonim?";
 
+/* Spend Bar Item Title */
+"Spend.barItemTitle" = "MENGHABISKAN";
+
 /* Current spending limit: */
 "SpendingLimit.title" = "Batas Pengeluaran Saat Ini: ";
 
@@ -1265,21 +1286,6 @@
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d dari %2$d";
 
-/* Blockcard users driver's license */
-"Blockcard.kycDriversLicense" = "";
-
-/* Blockcard users DL or passport */
-"Blockcard.kycIDOptions" = "";
-
-/* Blockcard ID Type */
-"Blockcard.kycIDType" = "";
-
-/* Blockcard users passport */
-"Blockcard.kycPassport" = "";
-
-/* Blockcard US SSN */
-"Blockcard.kycSSN" = "";
-
 /* Failed Address placeholder */
 "Card.address.failed.placeholder" = "";
 
@@ -1337,9 +1343,6 @@
 /* Postal code placeholder */
 "Card.postal.placeholder" = "";
 
-/* Register button title */
-"Card.registerButton.title" = "";
-
 /* Failed state placeholder */
 "Card.state.failed.placeholder" = "";
 
@@ -1351,6 +1354,3 @@
 
 /* US country */
 "Card.USStates" = "";
-
-/* Spend Bar Item Title */
-"Spend.barItemTitle" = "";
