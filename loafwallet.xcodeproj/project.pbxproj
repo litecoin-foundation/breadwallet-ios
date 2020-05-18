@@ -79,7 +79,6 @@
 		240D61BD2471E8C700F3D0F3 /* LFModalReceiveQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61BC2471E8C700F3D0F3 /* LFModalReceiveQRViewController.swift */; };
 		240D61BF2471EA6B00F3D0F3 /* Province.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61BE2471EA6B00F3D0F3 /* Province.swift */; };
 		240D61C12471EA8700F3D0F3 /* UABuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D61C02471EA8700F3D0F3 /* UABuilder.swift */; };
-		240D61C32472006700F3D0F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 240D61C22472006700F3D0F3 /* GoogleService-Info.plist */; };
 		2427342D2381C21800E2D22F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2427342B2381C21800E2D22F /* MainViewController.swift */; };
 		24306797238F3DF900EBEA99 /* BartyCrouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24306796238F3DF900EBEA99 /* BartyCrouch.swift */; };
 		2430A80D23FCCB47002463B5 /* DynamicDonation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2430A80C23FCCB47002463B5 /* DynamicDonation.storyboard */; };
@@ -4144,7 +4143,6 @@
 				24313CAA23824F9800A83F69 /* Main.storyboard in Resources */,
 				24D5F25F22599C0B00225462 /* BarlowSemiCondensed-Regular.ttf in Resources */,
 				24DFCE6823B89CDE001F17F8 /* Settings.storyboard in Resources */,
-				240D61C32472006700F3D0F3 /* GoogleService-Info.plist in Resources */,
 				24393B5C23C259400075218D /* Phrase.storyboard in Resources */,
 				CEAA9E9E1DC2F90C0066731D /* CircularPro-Bold.otf in Resources */,
 				24313CA723824F5800A83F69 /* Spend.storyboard in Resources */,
