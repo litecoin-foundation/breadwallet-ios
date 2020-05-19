@@ -65,9 +65,8 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     private func setupModelData() {
-        Country.allCases.forEach {
-            countries.append($0.name)
-        }
+        // Phase 0 only supports US transactions on LitecoinCard
+        countries.append(Country.unitedStates.name)
     }
     
     private func setupSubViews() {
@@ -96,7 +95,7 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         kycIDTypeTextField.placeholder = S.LitecoinCard.kycIDType
         registerButton.setTitle(S.LitecoinCard.registerButtonTitle, for: .normal)
     
-        countryTextField.text = S.LitecoinCard.USStates
+        countryTextField.text = Country.unitedStates.name
         registerButton.layer.cornerRadius = 5.0
     
         let textFields = [emailTextField, firstNameTextField, lastNameTextField, passwordTextField, confirmPasswordTextField, addressTextField, cityTextField, stateTextField, countryTextField, mobileTextField, postalCodeTextField, kycIDTypeTextField, kycSSNTextField, kycCustomerIDTextField]
@@ -279,26 +278,15 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    
-        if self.countryTextField.isFirstResponder {
-            return self.countries.count
-        }
-        
+ 
         if self.kycIDTypeTextField.isFirstResponder {
             return self.idTypes.count
         }
-        
-        
-    
         return 0
     }
     
     func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    
-        if self.countryTextField.isFirstResponder {
-            return self.countries[row]
-        }
-        
+      
         if self.kycIDTypeTextField.isFirstResponder {
             return self.idTypes[row]
         }
@@ -320,23 +308,7 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     //MARK: UITextField Delegate & Setup
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-    currentTextField = textField
-    
-    //    guard let text = textField.text else {
-    //      NSLog("Text not set")
-    //      return
-    //    }
-    //
-    //    guard let countryIndex = countries.firstIndex(of:text) else {
-    //      NSLog("Country Index not set")
-    //      return
-    //    }
-    
-    //    if textField == self.countryTextField {
-    //      self.pickerView?.selectedRow(inComponent: countryIndex)
-    //    }
-    
-    
+        currentTextField = textField
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
