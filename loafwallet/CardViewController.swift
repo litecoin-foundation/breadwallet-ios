@@ -6,7 +6,8 @@
 //  Copyright © 2019 Litecoin Foundation. All rights reserved.
 //
 
-import UIKit
+import UIKit 
+import LitewalletPartnerAPI
 
 class CardViewController: UIViewController {
 
@@ -20,7 +21,7 @@ class CardViewController: UIViewController {
     @IBOutlet weak var demoIDLabel: UILabel!
     @IBOutlet weak var demoVersionLabel: UILabel!
     
-    var ternioAccountData: TernioAccountData?
+    var litecoinCardAccountData: [String:Any]?
     var userHasTernioCard: Bool = false
     
     override func viewDidLoad() {
@@ -30,21 +31,21 @@ class CardViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        animateCardToBottomView()
+        
     }
     
     private func setupSubviews() {
-        
-        guard let accountData = self.ternioAccountData else {
-            NSLog("ERROR: ternio data not found")
-            return
-        }
+//
+//        guard let accountData = self.litecoinCardAccountData else {
+//            NSLog("ERROR: ternio data not found")
+//            return
+//        }
         self.demoTimestampLabel.alpha = 0
         self.demoIDLabel.alpha = 0
         self.demoVersionLabel.alpha = 0
-        self.demoTimestampLabel.text = accountData.creationTimestampString
-        self.demoIDLabel.text = accountData.accountID
-        self.demoVersionLabel.text = accountData.version
+//        self.demoTimestampLabel.text = accountData.creationTimestampString
+//        self.demoIDLabel.text = accountData.accountID
+//        self.demoVersionLabel.text = accountData.version
         
 //        SUCCESS: {
 //            data =     {
@@ -76,11 +77,11 @@ class CardViewController: UIViewController {
 //        }
         
          
-        if let initial  = accountData.firstName?.prefix(1) {
-            self.firstnameLabel.text = initial.uppercased() + "."
-        }
-        
-        self.lastnameLabel.text = accountData.lastName?.uppercased()
+//        if let initial  = accountData.firstName?.prefix(1) {
+//            self.firstnameLabel.text = initial.uppercased() + "."
+//        }
+//        
+//        self.lastnameLabel.text = accountData.lastName?.uppercased()
         self.cardBackgroundView.layer.cornerRadius =  5.0
         self.cardBackgroundView.clipsToBounds = true
         self.bottomVerticalConstraint.constant = self.view.frame.height/2  - self.cardBackgroundView.frame.height/2
@@ -99,11 +100,13 @@ class CardViewController: UIViewController {
             self.demoIDLabel.alpha = 1
             self.demoVersionLabel.alpha = 1
             
-            self.presentBiBoxAccountDetails()
+            self.presentLitecoinCardAccountDetails()
           })
     }
     
-    private func presentBiBoxAccountDetails() {
+    private func presentLitecoinCardAccountDetails() {
+        
+        
         
     }
     

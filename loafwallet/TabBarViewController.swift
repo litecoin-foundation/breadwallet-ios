@@ -8,7 +8,7 @@
 import UIKit
 import Foundation 
 import SwiftyJSON
-
+ 
 enum TabViewControllerIndex: Int {
     case transactions = 0
     case send = 1
@@ -22,7 +22,15 @@ protocol MainTabBarControllerDelegate {
 }
 
 class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDelegate, CardViewDelegate {
+    func didReceiveOpenLitecoinCardAccount(account: Data) {
+        //
+    }
     
+    func litecoinCardAccountExists(error: Error) {
+        //
+    }
+    
+      
     
     func floatingRegistrationHeader(shouldHide: Bool) {
          
@@ -59,7 +67,6 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     var viewControllers:[UIViewController] = []
     var activeController:UIViewController? = nil
     
-    var spendViewController: SpendViewController?
     var delegate: MainTabBarControllerDelegate?
     
     var updateTimer: Timer?
@@ -97,15 +104,6 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
             let controller = UIStoryboard.init(name: storyboardNames[index], bundle: nil).instantiateViewController(withIdentifier: storyboardID)
             viewControllers.append(controller)
             
-        }
-        
-        // Init early to keep delegate alive at runtime
-        if userDoesNotHaveCard() {
-            self.spendViewController = UIStoryboard.init(name: "Spend", bundle: nil).instantiateViewController(withIdentifier: "SpendViewController") as? SpendViewController
-        } else {
-            let mockJSON = JSON.init(rawValue: ["firstname":"M"])!
-            let ternioData = TernioAccountData(json: mockJSON)
-            self.didReceiveTernioAccount(account: ternioData)
         }
         
         self.updateTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { timer in
@@ -350,28 +348,28 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
         self.displayContentController(contentController: viewControllers[kInitialChildViewControllerIndex])
     }
     
-    func didReceiveTernioAccount(account: TernioAccountData) {
-        var cardViewIndex = 0
-        
-        for (index, spendVC) in viewControllers.enumerated() {
-            if NSStringFromClass(spendVC.classForCoder) == "loafwallet.SpendViewController" {
-                viewControllers.remove(at: index)
-                cardViewIndex = index
-            }
-        }
-        
-        if let cardVC = UIStoryboard.init(name: "Spend", bundle: nil).instantiateViewController(withIdentifier: "CardViewController") as? CardViewController {
-            cardVC.ternioAccountData = account
-            viewControllers.append(cardVC)
-        }
-        
-        self.displayContentController(contentController: viewControllers[cardViewIndex])
-        NotificationCenter.default.post(name: kDidReceiveNewTernioData, object: nil)
-    }
+//    func didReceiveOpenLitecoinCardAccount(account: LitecoinCardAccountData) {
+//        var cardViewIndex = 0
+//        
+//        for (index, spendVC) in viewControllers.enumerated() {
+//            if NSStringFromClass(spendVC.classForCoder) == "loafwallet.SpendViewController" {
+//                viewControllers.remove(at: index)
+//                cardViewIndex = index
+//            }
+//        }
+//        
+//        if let cardVC = UIStoryboard.init(name: "Spend", bundle: nil).instantiateViewController(withIdentifier: "CardViewController") as? CardViewController {
+////            cardVC.ternioAccountData = account
+////            viewControllers.append(cardVC)
+//        }
+//        
+//        self.displayContentController(contentController: viewControllers[cardViewIndex])
+//        NotificationCenter.default.post(name: kDidReceiveNewTernioData, object: nil)
+//    }
     
-    func ternioAccountExists(error: TernioErrorData) {
-        
-    }
+//    func ternioAccountExists(error: LitecoinCardErrorData) {
+//
+//    }
  
     func displayContentController(contentController:UIViewController) {
         
@@ -397,6 +395,7 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
                 return
             }
             spendVC.delegate = self
+            spendVC.isRegistered = userDoesNotHaveCard()
               
         case "loafwallet.ReceiveLTCViewController":
             guard let receiveVC = contentController as? ReceiveLTCViewController else  {
@@ -439,14 +438,13 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     }
     
     private func userDoesNotHaveCard() -> Bool {
-    //TODO: Remove to have Card working
-    //        if let _ = UserDefaults.standard.string(forKey:timeSinceLastLitecoinCardRequest) {
-    //            return false
-    //        } else {
-    //            return true
-    //        }
+        if let _ = UserDefaults.standard.string(forKey:timeSinceLastLitecoinCardRequest) {
+                return true
+            } else {
+                return false
+            }
             
-            return true
+            return false
     }
 }
 

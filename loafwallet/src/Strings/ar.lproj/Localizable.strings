@@ -1310,7 +1310,7 @@
 /* US country */
 "Card.USStates" = "";
 
-/* Donate Memo */
+/* Donate articles to the */
 "Donate.toThe" = "";
 
 /* Donate */
@@ -1319,7 +1319,7 @@
 /* Luxury fee */
 "FeeSelector.luxury" = "";
 
-/* Fee Selector economly fee description */
+/* Fee Selector luxury fee description */
 "FeeSelector.luxuryLabel" = "";
 
 /* Message for luxury fee */

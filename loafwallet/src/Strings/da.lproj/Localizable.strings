@@ -194,8 +194,71 @@
 /* Camera plugin instruction */
 "CameraPlugin.centerInstruction" = "Centrer dit ID i boksen";
 
+/* Failed Address placeholder */
+"Card.address.failed.placeholder" = "Adresse";
+
+/* Address placeholder */
+"Card.address.placeholder" = "Adresse";
+
+/* Failed City placeholder */
+"Card.city.failed.placeholder" = "By";
+
+/* City placeholder */
+"Card.city.placeholder" = "By";
+
+/* FailedPassword placeholder */
+"Card.confirmed.password.failed.placeholder" = "Bekræft adgangskode";
+
+/* Confirm Password placeholder */
+"Card.confirmed.password.placeholder" = "Bekræft adgangskode";
+
+/* Country placeholder */
+"Card.country.placeholder" = "Land";
+
+/* FailedEmail address placeholder */
+"Card.email.failed.placeholder" = "E-mail";
+
+/* Email address placeholder */
+"Card.email.placeholder" = "E-mail";
+
+/* First name failed placeholder */
+"Card.firstName.failed.placeholder" = "Fornavn";
+
+/* First name placeholder */
+"Card.firstName.placeholder" = "Fornavn";
+
+/* Last name failed placeholder */
+"Card.lastName.failed.placeholder" = "Efternavn";
+
+/* Last name placeholder */
+"Card.lastName.placeholder" = "Efternavn";
+
+/* Failed Mobile number placeholder */
+"Card.mobile.failed.placeholder" = "Mobilnummer";
+
+/* Mobile number placeholder */
+"Card.mobile.placeholder" = "Mobilnummer";
+
+/* FailedPassword placeholder */
+"Card.password.failed.placeholder" = "Adgangskode";
+
+/* Password placeholder */
+"Card.password.placeholder" = "Adgangskode";
+
+/* Postal code placeholder */
+"Card.postal.failed.placeholder" = "Postnummer";
+
+/* Postal code placeholder */
+"Card.postal.placeholder" = "Postnummer";
+
 /* Register button title */
 "Card.registerButton.title" = "Tilmeld";
+
+/* Failed state placeholder */
+"Card.state.failed.placeholder" = "Stat";
+
+/* State placeholder */
+"Card.state.placeholder" = "Stat";
 
 /* $53.09/L + 1.07% */
 "Confirmation.amountDetailLabel" = "Udvekslingsoplysninger:";
@@ -1285,69 +1348,6 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d af %2$d";
-
-/* Failed Address placeholder */
-"Card.address.failed.placeholder" = "";
-
-/* Address placeholder */
-"Card.address.placeholder" = "";
-
-/* Failed City placeholder */
-"Card.city.failed.placeholder" = "";
-
-/* City placeholder */
-"Card.city.placeholder" = "";
-
-/* FailedPassword placeholder */
-"Card.confirmed.password.failed.placeholder" = "";
-
-/* Confirm Password placeholder */
-"Card.confirmed.password.placeholder" = "";
-
-/* Country placeholder */
-"Card.country.placeholder" = "";
-
-/* FailedEmail address placeholder */
-"Card.email.failed.placeholder" = "";
-
-/* Email address placeholder */
-"Card.email.placeholder" = "";
-
-/* First name failed placeholder */
-"Card.firstName.failed.placeholder" = "";
-
-/* First name placeholder */
-"Card.firstName.placeholder" = "";
-
-/* Last name failed placeholder */
-"Card.lastName.failed.placeholder" = "";
-
-/* Last name placeholder */
-"Card.lastName.placeholder" = "";
-
-/* Failed Mobile number placeholder */
-"Card.mobile.failed.placeholder" = "";
-
-/* Mobile number placeholder */
-"Card.mobile.placeholder" = "";
-
-/* FailedPassword placeholder */
-"Card.password.failed.placeholder" = "";
-
-/* Password placeholder */
-"Card.password.placeholder" = "";
-
-/* Postal code placeholder */
-"Card.postal.failed.placeholder" = "";
-
-/* Postal code placeholder */
-"Card.postal.placeholder" = "";
-
-/* Failed state placeholder */
-"Card.state.failed.placeholder" = "";
-
-/* State placeholder */
-"Card.state.placeholder" = "";
 
 /* Title for Card ViewController */
 "Card.title" = "";

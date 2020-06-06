@@ -8,18 +8,22 @@
 
 import UIKit
 import Security
+import LitewalletPartnerAPI
 
 protocol CardViewDelegate {
-    func didReceiveTernioAccount(account: TernioAccountData)
-    func ternioAccountExists(error: TernioErrorData)
+    func didReceiveOpenLitecoinCardAccount(account: Data)
+    func litecoinCardAccountExists(error: Error)
     func floatingRegistrationHeader(shouldHide:Bool)
 }
   
 class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UIScrollViewDelegate, LFAlertViewDelegate {
     
-    static let serviceName = "com.litewallet.blockcard.service"
-
+    static let serviceName = "com.litewallet.litecoincard.service"
+    let rand = Int.random(in: 10000 ..< 20099)
+    let emailRand = "kwashingt+" + "3" + "@gmail.com"
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var headerLabel: UILabel!
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -39,7 +43,7 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     @IBOutlet weak var registerButton: UIButton!
     var currentTextField: UITextField?
-    
+    var isRegistered: Bool = false
     var pickerView: UIPickerView?
     var countries = [String]()
     let idTypes = [S.LitecoinCard.kycDriversLicense, S.LitecoinCard.kycPassport]
@@ -50,6 +54,8 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     var alertModal: LFAlertViewController?
     var userNotRegistered = true
     var delegate: CardViewDelegate?
+    
+    var manager = PartnerAPIManager.init()
     
     override func viewDidLoad() {
     self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -64,6 +70,10 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         NotificationCenter.default.addObserver(self, selector: #selector(dismissAlertView(notification:)), name: kDidReceiveNewTernioData , object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+         
+    }
+     
     private func setupModelData() {
         // Phase 0 only supports US transactions on LitecoinCard
         countries.append(Country.unitedStates.name)
@@ -105,13 +115,61 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         countryTextField.inputView = self.pickerView
         kycIDTypeTextField.inputView = self.pickerView
     }
+//    var mockData: Data?
+//      return
+//    """
+//        { "firstname":"Test",
+//            "lastname":"User",
+//            "email": emailRand,
+//            "address1":"123 Main",
+//            "city":"Sat",
+//            "country":"US",
+//            "phone":"1234567890",
+//            "zip_code":"95014",
+//            "username":"test"
+//        }
+//    """.data(using: .utf8)
+    var mockData: Data? {
+        return """
+            {
+            "firstName":"Test",
+            "lastName":"Case",
+            "email":\(emailRand),
+            "address1":"123 Lite Way",
+            "city":"Sat",
+            "state":"CA",
+            "zipcode":"95014",
+            "country":"US",
+            "phone":"1123456789",
+            "username":"test-user"
+            }
+        """.data(using: .utf8)
+    }
+    
     
     @IBAction func registerAction(_ sender: Any) {
         
-        let rand = Int.random(in: 10000 ..< 20099)
-        let emailRand = "kwashingt+" + "\(rand)" + "@gmail.com"
-        let mockedData = RegistrationData(email: emailRand, password: "password-23434", firstName: "firstName", lastName: "lastname", address: "100 address1", city: "city", country: "US", state: "CA", postalCode: "95129", mobileNumber: "4082167168")
-    //  Mocking Over
+        //TODO: Refactor whenTernio OAUTH is ready
+
+        let mockUser: [String: Any] = ["firstname":"Test", "lastname":"User", "email": emailRand,"address1":"123 Main","city":"Sat","country":"US","phone":"1234567890","zip_code":"95014", "username":"test"]
+         
+        
+
+        
+        
+        do {
+            if let jsonData = try? JSONSerialization.data(withJSONObject:mockUser) {
+                manager.createUser(userData: mockData!) { (user) in
+                               
+                               //
+                }
+            }
+
+        } catch {
+            print(error)
+        }
+              
+//  Mocking Over
 //        do {
 //            let email = try emailTextField.validatedText(validationType: ValidatorType.email)
 //            let password = try passwordTextField.validatedText(validationType: ValidatorType.password)
@@ -137,86 +195,99 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
 //           }
         
 
-        showRegistrationAlert(data: mockedData)
+        //showRegistrationAlertView(data: mockedData)
     }
     
     func showErrorAlert(for alert: String) {
+        
+        //TODO: Refactor whenTernio OAUTH is ready
+
         let alertController = UIAlertController(title: nil, message: alert, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(alertAction)
         present(alertController, animated: true, completion: nil)
     }
     
-    func showRegistrationAlert(data: RegistrationData) {
-        
-        let username = data.email
-        let password = data.password.data(using: String.Encoding.utf8)!
-        
-        var query: [String: Any] = [kSecClass as String: kSecClassInternetPassword,
-                                    kSecAttrAccount as String: username,
-                                    kSecAttrServer as String: APIServerURL.stagingTernioServer,
-                                    kSecValueData as String: password]
+    func showRegistrationAlertView(data: LitecoinCardAccountData) {
         
         
-        self.alertModal = UIStoryboard.init(name: "Alerts", bundle: nil).instantiateViewController(withIdentifier: "LFAlertViewController") as? LFAlertViewController
-        
-        guard let alertModal = self.alertModal else {
-            NSLog("ERROR: Alert object not initialized")
-            return
-
-        }
+        //TODO: Refactor whenTernio OAUTH is ready
+//        
+//        let username = data.email
+//        let password = data.accountID
+//        
+//       // password.data(using: String.Encoding.utf8)
+//        
+//        var query: [String: Any] = [kSecClass as String: kSecClassInternetPassword,
+//                                    kSecAttrAccount as String: username,
+//                                    kSecAttrServer as String: APIServerURL.stagingTernioServer,
+//                                    kSecValueData as String: password]
+//        
+//        
+//        self.alertModal = UIStoryboard.init(name: "Alerts", bundle: nil).instantiateViewController(withIdentifier: "LFAlertViewController") as? LFAlertViewController
+//        
+//        guard let alertModal = self.alertModal else {
+//            NSLog("ERROR: Alert object not initialized")
+//            return
+//
+//        }
         
 //        registrationAlert.headerLabel.text = S.Register.registerAlert
 //        registrationAlert.dynamicLabel.text = ""
-        alertModal.providesPresentationContextTransitionStyle = true
-        alertModal.definesPresentationContext = true
-        alertModal.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        alertModal.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        alertModal.delegate = self
-       
-        self.present(alertModal, animated: true) {
-        APIManager.sharedInstance.getLFUserToken(ternioEndpoint: .user, registrationData: data) { lfObject in
-            
-                guard let tokenObject = lfObject else {
-                    NSLog("ERROR: LFToken not retreived")
-                    return
-                }
-                self.fetchTernioAccount(registrationData: data, tokenObject: tokenObject)
-                
-            }
-        }
+//        alertModal.providesPresentationContextTransitionStyle = true
+//        alertModal.definesPresentationContext = true
+//        alertModal.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+//        alertModal.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+//        alertModal.delegate = self
+//       
+//        self.present(alertModal, animated: true) {
+//        APIManager.sharedInstance.getLFUserToken(ternioEndpoint: .user, registrationData: data) { lfObject in
+//            
+//                guard let tokenObject = lfObject else {
+//                    NSLog("ERROR: LFToken not retreived")
+//                    return
+//                }
+//             
+//            self.fetchLitecoinCardAccount(registrationData: data, tokenObject: tokenObject)
+//                
+//            }
+//        }
     }
     
-    private func fetchTernioAccount(registrationData: RegistrationData, tokenObject: LFTokenObject) {
-        APIManager.sharedInstance.createTernioUserAccount(data: registrationData, tokenObject: tokenObject) { ternioAccountData in
-             
-            if let account = ternioAccountData as? TernioAccountData  {
-                //self.delegate?.didReceiveTernioAccount(account: account)
-                print("ACCOUNT \(account)")
-               self.createTernioWallet(ternioAccount: account, tokenObject: tokenObject)
-               //self.createTernioCard(ternioAccount: account, tokenObject: tokenObject)
+    private func fetchLitecoinCardAccount(registrationData: LitecoinCardAccountData) {
+        
+        
+        //TODO: Refactor whenTernio OAUTH is ready
 
-            } else if let error = ternioAccountData as? TernioErrorData,
-                let message = error.emailErrorMessage,
-                let code = error.code {
-                self.alertModal?.headerLabel.text = "Error"//S.Register.registerAlert
-                self.alertModal?.dynamicLabel.text = message + " " + "(\(code))"
-                self.alertModal?.activityIndicatorView.isHidden = true
-                self.alertModal?.cancelButton.setTitle("Ok", for: .normal)
-                self.delegate?.ternioAccountExists(error: error)
-                self.delegate?.floatingRegistrationHeader(shouldHide: self.userNotRegistered)
-            }
-            
-            //TODO: Uncomment to show the card after launch
-            //  UserDefaults.standard.set(ternioAccountData?.creationTimestampString, forKey: timeSinceLastLitecoinCardRequest)
-            //  UserDefaults.standard.synchronize()
-        }
+//        APIManager.sharedInstance.createTernioUserAccount() { litecoinCardAccountData in
+//
+//            if let account = litecoinCardAccountData as? LitecoinCardAccountData  {
+//                //self.delegate?.didReceiveTernioAccount(account: account)
+//                print("ACCOUNT \(account)")
+//               self.createTernioWallet(ternioAccount: account, tokenObject: tokenObject)
+//
+//            } else if let error = ternioAccountData as? TernioErrorData,
+//                let message = error.emailErrorMessage,
+//                let code = error.code {
+//                self.alertModal?.headerLabel.text = "Error"//S.Register.registerAlert
+//                self.alertModal?.dynamicLabel.text = message + " " + "(\(code))"
+//                self.alertModal?.activityIndicatorView.isHidden = true
+//                self.alertModal?.cancelButton.setTitle("Ok", for: .normal)
+//                self.delegate?.litecoinCardAccountExists(error: error)
+//                self.delegate?.floatingRegistrationHeader(shouldHide: self.userNotRegistered)
+//            }
+//
+//            UserDefaults.standard.set(litecoinCardAccountData.ccreationTimestampString, forKey: timeSinceLastLitecoinCardRequest)
+//            UserDefaults.standard.synchronize()
+//        }
     }
      
-    private func createTernioWallet(ternioAccount: TernioAccountData, tokenObject: LFTokenObject) {
+    private func createLitecoinCardWallet(cardAccountData: LitecoinCardAccountData) {
         
-        let jsonWallet = APIManager.sharedInstance.createTernioWallet(ternioAccount: ternioAccount, tokenObject: tokenObject)
         
+        //TODO: Refactor whenTernio OAUTH is ready
+
+ 
         
        // self.delegate?.didReceiveTernioAccount(account: account)
     }

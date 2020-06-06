@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="BarlowSemiCondensed-Bold.ttf">
+            <string>BarlowSemiCondensed-Bold</string>
+        </array>
         <array key="BarlowSemiCondensed-Medium.ttf">
             <string>BarlowSemiCondensed-Medium</string>
         </array>
@@ -21,14 +23,14 @@
             <objects>
                 <viewController storyboardIdentifier="SpendViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wNG-O7-NAJ" customClass="SpendViewController" customModule="loafwallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uhd-8R-UA7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="EuW-PF-Vvj">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address / Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PE1-to-zlJ">
-                                        <rect key="frame" x="30" y="80" width="315" height="20"/>
+                                        <rect key="frame" x="30" y="80" width="260" height="20"/>
                                         <fontDescription key="fontDescription" name="BarlowSemiCondensed-Medium" family="Barlow Semi Condensed Medium" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                         <connections>
@@ -36,14 +38,14 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uw5-5P-msa">
-                                        <rect key="frame" x="30" y="108" width="315" height="0.5"/>
+                                        <rect key="frame" x="30" y="108" width="260" height="0.5"/>
                                         <color key="backgroundColor" red="0.65090787409999995" green="0.6621127725" blue="0.66606998439999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="4Qf-3o-wlC"/>
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="go2-we-YWY">
-                                        <rect key="frame" x="30" y="135" width="142.5" height="20"/>
+                                        <rect key="frame" x="30" y="135" width="115" height="20"/>
                                         <fontDescription key="fontDescription" name="BarlowSemiCondensed-Medium" family="Barlow Semi Condensed Medium" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" secureTextEntry="YES"/>
                                         <connections>
@@ -51,14 +53,14 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDg-dH-MwL">
-                                        <rect key="frame" x="30" y="163" width="142.5" height="0.5"/>
+                                        <rect key="frame" x="30" y="163" width="115" height="0.5"/>
                                         <color key="backgroundColor" red="0.65090787409999995" green="0.6621127725" blue="0.66606998439999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="FkX-S3-xtP"/>
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q1R-md-CUS">
-                                        <rect key="frame" x="202.5" y="135" width="142.5" height="20"/>
+                                        <rect key="frame" x="175" y="135" width="115" height="20"/>
                                         <fontDescription key="fontDescription" name="BarlowSemiCondensed-Medium" family="Barlow Semi Condensed Medium" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" secureTextEntry="YES"/>
                                         <connections>
@@ -66,14 +68,14 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qG9-pQ-fH2">
-                                        <rect key="frame" x="202.5" y="163" width="142.5" height="0.5"/>
+                                        <rect key="frame" x="175" y="163" width="115" height="0.5"/>
                                         <color key="backgroundColor" red="0.65090787409999995" green="0.6621127725" blue="0.66606998439999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="4cy-TE-1d8"/>
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bui-wZ-eR4">
-                                        <rect key="frame" x="30" y="190" width="142.5" height="20"/>
+                                        <rect key="frame" x="30" y="190" width="115" height="20"/>
                                         <fontDescription key="fontDescription" name="BarlowSemiCondensed-Medium" family="Barlow Semi Condensed Medium" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                                         <connections>
@@ -81,14 +83,14 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dc1-Bz-bXk">
-                                        <rect key="frame" x="30" y="218" width="142.5" height="0.5"/>
+                                        <rect key="frame" x="30" y="218" width="115" height="0.5"/>
                                         <color key="backgroundColor" red="0.65090787409999995" green="0.6621127725" blue="0.66606998439999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="7yJ-7H-Y2X"/>
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fKS-fG-fzJ">
-                                        <rect key="frame" x="202.5" y="190" width="142.5" height="20"/>
+                                        <rect key="frame" x="175" y="190" width="115" height="20"/>
                                         <fontDescription key="fontDescription" name="BarlowSemiCondensed-Medium" family="Barlow Semi Condensed Medium" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                                         <connections>
@@ -96,7 +98,7 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GxE-21-El1">
-                                        <rect key="frame" x="202.5" y="218" width="142.5" height="0.5"/>
+                                        <rect key="frame" x="175" y="218" width="115" height="0.5"/>
                                         <color key="backgroundColor" red="0.65090787409999995" green="0.6621127725" blue="0.66606998439999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="4dm-1k-bNH"/>
@@ -132,7 +134,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ID Type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wZD-K2-KfQ">
-                                        <rect key="frame" x="260" y="300" width="85" height="20"/>
+                                        <rect key="frame" x="260" y="300" width="30" height="20"/>
                                         <fontDescription key="fontDescription" name="BarlowSemiCondensed-Medium" family="Barlow Semi Condensed Medium" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                                         <connections>
@@ -140,7 +142,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XgX-P0-zTz">
-                                        <rect key="frame" x="30" y="355" width="315" height="20"/>
+                                        <rect key="frame" x="30" y="355" width="260" height="20"/>
                                         <fontDescription key="fontDescription" name="BarlowSemiCondensed-Medium" family="Barlow Semi Condensed Medium" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                                         <connections>
@@ -148,7 +150,7 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="shS-Vf-a29">
-                                        <rect key="frame" x="30" y="383" width="315" height="0.5"/>
+                                        <rect key="frame" x="30" y="383" width="260" height="0.5"/>
                                         <color key="backgroundColor" red="0.65090787409999995" green="0.6621127725" blue="0.66606998439999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="4GV-hb-Ras"/>
@@ -173,7 +175,7 @@
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tcC-LC-dgN">
-                                        <rect key="frame" x="260" y="410" width="85" height="20"/>
+                                        <rect key="frame" x="260" y="410" width="30" height="20"/>
                                         <fontDescription key="fontDescription" name="BarlowSemiCondensed-Medium" family="Barlow Semi Condensed Medium" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                                         <connections>
@@ -181,7 +183,7 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0T0-ij-HxB">
-                                        <rect key="frame" x="260" y="438" width="85" height="0.5"/>
+                                        <rect key="frame" x="260" y="438" width="30" height="0.5"/>
                                         <color key="backgroundColor" red="0.65090787409999995" green="0.6621127725" blue="0.66606998439999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="Ce7-cE-iws"/>
@@ -206,7 +208,7 @@
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Post code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FSp-QQ-BzQ">
-                                        <rect key="frame" x="260" y="465" width="85" height="20"/>
+                                        <rect key="frame" x="260" y="465" width="30" height="20"/>
                                         <fontDescription key="fontDescription" name="BarlowSemiCondensed-Medium" family="Barlow Semi Condensed Medium" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                                         <connections>
@@ -214,7 +216,7 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WbL-6T-a1k">
-                                        <rect key="frame" x="260" y="493" width="85" height="0.5"/>
+                                        <rect key="frame" x="260" y="493" width="30" height="0.5"/>
                                         <color key="backgroundColor" red="0.65090787409999995" green="0.6621127725" blue="0.66606998439999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="dtU-3V-qLg"/>
@@ -239,7 +241,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzl-R1-t2A">
-                                        <rect key="frame" x="30" y="698.5" width="315" height="50"/>
+                                        <rect key="frame" x="30" y="598.5" width="260" height="50"/>
                                         <color key="backgroundColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Vlw-Pd-j8b"/>
@@ -260,12 +262,18 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9wZ-GF-VWc" customClass="UITextField">
-                                        <rect key="frame" x="260" y="328" width="85" height="0.5"/>
+                                        <rect key="frame" x="260" y="328" width="30" height="0.5"/>
                                         <color key="backgroundColor" red="0.65090787409999995" green="0.6621127725" blue="0.66606998439999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="S1o-Mu-ILg"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get your LitecoinCard!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAj-1I-Jan">
+                                        <rect key="frame" x="65.5" y="34.5" width="189.5" height="25.5"/>
+                                        <fontDescription key="fontDescription" name="BarlowSemiCondensed-Bold" family="Barlow Semi Condensed" pointSize="21"/>
+                                        <color key="textColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -277,6 +285,7 @@
                                     <constraint firstItem="Pul-O5-dLr" firstAttribute="top" secondItem="Bui-wZ-eR4" secondAttribute="bottom" constant="35" id="62o-xG-pRC"/>
                                     <constraint firstItem="Cp0-mW-AT8" firstAttribute="leading" secondItem="EuW-PF-Vvj" secondAttribute="leading" constant="30" id="6io-Sl-kmn"/>
                                     <constraint firstItem="jsn-9K-bZN" firstAttribute="leading" secondItem="EuW-PF-Vvj" secondAttribute="leading" constant="30" id="6y5-ol-j1x"/>
+                                    <constraint firstItem="BAj-1I-Jan" firstAttribute="centerX" secondItem="EuW-PF-Vvj" secondAttribute="centerX" id="76s-fO-HVQ"/>
                                     <constraint firstItem="TCa-d2-Qpw" firstAttribute="top" secondItem="XgX-P0-zTz" secondAttribute="bottom" constant="35" id="89H-gb-7Sm"/>
                                     <constraint firstItem="tcC-LC-dgN" firstAttribute="leading" secondItem="TCa-d2-Qpw" secondAttribute="trailing" constant="30" id="8Mg-n1-pEg"/>
                                     <constraint firstItem="GxE-21-El1" firstAttribute="trailing" secondItem="fKS-fG-fzJ" secondAttribute="trailing" id="9Ox-9m-BUz"/>
@@ -299,7 +308,7 @@
                                     <constraint firstItem="fxu-bJ-SIu" firstAttribute="trailing" secondItem="jsn-9K-bZN" secondAttribute="trailing" id="OnE-TT-NXU"/>
                                     <constraint firstItem="1mq-gh-Z3N" firstAttribute="top" secondItem="Cp0-mW-AT8" secondAttribute="bottom" constant="8" id="PVG-3D-722"/>
                                     <constraint firstItem="XgX-P0-zTz" firstAttribute="top" secondItem="ioO-jC-ST3" secondAttribute="bottom" constant="35" id="Pji-H5-wb7"/>
-                                    <constraint firstItem="uzl-R1-t2A" firstAttribute="top" secondItem="1mq-gh-Z3N" secondAttribute="bottom" constant="150" id="Pl3-XV-yhD"/>
+                                    <constraint firstItem="uzl-R1-t2A" firstAttribute="top" secondItem="1mq-gh-Z3N" secondAttribute="bottom" constant="50" id="Pl3-XV-yhD"/>
                                     <constraint firstItem="fKS-fG-fzJ" firstAttribute="leading" secondItem="Bui-wZ-eR4" secondAttribute="trailing" constant="30" id="RZ5-rL-Uki"/>
                                     <constraint firstItem="qG9-pQ-fH2" firstAttribute="trailing" secondItem="Q1R-md-CUS" secondAttribute="trailing" id="S1J-US-4GP"/>
                                     <constraint firstItem="0T0-ij-HxB" firstAttribute="leading" secondItem="tcC-LC-dgN" secondAttribute="leading" id="SKG-YU-JaX"/>
@@ -335,6 +344,7 @@
                                     <constraint firstItem="PE1-to-zlJ" firstAttribute="width" secondItem="Uw5-5P-msa" secondAttribute="width" id="j1G-yi-vsx"/>
                                     <constraint firstItem="PE1-to-zlJ" firstAttribute="centerX" secondItem="EuW-PF-Vvj" secondAttribute="centerX" id="jFf-1W-irm"/>
                                     <constraint firstItem="ioO-jC-ST3" firstAttribute="top" secondItem="Pul-O5-dLr" secondAttribute="bottom" constant="35" id="jH8-DL-M0j"/>
+                                    <constraint firstItem="PE1-to-zlJ" firstAttribute="top" secondItem="BAj-1I-Jan" secondAttribute="bottom" constant="20" id="jN2-xe-LYZ"/>
                                     <constraint firstItem="FSp-QQ-BzQ" firstAttribute="leading" secondItem="jsn-9K-bZN" secondAttribute="trailing" constant="30" id="jwk-S7-gsP"/>
                                     <constraint firstAttribute="bottom" secondItem="uzl-R1-t2A" secondAttribute="bottom" constant="150" id="kMs-yy-UIF"/>
                                     <constraint firstItem="uzl-R1-t2A" firstAttribute="leading" secondItem="EuW-PF-Vvj" secondAttribute="leading" constant="30" id="kbq-t3-879"/>
@@ -374,6 +384,7 @@
                         <outlet property="countryTextField" destination="jsn-9K-bZN" id="Egd-hM-7ko"/>
                         <outlet property="emailTextField" destination="PE1-to-zlJ" id="dOR-or-l93"/>
                         <outlet property="firstNameTextField" destination="Bui-wZ-eR4" id="F4w-0j-EMt"/>
+                        <outlet property="headerLabel" destination="BAj-1I-Jan" id="SSB-Ai-4rU"/>
                         <outlet property="kycCustomerIDTextField" destination="ioO-jC-ST3" id="EfJ-p8-nMd"/>
                         <outlet property="kycIDTypeTextField" destination="wZD-K2-KfQ" id="PBG-Ta-mdh"/>
                         <outlet property="kycSSNTextField" destination="Pul-O5-dLr" id="uca-k2-Ogy"/>
@@ -395,11 +406,11 @@
             <objects>
                 <viewController storyboardIdentifier="CardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iSl-ol-FLq" customClass="CardViewController" customModule="loafwallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J3l-GF-uZL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjV-6j-D56">
-                                <rect key="frame" x="58" y="215" width="259" height="162"/>
+                                <rect key="frame" x="30.5" y="116" width="259" height="162"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blockcardPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="LGr-pV-FOB">
                                         <rect key="frame" x="0.0" y="0.0" width="259" height="162"/>
@@ -465,19 +476,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timestamp:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIe-dH-WVs">
-                                <rect key="frame" x="145" y="80" width="210" height="23"/>
+                                <rect key="frame" x="145" y="80" width="155" height="23"/>
                                 <fontDescription key="fontDescription" name="BarlowSemiCondensed-SemiBold" family="Barlow Semi Condensed SemiBold" pointSize="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bJ-9m-uZe">
-                                <rect key="frame" x="145" y="111" width="210" height="23"/>
+                                <rect key="frame" x="145" y="111" width="155" height="23"/>
                                 <fontDescription key="fontDescription" name="BarlowSemiCondensed-SemiBold" family="Barlow Semi Condensed SemiBold" pointSize="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lht-sB-ZZh">
-                                <rect key="frame" x="145" y="142" width="210" height="23"/>
+                                <rect key="frame" x="145" y="142" width="155" height="23"/>
                                 <fontDescription key="fontDescription" name="BarlowSemiCondensed-SemiBold" family="Barlow Semi Condensed SemiBold" pointSize="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
