@@ -1307,6 +1307,9 @@
 /* Title for Card ViewController */
 "Card.title" = "";
 
+/* Transfer button title */
+"Card.transferButton.title" = "";
+
 /* US country */
 "Card.USStates" = "";
 

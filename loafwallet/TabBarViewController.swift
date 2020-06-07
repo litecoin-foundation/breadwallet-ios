@@ -12,7 +12,7 @@ import SwiftyJSON
 enum TabViewControllerIndex: Int {
     case transactions = 0
     case send = 1
-    case spend = 2
+    case spendOrCard = 2
     case receive = 3
     case buy = 4
 }
@@ -22,16 +22,7 @@ protocol MainTabBarControllerDelegate {
 }
 
 class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDelegate, CardViewDelegate {
-    func didReceiveOpenLitecoinCardAccount(account: Data) {
-        //
-    }
-    
-    func litecoinCardAccountExists(error: Error) {
-        //
-    }
-    
       
-    
     func floatingRegistrationHeader(shouldHide: Bool) {
          
          floatingRegistrationView.isHidden = shouldHide
@@ -62,7 +53,7 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     private var regularConstraints: [NSLayoutConstraint] = []
     private var swappedConstraints: [NSLayoutConstraint] = []
     private let currencyTapView = UIView()
-      private let storyboardNames:[String] = ["Transactions","Send","Spend","Receive","Buy"]
+    private let storyboardNames:[String] = ["Transactions","Send","Spend","Receive","Buy"]
     var storyboardIDs:[String] = ["TransactionsViewController","SendLTCViewController", "SpendViewController","ReceiveLTCViewController","BuyTableViewController"]
     var viewControllers:[UIViewController] = []
     var activeController:UIViewController? = nil
@@ -94,17 +85,22 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     
       
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad() 
+        
+        if userHasLitecoinCard() {
+            //Switch VC to CardViewController
+         storyboardIDs = ["TransactionsViewController","SendLTCViewController", "CardViewController","ReceiveLTCViewController","BuyTableViewController"]
+            loadViewControllers()
+        } else {
+         storyboardIDs = ["TransactionsViewController","SendLTCViewController", "SpendViewController","ReceiveLTCViewController","BuyTableViewController"]
+        }
+        
         setupViews()
         configurePriceLabels()
         addSubscriptions()
         dateFormatter.setLocalizedDateFormatFromTemplate("MMM d, h:mm a")
-  
-        for (index, storyboardID) in self.storyboardIDs.enumerated() {
-            let controller = UIStoryboard.init(name: storyboardNames[index], bundle: nil).instantiateViewController(withIdentifier: storyboardID)
-            viewControllers.append(controller)
-            
-        }
+         
+        loadViewControllers()
         
         self.updateTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { timer in
             self.setBalances()
@@ -144,6 +140,13 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
         floatingRegistrationView.isHidden = true
     }
     
+    private func loadViewControllers() {
+        for (index, storyboardID) in self.storyboardIDs.enumerated() {
+            let controller = UIStoryboard.init(name: storyboardNames[index], bundle: nil).instantiateViewController(withIdentifier: storyboardID)
+            viewControllers.append(controller)
+        }
+    }
+        
     private func configurePriceLabels() {
 
         //TODO: Debug the reizing of label...very important
@@ -348,29 +351,33 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
         self.displayContentController(contentController: viewControllers[kInitialChildViewControllerIndex])
     }
     
-//    func didReceiveOpenLitecoinCardAccount(account: LitecoinCardAccountData) {
-//        var cardViewIndex = 0
-//        
-//        for (index, spendVC) in viewControllers.enumerated() {
-//            if NSStringFromClass(spendVC.classForCoder) == "loafwallet.SpendViewController" {
-//                viewControllers.remove(at: index)
-//                cardViewIndex = index
-//            }
-//        }
-//        
-//        if let cardVC = UIStoryboard.init(name: "Spend", bundle: nil).instantiateViewController(withIdentifier: "CardViewController") as? CardViewController {
-////            cardVC.ternioAccountData = account
-////            viewControllers.append(cardVC)
-//        }
-//        
-//        self.displayContentController(contentController: viewControllers[cardViewIndex])
-//        NotificationCenter.default.post(name: kDidReceiveNewTernioData, object: nil)
-//    }
     
-//    func ternioAccountExists(error: LitecoinCardErrorData) {
-//
-//    }
- 
+    // MARK: Card Delegates
+    
+    func didReceiveOpenLitecoinCardAccount(account: Data) {
+        storyboardIDs = ["TransactionsViewController","SendLTCViewController", "CardViewController","ReceiveLTCViewController","BuyTableViewController"]
+        loadViewControllers()
+        self.displayContentController(contentController: viewControllers[2])
+    }
+
+    func litecoinCardAccountExists(error: Error) {
+        //
+    }
+    
+    private func userHasLitecoinCard() -> Bool {
+       
+        //DEV Code: This is set to the opposite until the endpoints work
+        
+        if let _ = UserDefaults.standard.string(forKey:timeSinceLastLitecoinCardRequest) {
+                return true
+            } else {
+                return false
+            }
+            return false
+    }
+    
+    // MARK: TabViewController Delegates
+
     func displayContentController(contentController:UIViewController) {
         
         switch NSStringFromClass(contentController.classForCoder) {
@@ -395,7 +402,12 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
                 return
             }
             spendVC.delegate = self
-            spendVC.isRegistered = userDoesNotHaveCard()
+            
+        case "loafwallet.CardViewController":
+            guard let cardVC = contentController as? CardViewController else  {
+                return
+            }
+            cardVC.userHasLitecoinCard = userHasLitecoinCard()
               
         case "loafwallet.ReceiveLTCViewController":
             guard let receiveVC = contentController as? ReceiveLTCViewController else  {
@@ -435,16 +447,6 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
             self.hideContentController(contentController: tempActiveController)
         }
         self.displayContentController(contentController: viewControllers[item.tag])
-    }
-    
-    private func userDoesNotHaveCard() -> Bool {
-        if let _ = UserDefaults.standard.string(forKey:timeSinceLastLitecoinCardRequest) {
-                return true
-            } else {
-                return false
-            }
-            
-            return false
     }
 }
 

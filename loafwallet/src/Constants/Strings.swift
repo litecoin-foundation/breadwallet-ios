@@ -197,6 +197,7 @@ enum S {
         static let mobileNumberPlaceholder = NSLocalizedString("Card.mobile.placeholder", value: "Mobile number", comment: "Mobile number placeholder")
         static let mobileNumberFailedPlaceholder = NSLocalizedString("Card.mobile.failed.placeholder", value: "Enter a mobile number", comment: "Failed Mobile number placeholder")
         static let registerButtonTitle = NSLocalizedString("Card.registerButton.title", value: "Register", comment: "Register button title")
+        static let transferButtonTitle = NSLocalizedString("Card.transferButton.title", value: "Transfer", comment: "Transfer button title")
         static let USStates = NSLocalizedString("Card.USStates", value: "United States", comment: "US country")
     }
 

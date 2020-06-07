@@ -43,7 +43,7 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     @IBOutlet weak var registerButton: UIButton!
     var currentTextField: UITextField?
-    var isRegistered: Bool = false
+    var isRegistered: Bool?
     var pickerView: UIPickerView?
     var countries = [String]()
     let idTypes = [S.LitecoinCard.kycDriversLicense, S.LitecoinCard.kycPassport]
@@ -58,8 +58,6 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     var manager = PartnerAPIManager.init()
     
     override func viewDidLoad() {
-    self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    self.automaticallyAdjustsScrollViewInsets = true
     
     setupModelData()
     super.viewDidLoad()
@@ -67,9 +65,13 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(dismissAlertView(notification:)), name: kDidReceiveNewTernioData , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(switchToCardViewController), name: kDidReceiveNewLitecoinCardData , object: nil)
     }
     
+    
+    override func viewWillLayoutSubviews() {
+         
+    }
     override func viewWillAppear(_ animated: Bool) {
          
     }
@@ -80,40 +82,45 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     private func setupSubViews() {
-    
-        self.pickerView = UIPickerView()
-        pickerView?.delegate = self
-        pickerView?.dataSource = self
-    
-        self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: 2000)
-        self.scrollView.delegate = self
-        self.scrollView.isScrollEnabled = true
-    
-        emailTextField.placeholder = S.LitecoinCard.emailPlaceholder
-        passwordTextField.placeholder = S.LitecoinCard.passwordPlaceholder
-        confirmPasswordTextField.placeholder = S.LitecoinCard.confirmPasswordPlaceholder
-        firstNameTextField.placeholder = S.LitecoinCard.firstNamePlaceholder
-        lastNameTextField.placeholder = S.LitecoinCard.lastNamePlaceholder
-        addressTextField.placeholder = S.LitecoinCard.addressPlaceholder
-        cityTextField.placeholder = S.LitecoinCard.cityPlaceholder
-        stateTextField.placeholder = S.LitecoinCard.statePlaceholder
-        postalCodeTextField.placeholder = S.LitecoinCard.postalPlaceholder
-        mobileTextField.placeholder = S.LitecoinCard.mobileNumberPlaceholder
-        kycSSNTextField.placeholder = S.LitecoinCard.kycSSN
-        kycCustomerIDTextField.placeholder = S.LitecoinCard.kycIDOptionsPlaceholder
-        kycIDTypeTextField.placeholder = S.LitecoinCard.kycIDType
-        registerButton.setTitle(S.LitecoinCard.registerButtonTitle, for: .normal)
-    
-        countryTextField.text = Country.unitedStates.name
-        registerButton.layer.cornerRadius = 5.0
-    
-        let textFields = [emailTextField, firstNameTextField, lastNameTextField, passwordTextField, confirmPasswordTextField, addressTextField, cityTextField, stateTextField, countryTextField, mobileTextField, postalCodeTextField, kycIDTypeTextField, kycSSNTextField, kycCustomerIDTextField]
-        textFields.forEach { (textField) in
-            textField?.inputAccessoryView = okToolbar()
+        
+        if let registered = isRegistered,
+            !registered {
+            self.pickerView = UIPickerView()
+                   pickerView?.delegate = self
+                   pickerView?.dataSource = self
+ 
+                   self.automaticallyAdjustsScrollViewInsets = true
+                   self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                   self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: 2000)
+                   self.scrollView.delegate = self
+                   self.scrollView.isScrollEnabled = true
+               
+                   emailTextField.placeholder = S.LitecoinCard.emailPlaceholder
+                   passwordTextField.placeholder = S.LitecoinCard.passwordPlaceholder
+                   confirmPasswordTextField.placeholder = S.LitecoinCard.confirmPasswordPlaceholder
+                   firstNameTextField.placeholder = S.LitecoinCard.firstNamePlaceholder
+                   lastNameTextField.placeholder = S.LitecoinCard.lastNamePlaceholder
+                   addressTextField.placeholder = S.LitecoinCard.addressPlaceholder
+                   cityTextField.placeholder = S.LitecoinCard.cityPlaceholder
+                   stateTextField.placeholder = S.LitecoinCard.statePlaceholder
+                   postalCodeTextField.placeholder = S.LitecoinCard.postalPlaceholder
+                   mobileTextField.placeholder = S.LitecoinCard.mobileNumberPlaceholder
+                   kycSSNTextField.placeholder = S.LitecoinCard.kycSSN
+                   kycCustomerIDTextField.placeholder = S.LitecoinCard.kycIDOptionsPlaceholder
+                   kycIDTypeTextField.placeholder = S.LitecoinCard.kycIDType
+                   registerButton.setTitle(S.LitecoinCard.registerButtonTitle, for: .normal)
+                   registerButton.layer.cornerRadius = 5.0
+            
+                   countryTextField.text = Country.unitedStates.name
+
+               
+                   let textFields = [emailTextField, firstNameTextField, lastNameTextField, passwordTextField, confirmPasswordTextField, addressTextField, cityTextField, stateTextField, countryTextField, mobileTextField, postalCodeTextField, kycIDTypeTextField, kycSSNTextField, kycCustomerIDTextField]
+                   textFields.forEach { (textField) in
+                       textField?.inputAccessoryView = okToolbar()
+                   }
+                   countryTextField.inputView = self.pickerView
+                   kycIDTypeTextField.inputView = self.pickerView
         }
-        countryTextField.inputView = self.pickerView
-        kycIDTypeTextField.inputView = self.pickerView
     }
 //    var mockData: Data?
 //      return
@@ -129,73 +136,59 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
 //            "username":"test"
 //        }
 //    """.data(using: .utf8)
-    var mockData: Data? {
-        return """
-            {
-            "firstName":"Test",
-            "lastName":"Case",
-            "email":\(emailRand),
-            "address1":"123 Lite Way",
-            "city":"Sat",
-            "state":"CA",
-            "zipcode":"95014",
-            "country":"US",
-            "phone":"1123456789",
-            "username":"test-user"
-            }
-        """.data(using: .utf8)
-    }
-    
-    
+ 
     @IBAction func registerAction(_ sender: Any) {
         
+        //Validate registration data
+        let registeredData = didValidateRegistrationData
+ 
+        // Mock Data
+        let mockRegisteredData  = Data()
+        
+        ///Fake setting the UserDefaults
+       let timestampString = "FAKE-DATE"
+        UserDefaults.standard.set(timestampString, forKey: timeSinceLastLitecoinCardRequest)
+        UserDefaults.standard.synchronize()
+              
+        //Send the data to make the REST API
+        self.delegate?.didReceiveOpenLitecoinCardAccount(account: mockRegisteredData)
+          
+        //showRegistrationAlertView(data: mockedData)
+    }
+    
+    private func didValidateRegistrationData() -> (Data?) {
         //TODO: Refactor whenTernio OAUTH is ready
 
         let mockUser: [String: Any] = ["firstname":"Test", "lastname":"User", "email": emailRand,"address1":"123 Main","city":"Sat","country":"US","phone":"1234567890","zip_code":"95014", "username":"test"]
-         
+                      
+        //  Mocking Over
+        //        do {
+        //            let email = try emailTextField.validatedText(validationType: ValidatorType.email)
+        //            let password = try passwordTextField.validatedText(validationType: ValidatorType.password)
+        //
+        //            let firstName = try firstNameTextField.validatedText(validationType: ValidatorType.firstName)
+        //            let lastname = try self.lastNameTextField.validatedText(validationType: ValidatorType.lastName)
+        //            let address1 = try addressTextField.validatedText(validationType: ValidatorType.address)
+        //            let city = try cityTextField.validatedText(validationType: ValidatorType.city)
+        //            let state = try stateTextField.validatedText(validationType: ValidatorType.state)
+        //            let postalCode = try postalCodeTextField.validatedText(validationType: ValidatorType.postalCode)
+        //            let country = try countryTextField.validatedText(validationType: ValidatorType.country)
+        //            let mobile = try mobileTextField.validatedText(validationType: ValidatorType.mobileNumber)
+            
+        //         let registrationData = RegistrationData(email: email, password: password, firstName: firstName, lastName: lastname, address: address1, city: city, country: country, state: state, postalCode: postalCode, mobileNumber: mobile)
+        // return registrationData
+            
+        //           } catch(let error) {
+        //
+        //            let message = (error as! ValidationError).message
+        //
+        //            showErrorAlert(for: message)
+        //
+        //           }
         
+        let jsonData = try? JSONSerialization.data(withJSONObject:mockUser)
 
-        
-        
-        do {
-            if let jsonData = try? JSONSerialization.data(withJSONObject:mockUser) {
-                manager.createUser(userData: mockData!) { (user) in
-                               
-                               //
-                }
-            }
-
-        } catch {
-            print(error)
-        }
-              
-//  Mocking Over
-//        do {
-//            let email = try emailTextField.validatedText(validationType: ValidatorType.email)
-//            let password = try passwordTextField.validatedText(validationType: ValidatorType.password)
-//
-//            let firstName = try firstNameTextField.validatedText(validationType: ValidatorType.firstName)
-//            let lastname = try self.lastNameTextField.validatedText(validationType: ValidatorType.lastName)
-//            let address1 = try addressTextField.validatedText(validationType: ValidatorType.address)
-//            let city = try cityTextField.validatedText(validationType: ValidatorType.city)
-//            let state = try stateTextField.validatedText(validationType: ValidatorType.state)
-//            let postalCode = try postalCodeTextField.validatedText(validationType: ValidatorType.postalCode)
-//            let country = try countryTextField.validatedText(validationType: ValidatorType.country)
-//            let mobile = try mobileTextField.validatedText(validationType: ValidatorType.mobileNumber)
-    
-//         let registrationData = RegistrationData(email: email, password: password, firstName: firstName, lastName: lastname, address: address1, city: city, country: country, state: state, postalCode: postalCode, mobileNumber: mobile)
-    
-    
-//           } catch(let error) {
-//
-//            let message = (error as! ValidationError).message
-//
-//            showErrorAlert(for: message)
-//
-//           }
-        
-
-        //showRegistrationAlertView(data: mockedData)
+        return jsonData
     }
     
     func showErrorAlert(for alert: String) {
@@ -254,32 +247,22 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
 //        }
     }
     
-    private func fetchLitecoinCardAccount(registrationData: LitecoinCardAccountData) {
-        
+    private func createUser(registrationData: Data) {
         
         //TODO: Refactor whenTernio OAUTH is ready
-
-//        APIManager.sharedInstance.createTernioUserAccount() { litecoinCardAccountData in
-//
-//            if let account = litecoinCardAccountData as? LitecoinCardAccountData  {
-//                //self.delegate?.didReceiveTernioAccount(account: account)
-//                print("ACCOUNT \(account)")
-//               self.createTernioWallet(ternioAccount: account, tokenObject: tokenObject)
-//
-//            } else if let error = ternioAccountData as? TernioErrorData,
-//                let message = error.emailErrorMessage,
-//                let code = error.code {
-//                self.alertModal?.headerLabel.text = "Error"//S.Register.registerAlert
-//                self.alertModal?.dynamicLabel.text = message + " " + "(\(code))"
-//                self.alertModal?.activityIndicatorView.isHidden = true
-//                self.alertModal?.cancelButton.setTitle("Ok", for: .normal)
-//                self.delegate?.litecoinCardAccountExists(error: error)
-//                self.delegate?.floatingRegistrationHeader(shouldHide: self.userNotRegistered)
-//            }
-//
-//            UserDefaults.standard.set(litecoinCardAccountData.ccreationTimestampString, forKey: timeSinceLastLitecoinCardRequest)
-//            UserDefaults.standard.synchronize()
-//        }
+        manager.createUser(userData: registrationData) { (user) in
+          
+            var timestampString = ""
+            
+            if user != nil,
+                let jsonObject = try? JSONSerialization.data(withJSONObject: user, options: []) {
+                
+                timestampString = "lastTimeReachedTimestamp" ///stripped from user timestamp
+                UserDefaults.standard.set(timestampString, forKey: timeSinceLastLitecoinCardRequest)
+                UserDefaults.standard.synchronize()
+                self.delegate?.didReceiveOpenLitecoinCardAccount(account: jsonObject)
+            }
+        }
     }
      
     private func createLitecoinCardWallet(cardAccountData: LitecoinCardAccountData) {
@@ -291,6 +274,19 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
        // self.delegate?.didReceiveTernioAccount(account: account)
     }
+     
+    //MARK: Card VC Methods
+    
+    @objc func switchToCardViewController() {
+        if let cardVC = UIStoryboard.init(name: "Spend", bundle: nil).instantiateViewController(withIdentifier: "CardViewController") as? CardViewController {
+            print("Switch to CardView")
+            addChildViewController(cardVC)
+            view.addSubview(cardVC.view)
+            didMove(toParentViewController: self)
+         }
+    }
+     
+    //MARK: UI Keyboard Methods
     
     @objc func dismissKeyboard() {
         currentTextField?.resignFirstResponder()

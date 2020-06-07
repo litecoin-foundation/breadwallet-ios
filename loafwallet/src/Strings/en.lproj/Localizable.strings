@@ -1354,3 +1354,6 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d of %2$d";
+
+/* Transfer button title */
+"Card.transferButton.title" = "";

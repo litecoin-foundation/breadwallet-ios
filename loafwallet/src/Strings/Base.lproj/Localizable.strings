@@ -1353,3 +1353,6 @@
 
 /* US country */
 "Card.USStates" = "Country";
+
+/* Transfer button title */
+"Card.transferButton.title" = "";

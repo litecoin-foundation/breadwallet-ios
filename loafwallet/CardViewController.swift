@@ -9,20 +9,33 @@
 import UIKit 
 import LitewalletPartnerAPI
 
-class CardViewController: UIViewController {
+class CardViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 
-    @IBOutlet weak var cardBackgroundView: UIView!
-    @IBOutlet weak var blockcardImageView: UIImageView!
-    @IBOutlet weak var firstnameLabel: UILabel!
-    @IBOutlet weak var lastnameLabel: UILabel!
-    @IBOutlet weak var bottomVerticalConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cardViewHeight: NSLayoutConstraint! //200 pixels Start
+    @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var cardShadowView: LitecoinCardImageView!
+    @IBOutlet weak var litecoinCardDepositStatusLabel: UILabel!
     
-    @IBOutlet weak var demoTimestampLabel: UILabel!
-    @IBOutlet weak var demoIDLabel: UILabel!
-    @IBOutlet weak var demoVersionLabel: UILabel!
+    @IBOutlet weak var staticCardBalanceLabel: UILabel!
+    @IBOutlet weak var cardBalanceLabel: UILabel!
+    @IBOutlet weak var circleButtonContainerView: UIView!
     
+    @IBOutlet weak var upAmountButton: UIButton!
+    @IBOutlet weak var downAmountButton: UIButton!
+    
+    @IBOutlet weak var fiatLTCSegmentedControl: UISegmentedControl!
+    
+    @IBOutlet weak var transferTextField: UITextField!
+    
+    @IBOutlet weak var staticLitewalletBalanceLabel: UILabel!
+    @IBOutlet weak var litewalletBalanceLabel: UILabel!
+    
+    @IBOutlet weak var transferButton: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
+     
     var litecoinCardAccountData: [String:Any]?
-    var userHasTernioCard: Bool = false
+    var userHasLitecoinCard: Bool = false
+    var currentTextField: UITextField?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,74 +48,63 @@ class CardViewController: UIViewController {
     }
     
     private func setupSubviews() {
-//
-//        guard let accountData = self.litecoinCardAccountData else {
-//            NSLog("ERROR: ternio data not found")
-//            return
-//        }
-        self.demoTimestampLabel.alpha = 0
-        self.demoIDLabel.alpha = 0
-        self.demoVersionLabel.alpha = 0
-//        self.demoTimestampLabel.text = accountData.creationTimestampString
-//        self.demoIDLabel.text = accountData.accountID
-//        self.demoVersionLabel.text = accountData.version
         
-//        SUCCESS: {
-//            data =     {
-//                address1 = "100 address1";
-//                city = city;
-//                country = US;
-//                "created_at" = "2019-10-08 17:28:03";
-//                email = "kwashingt+411@gmail.com";
-//                firstname = firstName;
-//                id = "efaf6187-8511-4e61-be7c-527df7e010ff";
-//                lastname = lastname;
-//                phone = 4082167168;
-//                "referral_code" = "<null>";
-//                state = CA;
-//                username = "<null>";
-//                "zip_code" = 95129;
-//            };
-//            meta =     {
-//                executed = 1570555683163;
-//                received = "<null>";
-//                version = "1.0.2";
-//            };
-//            response =     {
-//                code = 200;
-//                errors =         {
-//                };
-//                message = OK;
-//            };
-//        }
+        self.automaticallyAdjustsScrollViewInsets = true
+        self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: 2000)
+        self.scrollView.delegate = self
+        self.scrollView.isScrollEnabled = true
         
-         
-//        if let initial  = accountData.firstName?.prefix(1) {
-//            self.firstnameLabel.text = initial.uppercased() + "."
-//        }
-//        
-//        self.lastnameLabel.text = accountData.lastName?.uppercased()
-        self.cardBackgroundView.layer.cornerRadius =  5.0
-        self.cardBackgroundView.clipsToBounds = true
-        self.bottomVerticalConstraint.constant = self.view.frame.height/2  - self.cardBackgroundView.frame.height/2
+        transferButton.setTitle(S.LitecoinCard.transferButtonTitle, for: .normal)
+        transferButton.layer.cornerRadius = 5.0
+        
+        //Setup card view dimensions
+        switch E.screenHeight {
+        case 0..<320:
+            cardViewHeight.constant = 100
+        case 320..<564:
+            cardViewHeight.constant = 175
+        case 564..<768:
+            cardViewHeight.constant = 250
+        case 768..<2000:
+            cardViewHeight.constant = 300
+        default:
+        cardViewHeight.constant = 200
+        }
+        
+        // Setup corners 
+        circleButtonContainerView.layer.cornerRadius = (circleButtonContainerView.frame.height / 2)
+        circleButtonContainerView.clipsToBounds = true
+        circleButtonContainerView.layer.borderColor = #colorLiteral(red: 0.2053973377, green: 0.3632233143, blue: 0.6166344285, alpha: 1)
+        circleButtonContainerView.layer.borderWidth = 2.0
+        circleButtonContainerView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+
         self.view.layoutIfNeeded()
     }
     
-    private func animateCardToBottomView() {
-        
-          bottomVerticalConstraint.constant = 50
-          
-        UIView.animate(withDuration: 1.0, delay: 1.0, options: .curveEaseInOut, animations: {
-            self.view.layoutIfNeeded()
-          }, completion: { finished in
+  @objc private func adjustForKeyboard(notification: NSNotification) {
+      
+           guard let keyboardValue = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else {
+               return
+           }
             
-            self.demoTimestampLabel.alpha = 1
-            self.demoIDLabel.alpha = 1
-            self.demoVersionLabel.alpha = 1
-            
-            self.presentLitecoinCardAccountDetails()
-          })
-    }
+           let keyboardScreenEndFrame = keyboardValue
+           let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+       
+           if notification.name == NSNotification.Name.UIKeyboardWillHide {
+               scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+           } else {
+    
+               guard let yPosition = currentTextField?.frame.origin.y else {
+                   NSLog("ERROR:  - Could not get y position")
+                   return
+               }
+                
+               scrollView.contentInset = UIEdgeInsets(top: 0 - yPosition, left: 0, bottom: keyboardViewEndFrame.height - self.view.frame.height, right: 0)
+               scrollView.scrollIndicatorInsets = scrollView.contentInset
+           }
+           
+       }
     
     private func presentLitecoinCardAccountDetails() {
         
