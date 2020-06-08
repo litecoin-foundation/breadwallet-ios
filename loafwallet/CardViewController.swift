@@ -12,7 +12,6 @@ import LitewalletPartnerAPI
 class CardViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 
     @IBOutlet weak var cardViewHeight: NSLayoutConstraint! //200 pixels Start
-    @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var cardShadowView: LitecoinCardImageView!
     @IBOutlet weak var litecoinCardDepositStatusLabel: UILabel!
     
@@ -35,19 +34,31 @@ class CardViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
      
     var litecoinCardAccountData: [String:Any]?
     var userHasLitecoinCard: Bool = false
-    var currentTextField: UITextField?
-    
+   
+    var localFiatCode = "USD"
+    var exchangeRate: Rate? {
+        didSet { updateFiatCode() }
+    }
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubviews()
     }
-    
-    
+     
     override func viewWillAppear(_ animated: Bool) {
         
     }
     
+    private func updateFiatCode() {
+        if let code = exchangeRate?.code {
+            localFiatCode = code
+        }
+    }
+    
     private func setupSubviews() {
+    UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white,NSAttributedStringKey.font: UIFont.barlowBold(size: 18)], for: .selected)
+    UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.gray,NSAttributedStringKey.font: UIFont.barlowBold(size: 18)], for: .normal)
+         
         
         self.automaticallyAdjustsScrollViewInsets = true
         self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -78,7 +89,10 @@ class CardViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
         circleButtonContainerView.layer.borderColor = #colorLiteral(red: 0.2053973377, green: 0.3632233143, blue: 0.6166344285, alpha: 1)
         circleButtonContainerView.layer.borderWidth = 2.0
         circleButtonContainerView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-
+ 
+        fiatLTCSegmentedControl.setTitle("LTC", forSegmentAt: 0)
+        fiatLTCSegmentedControl.setTitle(localFiatCode, forSegmentAt: 1)
+        
         self.view.layoutIfNeeded()
     }
     
@@ -95,10 +109,7 @@ class CardViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
                scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
            } else {
     
-               guard let yPosition = currentTextField?.frame.origin.y else {
-                   NSLog("ERROR:  - Could not get y position")
-                   return
-               }
+               let yPosition = transferTextField.frame.origin.y 
                 
                scrollView.contentInset = UIEdgeInsets(top: 0 - yPosition, left: 0, bottom: keyboardViewEndFrame.height - self.view.frame.height, right: 0)
                scrollView.scrollIndicatorInsets = scrollView.contentInset

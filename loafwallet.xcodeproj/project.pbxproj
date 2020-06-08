@@ -134,6 +134,7 @@
 		24B290DA248B553100967A1D /* LitewalletPartnerAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B290D9248B553100967A1D /* LitewalletPartnerAPI.framework */; };
 		24B290DB248B553100967A1D /* LitewalletPartnerAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24B290D9248B553100967A1D /* LitewalletPartnerAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		24B290DD248C046400967A1D /* LitecoinCardImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B290DC248C046400967A1D /* LitecoinCardImageView.swift */; };
+		24B290E0248E076D00967A1D /* CardLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B290DF248E076D00967A1D /* CardLoginViewController.swift */; };
 		24B523AD238A53DC0030594D /* BIP39Words.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24B523AF238A53DC0030594D /* BIP39Words.plist */; };
 		24B8FAC12160497C00A155B1 /* BuyCenterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B8FAC02160497B00A155B1 /* BuyCenterTableViewController.swift */; };
 		24B8FAC4216128A000A155B1 /* PartnerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B8FAC3216128A000A155B1 /* PartnerData.swift */; };
@@ -914,6 +915,7 @@
 		24B290D9248B553100967A1D /* LitewalletPartnerAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LitewalletPartnerAPI.framework; path = Frameworks/LitewalletPartnerAPI.framework; sourceTree = "<group>"; };
 		24B290DC248C046400967A1D /* LitecoinCardImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LitecoinCardImageView.swift; sourceTree = "<group>"; };
 		24B290DE248C05F300967A1D /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		24B290DF248E076D00967A1D /* CardLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLoginViewController.swift; sourceTree = "<group>"; };
 		24B523AE238A53DC0030594D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/BIP39Words.plist; sourceTree = "<group>"; };
 		24B523B0238A53E40030594D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/BIP39Words.plist"; sourceTree = "<group>"; };
 		24B8FAC02160497B00A155B1 /* BuyCenterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyCenterTableViewController.swift; sourceTree = "<group>"; };
@@ -2202,6 +2204,7 @@
 			isa = PBXGroup;
 			children = (
 				240D61A62471C76600F3D0F3 /* CardViewController.swift */,
+				24B290DF248E076D00967A1D /* CardLoginViewController.swift */,
 				240D61A72471C76600F3D0F3 /* SpendViewController.swift */,
 			);
 			name = Card;
@@ -4678,6 +4681,7 @@
 				240D61B12471E4D200F3D0F3 /* Countries+Name.swift in Sources */,
 				CECCE5B21E04B00D00D99448 /* SendCell.swift in Sources */,
 				24B8FAD22162B10200A155B1 /* BuyCenterWebViewController.swift in Sources */,
+				24B290E0248E076D00967A1D /* CardLoginViewController.swift in Sources */,
 				CE6DCC301E6666470044257B /* NonScrollingCollectionView.swift in Sources */,
 				22A9A9471DF61945000F0016 /* BRAPIProxy.swift in Sources */,
 				CE20C9011DBBFFF800C8397A /* Actions.swift in Sources */,

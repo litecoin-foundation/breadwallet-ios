@@ -12,8 +12,8 @@ import UIKit
 class LitecoinCardImageView:  UIView {
      
     var cardImage: UIImage?
-    var cardImageView: UIImageView?
-    var shadowView: UIView?
+    var cardImageView = UIImageView()
+    var shadowView = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,22 +24,13 @@ class LitecoinCardImageView:  UIView {
     }
 
     override func layoutSubviews() {
-        draw3DCardImage()
         super.layoutSubviews()
+        draw3DCardImage()
+
     }
     
     private func draw3DCardImage() {
-        
-        //Make sure it is
-        guard let cardView = self.cardImageView else {
-            print("CardView is nil")
-            return
-        }
-        
-        guard let shadow = self.shadowView else {
-            print("ShadowView is nil")
-            return
-        }
+         
         
         let degrees = CGFloat( -20 * Double.pi / 180)
  
@@ -56,19 +47,36 @@ class LitecoinCardImageView:  UIView {
         let cardHeight =  cardWidth * 53.98 / 85.90
          
         print(cardWidth,cardHeight)
-        let origin = CGPoint(x: self.frame.width - cardWidth, y: self.frame.height - cardHeight)
+        let origin = CGPoint(x: (self.frame.width - cardWidth) / 2, y: (self.frame.height - cardHeight)/2 )
         let size = CGSize(width: cardWidth, height: cardHeight)
-        shadow.frame = CGRect(origin: origin, size: size)
+        cardImageView.frame = CGRect(origin: origin, size: size)
         
+       
         
-        addSubview(shadow)
+        let frame = cardImageView.frame
+        shadowView.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width/2, height: frame.height/2)
+        shadowView.transform = CGAffineTransform(rotationAngle: degrees)
+        shadowView.backgroundColor = .white
+        shadowView.layer.shadowOpacity = 0.6
+        shadowView.layer.shadowOffset = CGSize(width: 4,height: 2)
+        shadowView.layer.shadowColor = UIColor.gray.cgColor
+        shadowView.layer.shadowRadius = 10
         
-        cardImageView?.transform = CGAffineTransform(rotationAngle: degrees)
-        shadow.layer.shadowOffset = CGSize(width: 2,height: 2)
-        shadow.layer.shadowColor = UIColor.red.cgColor
-        shadow.layer.shadowRadius = 20
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = shadowView.frame
+        gradientLayer.colors = [UIColor.white.cgColor,UIColor.darkGray.cgColor]
+        gradientLayer.locations = [0.0,1.0]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
+        shadowView.layer.insertSublayer(gradientLayer, at: 0)
+        //addSubview(shadowView)
+        
+        cardImageView.transform = CGAffineTransform(rotationAngle: degrees)
+        cardImageView.layer.borderColor = UIColor.lightGray.cgColor
+        cardImageView.layer.borderWidth = 0.5
 
-        addSubview(cardView)
+
+        addSubview(cardImageView)
     }
     
     

@@ -87,14 +87,14 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     override func viewDidLoad() {
         super.viewDidLoad() 
         
-        if userHasLitecoinCard() {
+        if userHasLitecoinCard() && litecoinCardAccessTokenIsValid() {
             //Switch VC to CardViewController
          storyboardIDs = ["TransactionsViewController","SendLTCViewController", "CardViewController","ReceiveLTCViewController","BuyTableViewController"]
             loadViewControllers()
         } else {
-         storyboardIDs = ["TransactionsViewController","SendLTCViewController", "SpendViewController","ReceiveLTCViewController","BuyTableViewController"]
+         storyboardIDs = ["TransactionsViewController","SendLTCViewController", "CardLoginViewController","ReceiveLTCViewController","BuyTableViewController"]
         }
-        
+         
         setupViews()
         configurePriceLabels()
         addSubscriptions()
@@ -364,6 +364,18 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
         //
     }
     
+    private func litecoinCardAccessTokenIsValid() -> Bool {
+       
+        //DEV Code: This is set to the opposite until the endpoints work
+        //Secure keychain to get the token
+        if let _ = UserDefaults.standard.string(forKey:tokenDoesExistAndIsValid)  {
+                return true
+            } else {
+                return false
+            }
+            return false
+    }
+    
     private func userHasLitecoinCard() -> Bool {
        
         //DEV Code: This is set to the opposite until the endpoints work
@@ -402,6 +414,11 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
                 return
             }
             spendVC.delegate = self
+            
+        case "loafwallet.CardLoginViewController":
+        guard let cardVC = contentController as? CardLoginViewController else  {
+            return
+        }
             
         case "loafwallet.CardViewController":
             guard let cardVC = contentController as? CardViewController else  {

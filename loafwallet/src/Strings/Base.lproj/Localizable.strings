@@ -1355,4 +1355,4 @@
 "Card.USStates" = "Country";
 
 /* Transfer button title */
-"Card.transferButton.title" = "";
+"Card.transferButton.title" = "Transfer";
