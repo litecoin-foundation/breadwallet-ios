@@ -466,7 +466,7 @@
                                             <constraint firstAttribute="height" constant="50" id="Pbm-6S-NU1"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="BarlowSemiCondensed-SemiBold" family="Barlow Semi Condensed SemiBold" pointSize="19"/>
-                                        <state key="normal" title="Register">
+                                        <state key="normal" title="Register for LitecoinCard">
                                             <color key="titleColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -490,12 +490,12 @@
                                         </constraints>
                                         <state key="normal" image="showpassword"/>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LitecoinCard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2we-XH-8i2">
-                                        <rect key="frame" x="120.5" y="50" width="134" height="32"/>
-                                        <fontDescription key="fontDescription" name="BarlowSemiCondensed-Bold" family="Barlow Semi Condensed" pointSize="26"/>
-                                        <color key="textColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="card-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="2Js-m9-S92">
+                                        <rect key="frame" x="30" y="40" width="315" height="180"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="180" id="SZr-GZ-8pS"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -510,16 +510,16 @@
                                     <constraint firstItem="mmL-ph-8XL" firstAttribute="leading" secondItem="PYW-As-TTX" secondAttribute="leading" constant="30" id="QQ4-zx-5HF"/>
                                     <constraint firstItem="mmL-ph-8XL" firstAttribute="centerY" secondItem="PYW-As-TTX" secondAttribute="centerY" constant="-70" id="RdF-6d-PKP"/>
                                     <constraint firstAttribute="trailing" secondItem="ky5-cR-VA4" secondAttribute="trailing" constant="30" id="TlI-9V-wTW"/>
+                                    <constraint firstItem="2Js-m9-S92" firstAttribute="centerX" secondItem="PYW-As-TTX" secondAttribute="centerX" id="UP9-nu-gfF"/>
                                     <constraint firstItem="5DI-CD-e7X" firstAttribute="top" secondItem="ky5-cR-VA4" secondAttribute="bottom" constant="28" id="XPv-NG-0WI"/>
-                                    <constraint firstAttribute="bottom" secondItem="5DI-CD-e7X" secondAttribute="bottom" constant="92" id="Ydw-B1-QDw"/>
+                                    <constraint firstAttribute="bottom" secondItem="5DI-CD-e7X" secondAttribute="bottom" constant="107" id="Ydw-B1-QDw"/>
                                     <constraint firstItem="gN0-Pa-9G5" firstAttribute="centerY" secondItem="7f4-hS-2aE" secondAttribute="centerY" id="Zs5-M0-ORa"/>
                                     <constraint firstItem="gN0-Pa-9G5" firstAttribute="trailing" secondItem="fYM-LR-XKR" secondAttribute="trailing" id="aMV-Xr-Toy"/>
                                     <constraint firstItem="ky5-cR-VA4" firstAttribute="leading" secondItem="PYW-As-TTX" secondAttribute="leading" constant="30" id="ayz-EH-uKm"/>
                                     <constraint firstItem="7f4-hS-2aE" firstAttribute="leading" secondItem="PYW-As-TTX" secondAttribute="leading" constant="30" id="dkg-n8-Tig"/>
-                                    <constraint firstItem="2we-XH-8i2" firstAttribute="top" secondItem="PYW-As-TTX" secondAttribute="top" constant="50" id="ez7-cC-TFh"/>
                                     <constraint firstItem="BGj-Ul-Dqm" firstAttribute="centerX" secondItem="PYW-As-TTX" secondAttribute="centerX" id="gYt-ms-FdI"/>
-                                    <constraint firstItem="2we-XH-8i2" firstAttribute="centerX" secondItem="PYW-As-TTX" secondAttribute="centerX" id="i4U-ew-rQ9"/>
                                     <constraint firstAttribute="trailing" secondItem="fYM-LR-XKR" secondAttribute="trailing" constant="30" id="l8Z-rX-pmh"/>
+                                    <constraint firstItem="mmL-ph-8XL" firstAttribute="top" secondItem="2Js-m9-S92" secondAttribute="bottom" constant="33.5" id="m7E-uE-q0x"/>
                                     <constraint firstItem="gN0-Pa-9G5" firstAttribute="leading" secondItem="7f4-hS-2aE" secondAttribute="trailing" priority="997" constant="8" id="m8c-la-eZ4"/>
                                     <constraint firstAttribute="trailing" secondItem="gN0-Pa-9G5" secondAttribute="trailing" constant="30" id="pn3-kl-e5D"/>
                                     <constraint firstItem="fYM-LR-XKR" firstAttribute="top" secondItem="7f4-hS-2aE" secondAttribute="bottom" constant="8" id="smc-8u-hvW"/>
@@ -712,6 +712,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="card-placeholder" width="426.66665649414062" height="323"/>
         <image name="down-arrow-gray" width="26" height="22"/>
         <image name="showpassword" width="22" height="15"/>
         <image name="up-arrow-blue" width="26" height="23"/>
