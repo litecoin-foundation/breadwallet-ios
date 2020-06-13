@@ -1,0 +1,11 @@
+framework module LitewalletPartnerAPI {
+  umbrella header "LitewalletPartnerAPI.h"
+
+  export *
+  module * { export * }
+}
+
+module LitewalletPartnerAPI.Swift {
+    header "LitewalletPartnerAPI-Swift.h"
+    requires objc
+}
