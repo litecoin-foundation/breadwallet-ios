@@ -38,7 +38,7 @@ class CardLoginViewController: UIViewController, UITextFieldDelegate, UIScrollVi
         
         NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    }
+    } 
     
     private func setupSubviews() {
         
@@ -71,7 +71,7 @@ class CardLoginViewController: UIViewController, UITextFieldDelegate, UIScrollVi
            self.resignFirstResponder()
    }
     
-   @objc private func adjustForKeyboard(notification: NSNotification) {
+   @objc func adjustForKeyboard(notification: NSNotification) {
   
        guard let keyboardValue = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else {
            return
@@ -97,39 +97,38 @@ class CardLoginViewController: UIViewController, UITextFieldDelegate, UIScrollVi
     
     
     //MARK: UITextField Delegate & Setup
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-        if textField == emailTextField {
-            emailUnderlineView.backgroundColor = #colorLiteral(red: 0.2222260833, green: 0.7466222048, blue: 0.415411979, alpha: 1)
-            passwordUnderlineView.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.3647058824, blue: 0.6156862745, alpha: 1)
-
-        } else if textField == passwordTextField {
-            emailUnderlineView.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.3647058824, blue: 0.6156862745, alpha: 1)
-            passwordUnderlineView.backgroundColor = #colorLiteral(red: 0.2222260833, green: 0.7466222048, blue: 0.415411979, alpha: 1)
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        if textField == emailTextField {
-            emailUnderlineView.backgroundColor = #colorLiteral(red: 0.2222260833, green: 0.7466222048, blue: 0.415411979, alpha: 1)
-            passwordUnderlineView.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.3647058824, blue: 0.6156862745, alpha: 1)
-        } else if textField == passwordTextField {
-            print("Password")
-
-        }
-    }
-
      
-    /*
-    // MARK: - Navigation
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+            
+            if textField == emailTextField {
+                emailUnderlineView.backgroundColor = #colorLiteral(red: 0.2222260833, green: 0.7466222048, blue: 0.415411979, alpha: 1)
+                passwordUnderlineView.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.3647058824, blue: 0.6156862745, alpha: 1)
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+            } else if textField == passwordTextField {
+                emailUnderlineView.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.3647058824, blue: 0.6156862745, alpha: 1)
+                passwordUnderlineView.backgroundColor = #colorLiteral(red: 0.2222260833, green: 0.7466222048, blue: 0.415411979, alpha: 1)
+            }
+        }
+        
+        func textFieldDidEndEditing(_ textField: UITextField) {
+            
+            guard let passwordText = passwordTextField.text,
+                let emailText = emailTextField.text else {
+                return
+            }
+            
+            if textField == emailTextField && passwordText.isEmpty {
+                emailUnderlineView.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.3647058824, blue: 0.6156862745, alpha: 1)
+                passwordUnderlineView.backgroundColor = #colorLiteral(red: 0.2222260833, green: 0.7466222048, blue: 0.415411979, alpha: 1)
+                passwordTextField.becomeFirstResponder()
+            }
+              
+            emailUnderlineView.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.3647058824, blue: 0.6156862745, alpha: 1)
+            passwordUnderlineView.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.3647058824, blue: 0.6156862745, alpha: 1)
+        }
+        
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.endEditing(true)
+            return false
+        }
 }
