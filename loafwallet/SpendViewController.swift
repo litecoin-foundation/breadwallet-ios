@@ -10,12 +10,13 @@ import UIKit
 import Security
 import LitewalletPartnerAPI
 
-protocol CardViewDelegate {
+@objc protocol LitecoinCardRegistrationViewDelegate {
     func didReceiveOpenLitecoinCardAccount(account: Data)
     func litecoinCardAccountExists(error: Error)
     func floatingRegistrationHeader(shouldHide:Bool)
+    func shouldReturnToLoginView()
 }
-  
+ 
 class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UIScrollViewDelegate, LFAlertViewDelegate {
     
     static let serviceName = "com.litewallet.litecoincard.service"
@@ -42,6 +43,9 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
+    
+    
     var currentTextField: UITextField?
     var isRegistered: Bool?
     var pickerView: UIPickerView?
@@ -53,7 +57,7 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
    
     var alertModal: LFAlertViewController?
     var userNotRegistered = true
-    var delegate: CardViewDelegate?
+    var delegate: LitecoinCardRegistrationViewDelegate?
     
     var manager = PartnerAPIManager.init()
     
@@ -83,44 +87,47 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     private func setupSubViews() {
         
-        if let registered = isRegistered,
-            !registered {
-            self.pickerView = UIPickerView()
-                   pickerView?.delegate = self
-                   pickerView?.dataSource = self
- 
-                   self.automaticallyAdjustsScrollViewInsets = true
-                   self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-                   self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: 2000)
-                   self.scrollView.delegate = self
-                   self.scrollView.isScrollEnabled = true
-               
-                   emailTextField.placeholder = S.LitecoinCard.emailPlaceholder
-                   passwordTextField.placeholder = S.LitecoinCard.passwordPlaceholder
-                   confirmPasswordTextField.placeholder = S.LitecoinCard.confirmPasswordPlaceholder
-                   firstNameTextField.placeholder = S.LitecoinCard.firstNamePlaceholder
-                   lastNameTextField.placeholder = S.LitecoinCard.lastNamePlaceholder
-                   addressTextField.placeholder = S.LitecoinCard.addressPlaceholder
-                   cityTextField.placeholder = S.LitecoinCard.cityPlaceholder
-                   stateTextField.placeholder = S.LitecoinCard.statePlaceholder
-                   postalCodeTextField.placeholder = S.LitecoinCard.postalPlaceholder
-                   mobileTextField.placeholder = S.LitecoinCard.mobileNumberPlaceholder
-                   kycSSNTextField.placeholder = S.LitecoinCard.kycSSN
-                   kycCustomerIDTextField.placeholder = S.LitecoinCard.kycIDOptionsPlaceholder
-                   kycIDTypeTextField.placeholder = S.LitecoinCard.kycIDType
-                   registerButton.setTitle(S.LitecoinCard.registerButtonTitle, for: .normal)
-                   registerButton.layer.cornerRadius = 5.0
-            
-                   countryTextField.text = Country.unitedStates.name
+           self.pickerView = UIPickerView()
+           pickerView?.delegate = self
+           pickerView?.dataSource = self
 
-               
-                   let textFields = [emailTextField, firstNameTextField, lastNameTextField, passwordTextField, confirmPasswordTextField, addressTextField, cityTextField, stateTextField, countryTextField, mobileTextField, postalCodeTextField, kycIDTypeTextField, kycSSNTextField, kycCustomerIDTextField]
-                   textFields.forEach { (textField) in
-                       textField?.inputAccessoryView = okToolbar()
-                   }
-                   countryTextField.inputView = self.pickerView
-                   kycIDTypeTextField.inputView = self.pickerView
-        }
+           self.automaticallyAdjustsScrollViewInsets = true
+           self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+           self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: 2000)
+           self.scrollView.delegate = self
+           self.scrollView.isScrollEnabled = true
+       
+           emailTextField.placeholder = S.LitecoinCard.emailPlaceholder
+           passwordTextField.placeholder = S.LitecoinCard.passwordPlaceholder
+           confirmPasswordTextField.placeholder = S.LitecoinCard.confirmPasswordPlaceholder
+           firstNameTextField.placeholder = S.LitecoinCard.firstNamePlaceholder
+           lastNameTextField.placeholder = S.LitecoinCard.lastNamePlaceholder
+           addressTextField.placeholder = S.LitecoinCard.addressPlaceholder
+           cityTextField.placeholder = S.LitecoinCard.cityPlaceholder
+           stateTextField.placeholder = S.LitecoinCard.statePlaceholder
+           postalCodeTextField.placeholder = S.LitecoinCard.postalPlaceholder
+           mobileTextField.placeholder = S.LitecoinCard.mobileNumberPlaceholder
+           kycSSNTextField.placeholder = S.LitecoinCard.kycSSN
+           kycCustomerIDTextField.placeholder = S.LitecoinCard.kycIDOptionsPlaceholder
+           kycIDTypeTextField.placeholder = S.LitecoinCard.kycIDType
+           registerButton.setTitle(S.LitecoinCard.registerButtonTitle, for: .normal)
+           registerButton.layer.cornerRadius = 5.0
+           countryTextField.text = Country.unitedStates.name
+
+           let textFields = [emailTextField, firstNameTextField, lastNameTextField, passwordTextField, confirmPasswordTextField, addressTextField, cityTextField, stateTextField, countryTextField, mobileTextField, postalCodeTextField, kycIDTypeTextField, kycSSNTextField, kycCustomerIDTextField]
+           textFields.forEach { (textField) in
+               textField?.inputAccessoryView = okToolbar()
+           }
+           kycIDTypeTextField.inputView = self.pickerView
+           registerButton.layer.cornerRadius = 5.0
+           registerButton.clipsToBounds = true
+        
+           loginButton.layer.borderWidth = 1.0
+           loginButton.layer.borderColor = #colorLiteral(red: 0.2053973377, green: 0.3632233143, blue: 0.6166344285, alpha: 1)
+
+           loginButton.layer.cornerRadius = 5.0
+           loginButton.clipsToBounds = true
+         
     }
 //    var mockData: Data?
 //      return
@@ -154,6 +161,9 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         self.delegate?.didReceiveOpenLitecoinCardAccount(account: mockRegisteredData)
           
         //showRegistrationAlertView(data: mockedData)
+    }
+    @IBAction func returnToLoginView(_ sender: Any) {
+        self.delegate?.shouldReturnToLoginView()
     }
     
     private func didValidateRegistrationData() -> (Data?) {
@@ -308,6 +318,7 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     func okToolbar() -> UIToolbar {
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 88))
         let okButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
+        okButton.tintColor = .liteWalletBlue
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolbar.setItems([flexibleSpace, okButton, flexibleSpace], animated: true)
         toolbar.tintColor = .litecoinDarkSilver

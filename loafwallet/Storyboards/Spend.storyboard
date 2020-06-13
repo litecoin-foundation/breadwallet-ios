@@ -192,11 +192,12 @@
                                             <constraint firstAttribute="height" constant="0.5" id="Ce7-cE-iws"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Country" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jsn-9K-bZN">
+                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Country" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jsn-9K-bZN">
                                         <rect key="frame" x="30" y="389.5" width="200" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="XhY-bt-rdk"/>
                                         </constraints>
+                                        <color key="textColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="BarlowSemiCondensed-Medium" family="Barlow Semi Condensed Medium" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                                         <connections>
@@ -244,7 +245,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzl-R1-t2A">
-                                        <rect key="frame" x="30" y="513" width="315" height="50"/>
+                                        <rect key="frame" x="30" y="498" width="315" height="50"/>
                                         <color key="backgroundColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Vlw-Pd-j8b"/>
@@ -277,6 +278,20 @@
                                         <color key="textColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gx-aY-txM">
+                                        <rect key="frame" x="30" y="576" width="315" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="GC8-Qv-dCI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="BarlowSemiCondensed-SemiBold" family="Barlow Semi Condensed SemiBold" pointSize="19"/>
+                                        <state key="normal" title="Login">
+                                            <color key="titleColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="returnToLoginView:" destination="wNG-O7-NAJ" eventType="touchUpInside" id="nwa-Eu-qed"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -285,6 +300,7 @@
                                     <constraint firstItem="3f5-tr-3Qu" firstAttribute="top" secondItem="Pul-O5-dLr" secondAttribute="bottom" constant="8" id="3b1-1X-oGC"/>
                                     <constraint firstItem="Awc-SM-eZg" firstAttribute="trailing" secondItem="TCa-d2-Qpw" secondAttribute="trailing" id="3nl-65-cQ8"/>
                                     <constraint firstItem="WbL-6T-a1k" firstAttribute="top" secondItem="FSp-QQ-BzQ" secondAttribute="bottom" constant="8" id="5CA-4B-kFV"/>
+                                    <constraint firstItem="8gx-aY-txM" firstAttribute="top" secondItem="uzl-R1-t2A" secondAttribute="bottom" constant="28" id="5UW-Ds-3lE"/>
                                     <constraint firstItem="Pul-O5-dLr" firstAttribute="top" secondItem="Bui-wZ-eR4" secondAttribute="bottom" constant="25" id="62o-xG-pRC"/>
                                     <constraint firstItem="Cp0-mW-AT8" firstAttribute="leading" secondItem="EuW-PF-Vvj" secondAttribute="leading" constant="30" id="6io-Sl-kmn"/>
                                     <constraint firstItem="jsn-9K-bZN" firstAttribute="leading" secondItem="EuW-PF-Vvj" secondAttribute="leading" constant="30" id="6y5-ol-j1x"/>
@@ -311,7 +327,8 @@
                                     <constraint firstItem="fxu-bJ-SIu" firstAttribute="trailing" secondItem="jsn-9K-bZN" secondAttribute="trailing" id="OnE-TT-NXU"/>
                                     <constraint firstItem="1mq-gh-Z3N" firstAttribute="top" secondItem="Cp0-mW-AT8" secondAttribute="bottom" constant="8" id="PVG-3D-722"/>
                                     <constraint firstItem="XgX-P0-zTz" firstAttribute="top" secondItem="ioO-jC-ST3" secondAttribute="bottom" constant="25" id="Pji-H5-wb7"/>
-                                    <constraint firstItem="uzl-R1-t2A" firstAttribute="top" secondItem="1mq-gh-Z3N" secondAttribute="bottom" constant="50" id="Pl3-XV-yhD"/>
+                                    <constraint firstItem="uzl-R1-t2A" firstAttribute="top" secondItem="1mq-gh-Z3N" secondAttribute="bottom" constant="35" id="Pl3-XV-yhD"/>
+                                    <constraint firstItem="8gx-aY-txM" firstAttribute="leading" secondItem="EuW-PF-Vvj" secondAttribute="leading" constant="30" id="QZm-Tw-JVx"/>
                                     <constraint firstItem="fKS-fG-fzJ" firstAttribute="leading" secondItem="Bui-wZ-eR4" secondAttribute="trailing" constant="30" id="RZ5-rL-Uki"/>
                                     <constraint firstItem="qG9-pQ-fH2" firstAttribute="trailing" secondItem="Q1R-md-CUS" secondAttribute="trailing" id="S1J-US-4GP"/>
                                     <constraint firstItem="0T0-ij-HxB" firstAttribute="leading" secondItem="tcC-LC-dgN" secondAttribute="leading" id="SKG-YU-JaX"/>
@@ -342,6 +359,7 @@
                                     <constraint firstItem="TCa-d2-Qpw" firstAttribute="leading" secondItem="EuW-PF-Vvj" secondAttribute="leading" constant="30" id="gas-0X-KK7"/>
                                     <constraint firstItem="0T0-ij-HxB" firstAttribute="trailing" secondItem="tcC-LC-dgN" secondAttribute="trailing" id="hEE-cA-BcY"/>
                                     <constraint firstItem="wZD-K2-KfQ" firstAttribute="leading" secondItem="ioO-jC-ST3" secondAttribute="trailing" constant="30" id="hEP-Ce-fzA"/>
+                                    <constraint firstAttribute="trailing" secondItem="8gx-aY-txM" secondAttribute="trailing" constant="30" id="hKg-TS-iRE"/>
                                     <constraint firstItem="go2-we-YWY" firstAttribute="top" secondItem="PE1-to-zlJ" secondAttribute="bottom" constant="25" id="imM-U1-ql8"/>
                                     <constraint firstItem="PE1-to-zlJ" firstAttribute="width" secondItem="Uw5-5P-msa" secondAttribute="width" id="j1G-yi-vsx"/>
                                     <constraint firstItem="PE1-to-zlJ" firstAttribute="centerX" secondItem="EuW-PF-Vvj" secondAttribute="centerX" id="jFf-1W-irm"/>
@@ -392,6 +410,7 @@
                         <outlet property="kycIDTypeTextField" destination="wZD-K2-KfQ" id="PBG-Ta-mdh"/>
                         <outlet property="kycSSNTextField" destination="Pul-O5-dLr" id="uca-k2-Ogy"/>
                         <outlet property="lastNameTextField" destination="fKS-fG-fzJ" id="DIY-Js-VZY"/>
+                        <outlet property="loginButton" destination="8gx-aY-txM" id="Bxr-Mc-cPF"/>
                         <outlet property="mobileTextField" destination="Cp0-mW-AT8" id="khD-JV-j2O"/>
                         <outlet property="passwordTextField" destination="go2-we-YWY" id="rFd-Ti-ZvY"/>
                         <outlet property="postalCodeTextField" destination="FSp-QQ-BzQ" id="Nsb-CR-weq"/>
@@ -426,7 +445,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="registerAction:" destination="wNG-O7-NAJ" eventType="touchUpInside" id="wBI-hb-9ur"/>
+                                            <action selector="loginAction:" destination="OTf-Lp-rPj" eventType="touchUpInside" id="G1G-Z5-14d"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mmL-ph-8XL">
@@ -476,7 +495,7 @@
                                             <color key="titleColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="registerAction:" destination="wNG-O7-NAJ" eventType="touchUpInside" id="5zg-5o-1TV"/>
+                                            <action selector="registrationAction:" destination="OTf-Lp-rPj" eventType="touchUpInside" id="iAa-QN-LZ4"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BGj-Ul-Dqm">
@@ -487,6 +506,9 @@
                                         <fontDescription key="fontDescription" name="BarlowSemiCondensed-Light" family="Barlow Semi Condensed Light" pointSize="15"/>
                                         <color key="tintColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Forgot your password?"/>
+                                        <connections>
+                                            <action selector="forgotPasswordAction:" destination="OTf-Lp-rPj" eventType="touchUpInside" id="aKI-St-MFs"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gN0-Pa-9G5">
                                         <rect key="frame" x="313" y="317.5" width="32" height="22"/>
@@ -581,14 +603,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQu-9Y-L79" customClass="LitecoinCardImageView" customModule="loafwallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="30" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="10" width="375" height="200"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="KxZ-R8-XvX"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVr-lN-gzi">
-                                        <rect key="frame" x="30" y="562" width="315" height="50"/>
+                                        <rect key="frame" x="30" y="542" width="315" height="50"/>
                                         <color key="backgroundColor" red="0.089909873900000006" green="0.6183931828" blue="0.15337970849999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="vYE-yw-TKo"/>
@@ -602,13 +624,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit to LitecoinCard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEc-1I-ZWE">
-                                        <rect key="frame" x="104.5" y="235" width="166" height="22"/>
+                                        <rect key="frame" x="104.5" y="215" width="166" height="22"/>
                                         <fontDescription key="fontDescription" name="BarlowSemiCondensed-Medium" family="Barlow Semi Condensed Medium" pointSize="18"/>
                                         <color key="textColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kCC-ef-tFc">
-                                        <rect key="frame" x="112.5" y="391" width="150" height="32"/>
+                                        <rect key="frame" x="112.5" y="371" width="150" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="Dsv-GG-JCu"/>
                                         </constraints>
@@ -619,8 +641,9 @@
                                         <color key="tintColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="selectedSegmentTintColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </segmentedControl>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vfM-oD-4gG">
-                                        <rect key="frame" x="30" y="450" width="315" height="46"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="vfM-oD-4gG">
+                                        <rect key="frame" x="30" y="430" width="315" height="46"/>
+                                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="46" id="gaX-tm-LmB"/>
                                         </constraints>
@@ -628,16 +651,10 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="aVM-wL-mTY">
-                                        <rect key="frame" x="30" y="506" width="315" height="28"/>
+                                        <rect key="frame" x="30" y="486" width="315" height="28"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Litewallet Balance:" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVy-B2-jGd">
-                                                <rect key="frame" x="0.0" y="0.0" width="155" height="28"/>
-                                                <fontDescription key="fontDescription" name="BarlowSemiCondensed-Light" family="Barlow Semi Condensed Light" pointSize="16"/>
-                                                <color key="textColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ł 4.09" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Am5-Jb-8N2">
-                                                <rect key="frame" x="160" y="0.0" width="155" height="28"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Litewallet Balance: Ł 4.09" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVy-B2-jGd">
+                                                <rect key="frame" x="0.0" y="0.0" width="315" height="28"/>
                                                 <fontDescription key="fontDescription" name="BarlowSemiCondensed-Light" family="Barlow Semi Condensed Light" pointSize="16"/>
                                                 <color key="textColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -648,19 +665,25 @@
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H8Y-Ae-WTy">
-                                        <rect key="frame" x="148.5" y="285" width="78" height="78"/>
+                                        <rect key="frame" x="148.5" y="265" width="78" height="78"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Xfm-cI-t2l">
-                                        <rect key="frame" x="148.5" y="285" width="78" height="78"/>
+                                        <rect key="frame" x="148.5" y="265" width="78" height="78"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6yJ-VC-egB">
                                                 <rect key="frame" x="0.0" y="0.0" width="78" height="37"/>
                                                 <state key="normal" image="up-arrow-blue"/>
+                                                <connections>
+                                                    <action selector="didTapUpArrowAction:" destination="2g1-Rq-t2L" eventType="touchUpInside" id="q5Y-QI-h0e"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6o9-xj-Eco">
                                                 <rect key="frame" x="0.0" y="41" width="78" height="37"/>
                                                 <state key="normal" image="down-arrow-gray"/>
+                                                <connections>
+                                                    <action selector="didTapDownArrowAction:" destination="2g1-Rq-t2L" eventType="touchUpInside" id="HRG-jQ-cu2"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -676,7 +699,7 @@
                                     <constraint firstItem="kCC-ef-tFc" firstAttribute="centerX" secondItem="aT0-5k-Big" secondAttribute="centerX" id="3pe-at-09g"/>
                                     <constraint firstItem="aVM-wL-mTY" firstAttribute="top" secondItem="vfM-oD-4gG" secondAttribute="bottom" constant="10" id="5Wd-cq-Jg9"/>
                                     <constraint firstItem="aVM-wL-mTY" firstAttribute="leading" secondItem="aT0-5k-Big" secondAttribute="leading" constant="30" id="FHm-jD-9YX"/>
-                                    <constraint firstItem="cQu-9Y-L79" firstAttribute="top" secondItem="aT0-5k-Big" secondAttribute="top" constant="30" id="HY6-y8-twq"/>
+                                    <constraint firstItem="cQu-9Y-L79" firstAttribute="top" secondItem="aT0-5k-Big" secondAttribute="top" constant="10" id="HY6-y8-twq"/>
                                     <constraint firstAttribute="trailing" secondItem="cQu-9Y-L79" secondAttribute="trailing" id="J3c-P2-QHI"/>
                                     <constraint firstAttribute="trailing" secondItem="vfM-oD-4gG" secondAttribute="trailing" constant="30" id="MqA-Ls-gU6"/>
                                     <constraint firstItem="vfM-oD-4gG" firstAttribute="leading" secondItem="aT0-5k-Big" secondAttribute="leading" constant="30" id="OI6-UB-T3a"/>
@@ -714,7 +737,6 @@
                         <outlet property="downAmountButton" destination="6o9-xj-Eco" id="slt-IB-Ok7"/>
                         <outlet property="fiatLTCSegmentedControl" destination="kCC-ef-tFc" id="GAh-ZT-cLK"/>
                         <outlet property="litecoinCardDepositStatusLabel" destination="yEc-1I-ZWE" id="hob-Yl-Rv3"/>
-                        <outlet property="litewalletBalanceLabel" destination="Am5-Jb-8N2" id="l8S-ms-Jak"/>
                         <outlet property="scrollView" destination="aT0-5k-Big" id="34S-vc-w3x"/>
                         <outlet property="staticLitewalletBalanceLabel" destination="mVy-B2-jGd" id="2zf-RA-XYm"/>
                         <outlet property="transferButton" destination="ZVr-lN-gzi" id="aWu-VI-veu"/>
@@ -724,7 +746,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fed-BY-ZmJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1433" y="159"/>
+            <point key="canvasLocation" x="657" y="191"/>
         </scene>
     </scenes>
     <resources>

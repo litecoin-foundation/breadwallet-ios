@@ -34,12 +34,32 @@ class CardViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
      
     var litecoinCardAccountData: [String:Any]?
     var userHasLitecoinCard: Bool = false
-   
+    var shouldTransferToLitewallet: Bool = true
+    
+    private let blueUpArrow = UIImage(named: "up-arrow-blue")
+    private let blueDownArrow = UIImage(named: "down-arrow-blue")
+    private let greyUpArrow = UIImage(named: "up-arrow-gray")
+    private let greyDownArrow = UIImage(named: "down-arrow-gray")
+    
     var localFiatCode = "USD"
     var exchangeRate: Rate? {
         didSet { updateFiatCode() }
     }
- 
+    
+    @IBAction func didTapUpArrowAction(_ sender: Any) {
+        downAmountButton.setImage(greyDownArrow, for: .normal)
+        upAmountButton.setImage(blueUpArrow, for: .normal)
+        shouldTransferToLitewallet = false
+        litecoinCardDepositStatusLabel.text = S.LitecoinCard.depositToCard
+    }
+    
+    @IBAction func didTapDownArrowAction(_ sender: Any) {
+        downAmountButton.setImage(blueDownArrow, for: .normal)
+        upAmountButton.setImage(greyUpArrow, for: .normal)
+        shouldTransferToLitewallet = true
+        litecoinCardDepositStatusLabel.text = S.LitecoinCard.transferToLitewallet
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubviews()
@@ -72,11 +92,11 @@ class CardViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
         //Setup card view dimensions
         switch E.screenHeight {
         case 0..<320:
-            cardViewHeight.constant = 100
+            cardViewHeight.constant = 90
         case 320..<564:
-            cardViewHeight.constant = 175
+            cardViewHeight.constant = 150
         case 564..<768:
-            cardViewHeight.constant = 250
+            cardViewHeight.constant = 200
         case 768..<2000:
             cardViewHeight.constant = 300
         default:
@@ -92,6 +112,13 @@ class CardViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
  
         fiatLTCSegmentedControl.setTitle("LTC", forSegmentAt: 0)
         fiatLTCSegmentedControl.setTitle(localFiatCode, forSegmentAt: 1)
+        
+        if shouldTransferToLitewallet {
+            downAmountButton.setImage(blueDownArrow, for: .normal)
+            upAmountButton.setImage(greyUpArrow, for: .normal)
+            litecoinCardDepositStatusLabel.text = S.LitecoinCard.transferToLitewallet
+        }
+        let maxButton = UIButton.textFieldMaxAmount(height: transferTextField.frame.height)
         
         self.view.layoutIfNeeded()
     }

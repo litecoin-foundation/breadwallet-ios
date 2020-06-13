@@ -36,7 +36,7 @@ class LitecoinCardImageView:  UIView {
  
         //DEV Using Mock Card until endpoint works
         if cardImage == nil {
-            cardImage = UIImage(named: "mockcard")
+            cardImage = UIImage(named: "card-placeholder")
         }
         
         cardImageView = UIImageView(image: cardImage)
@@ -72,10 +72,6 @@ class LitecoinCardImageView:  UIView {
         //addSubview(shadowView)
         
         cardImageView.transform = CGAffineTransform(rotationAngle: degrees)
-        cardImageView.layer.borderColor = UIColor.lightGray.cgColor
-        cardImageView.layer.borderWidth = 0.5
-
-
         addSubview(cardImageView)
     }
     

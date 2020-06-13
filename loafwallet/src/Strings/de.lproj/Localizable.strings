@@ -215,6 +215,9 @@
 /* Country placeholder */
 "Card.country.placeholder" = "Land";
 
+/* Deposit To Card */
+"Card.depositToCard" = " Deposit to LitecoinCard";
+
 /* FailedEmail address placeholder */
 "Card.email.failed.placeholder" = "E-mail";
 
@@ -259,6 +262,15 @@
 
 /* State placeholder */
 "Card.state.placeholder" = "Bundesland";
+
+/* Transfer button title */
+"Card.transferButton.title" = "Transfer";
+
+/* Transfer To Litewallet */
+"Card.transferToLitewallet" = "Transfer to Litewallet";
+
+/* US country */
+"Card.USStates" = "US";
 
 /* $53.09/L + 1.07% */
 "Confirmation.amountDetailLabel" = "Austauschdetails:";
@@ -1351,9 +1363,3 @@
 
 /* Title for Card ViewController */
 "Card.title" = "";
-
-/* Transfer button title */
-"Card.transferButton.title" = "";
-
-/* US country */
-"Card.USStates" = "";

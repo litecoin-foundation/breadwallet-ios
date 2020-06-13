@@ -1350,11 +1350,17 @@
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d de %2$d";
 
+/* Deposit To Card */
+"Card.depositToCard" = "";
+
 /* Title for Card ViewController */
 "Card.title" = "";
 
 /* Transfer button title */
 "Card.transferButton.title" = "";
+
+/* Transfer To Litewallet */
+"Card.transferToLitewallet" = "";
 
 /* US country */
 "Card.USStates" = "";

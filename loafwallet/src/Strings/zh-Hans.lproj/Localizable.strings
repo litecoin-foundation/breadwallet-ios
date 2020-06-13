@@ -1307,6 +1307,9 @@
 /* Country placeholder */
 "Card.country.placeholder" = "";
 
+/* Deposit To Card */
+"Card.depositToCard" = "";
+
 /* FailedEmail address placeholder */
 "Card.email.failed.placeholder" = "";
 
@@ -1354,6 +1357,9 @@
 
 /* Transfer button title */
 "Card.transferButton.title" = "";
+
+/* Transfer To Litewallet */
+"Card.transferToLitewallet" = "";
 
 /* US country */
 "Card.USStates" = "";

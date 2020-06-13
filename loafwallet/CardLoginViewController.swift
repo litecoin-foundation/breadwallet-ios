@@ -8,7 +8,18 @@
 
 import UIKit
 
-class CardLoginViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
+@objc protocol LitecoinCardLoginViewDelegate {
+    func shouldShowRegistrationView()
+    func shouldShowLoginView()
+    func didLoginLitecoinCardAccount()
+    func didForgetPassword()
+}
+
+class CardLoginViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, LFAlertViewDelegate {
+    func alertViewCancelButtonTapped() {
+        
+    }
+    
 
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -26,11 +37,72 @@ class CardLoginViewController: UIViewController, UITextFieldDelegate, UIScrollVi
     
     var currentTextField: UITextField?
     var isShowingPassword = false
+    var loginFailMessage: String?
+    var delegate: LitecoinCardLoginViewDelegate?
+    
+    var alertModal: LFAlertViewController?
     
     @IBAction func toggleSecureEntry(_ sender: Any) {
         passwordTextField.isSecureTextEntry = isShowingPassword
+        if isShowingPassword {
+            secureEntryToggleButton.setImage(UIImage(named: "noshowpassword"), for: .normal)
+        } else {
+            secureEntryToggleButton.setImage(UIImage(named: "showpassword"), for: .normal)
+        }
         isShowingPassword = !isShowingPassword
     }
+    
+    @IBAction func forgotPasswordAction(_ sender: Any) {
+        // TODO: Show Username/Email field and OK ...check for email acccount
+        self.delegate?.didForgetPassword()
+    }
+    
+    @IBAction func loginAction(_ sender: Any) {
+        
+        //Mock Login Success
+        self.delegate?.didLoginLitecoinCardAccount()
+
+        
+         
+//        do {
+//         let email = try emailTextField.validatedText(validationType: ValidatorType.email)
+//         let password = try passwordTextField.validatedText(validationType: ValidatorType.password)
+//            print(email)
+//            print(password)
+//
+//        } catch ValidationError {
+//
+//        }
+        
+//       self.alertModal = UIStoryboard.init(name: "Alerts", bundle: nil).instantiateViewController(withIdentifier: "LFAlertViewController") as? LFAlertViewController
+//
+//       guard let alertModal = self.alertModal else {
+//            NSLog("ERROR: Alert object not initialized")
+//            return
+//
+//       }
+//        alertModal.providesPresentationContextTransitionStyle = true
+//        alertModal.definesPresentationContext = true
+//        alertModal.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+//        alertModal.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+//
+//        if self.loginFailMessage != nil,
+//             let message = loginFailMessage {
+//            alertModal.dynamicLabel.text =  message
+//        } else {
+//           alertModal.dynamicLabel.text = ""
+//
+//        }
+//        alertModal.delegate = self
+//        self.present(alertModal, animated: true)
+         
+    }
+    
+    @IBAction func registrationAction(_ sender: Any) {
+        //Mock New User no LitecoinCard  - Show Registration View
+        self.delegate?.shouldShowRegistrationView()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +114,9 @@ class CardLoginViewController: UIViewController, UITextFieldDelegate, UIScrollVi
     
     private func setupSubviews() {
         
+
+        secureEntryToggleButton.setImage(UIImage(named: "noshowpassword"), for: .normal)
+
         //Corners
         
         loginButton.layer.cornerRadius = 5.0
@@ -49,7 +124,6 @@ class CardLoginViewController: UIViewController, UITextFieldDelegate, UIScrollVi
         
         registrationButton.layer.cornerRadius = 5.0
         registrationButton.clipsToBounds = true
-        
         
         //Borders
         
@@ -68,7 +142,6 @@ class CardLoginViewController: UIViewController, UITextFieldDelegate, UIScrollVi
     //MARK: UI Keyboard Methods
    @objc func dismissKeyboard() {
        currentTextField?.resignFirstResponder()
-           self.resignFirstResponder()
    }
     
    @objc func adjustForKeyboard(notification: NSNotification) {
@@ -79,26 +152,33 @@ class CardLoginViewController: UIViewController, UITextFieldDelegate, UIScrollVi
         
        let keyboardScreenEndFrame = keyboardValue
        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
-   
-       if notification.name == NSNotification.Name.UIKeyboardWillHide {
-           scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-       } else {
-
-           guard let yPosition = currentTextField?.frame.origin.y else {
-               NSLog("ERROR:  - Could not get y position")
-               return
-           }
-            
-           scrollView.contentInset = UIEdgeInsets(top: 0 - yPosition, left: 0, bottom: keyboardViewEndFrame.height - self.view.frame.height, right: 0)
-           scrollView.scrollIndicatorInsets = scrollView.contentInset
-       }
-       
+        
+    var insetConstant: CGFloat = 0
+    var insetBottom: CGFloat = 0
+    switch notification.name {
+    case NSNotification.Name.UIKeyboardWillHide:
+        insetConstant = 0
+        insetBottom = 0
+    case NSNotification.Name.UIKeyboardWillShow:
+        insetConstant = -100
+        insetBottom = keyboardViewEndFrame.height - self.view.frame.height
+    default:
+        insetConstant = 0
+    }
+    
+    //TODO: Adjust keyboard dismissal. Currently is does not reset
+    scrollView.contentInset = UIEdgeInsets(top: insetConstant, left: 0, bottom: insetBottom, right: 0)
+    scrollView.scrollIndicatorInsets = scrollView.contentInset
    }
+    
+    //MARK: AlertView
     
     
     //MARK: UITextField Delegate & Setup
      
     func textFieldDidBeginEditing(_ textField: UITextField) {
+            
+            currentTextField = textField
             
             if textField == emailTextField {
                 emailUnderlineView.backgroundColor = #colorLiteral(red: 0.2222260833, green: 0.7466222048, blue: 0.415411979, alpha: 1)
@@ -125,6 +205,7 @@ class CardLoginViewController: UIViewController, UITextFieldDelegate, UIScrollVi
               
             emailUnderlineView.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.3647058824, blue: 0.6156862745, alpha: 1)
             passwordUnderlineView.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.3647058824, blue: 0.6156862745, alpha: 1)
+            currentTextField?.resignFirstResponder()
         }
         
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -199,6 +199,9 @@ enum S {
         static let registerButtonTitle = NSLocalizedString("Card.registerButton.title", value: "Register", comment: "Register button title")
         static let transferButtonTitle = NSLocalizedString("Card.transferButton.title", value: "Transfer", comment: "Transfer button title")
         static let USStates = NSLocalizedString("Card.USStates", value: "United States", comment: "US country")
+        static let depositToCard = NSLocalizedString("Card.depositToCard", value: "Deposit to LitecoinCard", comment: "Deposit To Card")
+        static let transferToLitewallet = NSLocalizedString("Card.transferToLitewallet", value: "Transfer to Litewallet", comment: "Transfer To Litewallet")
+        
     }
 
     enum TransactionDetails {

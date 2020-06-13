@@ -1356,3 +1356,9 @@
 
 /* Transfer button title */
 "Card.transferButton.title" = "Transfer";
+
+/* Deposit To Card */
+"Card.depositToCard" = "Deposit to LitecoinCard";
+
+/* Transfer To Litewallet */
+"Card.transferToLitewallet" = "Transfer to Litewallet";

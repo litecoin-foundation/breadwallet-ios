@@ -73,4 +73,26 @@ extension UIButton {
         button.clipsToBounds = true
         return button
     }
+    
+    static func textFieldMaxAmount(height: CGFloat = 44, image: UIImage = UIImage(), title: String = "max." ) -> UIButton {
+        let button = UIButton(type: .system)
+        button.frame = CGRect(x: 0, y: 0, width: 44, height: height+40)
+        //button.contentMode = .center
+        button.setImage(image, for: .normal)
+
+//        if image == #imageLiteral(resourceName: "Close") {
+//            button.imageEdgeInsets = UIEdgeInsetsMake(14.0, 14.0, 14.0, 14.0)
+//        } else {
+//            button.imageEdgeInsets = UIEdgeInsetsMake(12.0, 12.0, 12.0, 12.0)
+//        }
+
+        button.tintColor = .liteWalletBlue
+        button.setTitle(title, for: .normal)
+        button.titleLabel?.textColor = .liteWalletBlue
+        button.titleLabel?.font = UIFont.barlowMedium(size: 16)
+        button.layer.borderColor = UIColor.liteWalletBlue.cgColor
+        button.layer.borderWidth = 1.0
+
+        return button
+    }
 }

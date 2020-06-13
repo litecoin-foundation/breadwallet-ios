@@ -21,14 +21,8 @@ protocol MainTabBarControllerDelegate {
     func alertViewShouldDismiss()
 }
 
-class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDelegate, CardViewDelegate {
-      
-    func floatingRegistrationHeader(shouldHide: Bool) {
-         
-         floatingRegistrationView.isHidden = shouldHide
-    }
+class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDelegate, LitecoinCardRegistrationViewDelegate, LitecoinCardLoginViewDelegate {
     
-      
     let kInitialChildViewControllerIndex = 0 // History  VC
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var containerView: UIView!
@@ -54,7 +48,7 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     private var swappedConstraints: [NSLayoutConstraint] = []
     private let currencyTapView = UIView()
     private let storyboardNames:[String] = ["Transactions","Send","Spend","Receive","Buy"]
-    var storyboardIDs:[String] = ["TransactionsViewController","SendLTCViewController", "SpendViewController","ReceiveLTCViewController","BuyTableViewController"]
+    var storyboardIDs:[String] = ["TransactionsViewController","SendLTCViewController","CardLoginViewController","ReceiveLTCViewController","BuyTableViewController"]
     var viewControllers:[UIViewController] = []
     var activeController:UIViewController? = nil
     
@@ -141,6 +135,7 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     }
     
     private func loadViewControllers() {
+        viewControllers.removeAll()
         for (index, storyboardID) in self.storyboardIDs.enumerated() {
             let controller = UIStoryboard.init(name: storyboardNames[index], bundle: nil).instantiateViewController(withIdentifier: storyboardID)
             viewControllers.append(controller)
@@ -352,7 +347,43 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     }
     
     
-    // MARK: Card Delegates
+    
+    // MARK: LitecoinCard Login Delegates
+   
+    
+    func shouldShowLoginView() {
+        //
+    }
+
+    func didLoginLitecoinCardAccount() {
+        storyboardIDs = ["TransactionsViewController","SendLTCViewController", "CardViewController","ReceiveLTCViewController","BuyTableViewController"]
+        loadViewControllers()
+        self.displayContentController(contentController: viewControllers[2])
+    }
+    
+    func didForgetPassword() {
+        //
+    }
+    
+    func shouldShowRegistrationView() {
+        storyboardIDs = ["TransactionsViewController","SendLTCViewController", "SpendViewController","ReceiveLTCViewController","BuyTableViewController"]
+        loadViewControllers()
+        self.displayContentController(contentController: viewControllers[2])
+    }
+
+    // MARK: LitecoinCard Registration Delegates
+    
+    
+    func floatingRegistrationHeader(shouldHide: Bool) {
+        //
+    }
+    
+    func shouldReturnToLoginView() {
+         storyboardIDs = ["TransactionsViewController","SendLTCViewController", "CardLoginViewController","ReceiveLTCViewController","BuyTableViewController"]
+               loadViewControllers()
+               self.displayContentController(contentController: viewControllers[2])
+    }
+    
     
     func didReceiveOpenLitecoinCardAccount(account: Data) {
         storyboardIDs = ["TransactionsViewController","SendLTCViewController", "CardViewController","ReceiveLTCViewController","BuyTableViewController"]
@@ -391,7 +422,7 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     // MARK: TabViewController Delegates
 
     func displayContentController(contentController:UIViewController) {
-        
+        print(" class: XX \(contentController.classForCoder)")
         switch NSStringFromClass(contentController.classForCoder) {
         case "loafwallet.TransactionsViewController":
 
@@ -416,16 +447,17 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
             spendVC.delegate = self
             
         case "loafwallet.CardLoginViewController":
-        guard let cardVC = contentController as? CardLoginViewController else  {
-            return
-        }
-            
+            guard let cardLoginVC = contentController as? CardLoginViewController else  {
+                return
+            }
+            cardLoginVC.delegate = self
+        
         case "loafwallet.CardViewController":
             guard let cardVC = contentController as? CardViewController else  {
                 return
             }
             cardVC.userHasLitecoinCard = userHasLitecoinCard()
-              
+ 
         case "loafwallet.ReceiveLTCViewController":
             guard let receiveVC = contentController as? ReceiveLTCViewController else  {
                 return
@@ -433,7 +465,7 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
             receiveVC.store = self.store
             
         case "loafwallet.BuyTableViewController":
-                guard let buyVC = contentController as? BuyTableViewController else  {
+            guard let buyVC = contentController as? BuyTableViewController else  {
                     return
             }
             buyVC.store = self.store
