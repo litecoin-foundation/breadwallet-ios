@@ -9,6 +9,9 @@
 import UIKit
 
 let π: CGFloat = .pi
+let kDidReceiveNewLitecoinCardData : Notification.Name = Notification.Name(rawValue: "com.litewallet.didreceivenewlitecoincarddata")
+let timeSinceLastLitecoinCardRequest = "com.litewallet.timesincelastblockcardrequest"
+let tokenDoesExistAndIsValid = "com.litewallet.tokendoesexistvalid"
 let kDonationAmount: UInt64 = 1800000
 let kDonationAmountInDouble: Double = Double(kDonationAmount) / Double(100000000)
   

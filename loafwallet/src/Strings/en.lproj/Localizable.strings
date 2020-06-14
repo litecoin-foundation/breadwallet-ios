@@ -194,6 +194,87 @@
 /* Camera plugin instruction */
 "CameraPlugin.centerInstruction" = "Center your ID in the box";
 
+/* Failed Address placeholder */
+"Card.address.failed.placeholder" = "Address";
+
+/* Address placeholder */
+"Card.address.placeholder" = "Address";
+
+/* Failed City placeholder */
+"Card.city.failed.placeholder" = "City";
+
+/* City placeholder */
+"Card.city.placeholder" = "City";
+
+/* FailedPassword placeholder */
+"Card.confirmed.password.failed.placeholder" = "Confirmed password";
+
+/* Confirm Password placeholder */
+"Card.confirmed.password.placeholder" = "Confirmed password";
+
+/* Country placeholder */
+"Card.country.placeholder" = "Country";
+
+/* Deposit To Card */
+"Card.depositToCard" = "Deposit to LitecoinCard";
+
+/* FailedEmail address placeholder */
+"Card.email.failed.placeholder" = "Email";
+
+/* Email address placeholder */
+"Card.email.placeholder" = "Email";
+
+/* First name failed placeholder */
+"Card.firstName.failed.placeholder" = "First name";
+
+/* First name placeholder */
+"Card.firstName.placeholder" = "First name";
+
+/* Last name failed placeholder */
+"Card.lastName.failed.placeholder" = "Last name";
+
+/* Last name placeholder */
+"Card.lastName.placeholder" = "Last name";
+
+/* Failed Mobile number placeholder */
+"Card.mobile.failed.placeholder" = "Mobile number";
+
+/* Mobile number placeholder */
+"Card.mobile.placeholder" = "Mobile number";
+
+/* FailedPassword placeholder */
+"Card.password.failed.placeholder" = "Password";
+
+/* Password placeholder */
+"Card.password.placeholder" = "Password";
+
+/* Postal code placeholder */
+"Card.postal.failed.placeholder" = "Postal code";
+
+/* Postal code placeholder */
+"Card.postal.placeholder" = "Postal code";
+
+/* Register button title */
+"Card.registerButton.title" = "Register";
+
+/* Failed state placeholder */
+"Card.state.failed.placeholder" = "State";
+
+/* State placeholder */
+"Card.state.placeholder" = "State";
+
+/* Title for Card ViewController */
+"Card.title" = "Register your LitecoinCard";
+
+/* Transfer button title */
+"Card.transferButton.title" = "Transfer";
+
+/* Transfer To Litewallet */
+"Card.transferToLitewallet" = "Transfer to Litewallet";
+
+/* US country */
+"Card.USStates" = "Country";
+
 /* $53.09/L + 1.07% */
 "Confirmation.amountDetailLabel" = "Exchange details:";
 
@@ -415,6 +496,21 @@
 
 /* Wipe wallet button */
 "JailbreakWarnings.wipe" = "Wipe";
+
+/* LitecoinCard users driver's license */
+"LitecoinCard.kycDriversLicense" = "Driver's License";
+
+/* LitecoinCard users DL or passport */
+"LitecoinCard.kycIDOptions" = "DL or Passport Number";
+
+/* LitecoinCard ID Type */
+"LitecoinCard.kycIDType" = "ID Type";
+
+/* LitecoinCard users passport */
+"LitecoinCard.kycPassport" = "Passport Number";
+
+/* LitecoinCard US SSN */
+"LitecoinCard.kycSSN" = "Social Security Number";
 
 /* Location services disabled error */
 "LocationPlugin.disabled" = "Location services are disabled.";
@@ -892,6 +988,9 @@
 
 /* Share data switch label. */
 "ShareData.toggleLabel" = "Share Anonymous Data?";
+
+/* Spend Bar Item Title */
+"Spend.barItemTitle" = "SPEND";
 
 /* Current spending limit: */
 "SpendingLimit.title" = "Current Spending Limit: ";

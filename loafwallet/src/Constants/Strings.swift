@@ -107,6 +107,10 @@ enum S {
         static let barItemTitle = NSLocalizedString("Receive.barItemTitle", value: "**Receive**", comment: "Receive Bar Item Title")
     }
     
+    enum Spend {
+        static let barItemTitle = NSLocalizedString("Spend.barItemTitle", value:"Spend", comment: "Spend Bar Item Title")
+    }
+    
     enum Account {
         static let loadingMessage = NSLocalizedString("Account.loadingMessage", value: "**Loading Wallet**", comment: "Loading Wallet Message")
     }
@@ -162,6 +166,42 @@ enum S {
         static let endAmountDetailLabel = NSLocalizedString("Transaction.endAmountDetailLabel", value: "**Transaction end amount detail**", comment: "Static end amount Label")
         static let blockHeightLabel = NSLocalizedString("Transaction.blockHeightLabel", value: "**Transaction blockHeightLabel**", comment: "Static blockHeight Label")
         static let commentLabel = NSLocalizedString("Transaction.commentLabel", value: "**Transaction comment label**", comment: "Static comment Label")
+    }
+    
+    enum LitecoinCard {
+        static let title = NSLocalizedString("Card.title", value: "Register your Litecoin Card", comment: "Title for Card ViewController")
+        static let kycSSN = NSLocalizedString("LitecoinCard.kycSSN", value:"Social Security Number", comment: "LitecoinCard US SSN")
+        static let kycDriversLicense = NSLocalizedString("LitecoinCard.kycDriversLicense", value:"Driver's License", comment: "LitecoinCard users driver's license")
+        static let kycPassport = NSLocalizedString("LitecoinCard.kycPassport", value:"Passport Number", comment: "LitecoinCard users passport")
+        static let kycIDOptionsPlaceholder = NSLocalizedString("LitecoinCard.kycIDOptions", value:"DL or Passport Number", comment: "LitecoinCard users DL or passport")
+        static let kycIDType = NSLocalizedString("LitecoinCard.kycIDType", value:"ID Type", comment: "LitecoinCard ID Type")
+        static let emailPlaceholder = NSLocalizedString("Card.email.placeholder", value: "Email address", comment: "Email address placeholder")
+        static let emailFailedPlaceholder = NSLocalizedString("Card.email.failed.placeholder", value: "Enter a valid email address", comment: "FailedEmail address placeholder")
+        static let passwordPlaceholder = NSLocalizedString("Card.password.placeholder", value: "Password", comment: "Password placeholder")
+        static let passwordFailedPlaceholder = NSLocalizedString("Card.password.failed.placeholder", value: "Enter 6 characters, 1 number, lower and uppercase", comment: "FailedPassword placeholder")
+        static let confirmPasswordPlaceholder = NSLocalizedString("Card.confirmed.password.placeholder", value: "Confirm password", comment: "Confirm Password placeholder")
+        static let confirmPasswordFailedPlaceholder = NSLocalizedString("Card.confirmed.password.failed.placeholder", value: "Must match the password", comment: "FailedPassword placeholder")
+        static let firstNamePlaceholder = NSLocalizedString("Card.firstName.placeholder", value: "First name", comment: "First name placeholder")
+        static let firstNameFailedPlaceholder = NSLocalizedString("Card.firstName.failed.placeholder", value: "Enter a first name", comment: "First name failed placeholder")
+        static let lastNamePlaceholder = NSLocalizedString("Card.lastName.placeholder", value: "Last name", comment: "Last name placeholder")
+        static let lastNameFailedPlaceholder = NSLocalizedString("Card.lastName.failed.placeholder", value: "Enter a family name", comment: "Last name failed placeholder")
+        static let addressPlaceholder = NSLocalizedString("Card.address.placeholder", value: "Address", comment: "Address placeholder")
+        static let addressFailedPlaceholder = NSLocalizedString("Card.address.failed.placeholder", value: "Please enter an address", comment: "Failed Address placeholder")
+        static let cityPlaceholder = NSLocalizedString("Card.city.placeholder", value: "City", comment: "City placeholder")
+        static let cityFailedPlaceholder = NSLocalizedString("Card.city.failed.placeholder", value: "Please enter a city", comment: "Failed City placeholder")
+        static let statePlaceholder = NSLocalizedString("Card.state.placeholder", value: "State", comment: "State placeholder")
+        static let stateFailedPlaceholder = NSLocalizedString("Card.state.failed.placeholder", value: "Enter a state", comment: "Failed state placeholder")
+        static let countryPlaceholder = NSLocalizedString("Card.country.placeholder", value: "Country", comment: "Country placeholder")
+        static let postalPlaceholder = NSLocalizedString("Card.postal.placeholder", value: "Postal code", comment: "Postal code placeholder")
+        static let postalFailedPlaceholder = NSLocalizedString("Card.postal.failed.placeholder", value: "Enter a postal code", comment: "Postal code placeholder")
+        static let mobileNumberPlaceholder = NSLocalizedString("Card.mobile.placeholder", value: "Mobile number", comment: "Mobile number placeholder")
+        static let mobileNumberFailedPlaceholder = NSLocalizedString("Card.mobile.failed.placeholder", value: "Enter a mobile number", comment: "Failed Mobile number placeholder")
+        static let registerButtonTitle = NSLocalizedString("Card.registerButton.title", value: "Register", comment: "Register button title")
+        static let transferButtonTitle = NSLocalizedString("Card.transferButton.title", value: "Transfer", comment: "Transfer button title")
+        static let USStates = NSLocalizedString("Card.USStates", value: "United States", comment: "US country")
+        static let depositToCard = NSLocalizedString("Card.depositToCard", value: "Deposit to LitecoinCard", comment: "Deposit To Card")
+        static let transferToLitewallet = NSLocalizedString("Card.transferToLitewallet", value: "Transfer to Litewallet", comment: "Transfer To Litewallet")
+        
     }
 
     enum TransactionDetails {

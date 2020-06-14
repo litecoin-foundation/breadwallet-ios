@@ -194,6 +194,84 @@
 /* Camera plugin instruction */
 "CameraPlugin.centerInstruction" = "Zentriere deinen Ausweis im Rechteck";
 
+/* Failed Address placeholder */
+"Card.address.failed.placeholder" = "Adresse";
+
+/* Address placeholder */
+"Card.address.placeholder" = "Adresse";
+
+/* Failed City placeholder */
+"Card.city.failed.placeholder" = "Stadt";
+
+/* City placeholder */
+"Card.city.placeholder" = "Stadt";
+
+/* FailedPassword placeholder */
+"Card.confirmed.password.failed.placeholder" = "Passwort bestätigen";
+
+/* Confirm Password placeholder */
+"Card.confirmed.password.placeholder" = "Passwort bestätigen";
+
+/* Country placeholder */
+"Card.country.placeholder" = "Land";
+
+/* Deposit To Card */
+"Card.depositToCard" = " Deposit to LitecoinCard";
+
+/* FailedEmail address placeholder */
+"Card.email.failed.placeholder" = "E-mail";
+
+/* Email address placeholder */
+"Card.email.placeholder" = "E-mail";
+
+/* First name failed placeholder */
+"Card.firstName.failed.placeholder" = "Vorname";
+
+/* First name placeholder */
+"Card.firstName.placeholder" = "Vorname";
+
+/* Last name failed placeholder */
+"Card.lastName.failed.placeholder" = "Nachname";
+
+/* Last name placeholder */
+"Card.lastName.placeholder" = "Nachname";
+
+/* Failed Mobile number placeholder */
+"Card.mobile.failed.placeholder" = "Handynummer";
+
+/* Mobile number placeholder */
+"Card.mobile.placeholder" = "Handynummer";
+
+/* FailedPassword placeholder */
+"Card.password.failed.placeholder" = "Passwort";
+
+/* Password placeholder */
+"Card.password.placeholder" = "Passwort";
+
+/* Postal code placeholder */
+"Card.postal.failed.placeholder" = "Postleitzahl";
+
+/* Postal code placeholder */
+"Card.postal.placeholder" = "Postleitzahl";
+
+/* Register button title */
+"Card.registerButton.title" = "Registrieren";
+
+/* Failed state placeholder */
+"Card.state.failed.placeholder" = "Bundesland";
+
+/* State placeholder */
+"Card.state.placeholder" = "Bundesland";
+
+/* Transfer button title */
+"Card.transferButton.title" = "Transfer";
+
+/* Transfer To Litewallet */
+"Card.transferToLitewallet" = "Transfer to Litewallet";
+
+/* US country */
+"Card.USStates" = "US";
+
 /* $53.09/L + 1.07% */
 "Confirmation.amountDetailLabel" = "Austauschdetails:";
 
@@ -415,6 +493,21 @@
 
 /* Wipe wallet button */
 "JailbreakWarnings.wipe" = "Löschen";
+
+/* LitecoinCard users driver's license */
+"LitecoinCard.kycDriversLicense" = "Führerschein";
+
+/* LitecoinCard users DL or passport */
+"LitecoinCard.kycIDOptions" = "DL or Passport Number";
+
+/* LitecoinCard ID Type */
+"LitecoinCard.kycIDType" = "ID Type";
+
+/* LitecoinCard users passport */
+"LitecoinCard.kycPassport" = "Ausweisnummer";
+
+/* LitecoinCard US SSN */
+"LitecoinCard.kycSSN" = "Social Security Number";
 
 /* Location services disabled error */
 "LocationPlugin.disabled" = "Standortdienste sind deaktiviert";
@@ -893,6 +986,9 @@
 /* Share data switch label. */
 "ShareData.toggleLabel" = "Anonyme Nutzungsdaten übermitteln?";
 
+/* Spend Bar Item Title */
+"Spend.barItemTitle" = "VERBRINGEN";
+
 /* Current spending limit: */
 "SpendingLimit.title" = "Aktuelles Ausgabenlimit:";
 
@@ -1264,3 +1360,6 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d von %2$d";
+
+/* Title for Card ViewController */
+"Card.title" = "";

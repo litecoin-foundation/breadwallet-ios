@@ -6,6 +6,9 @@
 build/
 DerivedData/
 
+## Private Frameworks
+Frameworks/*
+
 ## Various settings
 *.pbxuser
 !default.pbxuser
@@ -67,4 +70,3 @@ Screenshots/shots
 .DS_Store
 *.xcscheme
 GoogleService-Info.plist
-GoogleService-iOS-Beta-Info.plist

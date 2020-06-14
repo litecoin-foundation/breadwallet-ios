@@ -63,6 +63,7 @@ struct E {
     static var isIPhone8Plus: Bool {
       return (UIScreen.main.bounds.size.height == 736.0)
     }
+    
     static var isIPhoneXsMax: Bool {
       return (UIScreen.main.bounds.size.height == 812.0)
     }
@@ -76,4 +77,11 @@ struct E {
     static var screenHeight: CGFloat {
       return UIScreen.main.bounds.size.height
     }
-} 
+    
+    static var screenWidth: CGFloat {
+         return UIScreen.main.bounds.size.width
+    }
+}
+
+
+

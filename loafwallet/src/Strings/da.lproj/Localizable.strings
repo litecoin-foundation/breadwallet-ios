@@ -194,6 +194,72 @@
 /* Camera plugin instruction */
 "CameraPlugin.centerInstruction" = "Centrer dit ID i boksen";
 
+/* Failed Address placeholder */
+"Card.address.failed.placeholder" = "Adresse";
+
+/* Address placeholder */
+"Card.address.placeholder" = "Adresse";
+
+/* Failed City placeholder */
+"Card.city.failed.placeholder" = "By";
+
+/* City placeholder */
+"Card.city.placeholder" = "By";
+
+/* FailedPassword placeholder */
+"Card.confirmed.password.failed.placeholder" = "Bekræft adgangskode";
+
+/* Confirm Password placeholder */
+"Card.confirmed.password.placeholder" = "Bekræft adgangskode";
+
+/* Country placeholder */
+"Card.country.placeholder" = "Land";
+
+/* FailedEmail address placeholder */
+"Card.email.failed.placeholder" = "E-mail";
+
+/* Email address placeholder */
+"Card.email.placeholder" = "E-mail";
+
+/* First name failed placeholder */
+"Card.firstName.failed.placeholder" = "Fornavn";
+
+/* First name placeholder */
+"Card.firstName.placeholder" = "Fornavn";
+
+/* Last name failed placeholder */
+"Card.lastName.failed.placeholder" = "Efternavn";
+
+/* Last name placeholder */
+"Card.lastName.placeholder" = "Efternavn";
+
+/* Failed Mobile number placeholder */
+"Card.mobile.failed.placeholder" = "Mobilnummer";
+
+/* Mobile number placeholder */
+"Card.mobile.placeholder" = "Mobilnummer";
+
+/* FailedPassword placeholder */
+"Card.password.failed.placeholder" = "Adgangskode";
+
+/* Password placeholder */
+"Card.password.placeholder" = "Adgangskode";
+
+/* Postal code placeholder */
+"Card.postal.failed.placeholder" = "Postnummer";
+
+/* Postal code placeholder */
+"Card.postal.placeholder" = "Postnummer";
+
+/* Register button title */
+"Card.registerButton.title" = "Tilmeld";
+
+/* Failed state placeholder */
+"Card.state.failed.placeholder" = "Stat";
+
+/* State placeholder */
+"Card.state.placeholder" = "Stat";
+
 /* $53.09/L + 1.07% */
 "Confirmation.amountDetailLabel" = "Udvekslingsoplysninger:";
 
@@ -415,6 +481,21 @@
 
 /* Wipe wallet button */
 "JailbreakWarnings.wipe" = "Ryd";
+
+/* LitecoinCard users driver's license */
+"LitecoinCard.kycDriversLicense" = "Kørekort";
+
+/* LitecoinCard users DL or passport */
+"LitecoinCard.kycIDOptions" = "DL or Passport Number";
+
+/* LitecoinCard ID Type */
+"LitecoinCard.kycIDType" = "ID Type";
+
+/* LitecoinCard users passport */
+"LitecoinCard.kycPassport" = "Pasnummer";
+
+/* LitecoinCard US SSN */
+"LitecoinCard.kycSSN" = "Social Security Number";
 
 /* Location services disabled error */
 "LocationPlugin.disabled" = "Placeringstjenester er deaktiveret.";
@@ -893,6 +974,9 @@
 /* Share data switch label. */
 "ShareData.toggleLabel" = "Del anonyme data?";
 
+/* Spend Bar Item Title */
+"Spend.barItemTitle" = "BRUGE";
+
 /* Current spending limit: */
 "SpendingLimit.title" = "Nuværende forbrugsgrænse: ";
 
@@ -1264,3 +1348,18 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d af %2$d";
+
+/* Deposit To Card */
+"Card.depositToCard" = "";
+
+/* Title for Card ViewController */
+"Card.title" = "";
+
+/* Transfer button title */
+"Card.transferButton.title" = "";
+
+/* Transfer To Litewallet */
+"Card.transferToLitewallet" = "";
+
+/* US country */
+"Card.USStates" = "";
