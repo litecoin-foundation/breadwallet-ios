@@ -129,6 +129,8 @@
 		2494037F23AE0C7100369261 /* SyncProgressHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2494037D23AE0C7100369261 /* SyncProgressHeaderView.xib */; };
 		2494038123AF208F00369261 /* PromptModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494038023AF208F00369261 /* PromptModalViewController.swift */; };
 		249C570523B51F9B009CB5A9 /* TransactionsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249C570423B51F9B009CB5A9 /* TransactionsViewControllerTests.swift */; };
+		24A619D8249C7CB900FB1BC4 /* LitewalletPartnerAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A619D4249C7C3B00FB1BC4 /* LitewalletPartnerAPI.framework */; };
+		24A619D9249C7CB900FB1BC4 /* LitewalletPartnerAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24A619D4249C7C3B00FB1BC4 /* LitewalletPartnerAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		24A6DCFC2230BD9000505F44 /* WipeEmptyWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A6DCFA2230BD9000505F44 /* WipeEmptyWalletViewController.swift */; };
 		24AF00FE221B331D00FF636F /* WarningConfirmation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24AF00FC221B331D00FF636F /* WarningConfirmation.storyboard */; };
 		24AF0101221B349100FF636F /* WarningConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AF00FF221B349100FF636F /* WarningConfirmationViewController.swift */; };
@@ -567,6 +569,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				24A619D9249C7CB900FB1BC4 /* LitewalletPartnerAPI.framework in Embed Frameworks */,
 				754AE0B71DFCA870007FD001 /* libbz2.framework in Embed Frameworks */,
 				754AE0B81DFCA870007FD001 /* sqlite3.framework in Embed Frameworks */,
 			);
@@ -908,6 +911,7 @@
 		249F976D236F86240045087A /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		249F976E236F86240045087A /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Interface.strings; sourceTree = "<group>"; };
 		249F9770236F862C0045087A /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		24A619D4249C7C3B00FB1BC4 /* LitewalletPartnerAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LitewalletPartnerAPI.framework; sourceTree = "<group>"; };
 		24A6DCFA2230BD9000505F44 /* WipeEmptyWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WipeEmptyWalletViewController.swift; sourceTree = "<group>"; };
 		24AF00FC221B331D00FF636F /* WarningConfirmation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WarningConfirmation.storyboard; sourceTree = "<group>"; };
 		24AF00FF221B349100FF636F /* WarningConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -1836,6 +1840,7 @@
 				24D91D0B2166923E0077A619 /* UserNotifications.framework in Frameworks */,
 				22A9A9661DF61FEE000F0016 /* WebKit.framework in Frameworks */,
 				22A9A9641DF61FE7000F0016 /* Security.framework in Frameworks */,
+				24A619D8249C7CB900FB1BC4 /* LitewalletPartnerAPI.framework in Frameworks */,
 				22A9A9621DF61FE0000F0016 /* SystemConfiguration.framework in Frameworks */,
 				22A9A9601DF61FD8000F0016 /* CoreLocation.framework in Frameworks */,
 				22A9A95E1DF61FD0000F0016 /* PushKit.framework in Frameworks */,
@@ -2372,6 +2377,7 @@
 		24A619D3249C78D500FB1BC4 /* PrivateFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				24A619D4249C7C3B00FB1BC4 /* LitewalletPartnerAPI.framework */,
 			);
 			path = PrivateFrameworks;
 			sourceTree = "<group>";
@@ -5099,6 +5105,7 @@
 					"$(PROJECT_DIR)/**",
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/PrivateFrameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/loafwallet/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -5763,6 +5770,7 @@
 					"$(PROJECT_DIR)/**",
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/PrivateFrameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/loafwallet/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -5917,6 +5925,7 @@
 					"$(PROJECT_DIR)",
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/PrivateFrameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/loafwallet/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
