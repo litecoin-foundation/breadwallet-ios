@@ -132,8 +132,6 @@
 		24A6DCFC2230BD9000505F44 /* WipeEmptyWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A6DCFA2230BD9000505F44 /* WipeEmptyWalletViewController.swift */; };
 		24AF00FE221B331D00FF636F /* WarningConfirmation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24AF00FC221B331D00FF636F /* WarningConfirmation.storyboard */; };
 		24AF0101221B349100FF636F /* WarningConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AF00FF221B349100FF636F /* WarningConfirmationViewController.swift */; };
-		24B290DA248B553100967A1D /* LitewalletPartnerAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B290D9248B553100967A1D /* LitewalletPartnerAPI.framework */; };
-		24B290DB248B553100967A1D /* LitewalletPartnerAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24B290D9248B553100967A1D /* LitewalletPartnerAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		24B290DD248C046400967A1D /* LitecoinCardImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B290DC248C046400967A1D /* LitecoinCardImageView.swift */; };
 		24B290E0248E076D00967A1D /* CardLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B290DF248E076D00967A1D /* CardLoginViewController.swift */; };
 		24B523AD238A53DC0030594D /* BIP39Words.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24B523AF238A53DC0030594D /* BIP39Words.plist */; };
@@ -569,7 +567,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				24B290DB248B553100967A1D /* LitewalletPartnerAPI.framework in Embed Frameworks */,
 				754AE0B71DFCA870007FD001 /* libbz2.framework in Embed Frameworks */,
 				754AE0B81DFCA870007FD001 /* sqlite3.framework in Embed Frameworks */,
 			);
@@ -914,7 +911,6 @@
 		24A6DCFA2230BD9000505F44 /* WipeEmptyWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WipeEmptyWalletViewController.swift; sourceTree = "<group>"; };
 		24AF00FC221B331D00FF636F /* WarningConfirmation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WarningConfirmation.storyboard; sourceTree = "<group>"; };
 		24AF00FF221B349100FF636F /* WarningConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningConfirmationViewController.swift; sourceTree = "<group>"; };
-		24B290D9248B553100967A1D /* LitewalletPartnerAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LitewalletPartnerAPI.framework; path = Frameworks/LitewalletPartnerAPI.framework; sourceTree = "<group>"; };
 		24B290DC248C046400967A1D /* LitecoinCardImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LitecoinCardImageView.swift; sourceTree = "<group>"; };
 		24B290DF248E076D00967A1D /* CardLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLoginViewController.swift; sourceTree = "<group>"; };
 		24B523AE238A53DC0030594D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/BIP39Words.plist; sourceTree = "<group>"; };
@@ -1840,7 +1836,6 @@
 				24D91D0B2166923E0077A619 /* UserNotifications.framework in Frameworks */,
 				22A9A9661DF61FEE000F0016 /* WebKit.framework in Frameworks */,
 				22A9A9641DF61FE7000F0016 /* Security.framework in Frameworks */,
-				24B290DA248B553100967A1D /* LitewalletPartnerAPI.framework in Frameworks */,
 				22A9A9621DF61FE0000F0016 /* SystemConfiguration.framework in Frameworks */,
 				22A9A9601DF61FD8000F0016 /* CoreLocation.framework in Frameworks */,
 				22A9A95E1DF61FD0000F0016 /* PushKit.framework in Frameworks */,
@@ -2372,6 +2367,13 @@
 				2494037D23AE0C7100369261 /* SyncProgressHeaderView.xib */,
 			);
 			path = XIBs;
+			sourceTree = "<group>";
+		};
+		24A619D3249C78D500FB1BC4 /* PrivateFrameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PrivateFrameworks;
 			sourceTree = "<group>";
 		};
 		24AF00FB221B32EC00FF636F /* Storyboards */ = {
@@ -3125,6 +3127,7 @@
 		75A2A7871DA5934300A983D8 = {
 			isa = PBXGroup;
 			children = (
+				24A619D3249C78D500FB1BC4 /* PrivateFrameworks */,
 				75A2A7921DA5934300A983D8 /* loafwallet */,
 				2465873723A5AAD100A32E9E /* loafwalletTests */,
 				2465872723A5AAC200A32E9E /* loafwalletUITests */,
@@ -3249,7 +3252,6 @@
 		75A2A7F11DA5935F00A983D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				24B290D9248B553100967A1D /* LitewalletPartnerAPI.framework */,
 				24D91D0A2166923E0077A619 /* UserNotifications.framework */,
 				22A9A9671DF61FF8000F0016 /* libbz2.tbd */,
 				1BA74B86206AD60A0083BD2A /* Crashlytics.framework */,
