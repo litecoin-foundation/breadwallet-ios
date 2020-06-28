@@ -7,7 +7,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let applicationController = ApplicationController()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setFirebaseConfiguration()
         UIView.swizzleSetFrame()
         applicationController.launch(application: application, window: window, options: launchOptions)
@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         applicationController.performFetch(completionHandler)
     }
 
-    func application(_: UIApplication, shouldAllowExtensionPointIdentifier _: UIApplicationExtensionPointIdentifier) -> Bool {
+    func application(_: UIApplication, shouldAllowExtensionPointIdentifier _: UIApplication.ExtensionPointIdentifier) -> Bool {
         return false // disable extensions such as custom keyboards for security purposes
     }
 
@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         applicationController.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
     }
 
-    func application(_: UIApplication, open url: URL, options _: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+    func application(_: UIApplication, open url: URL, options _: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         return applicationController.open(url: url)
     }
 

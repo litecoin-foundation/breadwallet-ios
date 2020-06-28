@@ -240,12 +240,12 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
 
         let balanceAttributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.font: UIFont.customBody(size: 14.0),
-            NSAttributedStringKey.foregroundColor: color,
+            NSAttributedString.Key.foregroundColor: color,
         ]
 
         let feeAttributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.font: UIFont.customBody(size: 14.0),
-            NSAttributedStringKey.foregroundColor: UIColor.grayTextTint,
+            NSAttributedString.Key.foregroundColor: UIColor.grayTextTint,
         ]
 
         return (NSAttributedString(string: balanceOutput, attributes: balanceAttributes), NSAttributedString(string: feeOutput, attributes: feeAttributes))

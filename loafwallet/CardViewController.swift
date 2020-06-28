@@ -120,7 +120,7 @@ class CardViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
         let keyboardScreenEndFrame = keyboardValue
         let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
 
-        if notification.name == NSNotification.Name.UIResponder.keyboardWillHideNotification {
+        if notification.name == UIResponder.keyboardWillHideNotification {
             scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         } else {
             let yPosition = transferTextField.frame.origin.y

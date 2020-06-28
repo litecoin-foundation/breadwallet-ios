@@ -454,18 +454,18 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
         }
         exchangeRate = TransactionManager.sharedInstance.rate
 
-        addChildViewController(contentController)
+        addChild(contentController)
         contentController.view.frame = containerView.frame
         view.addSubview(contentController.view)
-        contentController.didMove(toParentViewController: self)
+        contentController.didMove(toParent: self)
         activeController = contentController
-        view.bringSubview(toFront: floatingRegistrationView)
+        view.bringSubviewToFront(floatingRegistrationView)
     }
 
     func hideContentController(contentController: UIViewController) {
-        contentController.willMove(toParentViewController: nil)
+        contentController.willMove(toParent: nil)
         contentController.view.removeFromSuperview()
-        contentController.removeFromParentViewController()
+        contentController.removeFromParent()
     }
 
     func tabBar(_: UITabBar, didSelect item: UITabBarItem) {

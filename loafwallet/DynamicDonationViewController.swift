@@ -69,7 +69,7 @@ class DynamicDonationViewController: UIViewController, Subscriber {
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blurEffectView)
-        view.sendSubview(toBack: blurEffectView)
+        view.sendSubviewToBack(blurEffectView)
 
         dialogTitle.text = S.Donate.titleConfirmation
         staticSendLabel.text = S.Confirmation.staticAddressLabel.capitalizingFirstLetter()

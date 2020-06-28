@@ -3,10 +3,9 @@ import UIKit
 import WebKit
 
 @available(iOS 8.0, *)
-@objc open class BRWebViewController: UIViewController, WKNavigationDelegate, BRWebSocketClient, WKScriptMessageHandler {
+@objc open class BRWebViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
     var wkProcessPool: WKProcessPool
     var webView: WKWebView?
-    var server = BRHTTPServer()
     var debugEndpoint: String?
     var mountPoint: String
     var walletManager: WalletManager
@@ -18,16 +17,6 @@ import WebKit
     var didAppear = false
     var didLoadTimeout = 2500
     var waitTimeout = 90
-    // we are also a socket server which sends didview/didload events to the listening client(s)
-    var sockets = [String: BRWebSocket]()
-
-    // this is the data that occasionally gets sent to the above connected sockets
-    var webViewInfo: [String: Any] {
-        return [
-            "visible": didAppear,
-            "loaded": didLoad,
-        ]
-    }
 
     var indexUrl: URL {
         switch mountPoint {
@@ -52,7 +41,7 @@ import WebKit
         case "/ea":
             return URL(string: "https://api.loafwallet.org/ea")!
         default:
-            return URL(string: "http://127.0.0.1:\(server.port)\(mountPoint)")!
+            return URL(string: "http://127.0.0.1")!
         }
     }
 
@@ -117,15 +106,9 @@ import WebKit
         let center = NotificationCenter.default
         center.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: .main) { [weak self] _ in
             self?.didAppear = true
-            if let info = self?.webViewInfo {
-                self?.sendToAllSockets(data: info)
-            }
         }
         center.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: .main) { [weak self] _ in
             self?.didAppear = false
-            if let info = self?.webViewInfo {
-                self?.sendToAllSockets(data: info)
-            }
         }
 
         activityIndicator.style = .white
@@ -139,18 +122,15 @@ import WebKit
 
     open override func viewDidAppear(_: Bool) {
         didAppear = true
-        sendToAllSockets(data: webViewInfo)
     }
 
     open override func viewDidDisappear(_: Bool) {
         didAppear = false
-        sendToAllSockets(data: webViewInfo)
     }
 
     // signal to the presenter that the webview content successfully loaded
     fileprivate func webviewDidLoad() {
         didLoad = true
-        sendToAllSockets(data: webViewInfo)
     }
 
     fileprivate func closeNow() {
@@ -201,45 +181,5 @@ import WebKit
             browser.load(req)
             self.present(browser, animated: true, completion: nil)
         }
-    }
-
-    // MARK: - socket delegate
-
-    func sendTo(socket: BRWebSocket, data: [String: Any]) {
-        do {
-            let j = try JSONSerialization.data(withJSONObject: data, options: [])
-            if let s = String(data: j, encoding: .utf8) {
-                socket.request.queue.async {
-                    socket.send(s)
-                }
-            }
-        } catch let e {
-            print("LOCATION SOCKET FAILED ENCODE JSON: \(e)")
-        }
-    }
-
-    func sendToAllSockets(data: [String: Any]) {
-        for (_, s) in sockets {
-            sendTo(socket: s, data: data)
-        }
-    }
-
-    public func socketDidConnect(_ socket: BRWebSocket) {
-        print("WEBVIEW SOCKET CONNECT \(socket.id)")
-        sockets[socket.id] = socket
-        sendTo(socket: socket, data: webViewInfo)
-    }
-
-    public func socketDidDisconnect(_ socket: BRWebSocket) {
-        print("WEBVIEW SOCKET DISCONNECT \(socket.id)")
-        sockets.removeValue(forKey: socket.id)
-    }
-
-    public func socket(_: BRWebSocket, didReceiveText text: String) {
-        print("WEBVIEW SOCKET RECV TEXT \(text)")
-    }
-
-    public func socket(_: BRWebSocket, didReceiveData data: Data) {
-        print("WEBVIEW SOCKET RECV TEXT \(data.hexString)")
     }
 }

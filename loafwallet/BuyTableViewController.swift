@@ -15,15 +15,15 @@ class BuyTableViewController: UITableViewController {
         if let vcWKVC = UIStoryboard(name: "Buy", bundle: nil).instantiateViewController(withIdentifier: "BuyWKWebViewController") as? BuyWKWebViewController {
             vcWKVC.partnerPrefixString = PartnerPrefix.simplex.rawValue
             vcWKVC.currencyCode = currencyCode
-            addChildViewController(vcWKVC)
+            addChild(vcWKVC)
             view.addSubview(vcWKVC.view)
-            vcWKVC.didMove(toParentViewController: self)
+            vcWKVC.didMove(toParent: self)
 
             vcWKVC.didDismissChildView = { [weak self] in
                 guard self != nil else { return }
-                vcWKVC.willMove(toParentViewController: nil)
+                vcWKVC.willMove(toParent: nil)
                 vcWKVC.view.removeFromSuperview()
-                vcWKVC.removeFromParentViewController()
+                vcWKVC.removeFromParent()
             }
         } else {
             NSLog("ERROR: Storyboard not initialized")
