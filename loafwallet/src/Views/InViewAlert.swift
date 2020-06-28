@@ -15,7 +15,7 @@ class InViewAlert: UIView {
         didSet {
             guard let view = contentView else { return }
             addSubview(view)
-            view.constrain(toSuperviewEdges: UIEdgeInsetsMake(arrowHeight, 0, 0, 0))
+            view.constrain(toSuperviewEdges: UIEdgeInsets(top: arrowHeight, left: 0, bottom: 0, right: 0))
         }
     }
 

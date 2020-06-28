@@ -45,7 +45,7 @@ class LoginViewController: UIViewController, Subscriber, Trackable {
     private var pinView: PinView?
     private let isPresentedForLock: Bool
     private let disabledView: WalletDisabledView
-    private let activityView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    private let activityView = UIActivityIndicatorView(style: .whiteLarge)
     private let wipeBannerButton = UIButton()
     var delegate: LoginViewControllerDelegate?
 

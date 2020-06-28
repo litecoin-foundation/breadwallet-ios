@@ -20,22 +20,22 @@ private class BRBrowserViewControllerInternal: UIViewController, WKNavigationDel
     let toolbarView = UIToolbar()
     let progressView = UIProgressView()
     let refreshButtonItem = UIBarButtonItem(
-        barButtonSystemItem: UIBarButtonSystemItem.refresh, target: self,
+        barButtonSystemItem: UIBarButtonItem.SystemItem.refresh, target: self,
         action: #selector(BRBrowserViewControllerInternal.refresh)
     )
     var stopButtonItem = UIBarButtonItem(
-        barButtonSystemItem: UIBarButtonSystemItem.stop, target: self,
+        barButtonSystemItem: UIBarButtonItem.SystemItem.stop, target: self,
         action: #selector(BRBrowserViewControllerInternal.stop)
     )
     var flexibleSpace = UIBarButtonItem(
-        barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil
+        barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil
     )
     var backButtonItem = UIBarButtonItem(
-        title: "\u{25C0}\u{FE0E}", style: UIBarButtonItemStyle.plain, target: self,
+        title: "\u{25C0}\u{FE0E}", style: UIBarButtonItem.Style.plain, target: self,
         action: #selector(BRBrowserViewControllerInternal.goBack)
     )
     var forwardButtonItem = UIBarButtonItem(
-        title: "\u{25B6}\u{FE0E}", style: UIBarButtonItemStyle.plain, target: self,
+        title: "\u{25B6}\u{FE0E}", style: UIBarButtonItem.Style.plain, target: self,
         action: #selector(BRBrowserViewControllerInternal.goForward)
     )
 

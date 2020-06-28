@@ -65,8 +65,8 @@ class CardViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
     }
 
     private func setupSubviews() {
-        UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.barlowBold(size: 18)], for: .selected)
-        UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.gray, NSAttributedStringKey.font: UIFont.barlowBold(size: 18)], for: .normal)
+        UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.barlowBold(size: 18)], for: .selected)
+        UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray, NSAttributedString.Key.font: UIFont.barlowBold(size: 18)], for: .normal)
 
         automaticallyAdjustsScrollViewInsets = true
         scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -106,20 +106,21 @@ class CardViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
             upAmountButton.setImage(greyUpArrow, for: .normal)
             litecoinCardDepositStatusLabel.text = S.LitecoinCard.transferToLitewallet
         }
-        let maxButton = UIButton.textFieldMaxAmount(height: transferTextField.frame.height)
+        // TODO: Build out later
+        //let maxButton = UIButton.textFieldMaxAmount(height: transferTextField.frame.height)
 
         view.layoutIfNeeded()
     }
 
     @objc private func adjustForKeyboard(notification: NSNotification) {
-        guard let keyboardValue = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else {
+        guard let keyboardValue = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
 
         let keyboardScreenEndFrame = keyboardValue
         let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
 
-        if notification.name == NSNotification.Name.UIKeyboardWillHide {
+        if notification.name == NSNotification.Name.UIResponder.keyboardWillHideNotification {
             scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         } else {
             let yPosition = transferTextField.frame.origin.y

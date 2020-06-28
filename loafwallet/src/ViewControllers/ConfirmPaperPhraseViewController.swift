@@ -67,7 +67,7 @@ class ConfirmPaperPhraseViewController: UITableViewController {
         navigationController?.navigationBar.isHidden = true
         setupSubViews()
         firstWordCell.confirmPhraseView?.textField.becomeFirstResponder()
-        NotificationCenter.default.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
         }
     }

@@ -92,8 +92,8 @@ class CardLoginViewController: UIViewController, UITextFieldDelegate, UIScrollVi
         super.viewDidLoad()
         setupSubviews()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     private func setupSubviews() {
@@ -127,7 +127,7 @@ class CardLoginViewController: UIViewController, UITextFieldDelegate, UIScrollVi
     }
 
     @objc func adjustForKeyboard(notification: NSNotification) {
-        guard let keyboardValue = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else {
+        guard let keyboardValue = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
 
@@ -137,10 +137,10 @@ class CardLoginViewController: UIViewController, UITextFieldDelegate, UIScrollVi
         var insetConstant: CGFloat = 0
         var insetBottom: CGFloat = 0
         switch notification.name {
-        case NSNotification.Name.UIKeyboardWillHide:
+        case UIResponder.keyboardWillHideNotification:
             insetConstant = 0
             insetBottom = 0
-        case NSNotification.Name.UIKeyboardWillShow:
+        case UIResponder.keyboardWillShowNotification:
             insetConstant = -100
             insetBottom = keyboardViewEndFrame.height - view.frame.height
         default:

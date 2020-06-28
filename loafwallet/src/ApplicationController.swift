@@ -51,10 +51,10 @@ class ApplicationController: Subscriber, Trackable {
         }
     }
 
-    func launch(application: UIApplication, window: UIWindow?, options: [UIApplicationLaunchOptionsKey: Any]?) {
+    func launch(application: UIApplication, window: UIWindow?, options: [UIApplication.LaunchOptionsKey: Any]?) {
         self.application = application
         self.window = window
-        application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+        application.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
         setup()
         handleLaunchOptions(options)
         reachability.didChange = { isReachable in
@@ -256,7 +256,6 @@ class ApplicationController: Subscriber, Trackable {
         initKVStoreCoordinator()
         feeUpdater?.refresh()
         defaultsUpdater?.refresh()
-        walletManager?.apiClient?.events?.up()
         exchangeUpdater?.refresh(completion: {
             self.watchSessionManager.walletManager = self.walletManager
             self.watchSessionManager.rate = self.store.state.currentRate
@@ -338,8 +337,6 @@ class ApplicationController: Subscriber, Trackable {
         Async.parallel(callbacks: [
             { self.exchangeUpdater?.refresh(completion: $0) },
             { self.feeUpdater?.refresh(completion: $0) },
-            { self.walletManager?.apiClient?.events?.sync(completion: $0) },
-            { self.walletManager?.apiClient?.updateFeatureFlags(); $0() },
         ], completion: {
             LWAnalytics.logEventWithParameters(itemName: ._20200111_DLDG)
             group.leave()

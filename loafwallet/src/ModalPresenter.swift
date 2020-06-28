@@ -426,7 +426,7 @@ class ModalPresenter: Subscriber, Trackable {
                })],
             "Manage": [
                 Setting(title: S.Settings.languages, callback: strongify(self) { _ in
-                    UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
                 }),
                 Setting(title: LAContext.biometricType() == .face ? S.Settings.faceIdLimit : S.Settings.touchIdLimit, accessoryText: { [weak self] in
                     guard let myself = self else { return "" }

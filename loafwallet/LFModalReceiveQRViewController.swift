@@ -23,7 +23,7 @@ class LFModalReceiveQRViewController: UIViewController {
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blurEffectView)
-        view.sendSubview(toBack: blurEffectView)
+        view.sendSubviewToBack(blurEffectView)
 
         modalView.layer.cornerRadius = 15
         modalView.clipsToBounds = true

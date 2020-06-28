@@ -55,8 +55,8 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         super.viewDidLoad()
         setupSubViews()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(switchToCardViewController), name: kDidReceiveNewLitecoinCardData, object: nil)
     }
 
@@ -265,9 +265,9 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @objc func switchToCardViewController() {
         if let cardVC = UIStoryboard(name: "Spend", bundle: nil).instantiateViewController(withIdentifier: "CardViewController") as? CardViewController {
             print("Switch to CardView")
-            addChildViewController(cardVC)
+            addChild(cardVC)
             view.addSubview(cardVC.view)
-            didMove(toParentViewController: self)
+            didMove(toParent: self)
         }
     }
 
@@ -302,14 +302,14 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
 
     @objc private func adjustForKeyboard(notification: NSNotification) {
-        guard let keyboardValue = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else {
+        guard let keyboardValue = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
 
         let keyboardScreenEndFrame = keyboardValue
         let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
 
-        if notification.name == NSNotification.Name.UIKeyboardWillHide {
+        if notification.name == NSNotification.Name.UIResponder.keyboardWillHideNotification {
             scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         } else {
             guard let yPosition = currentTextField?.frame.origin.y else {

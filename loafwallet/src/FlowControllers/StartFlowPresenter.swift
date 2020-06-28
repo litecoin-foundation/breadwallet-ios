@@ -139,8 +139,8 @@ class StartFlowPresenter: Subscriber {
         paperPhraseViewController.hideCloseNavigationItem() // Forces user to confirm paper-key
 
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.foregroundColor: UIColor.white,
-            NSAttributedStringKey.font: UIFont.customBold(size: 17.0),
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont.customBold(size: 17.0),
         ]
         navigationController?.pushViewController(paperPhraseViewController, animated: true)
     }

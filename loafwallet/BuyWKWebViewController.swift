@@ -55,7 +55,7 @@ class BuyWKWebViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         let wkWebView = WKWebView(frame: wkWithFooter, configuration: config)
         wkWebView.navigationDelegate = self
         wkWebView.allowsBackForwardNavigationGestures = true
-        wkWebView.scrollView.contentInset = UIEdgeInsetsMake(-50, 0, 0, 0)
+        wkWebView.scrollView.contentInset = UIEdgeInsets(top: -50, left: 0, bottom: 0, right: 0)
 
         wkWebView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         wkWebContainerView.addSubview(wkWebView)
@@ -136,9 +136,9 @@ extension BuyWKWebViewController {
         DispatchQueue.main.async {
             let vc = BRBrowserViewController()
             vc.load(req)
-            self.addChildViewController(vc)
+            self.addChild(vc)
             self.wkWebContainerView.addSubview(vc.view)
-            vc.didMove(toParentViewController: self)
+            vc.didMove(toParent: self)
         }
     }
 }

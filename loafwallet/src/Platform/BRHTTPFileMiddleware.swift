@@ -20,7 +20,6 @@ open class BRHTTPFileMiddleware: BRHTTPMiddleware {
             let fm = FileManager.default
             // read the file attributes
             guard let attrs = try? fm.attributesOfItem(atPath: fileURL.path) else {
-                print("[BRHTTPServer] file not found: \(String(describing: fileURL))")
                 return next(BRHTTPMiddlewareResponse(request: request, response: nil))
             }
             // generate an etag
@@ -64,7 +63,6 @@ open class BRHTTPFileMiddleware: BRHTTPMiddleware {
             }).resume()
             _ = grp.wait(timeout: DispatchTime.now() + Double(Int64(30) * Int64(NSEC_PER_SEC)) / Double(NSEC_PER_SEC))
             if body == nil {
-                print("[BRHTTPServer] DEBUG file not found \(String(describing: fileURL))")
                 return next(BRHTTPMiddlewareResponse(request: request, response: nil))
             }
         }

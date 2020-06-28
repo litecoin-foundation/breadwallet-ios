@@ -30,8 +30,8 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
         amountView = AmountViewController(store: store, isPinPadExpandedAtLaunch: false)
         donationCell = DonationSetupCell(store: store, isLTCSwapped: store.state.isLtcSwapped)
         super.init(nibName: nil, bundle: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     // MARK: - Private
@@ -238,13 +238,13 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
             }
         }
 
-        let balanceAttributes: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font: UIFont.customBody(size: 14.0),
+        let balanceAttributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.font: UIFont.customBody(size: 14.0),
             NSAttributedStringKey.foregroundColor: color,
         ]
 
-        let feeAttributes: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font: UIFont.customBody(size: 14.0),
+        let feeAttributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.font: UIFont.customBody(size: 14.0),
             NSAttributedStringKey.foregroundColor: UIColor.grayTextTint,
         ]
 

@@ -26,7 +26,7 @@ extension UIImage {
         }
 
         // force software rendering for security (GPU rendering causes image artifacts on iOS 7 and is generally crashy)
-        let context = CIContext(options: [kCIContextUseSoftwareRenderer: true])
+        let context = CIContext(options: [CIContextOption.useSoftwareRenderer: true])
         objc_sync_enter(context)
         defer { objc_sync_exit(context) }
         guard let outputImage = filter?.outputImage else { assert(false, "No qr output image"); return nil }

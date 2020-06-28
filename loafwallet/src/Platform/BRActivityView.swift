@@ -21,7 +21,7 @@ class BRActivityViewController: UIViewController {
 }
 
 @objc open class BRActivityView: UIView {
-    let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
     let boundingBoxView = UIView(frame: CGRect.zero)
     let messageLabel = UILabel(frame: CGRect.zero)
 

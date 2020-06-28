@@ -220,7 +220,7 @@ class AmountViewController: UIViewController, Trackable {
             self?.toggleFeeSelector()
         }
         editFee.setImage(#imageLiteral(resourceName: "Edit"), for: .normal)
-        editFee.imageEdgeInsets = UIEdgeInsetsMake(15.0, 15.0, 15.0, 15.0)
+        editFee.imageEdgeInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
         editFee.tintColor = .grayTextTint
         editFee.isHidden = true
     }

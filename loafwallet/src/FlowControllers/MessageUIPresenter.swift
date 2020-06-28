@@ -18,7 +18,7 @@ class MessageUIPresenter: NSObject, Trackable {
         UINavigationBar.appearance().titleTextAttributes = nil
         let emailView = MFMailComposeViewController()
         emailView.setMessageBody(string, isHTML: false)
-        if let data = UIImagePNGRepresentation(image) {
+        if let data = image.pngData() {
             emailView.addAttachmentData(data, mimeType: "image/png", fileName: "litecoinqr.png")
         }
         emailView.mailComposeDelegate = self
@@ -60,7 +60,7 @@ class MessageUIPresenter: NSObject, Trackable {
         UINavigationBar.appearance().titleTextAttributes = nil
         let textView = MFMessageComposeViewController()
         textView.body = string
-        if let data = UIImagePNGRepresentation(image) {
+        if let data = image.pngData() {
             textView.addAttachmentData(data, typeIdentifier: "public.image", filename: "litecoinqr.png")
         }
         textView.messageComposeDelegate = self
@@ -68,7 +68,7 @@ class MessageUIPresenter: NSObject, Trackable {
         present(textView)
     }
 
-    fileprivate var originalTitleTextAttributes: [NSAttributedStringKey: Any]?
+    fileprivate var originalTitleTextAttributes: [NSAttributedString.Key: Any]?
 
     private func present(_ viewController: UIViewController) {
         presenter?.view.isFrameChangeBlocked = true

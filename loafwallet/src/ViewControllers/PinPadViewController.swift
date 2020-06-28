@@ -282,7 +282,7 @@ class GenericPinPadCell: UICollectionViewCell {
 
     override var accessibilityTraits: UIAccessibilityTraits {
         get {
-            return UIAccessibilityTraitStaticText
+            return UIAccessibilityTraits.staticText
         }
         set {}
     }

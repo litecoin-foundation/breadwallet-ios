@@ -109,31 +109,31 @@ import WebKit
         webView?.navigationDelegate = self
         webView?.backgroundColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.0)
         _ = webView?.load(request)
-        webView?.autoresizingMask = [UIViewAutoresizing.flexibleHeight, UIViewAutoresizing.flexibleWidth]
+        webView?.autoresizingMask = [UIView.AutoresizingMask.flexibleHeight, UIView.AutoresizingMask.flexibleWidth]
         webView?.scrollView.contentInsetAdjustmentBehavior = .never
 
         view.addSubview(webView!)
 
         let center = NotificationCenter.default
-        center.addObserver(forName: .UIApplicationDidBecomeActive, object: nil, queue: .main) { [weak self] _ in
+        center.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: .main) { [weak self] _ in
             self?.didAppear = true
             if let info = self?.webViewInfo {
                 self?.sendToAllSockets(data: info)
             }
         }
-        center.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: .main) { [weak self] _ in
+        center.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: .main) { [weak self] _ in
             self?.didAppear = false
             if let info = self?.webViewInfo {
                 self?.sendToAllSockets(data: info)
             }
         }
 
-        activityIndicator.activityIndicatorViewStyle = .white
+        activityIndicator.style = .white
         activityIndicator.color = .darkGray
         activityIndicator.startAnimating()
         activityIndicator.isHidden = false
         activityIndicator.bounds = CGRect(x: 0, y: 0, width: 15, height: 15)
-        activityIndicator.autoresizingMask = [UIViewAutoresizing.flexibleHeight, UIViewAutoresizing.flexibleWidth]
+        activityIndicator.autoresizingMask = [UIView.AutoresizingMask.flexibleHeight, UIView.AutoresizingMask.flexibleWidth]
         view.addSubview(activityIndicator)
     }
 
