@@ -260,19 +260,19 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     private func createUser(registrationData: Data) {
         
         //TODO: Refactor whenTernio OAUTH is ready
-        manager.createUser(userData: registrationData) { (user) in
-          
-            var timestampString = ""
-            
-            if user != nil,
-                let jsonObject = try? JSONSerialization.data(withJSONObject: user, options: []) {
-                
-                timestampString = "lastTimeReachedTimestamp" ///stripped from user timestamp
-                UserDefaults.standard.set(timestampString, forKey: timeSinceLastLitecoinCardRequest)
-                UserDefaults.standard.synchronize()
-                self.delegate?.didReceiveOpenLitecoinCardAccount(account: jsonObject)
-            }
-        }
+//        manager.createUser(userDataParams: <#T##[String : Any]#>, completion: <#T##(User?) -> Void#>)
+//          
+//            var timestampString = ""
+//            
+//            if user != nil,
+//                let jsonObject = try? JSONSerialization.data(withJSONObject: user, options: []) {
+//                
+//                timestampString = "lastTimeReachedTimestamp" ///stripped from user timestamp
+//                UserDefaults.standard.set(timestampString, forKey: timeSinceLastLitecoinCardRequest)
+//                UserDefaults.standard.synchronize()
+//                self.delegate?.didReceiveOpenLitecoinCardAccount(account: jsonObject)
+//            }
+//        }
     }
      
     private func createLitecoinCardWallet(cardAccountData: LitecoinCardAccountData) {
