@@ -1,20 +1,11 @@
-//
-//  StartImportViewController.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-06-13.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
-import UIKit
 import BRCore
+import UIKit
 
 private let mainURL = "https://insight.litecore.io/api/addrs/utxo"
 private let fallbackURL = "https://insight.litecore.io/api/addrs/utxo"
 private let testnetURL = "https://testnet.litecore.io/api/addrs/utxo"
 
-class StartImportViewController : UIViewController {
-
+class StartImportViewController: UIViewController {
     init(walletManager: WalletManager, store: Store) {
         self.walletManager = walletManager
         self.store = store
@@ -55,38 +46,46 @@ class StartImportViewController : UIViewController {
     private func addConstraints() {
         header.constrainTopCorners(sidePadding: 0, topPadding: 0)
         header.constrain([
-            header.constraint(.height, constant: 220.0) ])
+            header.constraint(.height, constant: 220.0),
+        ])
         illustration.constrain([
             illustration.constraint(.width, constant: 64.0),
             illustration.constraint(.height, constant: 84.0),
             illustration.constraint(.centerX, toView: header, constant: 0.0),
-            illustration.constraint(.centerY, toView: header, constant: -C.padding[1]) ])
+            illustration.constraint(.centerY, toView: header, constant: -C.padding[1]),
+        ])
         leftCaption.constrain([
             leftCaption.topAnchor.constraint(equalTo: illustration.bottomAnchor, constant: C.padding[1]),
             leftCaption.trailingAnchor.constraint(equalTo: header.centerXAnchor, constant: -C.padding[2]),
-            leftCaption.widthAnchor.constraint(equalToConstant: 80.0)])
+            leftCaption.widthAnchor.constraint(equalToConstant: 80.0),
+        ])
         rightCaption.constrain([
             rightCaption.topAnchor.constraint(equalTo: illustration.bottomAnchor, constant: C.padding[1]),
             rightCaption.leadingAnchor.constraint(equalTo: header.centerXAnchor, constant: C.padding[2]),
-            rightCaption.widthAnchor.constraint(equalToConstant: 80.0)])
+            rightCaption.widthAnchor.constraint(equalToConstant: 80.0),
+        ])
         message.constrain([
             message.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: C.padding[2]),
             message.topAnchor.constraint(equalTo: header.bottomAnchor, constant: C.padding[2]),
-            message.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -C.padding[2]) ])
+            message.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -C.padding[2]),
+        ])
         bullet.constrain([
             bullet.leadingAnchor.constraint(equalTo: message.leadingAnchor),
             bullet.topAnchor.constraint(equalTo: message.bottomAnchor, constant: C.padding[4]),
             bullet.widthAnchor.constraint(equalToConstant: 16.0),
-            bullet.heightAnchor.constraint(equalToConstant: 16.0) ])
+            bullet.heightAnchor.constraint(equalToConstant: 16.0),
+        ])
         warning.constrain([
             warning.leadingAnchor.constraint(equalTo: bullet.trailingAnchor, constant: C.padding[2]),
             warning.topAnchor.constraint(equalTo: bullet.topAnchor, constant: 0.0),
-            warning.trailingAnchor.constraint(equalTo: message.trailingAnchor) ])
+            warning.trailingAnchor.constraint(equalTo: message.trailingAnchor),
+        ])
         button.constrain([
             button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: C.padding[3]),
             button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -C.padding[4]),
             button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -C.padding[3]),
-            button.constraint(.height, constant: C.Sizes.buttonHeight) ])
+            button.constraint(.height, constant: C.Sizes.buttonHeight),
+        ])
     }
 
     private func setInitialData() {
@@ -103,7 +102,7 @@ class StartImportViewController : UIViewController {
             let scan = ScanViewController(scanKeyCompletion: { keyString in
                 self?.didReceiveAddress(keyString)
             }, isValidURI: { (string) -> Bool in
-                return string.isValidPrivateKey || string.isValidBip38Key
+                string.isValidPrivateKey || string.isValidBip38Key
             })
             self?.parent?.present(scan, animated: true, completion: nil)
         }
@@ -152,25 +151,25 @@ class StartImportViewController : UIViewController {
     private func checkBalance(key: BRKey) {
         present(balanceActivity, animated: true, completion: {
             var key = key
-            
+
             guard let address = key.address() else {
                 NSLog("KEY ADDRESS: No Key Address")
                 return
             }
-            
+
             let urlString = E.isTestnet ? testnetURL : mainURL
             let request = NSMutableURLRequest(url: URL(string: urlString)!,
                                               cachePolicy: .reloadIgnoringLocalCacheData,
                                               timeoutInterval: 20.0)
             request.httpMethod = "POST"
             request.httpBody = "addrs=\(address)".data(using: .utf8)
-            let task = URLSession.shared.dataTask(with: request as URLRequest) { [weak self] data, response, error in
+            let task = URLSession.shared.dataTask(with: request as URLRequest) { [weak self] data, _, error in
                 guard let myself = self else { return }
                 guard error == nil else { print("error: \(error!)"); return }
                 guard let data = data,
                     let jsonData = try? JSONSerialization.jsonObject(with: data, options: []),
                     let json = jsonData as? [[String: Any]] else { return }
-                
+
                 DispatchQueue.main.async {
                     myself.handleData(data: json, key: key)
                 }
@@ -194,9 +193,9 @@ class StartImportViewController : UIViewController {
         }
 
         let pubKeyLength = key.pubKey()?.count ?? 0
-        let fee = wallet.feeForTxSize(tx.size + 34 + (pubKeyLength - 34)*tx.inputs.count)
+        let fee = wallet.feeForTxSize(tx.size + 34 + (pubKeyLength - 34) * tx.inputs.count)
         balanceActivity.dismiss(animated: true, completion: {
-            guard outputs.count > 0 && balance > 0 else {
+            guard !outputs.isEmpty, balance > 0 else {
                 return self.showErrorMessage(S.Import.Error.empty)
             }
             guard fee + wallet.minOutputAmount <= balance else {
@@ -223,29 +222,29 @@ class StartImportViewController : UIViewController {
             guard let script = BRAddress(string: wallet.receiveAddress)?.scriptPubKey else { return }
             tx.addOutput(amount: balance - fee, script: script)
             var keys = [key]
-            let _ = tx.sign(keys: &keys)
+            _ = tx.sign(keys: &keys)
 
-                guard tx.isSigned else {
-                    DispatchQueue.main.async {
-                        self.importingActivity.dismiss(animated: true, completion: {
-                            self.showErrorMessage(S.Import.Error.signing)
+            guard tx.isSigned else {
+                DispatchQueue.main.async {
+                    self.importingActivity.dismiss(animated: true, completion: {
+                        self.showErrorMessage(S.Import.Error.signing)
                         })
-                    }
-                    return
                 }
-                self.walletManager.peerManager?.publishTx(tx, completion: { [weak self] success, error in
-                    guard let myself = self else { return }
-                    DispatchQueue.main.async {
-                        myself.importingActivity.dismiss(animated: true, completion: {
-                            DispatchQueue.main.async {
-                                if let error = error {
-                                    myself.showErrorMessage(error.localizedDescription)
-                                    return
-                                }
-                                myself.showSuccess()
+                return
+            }
+            self.walletManager.peerManager?.publishTx(tx, completion: { [weak self] _, error in
+                guard let myself = self else { return }
+                DispatchQueue.main.async {
+                    myself.importingActivity.dismiss(animated: true, completion: {
+                        DispatchQueue.main.async {
+                            if let error = error {
+                                myself.showErrorMessage(error.localizedDescription)
+                                return
                             }
+                            myself.showSuccess()
+                        }
                         })
-                    }
+                }
                 })
         })
     }
@@ -261,14 +260,14 @@ class StartImportViewController : UIViewController {
         return .lightContent
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 extension Data {
     var reverse: Data {
-        let tempBytes = Array(([UInt8](self)).reversed())
+        let tempBytes = Array([UInt8](self).reversed())
         return Data(bytes: tempBytes)
     }
 }

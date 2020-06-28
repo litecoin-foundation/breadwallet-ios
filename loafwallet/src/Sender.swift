@@ -1,15 +1,7 @@
-//
-//  Sender.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-01-16.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
+import BRCore
 import Foundation
 import UIKit
-import BRCore 
- 
+
 enum SendResult {
     case success
     case creationError(String)
@@ -19,7 +11,6 @@ enum SendResult {
 private let protocolPaymentTimeout: TimeInterval = 20.0
 
 class Sender {
-
     init(walletManager: WalletManager, kvStore: BRReplicatedKVStore, store: Store) {
         self.walletManager = walletManager
         self.kvStore = kvStore
@@ -44,23 +35,23 @@ class Sender {
         protocolRequest = forPaymentProtocol
         transaction = walletManager.wallet?.createTxForOutputs(forPaymentProtocol.details.outputs)
     }
-    
+
     var fee: UInt64 {
         guard let tx = transaction else { return 0 }
         return walletManager.wallet?.feeForTx(tx) ?? 0
     }
 
     var canUseBiometrics: Bool {
-        guard let tx = transaction else  { return false }
+        guard let tx = transaction else { return false }
         return walletManager.canUseBiometrics(forTx: tx)
     }
 
     func feeForTx(amount: UInt64) -> UInt64 {
-        return walletManager.wallet?.feeForTx(amount:amount) ?? 0
+        return walletManager.wallet?.feeForTx(amount: amount) ?? 0
     }
 
-    //Amount in bits
-    func send(biometricsMessage: String, rate: Rate?, comment: String?, feePerKb: UInt64, verifyPinFunction: @escaping (@escaping(String) -> Bool) -> Void, completion:@escaping (SendResult) -> Void) {
+    // Amount in bits
+    func send(biometricsMessage: String, rate: Rate?, comment: String?, feePerKb: UInt64, verifyPinFunction: @escaping (@escaping (String) -> Bool) -> Void, completion: @escaping (SendResult) -> Void) {
         guard let tx = transaction else {
             return completion(.creationError(S.Send.createTransactionError))
         }
@@ -69,7 +60,7 @@ class Sender {
         self.comment = comment
         self.feePerKb = feePerKb
 
-        if UserDefaults.isBiometricsEnabled && walletManager.canUseBiometrics(forTx:tx) {
+        if UserDefaults.isBiometricsEnabled && walletManager.canUseBiometrics(forTx: tx) {
             DispatchQueue.walletQueue.async { [weak self] in
                 guard let myself = self else { return }
                 myself.walletManager.signTransaction(tx, biometricsPrompt: biometricsMessage, completion: { result in
@@ -83,16 +74,16 @@ class Sender {
                 })
             }
         } else {
-            self.verifyPin(tx: tx, withFunction: verifyPinFunction, completion: completion)
+            verifyPin(tx: tx, withFunction: verifyPinFunction, completion: completion)
         }
     }
 
-    private func verifyPin(tx: BRTxRef, withFunction: (@escaping(String) -> Bool) -> Void, completion:@escaping (SendResult) -> Void) {
-        withFunction({ pin in
+    private func verifyPin(tx: BRTxRef, withFunction: (@escaping (String) -> Bool) -> Void, completion: @escaping (SendResult) -> Void) {
+        withFunction { pin in
             var success = false
             let group = DispatchGroup()
             group.enter()
-             DispatchQueue.walletQueue.async {
+            DispatchQueue.walletQueue.async {
                 if self.walletManager.signTransaction(tx, pin: pin) {
                     self.publish(completion: completion)
                     success = true
@@ -101,21 +92,21 @@ class Sender {
             }
             let result = group.wait(timeout: .now() + 30.0)
             if result == .timedOut {
-                let properties: [String: String] = ["ERROR_TX":"\(tx.txHash)","ERROR_BLOCKHEIGHT": "\(tx.blockHeight)"]
-                LWAnalytics.logEventWithParameters(itemName:._20200112_ERR, properties: properties)
+                let properties: [String: String] = ["ERROR_TX": "\(tx.txHash)", "ERROR_BLOCKHEIGHT": "\(tx.blockHeight)"]
+                LWAnalytics.logEventWithParameters(itemName: ._20200112_ERR, properties: properties)
 
                 let alert = UIAlertController(title: S.Alert.corruptionError, message: S.Alert.corruptionMessage, preferredStyle: .alert)
-          
+
                 UserDefaults.didSeeCorruption = true
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.topViewController?.present(alert, animated: true, completion: nil)
                 return false
             }
             return success
-        })
+        }
     }
 
-    //TODO - remove this -- only temporary for testing
+    // TODO: - remove this -- only temporary for testing
     private var topViewController: UIViewController? {
         var viewController = UIApplication.shared.keyWindow?.rootViewController
         while viewController?.presentedViewController != nil {
@@ -128,7 +119,7 @@ class Sender {
         guard let tx = transaction else { assert(false, "publish failure"); return }
         DispatchQueue.walletQueue.async { [weak self] in
             guard let myself = self else { assert(false, "myself didn't exist"); return }
-            myself.walletManager.peerManager?.publishTx(tx, completion: { success, error in
+            myself.walletManager.peerManager?.publishTx(tx, completion: { _, error in
                 DispatchQueue.main.async {
                     if let error = error {
                         completion(.publishFailure(error))
@@ -143,20 +134,19 @@ class Sender {
     }
 
     private func setMetaData() {
-        
         guard let rate = rate else {
-            LWAnalytics.logEventWithParameters(itemName:._20200111_RNI)
+            LWAnalytics.logEventWithParameters(itemName: ._20200111_RNI)
             return
         }
         guard let tx = transaction else {
-            LWAnalytics.logEventWithParameters(itemName:._20200111_TNI)
+            LWAnalytics.logEventWithParameters(itemName: ._20200111_TNI)
             return
         }
         guard let feePerKb = feePerKb else {
-            LWAnalytics.logEventWithParameters(itemName:._20200111_FNI)
+            LWAnalytics.logEventWithParameters(itemName: ._20200111_FNI)
             return
         }
-        
+
         let metaData = TxMetaData(transaction: tx.pointee,
                                   exchangeRate: rate.rate,
                                   exchangeRateCurrency: rate.code,
@@ -164,9 +154,9 @@ class Sender {
                                   deviceId: UserDefaults.standard.deviceID,
                                   comment: comment)
         do {
-            let _ = try kvStore.set(metaData)
-        } catch let error {
-            LWAnalytics.logEventWithParameters(itemName:._20200112_ERR, properties: ["error": String(describing: error)])
+            _ = try kvStore.set(metaData)
+        } catch {
+            LWAnalytics.logEventWithParameters(itemName: ._20200112_ERR, properties: ["error": String(describing: error)])
         }
         store.trigger(name: .txMemoUpdated(tx.pointee.txHash.description))
     }
@@ -191,9 +181,9 @@ class Sender {
         URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
             guard error == nil else { print("payment error: \(error!)"); return }
             guard let response = response, let data = data else { print("no response or data"); return }
-            if response.mimeType == "application/litecoin-paymentack" && data.count <= 50000 {
+            if response.mimeType == "application/litecoin-paymentack", data.count <= 50000 {
                 if let ack = PaymentProtocolACK(data: data) {
-                    print("received ack: \(ack)") //TODO - show memo to user
+                    print("received ack: \(ack)") // TODO: - show memo to user
                 } else {
                     print("ack failed to deserialize")
                 }
@@ -203,6 +193,5 @@ class Sender {
 
             print("finished!!")
         }.resume()
-
     }
 }

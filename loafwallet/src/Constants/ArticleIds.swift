@@ -1,11 +1,3 @@
-//
-//  ArticleIds.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-04-17.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import Foundation
 
 enum ArticleIds {

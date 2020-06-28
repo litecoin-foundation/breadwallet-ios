@@ -1,15 +1,6 @@
-//
-//  WelcomeViewController.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-09-10.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class WelcomeViewController : UIViewController, ContentBoxPresenter {
-
+class WelcomeViewController: UIViewController, ContentBoxPresenter {
     let blurView = UIVisualEffectView()
     let effect = UIBlurEffect(style: .dark)
     let contentBox = UIView(color: .white)
@@ -37,23 +28,27 @@ class WelcomeViewController : UIViewController, ContentBoxPresenter {
         contentBox.constrain([
             contentBox.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             contentBox.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            contentBox.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -C.padding[6] ) ])
+            contentBox.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -C.padding[6]),
+        ])
         header.constrainTopCorners(height: 44.0)
         titleLabel.constrain([
             titleLabel.leadingAnchor.constraint(equalTo: contentBox.leadingAnchor, constant: C.padding[2]),
             titleLabel.topAnchor.constraint(equalTo: header.bottomAnchor, constant: C.padding[2]),
-            titleLabel.trailingAnchor.constraint(equalTo: contentBox.trailingAnchor, constant: -C.padding[2]) ])
+            titleLabel.trailingAnchor.constraint(equalTo: contentBox.trailingAnchor, constant: -C.padding[2]),
+        ])
 
         body.constrain([
             body.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             body.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: C.padding[2]),
-            body.trailingAnchor.constraint(equalTo: contentBox.trailingAnchor, constant: -C.padding[2]) ])
+            body.trailingAnchor.constraint(equalTo: contentBox.trailingAnchor, constant: -C.padding[2]),
+        ])
 
         button.constrain([
             button.leadingAnchor.constraint(equalTo: body.leadingAnchor),
             button.topAnchor.constraint(equalTo: body.bottomAnchor, constant: C.padding[2]),
             button.trailingAnchor.constraint(equalTo: body.trailingAnchor),
-            button.bottomAnchor.constraint(equalTo: contentBox.bottomAnchor, constant: -C.padding[2]) ])
+            button.bottomAnchor.constraint(equalTo: contentBox.bottomAnchor, constant: -C.padding[2]),
+        ])
     }
 
     private func setInitialData() {
@@ -78,7 +73,7 @@ class WelcomeViewController : UIViewController, ContentBoxPresenter {
             NSLog("ERROR: Range not found")
             return
         }
-    
+
         let nsRange = bodyText.nsRange(from: range)
         attributedString.replaceCharacters(in: nsRange, with: NSAttributedString(attachment: icon))
         body.attributedText = attributedString
@@ -87,5 +82,4 @@ class WelcomeViewController : UIViewController, ContentBoxPresenter {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-
 }

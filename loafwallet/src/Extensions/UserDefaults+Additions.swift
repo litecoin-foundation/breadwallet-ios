@@ -1,11 +1,3 @@
-//
-//  UserDefaults+Additions.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-04-04.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import Foundation
 
 private let defaults = UserDefaults.standard
@@ -26,7 +18,6 @@ private let hasShownWelcomeKey = "hasShownWelcomeKey"
 private let didSeeTransactionCorruption = "DidSeeTransactionCorruption"
 
 extension UserDefaults {
-
     static var isBiometricsEnabled: Bool {
         get {
             guard defaults.object(forKey: isBiometricsEnabledKey) != nil else {
@@ -36,8 +27,7 @@ extension UserDefaults {
         }
         set { defaults.set(newValue, forKey: isBiometricsEnabledKey) }
     }
-    
-    
+
     static var didSeeCorruption: Bool {
         get { return defaults.bool(forKey: didSeeTransactionCorruption) }
         set { defaults.set(newValue, forKey: didSeeTransactionCorruption) }
@@ -45,19 +35,19 @@ extension UserDefaults {
 
     static var defaultCurrencyCode: String {
         get {
-            var currencyCode = "USD";
+            var currencyCode = "USD"
             if defaults.object(forKey: defaultCurrencyCodeKey) == nil {
                 currencyCode = Locale.current.currencyCode ?? "USD"
             } else {
                 currencyCode = defaults.string(forKey: defaultCurrencyCodeKey)!
             }
-            let acceptedCurrencyCodes = ["USD","EUR","JPY","BGN","CZK","DKK","GBP","HUF","PLN","RON","SEK","CHF","NOK","HRK","RUB","TRY","AUD","BRL","CAD","CNY","HKD","IDR","ILS","INR","KRW","MXN","MYR","NZD","PHP","SDG","THB","ZAR"]
+            let acceptedCurrencyCodes = ["USD", "EUR", "JPY", "BGN", "CZK", "DKK", "GBP", "HUF", "PLN", "RON", "SEK", "CHF", "NOK", "HRK", "RUB", "TRY", "AUD", "BRL", "CAD", "CNY", "HKD", "IDR", "ILS", "INR", "KRW", "MXN", "MYR", "NZD", "PHP", "SDG", "THB", "ZAR"]
 
-            if !(acceptedCurrencyCodes.contains(currencyCode)) {
-                return "USD";
+            if !acceptedCurrencyCodes.contains(currencyCode) {
+                return "USD"
             }
 
-            return currencyCode;
+            return currencyCode
         }
         set { defaults.set(newValue, forKey: defaultCurrencyCodeKey) }
     }
@@ -81,7 +71,7 @@ extension UserDefaults {
     static var maxDigits: Int {
         get {
             guard defaults.object(forKey: maxDigitsKey) != nil else {
-                return 8///Default to LTC
+                return 8 /// Default to LTC
             }
             return defaults.integer(forKey: maxDigitsKey)
         }
@@ -99,12 +89,10 @@ extension UserDefaults {
     }
 
     static var currentRate: Rate? {
-        get {
-            guard let data = defaults.object(forKey: currentRateKey) as? [String: Any] else {
-                return nil
-            }
-            return Rate(data: data)
+        guard let data = defaults.object(forKey: currentRateKey) as? [String: Any] else {
+            return nil
         }
+        return Rate(data: data)
     }
 
     static var currentRateData: [String: Any]? {
@@ -144,9 +132,9 @@ extension UserDefaults {
     }
 }
 
-//MARK: - Wallet Requires Backup
+// MARK: - Wallet Requires Backup
+
 extension UserDefaults {
-    
     static var legacyWalletNeedsBackup: Bool? {
         guard defaults.object(forKey: legacyWalletNeedsBackupKey) != nil else {
             return nil
@@ -169,7 +157,7 @@ extension UserDefaults {
         } else {
             return true
         }
-        
+
         if let legacyWalletNeedsBackup = UserDefaults.legacyWalletNeedsBackup, legacyWalletNeedsBackup == true {
             return true
         }
@@ -177,7 +165,8 @@ extension UserDefaults {
     }
 }
 
-//MARK: - Prompts
+// MARK: - Prompts
+
 extension UserDefaults {
     static var hasPromptedBiometrics: Bool {
         get { return defaults.bool(forKey: hasPromptedBiometricsKey) }

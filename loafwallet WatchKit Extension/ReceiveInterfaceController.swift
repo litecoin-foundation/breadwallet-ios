@@ -1,15 +1,6 @@
-//
-//  ReceiveInterfaceController.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-04-27.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
-import WatchKit
 import UIKit
-class ReceiveInterfaceController : WKInterfaceController {
-
+import WatchKit
+class ReceiveInterfaceController: WKInterfaceController {
     @IBOutlet var image: WKInterfaceImage!
     @IBOutlet var label: WKInterfaceLabel!
 

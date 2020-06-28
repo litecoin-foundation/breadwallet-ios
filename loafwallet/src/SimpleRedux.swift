@@ -1,11 +1,3 @@
-//
-//  SimpleRedux.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-10-21.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 typealias Reducer = (State) -> State
@@ -15,8 +7,8 @@ protocol Action {
     var reduce: Reducer { get }
 }
 
-//We need reference semantics for Subscribers, so they are restricted to classes
-protocol Subscriber: class {}
+// We need reference semantics for Subscribers, so they are restricted to classes
+protocol Subscriber: AnyObject {}
 
 extension Subscriber {
     var hashValue: Int {
@@ -27,7 +19,7 @@ extension Subscriber {
 typealias StateUpdatedCallback = (State) -> Void
 
 struct Subscription {
-    let selector: ((_ oldState: State, _ newState: State) -> Bool)
+    let selector: (_ oldState: State, _ newState: State) -> Bool
     let callback: (State) -> Void
 }
 
@@ -53,23 +45,23 @@ enum TriggerName {
     case receivedPaymentRequest(PaymentRequest?)
     case scanQr
     case copyWalletAddresses(String?, String?)
-    case authenticateForBitId(String, (BitIdAuthResult)->Void)
+    case authenticateForBitId(String, (BitIdAuthResult) -> Void)
     case hideStatusBar
     case showStatusBar
     case lightWeightAlert(String)
     case didCreateOrRecoverWallet
     case showAlert(UIAlertController?)
-    case reinitWalletManager((()->Void)?)
+    case reinitWalletManager((() -> Void)?)
     case didUpgradePin
     case txMemoUpdated(String)
     case promptShareData
     case didEnableShareData
     case didWritePaperKey
-} //NB : remember to add to triggers to == fuction below
+} // NB : remember to add to triggers to == fuction below
 
-extension TriggerName : Equatable {}
+extension TriggerName: Equatable {}
 
-func ==(lhs: TriggerName, rhs: TriggerName) -> Bool {
+func == (lhs: TriggerName, rhs: TriggerName) -> Bool {
     switch (lhs, rhs) {
     case (.presentFaq(_), .presentFaq(_)):
         return true
@@ -101,9 +93,9 @@ func ==(lhs: TriggerName, rhs: TriggerName) -> Bool {
         return true
     case (.scanQr, .scanQr):
         return true
-    case (.copyWalletAddresses(_,_), .copyWalletAddresses(_,_)):
+    case (.copyWalletAddresses(_, _), .copyWalletAddresses(_, _)):
         return true
-    case (.authenticateForBitId(_,_), .authenticateForBitId(_,_)):
+    case (.authenticateForBitId(_, _), .authenticateForBitId(_, _)):
         return true
     case (.showStatusBar, .showStatusBar):
         return true
@@ -133,8 +125,8 @@ func ==(lhs: TriggerName, rhs: TriggerName) -> Bool {
 }
 
 class Store {
+    // MARK: - Public
 
-    //MARK: - Public
     func perform(action: Action) {
         state = action.reduce(state)
     }
@@ -146,14 +138,14 @@ class Store {
             .forEach { $0.callback(name) }
     }
 
-    //Subscription callback is immediately called with current State value on subscription
-    //and then any time the selected value changes
+    // Subscription callback is immediately called with current State value on subscription
+    // and then any time the selected value changes
     func subscribe(_ subscriber: Subscriber, selector: @escaping Selector, callback: @escaping (State) -> Void) {
         lazySubscribe(subscriber, selector: selector, callback: callback)
         callback(state)
     }
 
-    //Same as subscribe(), but doesn't call the callback with current state upon subscription
+    // Same as subscribe(), but doesn't call the callback with current state upon subscription
     func lazySubscribe(_ subscriber: Subscriber, selector: @escaping Selector, callback: @escaping (State) -> Void) {
         let key = subscriber.hashValue
         let subscription = Subscription(selector: selector, callback: callback)
@@ -179,11 +171,12 @@ class Store {
         triggers.removeValue(forKey: subscriber.hashValue)
     }
 
-    //MARK: - Private
+    // MARK: - Private
+
     private(set) var state = State.initial {
         didSet {
             subscriptions
-                .flatMap { $0.value } //Retreive all subscriptions (subscriptions is a dictionary)
+                .flatMap { $0.value } // Retreive all subscriptions (subscriptions is a dictionary)
                 .filter { $0.selector(oldValue, state) }
                 .forEach { $0.callback(state) }
         }

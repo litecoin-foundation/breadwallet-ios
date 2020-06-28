@@ -1,11 +1,3 @@
-//
-//  AssociatedObject.swift
-//  breadwallet
-//
-//  Created by Samuel Sutch on 4/1/17.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import Foundation
 
 func associatedObject<T: AnyObject>(_ base: AnyObject, key: UnsafePointer<UInt8>, initialiser: () -> T) -> T {

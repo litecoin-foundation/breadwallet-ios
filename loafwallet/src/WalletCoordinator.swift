@@ -1,21 +1,12 @@
-//
-//  WalletCoordinator.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-01-07.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
+import AVFoundation
 import Foundation
 import UIKit
-import AVFoundation
 
 private let lastBlockHeightKey = "LastBlockHeightKey"
 private let progressUpdateInterval: TimeInterval = 0.5
 private let updateDebounceInterval: TimeInterval = 0.4
 
-class WalletCoordinator : Subscriber, Trackable {
-
+class WalletCoordinator: Subscriber, Trackable {
     var kvStore: BRReplicatedKVStore? {
         didSet {
             requestTxUpdate()
@@ -30,7 +21,7 @@ class WalletCoordinator : Subscriber, Trackable {
     private var backgroundTaskId: UIBackgroundTaskIdentifier?
     private var reachability = ReachabilityMonitor()
     private var retryTimer: RetryTimer?
-    
+
     init(walletManager: WalletManager, store: Store) {
         self.walletManager = walletManager
         self.store = store
@@ -58,7 +49,7 @@ class WalletCoordinator : Subscriber, Trackable {
                 self.store.perform(action: WalletChange.setProgress(progress: progress, timestamp: timestamp))
             }
         }
-        self.updateBalance()
+        updateBalance()
     }
 
     private func onSyncStart() {
@@ -83,7 +74,7 @@ class WalletCoordinator : Subscriber, Trackable {
             saveEvent("event.syncErrorMessage", attributes: ["message": "\(message) (\(code))"])
             endActivity()
 
-            if retryTimer == nil && reachability.isReachable {
+            if retryTimer == nil, reachability.isReachable {
                 retryTimer = RetryTimer()
                 retryTimer?.callback = strongify(self) { myself in
                     myself.store.trigger(name: .retrySync)
@@ -96,7 +87,7 @@ class WalletCoordinator : Subscriber, Trackable {
         retryTimer?.stop()
         retryTimer = nil
         if let height = walletManager.peerManager?.lastBlockHeight {
-            self.lastBlockHeight = height
+            lastBlockHeight = height
         }
         progressTimer?.invalidate()
         progressTimer = nil
@@ -131,7 +122,7 @@ class WalletCoordinator : Subscriber, Trackable {
         DispatchQueue.walletQueue.async {
             guard let txRefs = self.walletManager.wallet?.transactions else { return }
             let transactions = self.makeTransactionViewModels(transactions: txRefs, walletManager: self.walletManager, kvStore: self.kvStore, rate: self.store.state.currentRate)
-            if transactions.count > 0 {
+            if !transactions.isEmpty {
                 DispatchQueue.main.async {
                     self.store.perform(action: WalletChange.setTransactions(transactions))
                 }
@@ -140,30 +131,30 @@ class WalletCoordinator : Subscriber, Trackable {
     }
 
     func makeTransactionViewModels(transactions: [BRTxRef?], walletManager: WalletManager, kvStore: BRReplicatedKVStore?, rate: Rate?) -> [Transaction] {
-        return transactions.compactMap{ $0 }.sorted {
-                if $0.pointee.timestamp == 0 {
-                    return true
-                } else if $1.pointee.timestamp == 0 {
-                    return false
-                } else {
-                    return $0.pointee.timestamp > $1.pointee.timestamp
-                }
-            }.compactMap {
-                return Transaction($0, walletManager: walletManager, kvStore: kvStore, rate: rate)
+        return transactions.compactMap { $0 }.sorted {
+            if $0.pointee.timestamp == 0 {
+                return true
+            } else if $1.pointee.timestamp == 0 {
+                return false
+            } else {
+                return $0.pointee.timestamp > $1.pointee.timestamp
+            }
+        }.compactMap {
+            return Transaction($0, walletManager: walletManager, kvStore: kvStore, rate: rate)
         }
     }
 
     private func addWalletObservers() {
-        NotificationCenter.default.addObserver(forName: .WalletBalanceChangedNotification, object: nil, queue: nil, using: { note in
+        NotificationCenter.default.addObserver(forName: .WalletBalanceChangedNotification, object: nil, queue: nil, using: { _ in
             self.updateBalance()
             self.requestTxUpdate()
         })
 
-        NotificationCenter.default.addObserver(forName: .WalletTxStatusUpdateNotification, object: nil, queue: nil, using: {note in
+        NotificationCenter.default.addObserver(forName: .WalletTxStatusUpdateNotification, object: nil, queue: nil, using: { _ in
             self.requestTxUpdate()
         })
 
-        NotificationCenter.default.addObserver(forName: .WalletTxRejectedNotification, object: nil, queue: nil, using: {note in
+        NotificationCenter.default.addObserver(forName: .WalletTxRejectedNotification, object: nil, queue: nil, using: { note in
             guard let recommendRescan = note.userInfo?["recommendRescan"] as? Bool else { return }
             self.requestTxUpdate()
             if recommendRescan {
@@ -171,11 +162,11 @@ class WalletCoordinator : Subscriber, Trackable {
             }
         })
 
-        NotificationCenter.default.addObserver(forName: .WalletSyncStartedNotification, object: nil, queue: nil, using: {note in
+        NotificationCenter.default.addObserver(forName: .WalletSyncStartedNotification, object: nil, queue: nil, using: { _ in
             self.onSyncStart()
         })
 
-        NotificationCenter.default.addObserver(forName: .WalletSyncStoppedNotification, object: nil, queue: nil, using: {note in
+        NotificationCenter.default.addObserver(forName: .WalletSyncStoppedNotification, object: nil, queue: nil, using: { note in
             self.onSyncStop(notification: note)
         })
     }
@@ -194,7 +185,7 @@ class WalletCoordinator : Subscriber, Trackable {
         if let oldBalance = store.state.walletState.balance {
             if newBalance > oldBalance {
                 if store.state.walletState.syncState == .success {
-                    self.showReceived(amount: newBalance - oldBalance)
+                    showReceived(amount: newBalance - oldBalance)
                 }
             }
         }
@@ -213,9 +204,9 @@ class WalletCoordinator : Subscriber, Trackable {
     }
 
     private func ping() {
-        if let url = Bundle.main.url(forResource: "coinflip", withExtension: "aiff"){
+        if let url = Bundle.main.url(forResource: "coinflip", withExtension: "aiff") {
             var id: SystemSoundID = 0
-            AudioServicesCreateSystemSoundID(url as CFURL , &id)
+            AudioServicesCreateSystemSoundID(url as CFURL, &id)
             AudioServicesAddSystemSoundCompletion(id, nil, nil, { soundId, _ in
                 AudioServicesDisposeSystemSoundID(soundId)
             }, nil)
@@ -228,7 +219,7 @@ class WalletCoordinator : Subscriber, Trackable {
         guard store.state.isPushNotificationsEnabled else { return }
         UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
         let notification =
-      UILocalNotification()
+            UILocalNotification()
         notification.alertBody = message
         notification.soundName = "coinflip.aiff"
         UIApplication.shared.presentLocalNotificationNow(notification)
@@ -246,7 +237,7 @@ class WalletCoordinator : Subscriber, Trackable {
     }
 
     private func addSubscriptions() {
-        store.subscribe(self, name: .retrySync, callback: { _ in 
+        store.subscribe(self, name: .retrySync, callback: { _ in
             DispatchQueue.walletQueue.async {
                 self.walletManager.peerManager?.connect()
             }
@@ -254,9 +245,9 @@ class WalletCoordinator : Subscriber, Trackable {
 
         store.subscribe(self, name: .rescan, callback: { _ in
             self.store.perform(action: RecommendRescan.set(false))
-            //In case rescan is called while a sync is in progess
-            //we need to make sure it's false before a rescan starts
-            //self.store.perform(action: WalletChange.setIsSyncing(false))
+            // In case rescan is called while a sync is in progess
+            // we need to make sure it's false before a rescan starts
+            // self.store.perform(action: WalletChange.setIsSyncing(false))
             DispatchQueue.walletQueue.async {
                 self.walletManager.peerManager?.rescan()
             }

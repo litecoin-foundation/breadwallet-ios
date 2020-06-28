@@ -1,11 +1,3 @@
-//
-//  PinView.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-10-28.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 enum PinViewStyle {
@@ -13,9 +5,9 @@ enum PinViewStyle {
     case login
 }
 
-class PinView : UIView {
+class PinView: UIView {
+    // MARK: - Public
 
-    //MARK: - Public
     var itemSize: CGFloat {
         switch style {
         case .create:
@@ -24,9 +16,11 @@ class PinView : UIView {
             return 16.0
         }
     }
+
     var width: CGFloat {
         return (itemSize + C.padding[1]) * CGFloat(length)
     }
+
     let shakeDuration: CFTimeInterval = 0.6
     fileprivate var shakeCompletion: (() -> Void)?
 
@@ -35,28 +29,28 @@ class PinView : UIView {
         self.length = length
         switch style {
         case .create:
-            unFilled = (0...(length-1)).map { _ in Circle(color: .transparentWhite) }
+            unFilled = (0 ... (length - 1)).map { _ in Circle(color: .transparentWhite) }
         case .login:
-            unFilled = (0...(length-1)).map { _ in Circle(color: .transparentWhite) }
+            unFilled = (0 ... (length - 1)).map { _ in Circle(color: .transparentWhite) }
         }
-        filled = (0...(length-1)).map { _ in Circle(color: .white) }
+        filled = (0 ... (length - 1)).map { _ in Circle(color: .white) }
         super.init(frame: CGRect())
         setupSubviews()
     }
 
     func fill(_ number: Int) {
         filled.enumerated().forEach { index, circle in
-            circle.isHidden = index > number-1
+            circle.isHidden = index > number - 1
         }
     }
 
     func shake(completion: (() -> Void)? = nil) {
         shakeCompletion = completion
-        let translation = CAKeyframeAnimation(keyPath: "transform.translation.x");
+        let translation = CAKeyframeAnimation(keyPath: "transform.translation.x")
         translation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         translation.values = [-5, 5, -5, 5, -3, 3, -2, 2, 0]
 
-        let rotation = CAKeyframeAnimation(keyPath: "transform.rotation.y");
+        let rotation = CAKeyframeAnimation(keyPath: "transform.rotation.y")
         rotation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
 
         rotation.values = [-5, 5, -5, 5, -3, 3, -2, 2, 0].map {
@@ -66,10 +60,11 @@ class PinView : UIView {
         shakeGroup.animations = [translation, rotation]
         shakeGroup.duration = shakeDuration
         shakeGroup.delegate = self
-        self.layer.add(shakeGroup, forKey: "shakeIt")
+        layer.add(shakeGroup, forKey: "shakeIt")
     }
 
-    //MARK: - Private
+    // MARK: - Private
+
     private let unFilled: [Circle]
     private var filled: [Circle]
     private let style: PinViewStyle
@@ -98,17 +93,18 @@ class PinView : UIView {
                 circle.constraint(.width, constant: itemSize),
                 circle.constraint(.height, constant: itemSize),
                 circle.constraint(.centerY, toView: self, constant: nil),
-                leadingConstraint ])
+                leadingConstraint,
+            ])
         }
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-extension PinView : CAAnimationDelegate {
-    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+extension PinView: CAAnimationDelegate {
+    func animationDidStop(_: CAAnimation, finished _: Bool) {
         shakeCompletion?()
     }
 }

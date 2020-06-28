@@ -1,15 +1,6 @@
-//
-//  PhraseView.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-10-26.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 class PhraseView: UIView {
-
     private let phrase: String
     private let label = UILabel()
 
@@ -34,8 +25,7 @@ class PhraseView: UIView {
         layer.cornerRadius = 10.0
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }

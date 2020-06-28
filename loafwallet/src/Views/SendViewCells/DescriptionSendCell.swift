@@ -1,34 +1,25 @@
-//
-//  DescriptionSendCell.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-12-16.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class DescriptionSendCell : SendCell {
-
+class DescriptionSendCell: SendCell {
     init(placeholder: String) {
         super.init()
         textView.delegate = self
         textView.font = .customBody(size: 20.0)
         textView.returnKeyType = .done
         self.placeholder.text = placeholder
-        
+
         if #available(iOS 11.0, *) {
             guard let headerTextColor = UIColor(named: "headerTextColor"),
                 let textColor = UIColor(named: "labelTextColor") else {
-               NSLog("ERROR: Custom color")
-               return
+                NSLog("ERROR: Custom color")
+                return
             }
             textView.textColor = textColor
             self.placeholder.textColor = headerTextColor
         } else {
             textView.textColor = .darkText
         }
-        
+
         setupViews()
     }
 
@@ -51,21 +42,23 @@ class DescriptionSendCell : SendCell {
             textView.constraint(.leading, toView: self, constant: 11.0),
             textView.topAnchor.constraint(equalTo: topAnchor, constant: C.padding[2]),
             textView.heightAnchor.constraint(greaterThanOrEqualToConstant: 30.0),
-            textView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -C.padding[2]) ])
+            textView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -C.padding[2]),
+        ])
 
         textView.addSubview(placeholder)
         placeholder.constrain([
             placeholder.centerYAnchor.constraint(equalTo: textView.centerYAnchor),
-            placeholder.leadingAnchor.constraint(equalTo: textView.leadingAnchor, constant: 5.0) ])
+            placeholder.leadingAnchor.constraint(equalTo: textView.leadingAnchor, constant: 5.0),
+        ])
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-extension DescriptionSendCell : UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
+extension DescriptionSendCell: UITextViewDelegate {
+    func textViewDidBeginEditing(_: UITextView) {
         didBeginEditing?()
     }
 
@@ -76,11 +69,11 @@ extension DescriptionSendCell : UITextViewDelegate {
         }
     }
 
-    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+    func textViewShouldEndEditing(_: UITextView) -> Bool {
         return true
     }
 
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn _: NSRange, replacementText text: String) -> Bool {
         guard text.rangeOfCharacter(from: CharacterSet.newlines) == nil else {
             textView.resignFirstResponder()
             return false

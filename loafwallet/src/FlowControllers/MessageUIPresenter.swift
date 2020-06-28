@@ -1,16 +1,7 @@
-//
-//  MessageUIPresenter.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-12-11.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
-import UIKit
 import MessageUI
+import UIKit
 
 class MessageUIPresenter: NSObject, Trackable {
-
     weak var presenter: UIViewController?
 
     func presentMailCompose(bitcoinAddress: String, image: UIImage) {
@@ -107,13 +98,13 @@ class MessageUIPresenter: NSObject, Trackable {
 }
 
 extension MessageUIPresenter: MFMailComposeViewControllerDelegate {
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith _: MFMailComposeResult, error _: Error?) {
         dismiss(controller)
     }
 }
 
 extension MessageUIPresenter: MFMessageComposeViewControllerDelegate {
-    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith _: MessageComposeResult) {
         dismiss(controller)
     }
 }

@@ -1,38 +1,13 @@
-//
-//  BRKVStorePlugin.swift
-//  BreadWallet
-//
-//  Created by Samuel Sutch on 8/18/16.
-//  Copyright © 2016 breawallet LLC. All rights reserved.
-//
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-//
-//  The above copyright notice and this permission notice shall be included in
-//  all copies or substantial portions of the Software.
-//
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//  THE SOFTWARE.
-
 import Foundation
 
 /// Provides KV Store access to the HTML5 platform
 @objc class BRKVStorePlugin: NSObject, BRHTTPRouterPlugin {
     let client: BRAPIClient
-    
+
     init(client: BRAPIClient) {
         self.client = client
     }
-    
+
     func transformErrorToResponse(_ request: BRHTTPRequest, err: Error?) -> BRHTTPResponse? {
         switch err {
         case nil:
@@ -53,21 +28,21 @@ import Foundation
         print("[BRHTTPStorePlugin]: unexpected error: \(String(describing: err))")
         return BRHTTPResponse(request: request, code: 500)
     }
-    
+
     func getKey(_ s: String) -> String {
         return "plat-\(s)"
     }
-    
+
     func decorateResponse(version: UInt64, date: Date, response: BRHTTPResponse) -> BRHTTPResponse {
         let headers = [
             "Cache-Control": ["max-age=0, must-revalidate"],
             "ETag": ["\(version)"],
-            "Last-Modified": [date.RFC1123String() ?? ""]
+            "Last-Modified": [date.RFC1123String() ?? ""],
         ]
         return BRHTTPResponse(request: response.request, statusCode: response.statusCode,
                               statusReason: response.statusReason, headers: headers, body: response.body)
     }
-    
+
     func hook(_ router: BRHTTPRouter) {
         // GET /_kv/(key)
         //
@@ -81,7 +56,7 @@ import Foundation
         // If you are retrieving a key that was replaced after having deleted it, you may have to instruct your client
         // to ignore its cache (using Pragma: no-cache and Cache-Control: no-cache headers)
         router.get("/_kv/(key)") { (request, match) -> BRHTTPResponse in
-            guard let key = match["key"] , key.count == 1 else {
+            guard let key = match["key"], key.count == 1 else {
                 print("[BRKVStorePlugin] missing key argument")
                 return BRHTTPResponse(request: request, code: 400)
             }
@@ -120,7 +95,7 @@ import Foundation
                 let headers: [String: [String]] = [
                     "ETag": ["\(ver)"],
                     "Cache-Control": ["max-age=0, must-revalidate"],
-                    "Last-Modified": [date.RFC1123String() ?? ""]
+                    "Last-Modified": [date.RFC1123String() ?? ""],
                 ]
                 return BRHTTPResponse(
                     request: request, statusCode: 410, statusReason: "Gone", headers: headers, body: nil
@@ -130,13 +105,13 @@ import Foundation
                 "ETag": ["\(ver)"],
                 "Cache-Control": ["max-age=0, must-revalidate"],
                 "Last-Modified": [date.RFC1123String() ?? ""],
-                "Content-Type": ["application/json"]
+                "Content-Type": ["application/json"],
             ]
             return BRHTTPResponse(
                 request: request, statusCode: 200, statusReason: "OK", headers: headers, body: uncompressedBytes
             )
         }
-        
+
         // PUT /_kv/(key)
         //
         // Save a JSON value under a key. If it's a new key, then pass 0 as the If-None-Match header
@@ -149,7 +124,7 @@ import Foundation
         // Successful response is a 204 no content with the ETag set to the new version and Last-Modified header
         // set to that version's date
         router.put("/_kv/(key)") { (request, match) -> BRHTTPResponse in
-            guard let key = match["key"] , key.count == 1 else {
+            guard let key = match["key"], key.count == 1 else {
                 print("[BRKVStorePlugin] missing key argument")
                 return BRHTTPResponse(request: request, code: 400)
             }
@@ -157,11 +132,11 @@ import Foundation
                 print("[BRKVStorePlugin] kv store is not yet set up on  client")
                 return BRHTTPResponse(request: request, code: 500)
             }
-            guard let ct = request.headers["content-type"] , ct.count == 1 && ct[0] == "application/json" else {
+            guard let ct = request.headers["content-type"], ct.count == 1, ct[0] == "application/json" else {
                 print("[BRKVStorePlugin] can only set application/json request bodies")
                 return BRHTTPResponse(request: request, code: 400)
             }
-            guard let vs = request.headers["if-none-match"] , vs.count == 1 && Int(vs[0]) != nil else {
+            guard let vs = request.headers["if-none-match"], vs.count == 1, Int(vs[0]) != nil else {
                 print("[BRKVStorePlugin] missing If-None-Match header, set to `0` if creating a new key")
                 return BRHTTPResponse(request: request, code: 400)
             }
@@ -184,13 +159,13 @@ import Foundation
             let headers: [String: [String]] = [
                 "ETag": ["\(ver)"],
                 "Cache-Control": ["max-age=0, must-revalidate"],
-                "Last-Modified": [date.RFC1123String() ?? ""]
+                "Last-Modified": [date.RFC1123String() ?? ""],
             ]
             return BRHTTPResponse(
                 request: request, statusCode: 204, statusReason: "No Content", headers: headers, body: nil
             )
         }
-        
+
         // DELETE /_kv/(key)
         //
         // Mark a key as deleted in the KV store. The If-None-Match header MUST be the current version stored in the
@@ -199,7 +174,7 @@ import Foundation
         // Keys may not actually be removed from the database, and can be restored by PUTing a new version. This is
         // called a tombstone and is used to replicate deletes to other databases
         router.delete("/_kv/(key)") { (request, match) -> BRHTTPResponse in
-            guard let key = match["key"] , key.count == 1 else {
+            guard let key = match["key"], key.count == 1 else {
                 print("[BRKVStorePlugin] missing key argument")
                 return BRHTTPResponse(request: request, code: 400)
             }
@@ -207,7 +182,7 @@ import Foundation
                 print("[BRKVStorePlugin] kv store is not yet set up on  client")
                 return BRHTTPResponse(request: request, code: 500)
             }
-            guard let vs = request.headers["if-none-match"] , vs.count == 1 && Int(vs[0]) != nil else {
+            guard let vs = request.headers["if-none-match"], vs.count == 1, Int(vs[0]) != nil else {
                 print("[BRKVStorePlugin] missing If-None-Match header")
                 return BRHTTPResponse(request: request, code: 400)
             }
@@ -224,7 +199,7 @@ import Foundation
             let headers: [String: [String]] = [
                 "ETag": ["\(ver)"],
                 "Cache-Control": ["max-age=0, must-revalidate"],
-                "Last-Modified": [date.RFC1123String() ?? ""]
+                "Last-Modified": [date.RFC1123String() ?? ""],
             ]
             return BRHTTPResponse(
                 request: request, statusCode: 204, statusReason: "No Content", headers: headers, body: nil

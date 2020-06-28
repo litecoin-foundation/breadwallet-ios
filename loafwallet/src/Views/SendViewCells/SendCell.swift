@@ -1,15 +1,6 @@
-//
-//  SendCell.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-12-01.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class SendCell : UIView {
-
+class SendCell: UIView {
     static let defaultHeight: CGFloat = 72.0
 
     init() {
@@ -26,12 +17,12 @@ class SendCell : UIView {
         accessoryView.constrain([
             accessoryView.constraint(.top, toView: self),
             accessoryView.constraint(.trailing, toView: self),
-            accessoryView.heightAnchor.constraint(equalToConstant: SendCell.defaultHeight) ])
+            accessoryView.heightAnchor.constraint(equalToConstant: SendCell.defaultHeight),
+        ])
         border.constrainBottomCorners(height: 1.0)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-

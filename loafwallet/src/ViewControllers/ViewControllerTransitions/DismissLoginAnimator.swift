@@ -1,16 +1,7 @@
-//
-//  DismissLoginAnimator.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-02-07.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class DismissLoginAnimator : NSObject, UIViewControllerAnimatedTransitioning {
-
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+class DismissLoginAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+    func transitionDuration(using _: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.4
     }
 

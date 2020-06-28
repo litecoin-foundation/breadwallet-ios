@@ -1,16 +1,7 @@
-//
-//  ManageWalletViewController.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-03-11.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class ManageWalletViewController : UIViewController, ModalPresentable, Subscriber {
-
-    var parentView: UIView? //ModalPresentable
+class ManageWalletViewController: UIViewController, ModalPresentable, Subscriber {
+    var parentView: UIView? // ModalPresentable
     private let textFieldLabel = UILabel(font: .customBold(size: 14.0), color: .grayTextTint)
     private let textField = UITextField()
     private let separator = UIView(color: .secondaryShadow)
@@ -52,21 +43,25 @@ class ManageWalletViewController : UIViewController, ModalPresentable, Subscribe
         textFieldLabel.constrain([
             textFieldLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: C.padding[2]),
             textFieldLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: C.padding[2]),
-            textFieldLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -C.padding[2]) ])
+            textFieldLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -C.padding[2]),
+        ])
         textField.constrain([
             textField.leadingAnchor.constraint(equalTo: textFieldLabel.leadingAnchor),
             textField.topAnchor.constraint(equalTo: textFieldLabel.bottomAnchor),
-            textField.trailingAnchor.constraint(equalTo: textFieldLabel.trailingAnchor) ])
+            textField.trailingAnchor.constraint(equalTo: textFieldLabel.trailingAnchor),
+        ])
         separator.constrain([
             separator.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
             separator.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: C.padding[2]),
             separator.trailingAnchor.constraint(equalTo: textField.trailingAnchor),
-            separator.heightAnchor.constraint(equalToConstant: 1.0) ])
+            separator.heightAnchor.constraint(equalToConstant: 1.0),
+        ])
         body.constrain([
             body.leadingAnchor.constraint(equalTo: separator.leadingAnchor),
             body.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: C.padding[2]),
             body.trailingAnchor.constraint(equalTo: separator.trailingAnchor),
-            body.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -C.padding[2]) ])
+            body.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -C.padding[2]),
+        ])
     }
 
     private func setData() {
@@ -77,7 +72,7 @@ class ManageWalletViewController : UIViewController, ModalPresentable, Subscribe
         textFieldLabel.text = S.ManageWallet.textFieldLabel
         textField.delegate = self
 
-        self.textField.text = store.state.walletState.name
+        textField.text = store.state.walletState.name
         let creationDate = store.state.walletState.creationDate
         if creationDate.timeIntervalSince1970 > 0 {
             let df = DateFormatter()
@@ -88,7 +83,8 @@ class ManageWalletViewController : UIViewController, ModalPresentable, Subscribe
         }
     }
 
-    //MARK: - Keyboard Notifications
+    // MARK: - Keyboard Notifications
+
     @objc private func keyboardWillShow(notification: Notification) {
         copyKeyboardChangeAnimation(notification: notification)
     }
@@ -113,13 +109,13 @@ class ManageWalletViewController : UIViewController, ModalPresentable, Subscribe
         store.perform(action: WalletChange.setWalletName(name))
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-extension ManageWalletViewController : UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
+extension ManageWalletViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_: UITextField) {
         saveWalletName()
     }
 
@@ -128,7 +124,7 @@ extension ManageWalletViewController : UITextFieldDelegate {
         return true
     }
 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn _: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         if text.utf8.count + string.utf8.count > maxWalletNameLength {
             return false
@@ -138,7 +134,7 @@ extension ManageWalletViewController : UITextFieldDelegate {
     }
 }
 
-extension ManageWalletViewController : ModalDisplayable {
+extension ManageWalletViewController: ModalDisplayable {
     var faqArticleId: String? {
         return ArticleIds.manageWallet
     }

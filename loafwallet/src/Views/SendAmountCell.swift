@@ -1,20 +1,11 @@
-//
-//  SendAmountCell.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-04-12.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class SendAmountCell : SendCell {
-
+class SendAmountCell: SendCell {
     init(placeholder: String) {
         super.init()
         let attributes: [NSAttributedStringKey: Any] = [
             NSAttributedStringKey.foregroundColor: UIColor.grayTextTint,
-            NSAttributedStringKey.font : placeholderFont
+            NSAttributedStringKey.font: placeholderFont,
         ]
         textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
         textField.delegate = self
@@ -34,14 +25,14 @@ class SendAmountCell : SendCell {
             textField.font = count > 0 ? textFieldFont : placeholderFont
         }
     }
-    
+
     func setLabel(text: String, color: UIColor) {
         label.text = text
         label.textColor = color
     }
 
     func setAmountLabel(text: String) {
-        textField.isHidden = text.utf8.count > 0 //Textfield should be hidden if amount label has text
+        textField.isHidden = text.utf8.count > 0 // Textfield should be hidden if amount label has text
         cursor.isHidden = !textField.isHidden
         amountLabel.text = text
     }
@@ -63,21 +54,25 @@ class SendAmountCell : SendCell {
             textField.constraint(.leading, toView: self, constant: C.padding[2]),
             textField.centerYAnchor.constraint(equalTo: accessoryView.centerYAnchor),
             textField.heightAnchor.constraint(greaterThanOrEqualToConstant: 30.0),
-            textField.constraint(toLeading: accessoryView, constant: 0.0) ])
+            textField.constraint(toLeading: accessoryView, constant: 0.0),
+        ])
         label.constrain([
             label.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
             label.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: C.padding[2]),
             label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -C.padding[2]),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor) ])
+            label.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
         amountLabel.constrain([
             amountLabel.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
             amountLabel.topAnchor.constraint(equalTo: textField.topAnchor),
-            amountLabel.bottomAnchor.constraint(equalTo: textField.bottomAnchor) ])
+            amountLabel.bottomAnchor.constraint(equalTo: textField.bottomAnchor),
+        ])
         cursor.constrain([
             cursor.leadingAnchor.constraint(equalTo: amountLabel.trailingAnchor, constant: 2.0),
             cursor.heightAnchor.constraint(equalTo: amountLabel.heightAnchor, constant: -4.0),
             cursor.centerYAnchor.constraint(equalTo: amountLabel.centerYAnchor),
-            cursor.widthAnchor.constraint(equalToConstant: 2.0) ])
+            cursor.widthAnchor.constraint(equalToConstant: 2.0),
+        ])
 
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -92,13 +87,13 @@ class SendAmountCell : SendCell {
         textFieldDidChange?(text)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-extension SendAmountCell : UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+extension SendAmountCell: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_: UITextField) {
         textFieldDidBeginEditing?()
     }
 

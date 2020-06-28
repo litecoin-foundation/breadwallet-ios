@@ -4,17 +4,17 @@ import Foundation
     typealias NSRegularExpression = RegularExpression
 #endif
 
-fileprivate var regex: NSRegularExpression!
+private var regex: NSRegularExpression!
 
 extension String {
-    public func countryFromURL()throws -> Country? {
+    public func countryFromURL() throws -> Country? {
         if regex == nil {
             regex = try NSRegularExpression(pattern: "http(?:s)?:\\/\\/(?:(?:.*?)\\.)?(?:[^\\/]*?)(?:\\.co)?\\.(.*?)(?:\\/|$).*", options: [])
         }
         let code = regex.stringByReplacingMatches(
             in: self,
             options: [],
-            range: NSMakeRange(0, self.utf8.count),
+            range: NSMakeRange(0, utf8.count),
             withTemplate: "$1"
         )
         switch code {
@@ -23,8 +23,8 @@ extension String {
         default: return Country(rawValue: code)
         }
     }
-    
-    public func countryFromURL(`default`: Country = .allCountries)throws -> Country {
-        return try self.countryFromURL() ?? `default`
+
+    public func countryFromURL(default: Country = .allCountries) throws -> Country {
+        return try countryFromURL() ?? `default`
     }
 }

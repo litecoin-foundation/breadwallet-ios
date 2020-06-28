@@ -1,30 +1,5 @@
-//
-//  BRWebSocket.swift
-//  BreadWallet
-//
-//  Created by Samuel Sutch on 2/18/16.
-//  Copyright (c) 2016 breadwallet LLC
-//
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-//
-//  The above copyright notice and this permission notice shall be included in
-//  all copies or substantial portions of the Software.
-//
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//  THE SOFTWARE.
-
-import Foundation
 import BRSocketHelpers
+import Foundation
 
 public protocol BRWebSocket {
     var id: String { get }
@@ -33,14 +8,14 @@ public protocol BRWebSocket {
     func send(_ text: String)
 }
 
-public protocol BRWebSocketClient: class {
+public protocol BRWebSocketClient: AnyObject {
     func socketDidConnect(_ socket: BRWebSocket)
     func socket(_ socket: BRWebSocket, didReceiveData data: Data)
     func socket(_ socket: BRWebSocket, didReceiveText text: String)
     func socketDidDisconnect(_ socket: BRWebSocket)
 }
 
-let GID = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
+let GID = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
 
 enum SocketState {
     case headerb1
@@ -58,9 +33,9 @@ enum SocketOpcode: UInt8, CustomStringConvertible {
     case close = 0x8
     case ping = 0x9
     case pong = 0xA
-    
+
     var description: String {
-        switch (self) {
+        switch self {
         case .stream: return "STREAM"
         case .text: return "TEXT"
         case .binary: return "BINARY"
@@ -71,7 +46,7 @@ enum SocketOpcode: UInt8, CustomStringConvertible {
     }
 }
 
-let (MAXHEADER, MAXPAYLOAD) = (65536, 33554432)
+let (MAXHEADER, MAXPAYLOAD) = (65536, 33_554_432)
 
 enum SocketCloseEventCode: UInt16 {
     case close_NORMAL = 1000
@@ -92,17 +67,17 @@ enum SocketCloseEventCode: UInt16 {
 
 class BRWebSocketServer {
     var sockets = [Int32: BRWebSocketImpl]()
-    var thread: pthread_t? = nil
+    var thread: pthread_t?
     var waiter: UnsafeMutablePointer<pthread_cond_t>
     var mutex: UnsafeMutablePointer<pthread_mutex_t>
-    
+
     init() {
         mutex = UnsafeMutablePointer.allocate(capacity: MemoryLayout<pthread_mutex_t>.size)
         waiter = UnsafeMutablePointer.allocate(capacity: MemoryLayout<pthread_cond_t>.size)
         pthread_mutex_init(mutex, nil)
         pthread_cond_init(waiter, nil)
     }
-    
+
     func add(_ socket: BRWebSocketImpl) {
         log("adding socket \(socket.fd)")
         pthread_mutex_lock(mutex)
@@ -112,7 +87,7 @@ class BRWebSocketServer {
         pthread_mutex_unlock(mutex)
         log("done adding socket \(socket.fd)")
     }
-    
+
     func serveForever() {
         objc_sync_enter(self)
         if thread != nil {
@@ -128,7 +103,7 @@ class BRWebSocketServer {
         }, selfPointer)
         objc_sync_exit(self)
     }
-    
+
     func _serveForever() {
         log("starting websocket poller")
         while true {
@@ -139,33 +114,34 @@ class BRWebSocketServer {
             }
             pthread_mutex_unlock(mutex)
             // log("awaiting select")
-            
+
             // all fds should be available for a read
-            let readFds = sockets.map({ (ws) -> Int32 in return ws.0 });
-            
+            let readFds = sockets.map { (ws) -> Int32 in ws.0 }
+
             // only fds which have items in the send queue are available for a write
-            let writeFds = sockets.map({
-                (ws) -> Int32 in return ws.1.sendq.count > 0 ? ws.0 : -1
-            }).filter({ i in return i != -1 })
-            
+            let writeFds = sockets.map {
+                (ws) -> Int32 in !ws.1.sendq.isEmpty ? ws.0 : -1
+            }.filter { i in i != -1 }
+
             // build the select request and execute it, checking the result for an error
             let req = bw_select_request(
                 write_fd_len: Int32(writeFds.count),
                 read_fd_len: Int32(readFds.count),
                 write_fds: UnsafeMutablePointer(mutating: writeFds),
-                read_fds: UnsafeMutablePointer(mutating: readFds));
-            
+                read_fds: UnsafeMutablePointer(mutating: readFds)
+            )
+
             let resp = bw_select(req)
-            
+
             if resp.error > 0 {
                 let errstr = strerror(resp.error)
                 log("error doing a select \(String(describing: errstr)) - removing all clients")
                 sockets.removeAll()
                 continue
             }
-            
+
             // read for all readers that have data waiting
-            for i in 0..<resp.read_fd_len {
+            for i in 0 ..< resp.read_fd_len {
                 if let readSock = sockets[resp.read_fds[Int(i)]] {
                     log("handle read fd \(readSock.fd)")
                     do {
@@ -179,9 +155,9 @@ class BRWebSocketServer {
                     log("nil read socket")
                 }
             }
-            
+
             // write for all writers
-            for i in 0..<resp.write_fd_len {
+            for i in 0 ..< resp.write_fd_len {
                 if let writeSock = sockets[resp.write_fds[Int(i)]] {
                     log("handle write fd=\(writeSock.fd)")
                     let (opcode, payload) = writeSock.sendq.removeFirst()
@@ -210,9 +186,9 @@ class BRWebSocketServer {
                     log("nil write socket")
                 }
             }
-            
+
             // kill sockets that wrote out of bound data
-            for i in 0..<resp.error_fd_len {
+            for i in 0 ..< resp.error_fd_len {
                 if let errSock = sockets[resp.error_fds[Int(i)]] {
                     errSock.response.kill()
                     errSock.client?.socketDidDisconnect(errSock)
@@ -221,7 +197,7 @@ class BRWebSocketServer {
             }
         }
     }
-    
+
     // attempt to send a buffer, returning the number of sent bytes
     func sendBuffer(_ fd: Int32, buffer: [UInt8]) throws -> Int {
         log("send buffer fd=\(fd) buffer=\(buffer)")
@@ -236,7 +212,7 @@ class BRWebSocketServer {
                     if Int32(serr) == EWOULDBLOCK || Int32(serr) == EAGAIN {
                         return
                     } else {
-                      self.log("socket write failed fd=\(fd) err=\(String(describing: strerror(serr)))")
+                        self.log("socket write failed fd=\(fd) err=\(String(describing: strerror(serr)))")
                         throw BRHTTPServerError.socketWriteFailed
                     }
                 }
@@ -245,7 +221,7 @@ class BRWebSocketServer {
         }
         return sent
     }
-    
+
     func log(_ s: String) {
         print("[BRWebSocketHost] \(s)")
     }
@@ -260,7 +236,7 @@ class BRWebSocketImpl: BRWebSocket {
     var key: String!
     var version: String!
     var id: String = UUID().uuidString
-    
+
     var state = SocketState.headerb1
     var fin: UInt8 = 0
     var hasMask = false
@@ -274,35 +250,35 @@ class BRWebSocketImpl: BRWebSocket {
     var dataWritten = 0
     var maskarray = [UInt8]()
     var maskarrayWritten = 0
-    
+
     var fragStart = false
     var fragType = SocketOpcode.binary
     var fragBuffer = [UInt8]()
-    
+
     var sendq = [(SocketOpcode, [UInt8])]()
-    
+
     init(request: BRHTTPRequest, response: BRHTTPResponse, match: BRHTTPRouteMatch, client: BRWebSocketClient) {
         self.request = request
         self.match = match
-        self.fd = request.fd
+        fd = request.fd
         self.response = response
         self.client = client
     }
-    
+
     // MARK: - public interface impl
-    
+
     @objc func send(_ text: String) {
         sendMessage(false, opcode: .text, data: [UInt8](text.utf8))
     }
-    
+
     // MARK: - private interface
-    
+
     func handshake() -> Bool {
         log("handshake initiated")
-        if let upgrades = request.headers["upgrade"] , upgrades.count > 0 {
+        if let upgrades = request.headers["upgrade"], !upgrades.isEmpty {
             let upgrade = upgrades[0]
             if upgrade.lowercased() == "websocket" {
-                if let ks = request.headers["sec-websocket-key"], let vs = request.headers["sec-websocket-version"], ks.count > 0 && vs.count > 0 {
+                if let ks = request.headers["sec-websocket-key"], let vs = request.headers["sec-websocket-version"], !ks.isEmpty, !vs.isEmpty {
                     key = ks[0]
                     version = vs[0]
                     do {
@@ -323,7 +299,7 @@ class BRWebSocketImpl: BRWebSocket {
                     if !setNonBlocking() {
                         return false
                     }
-                    
+
                     return true
                 }
                 log("invalid handshake - missing sec-websocket-key or sec-websocket-version")
@@ -332,7 +308,7 @@ class BRWebSocketImpl: BRWebSocket {
         log("invalid handshake - missing or malformed \"upgrade\" header")
         return false
     }
-    
+
     func setNonBlocking() -> Bool {
         log("setting socket to non blocking")
         let nbResult = bw_nbioify(request.fd)
@@ -342,7 +318,7 @@ class BRWebSocketImpl: BRWebSocket {
         }
         return true
     }
-    
+
     func handleRead() throws {
         var buf = [UInt8](repeating: 0, count: 1)
         let n = recv(fd, &buf, 1, 0)
@@ -352,7 +328,7 @@ class BRWebSocketImpl: BRWebSocket {
         }
         parseMessage(buf[0])
     }
-    
+
     func parseMessage(_ byte: UInt8) {
         if state == .headerb1 {
             fin = byte & UInt8(0x80)
@@ -417,12 +393,12 @@ class BRWebSocketImpl: BRWebSocket {
             }
             lengtharray[lengtharrayWritten - 1] = byte
             if lengtharrayWritten == 2 {
-                let ll = Data(bytes: lengtharray).withUnsafeBytes({ (p: UnsafePointer<UInt16>) -> UInt16 in
+                let ll = Data(bytes: lengtharray).withUnsafeBytes { (p: UnsafePointer<UInt16>) -> UInt16 in
                     if Int(OSHostByteOrder()) != OSBigEndian {
                         return CFSwapInt16BigToHost(p.pointee)
                     }
                     return p.pointee
-                })
+                }
                 length = Int(ll)
                 if hasMask {
                     maskarray = [UInt8](repeating: 0, count: 4)
@@ -450,12 +426,12 @@ class BRWebSocketImpl: BRWebSocket {
             }
             lengtharray[lengtharrayWritten - 1] = byte
             if lengtharrayWritten == 8 {
-                let ll = Data(bytes: lengtharray).withUnsafeBytes({ (p: UnsafePointer<UInt64>) -> UInt64 in
+                let ll = Data(bytes: lengtharray).withUnsafeBytes { (p: UnsafePointer<UInt64>) -> UInt64 in
                     if Int(OSHostByteOrder()) != OSBigEndian {
                         return CFSwapInt64BigToHost(p.pointee)
                     }
                     return p.pointee
-                })
+                }
                 length = Int(ll)
                 if hasMask {
                     maskarray = [UInt8](repeating: 0, count: 4)
@@ -502,7 +478,7 @@ class BRWebSocketImpl: BRWebSocket {
                 return
             }
             if hasMask {
-                log("payload byte length=\(length) mask=\(maskarray[index%4]) byte=\(byte)")
+                log("payload byte length=\(length) mask=\(maskarray[index % 4]) byte=\(byte)")
                 data[dataWritten - 1] = byte ^ maskarray[index % 4]
             } else {
                 log("payload byte length=\(length) \(byte)")
@@ -519,14 +495,14 @@ class BRWebSocketImpl: BRWebSocket {
             }
         }
     }
-    
+
     func handlePacket() {
         log("handle packet state=\(state) opcode=\(opcode)")
         // validate opcode
         if opcode == .close || opcode == .stream || opcode == .text || opcode == .binary {
             // valid
         } else if opcode == .pong || opcode == .ping {
-            if dataWritten >  125 {
+            if dataWritten > 125 {
                 log("control frame length can not be > 125")
                 return
             }
@@ -534,23 +510,23 @@ class BRWebSocketImpl: BRWebSocket {
             log("unknown opcode")
             return
         }
-        
+
         if opcode == .close {
             log("CLOSE")
             var status = SocketCloseEventCode.close_NORMAL
             var reason = ""
             if dataWritten >= 2 {
                 let lt = Array(data.prefix(2))
-                let ll = Data(bytes: lt).withUnsafeBytes({ (p: UnsafePointer<UInt16>) -> UInt16 in
-                    return CFSwapInt16BigToHost(p.pointee)
-                })
+                let ll = Data(bytes: lt).withUnsafeBytes { (p: UnsafePointer<UInt16>) -> UInt16 in
+                    CFSwapInt16BigToHost(p.pointee)
+                }
                 if let ss = SocketCloseEventCode(rawValue: ll) {
                     status = ss
                 } else {
                     status = .close_PROTOCOL_ERROR
                 }
                 let lr = Array(data.suffix(from: 2))
-                if lr.count > 0 {
+                if !lr.isEmpty {
                     if let rr = String(bytes: lr, encoding: String.Encoding.utf8) {
                         reason = rr
                     } else {
@@ -587,15 +563,15 @@ class BRWebSocketImpl: BRWebSocket {
                     log("error: fragmentation protocol error x")
                     return
                 }
-                if self.fragType == .text {
+                if fragType == .text {
                     if let str = String(bytes: data, encoding: String.Encoding.utf8) {
-                        self.client?.socket(self, didReceiveText: str)
+                        client?.socket(self, didReceiveText: str)
                     } else {
                         log("error decoding utf8 data")
                     }
                 } else {
                     let bin = Data(bytes: UnsafePointer<UInt8>(UnsafePointer(data)), count: data.count)
-                    self.client?.socket(self, didReceiveData: bin)
+                    client?.socket(self, didReceiveData: bin)
                 }
                 fragType = .binary
                 fragStart = false
@@ -611,7 +587,7 @@ class BRWebSocketImpl: BRWebSocket {
                 }
                 if opcode == .text {
                     if let str = String(bytes: data, encoding: String.Encoding.utf8) {
-                        self.client?.socket(self, didReceiveText: str)
+                        client?.socket(self, didReceiveText: str)
                     } else {
                         log("error decoding uft8 data")
                     }
@@ -619,7 +595,7 @@ class BRWebSocketImpl: BRWebSocket {
             }
         }
     }
-    
+
     func close(_ status: SocketCloseEventCode = .close_NORMAL, reason: String = "") {
         if !closed {
             log("sending close")
@@ -629,19 +605,19 @@ class BRWebSocketImpl: BRWebSocket {
         }
         closed = true
     }
-    
+
     func sendMessage(_ fin: Bool, opcode: SocketOpcode, data: [UInt8]) {
         log("send message opcode=\(opcode)")
         var b1: UInt8 = 0
         var b2: UInt8 = 0
         if !fin { b1 |= 0x80 }
-        var payload = [UInt8]() // todo: pick the right size for this
+        var payload = [UInt8]() // TODO: pick the right size for this
         b1 |= opcode.rawValue
         payload.append(b1)
         if data.count <= 125 {
             b2 |= UInt8(data.count)
             payload.append(b2)
-        } else if data.count >= 126 && data.count <= 65535 {
+        } else if data.count >= 126, data.count <= 65535 {
             b2 |= 126
             payload.append(b2)
             payload.append(contentsOf: UInt16(data.count).toNetwork())
@@ -653,7 +629,7 @@ class BRWebSocketImpl: BRWebSocket {
         payload.append(contentsOf: data)
         sendq.append((opcode, payload))
     }
-    
+
     func log(_ s: String) {
         print("[BRWebSocket \(fd)] \(s)")
     }
@@ -663,9 +639,9 @@ extension UInt16 {
     func toNetwork() -> [UInt8] {
         var selfBig = CFSwapInt16HostToBig(self)
         let size = MemoryLayout<UInt16>.size
-        return Data(bytes: &selfBig, count: size).withUnsafeBytes({ (p: UnsafePointer<UInt8>) -> [UInt8] in
-            return Array(UnsafeBufferPointer(start: p, count: size))
-        })
+        return Data(bytes: &selfBig, count: size).withUnsafeBytes { (p: UnsafePointer<UInt8>) -> [UInt8] in
+            Array(UnsafeBufferPointer(start: p, count: size))
+        }
     }
 }
 
@@ -673,8 +649,8 @@ extension UInt64 {
     func toNetwork() -> [UInt8] {
         var selfBig = CFSwapInt64HostToBig(self)
         let size = MemoryLayout<UInt64>.size
-        return Data(bytes: &selfBig, count: size).withUnsafeBytes({ (p: UnsafePointer<UInt8>) -> [UInt8] in
-            return Array(UnsafeBufferPointer(start: p, count: size))
-        })
+        return Data(bytes: &selfBig, count: size).withUnsafeBytes { (p: UnsafePointer<UInt8>) -> [UInt8] in
+            Array(UnsafeBufferPointer(start: p, count: size))
+        }
     }
 }

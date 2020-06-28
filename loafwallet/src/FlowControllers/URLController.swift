@@ -1,15 +1,6 @@
-//
-//  URLController.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-05-26.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class URLController : Trackable {
-
+class URLController: Trackable {
     init(store: Store, walletManager: WalletManager) {
         self.store = store
         self.walletManager = walletManager
@@ -21,9 +12,9 @@ class URLController : Trackable {
 
     func handleUrl(_ url: URL) -> Bool {
         saveEvent("send.handleURL", attributes: [
-            "scheme" : url.scheme ?? C.null,
-            "host" : url.host ?? C.null,
-            "path" : url.path
+            "scheme": url.scheme ?? C.null,
+            "host": url.host ?? C.null,
+            "path": url.path,
         ])
 
         switch url.scheme ?? "" {
@@ -77,7 +68,7 @@ class URLController : Trackable {
     private func isBitcoinUri(url: URL, uri: String?) -> URL? {
         guard let uri = uri else { return nil }
         guard let bitcoinUrl = URL(string: uri) else { return nil }
-        if (url.host == "litecoin-uri" || url.path == "/litecoin-uri") && bitcoinUrl.scheme == "litecoin" {
+        if url.host == "litecoin-uri" || url.path == "/litecoin-uri", bitcoinUrl.scheme == "litecoin" {
             return url
         } else {
             return nil
@@ -89,7 +80,7 @@ class URLController : Trackable {
             let queryLength = url.query?.utf8.count ?? 0
             let callback = callback.appendingFormat("%@address=%@", queryLength > 0 ? "&" : "?", wallet.receiveAddress)
             if let callbackURL = URL(string: callback) {
-              UIApplication.shared.open(callbackURL, options: [:], completionHandler: nil)
+                UIApplication.shared.open(callbackURL, options: [:], completionHandler: nil)
             }
         }
     }
@@ -109,8 +100,8 @@ class URLController : Trackable {
         let alert = UIAlertController(title: S.BitID.title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: S.BitID.deny, style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: S.BitID.approve, style: .default, handler: { _ in
-            bitid.runCallback(store: self.store) { data, response, error in
-                if let resp = response as? HTTPURLResponse, error == nil && resp.statusCode >= 200 && resp.statusCode < 300 {
+            bitid.runCallback(store: self.store) { _, response, error in
+                if let resp = response as? HTTPURLResponse, error == nil, resp.statusCode >= 200, resp.statusCode < 300 {
                     let alert = UIAlertController(title: S.BitID.success, message: nil, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: S.Button.ok, style: .default, handler: nil))
                     self.present(alert: alert)

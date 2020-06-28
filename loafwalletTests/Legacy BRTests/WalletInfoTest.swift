@@ -1,18 +1,10 @@
-//
-//  WalletInfoTest.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-06-29.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import XCTest
 @testable import loafwallet
 
 private var walletManager: WalletManager?
 private var client: BRAPIClient?
 
-//class WalletInfoTest : XCTestCase {
+// class WalletInfoTest : XCTestCase {
 //
 //    override class func setUp() {
 //        clearKeychain()
@@ -63,4 +55,4 @@ private var client: BRAPIClient?
 ////        waitForExpectations(timeout: 15.0, handler: nil)
 ////    }
 //
-//}
+// }

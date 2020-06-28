@@ -1,38 +1,27 @@
-//
-//  PinTransitioningDelegate.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-05-05.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 private let duration: TimeInterval = 0.4
 
-class TransitioningDelegate : NSObject , UIViewControllerTransitioningDelegate {
-
+class TransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
     var shouldShowMaskView = true
 
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forPresented _: UIViewController, presenting _: UIViewController, source _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return PresentGenericAnimator(shouldShowMaskView: shouldShowMaskView)
     }
 
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forDismissed _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return DismissGenericAnimator()
     }
 }
- 
 
-class PresentGenericAnimator : NSObject, UIViewControllerAnimatedTransitioning {
-
+class PresentGenericAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     init(shouldShowMaskView: Bool) {
         self.shouldShowMaskView = shouldShowMaskView
     }
 
     private let shouldShowMaskView: Bool
 
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    func transitionDuration(using _: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
     }
 
@@ -55,10 +44,10 @@ class PresentGenericAnimator : NSObject, UIViewControllerAnimatedTransitioning {
         }
 
         let scaleFactor: CGFloat = 0.1
-        let deltaX = toVc.contentBox.frame.width * (1-scaleFactor)
-        let deltaY = toVc.contentBox.frame.height * (1-scaleFactor)
+        let deltaX = toVc.contentBox.frame.width * (1 - scaleFactor)
+        let deltaY = toVc.contentBox.frame.height * (1 - scaleFactor)
         let scale = CGAffineTransform(scaleX: scaleFactor, y: scaleFactor)
-        toVc.contentBox.transform = scale.translatedBy(x: -deltaX, y: deltaY/2.0)
+        toVc.contentBox.transform = scale.translatedBy(x: -deltaX, y: deltaY / 2.0)
 
         let finalToViewFrame = toView.frame
         toView.frame = toView.frame.offsetBy(dx: 0, dy: toView.frame.height)
@@ -69,15 +58,15 @@ class PresentGenericAnimator : NSObject, UIViewControllerAnimatedTransitioning {
             blurView.effect = toVc.effect
             toView.frame = finalToViewFrame
             toVc.contentBox.transform = .identity
-        }, completion: { completed in
+        }, completion: { _ in
             maskView.removeFromSuperview()
             transitionContext.completeTransition(true)
         })
     }
 }
 
-class DismissGenericAnimator : NSObject, UIViewControllerAnimatedTransitioning {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+class DismissGenericAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+    func transitionDuration(using _: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
     }
 
@@ -91,16 +80,13 @@ class DismissGenericAnimator : NSObject, UIViewControllerAnimatedTransitioning {
             fromView.frame = fromView.frame.offsetBy(dx: 0, dy: fromView.frame.height)
 
             let scaleFactor: CGFloat = 0.1
-            let deltaX = fromVc.contentBox.frame.width * (1-scaleFactor)
-            let deltaY = fromVc.contentBox.frame.height * (1-scaleFactor)
+            let deltaX = fromVc.contentBox.frame.width * (1 - scaleFactor)
+            let deltaY = fromVc.contentBox.frame.height * (1 - scaleFactor)
             let scale = CGAffineTransform(scaleX: scaleFactor, y: scaleFactor)
-            fromVc.contentBox.transform = scale.translatedBy(x: -deltaX, y: deltaY/2.0)
+            fromVc.contentBox.transform = scale.translatedBy(x: -deltaX, y: deltaY / 2.0)
 
         }, completion: { _ in
             transitionContext.completeTransition(true)
         })
     }
 }
-
-
-

@@ -1,11 +1,3 @@
-//
-//  Rate.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-01-25.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
@@ -19,7 +11,7 @@ struct Rate {
         if let symbol = Rate.symbolMap[code] {
             return symbol
         } else {
-            let components: [String : String] = [NSLocale.Key.currencyCode.rawValue : code]
+            let components: [String: String] = [NSLocale.Key.currencyCode.rawValue: code]
             let identifier = Locale.identifier(fromComponents: components)
             return Locale(identifier: identifier).currencySymbol ?? code
         }
@@ -44,11 +36,11 @@ struct Rate {
     }()
 
     var locale: Locale {
-        let components: [String : String] = [NSLocale.Key.currencyCode.rawValue : code]
+        let components: [String: String] = [NSLocale.Key.currencyCode.rawValue: code]
         let identifier = Locale.identifier(fromComponents: components)
         return Locale(identifier: identifier)
     }
-   
+
     static var empty: Rate {
         return Rate(code: "", name: "", rate: 0.0, lastTimestamp: Date())
     }
@@ -67,13 +59,13 @@ extension Rate {
         return [
             "code": code,
             "name": name,
-            "n": rate
+            "n": rate,
         ]
     }
 }
 
-extension Rate : Equatable {}
+extension Rate: Equatable {}
 
-func ==(lhs: Rate, rhs: Rate) -> Bool {
+func == (lhs: Rate, rhs: Rate) -> Bool {
     return lhs.code == rhs.code && lhs.name == rhs.name && lhs.rate == rhs.rate
 }

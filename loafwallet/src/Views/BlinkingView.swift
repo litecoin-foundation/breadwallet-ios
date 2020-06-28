@@ -1,15 +1,6 @@
-//
-//  BlinkingView.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-04-16.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class BlinkingView : UIView {
-
+class BlinkingView: UIView {
     init(blinkColor: UIColor) {
         self.blinkColor = blinkColor
         super.init(frame: .zero)
@@ -30,7 +21,7 @@ class BlinkingView : UIView {
     private let blinkColor: UIColor
     private var timer: Timer?
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

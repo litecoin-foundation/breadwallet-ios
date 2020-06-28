@@ -1,11 +1,3 @@
-//
-//  AlertView.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-11-22.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 enum AlertType {
@@ -50,9 +42,9 @@ enum AlertType {
     }
 }
 
-extension AlertType : Equatable {}
+extension AlertType: Equatable {}
 
-func ==(lhs: AlertType, rhs: AlertType) -> Bool {
+func == (lhs: AlertType, rhs: AlertType) -> Bool {
     switch (lhs, rhs) {
     case (.pinSet(_), .pinSet(_)):
         return true
@@ -69,8 +61,7 @@ func ==(lhs: AlertType, rhs: AlertType) -> Bool {
     }
 }
 
-class AlertView : UIView, GradientDrawable {
-
+class AlertView: UIView, GradientDrawable {
     private let type: AlertType
     private let header = UILabel()
     private let subheader = UILabel()
@@ -81,7 +72,7 @@ class AlertView : UIView, GradientDrawable {
 
     init(type: AlertType) {
         self.type = type
-        self.icon = type.icon
+        icon = type.icon
 
         super.init(frame: .zero)
         layer.cornerRadius = 6.0
@@ -120,33 +111,35 @@ class AlertView : UIView, GradientDrawable {
     }
 
     private func addConstraints() {
-
-        //NB - In this alert view, constraints shouldn't be pinned to the bottom
-        //of the view because the bottom actually extends off the bottom of the screen a bit.
-        //It extends so that it still covers up the underlying view when it bounces on screen.
+        // NB - In this alert view, constraints shouldn't be pinned to the bottom
+        // of the view because the bottom actually extends off the bottom of the screen a bit.
+        // It extends so that it still covers up the underlying view when it bounces on screen.
 
         header.constrainTopCorners(sidePadding: C.padding[2], topPadding: C.padding[2])
         separator.constrain([
             separator.constraint(.height, constant: 1.0),
             separator.constraint(.width, toView: self, constant: 0.0),
             separator.constraint(.top, toView: self, constant: separatorYOffset),
-            separator.constraint(.leading, toView: self, constant: nil) ])
+            separator.constraint(.leading, toView: self, constant: nil),
+        ])
         icon.constrain([
             icon.constraint(.centerX, toView: self, constant: nil),
             icon.constraint(.centerY, toView: self, constant: nil),
             icon.constraint(.width, constant: iconSize),
-            icon.constraint(.height, constant: iconSize) ])
+            icon.constraint(.height, constant: iconSize),
+        ])
         subheader.constrain([
             subheader.constraint(.leading, toView: self, constant: C.padding[2]),
             subheader.constraint(.trailing, toView: self, constant: -C.padding[2]),
-            subheader.constraint(toBottom: icon, constant: C.padding[3]) ])
+            subheader.constraint(toBottom: icon, constant: C.padding[3]),
+        ])
     }
 
     override func draw(_ rect: CGRect) {
         drawGradient(rect)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

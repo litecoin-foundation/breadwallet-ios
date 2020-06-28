@@ -1,13 +1,5 @@
-//
-//  PaymentRequest.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-03-26.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
-import Foundation
 import BRCore
+import Foundation
 
 enum PaymentRequestType {
     case local
@@ -15,7 +7,6 @@ enum PaymentRequestType {
 }
 
 struct PaymentRequest {
-
     init?(string: String) {
         if var url = NSURL(string: string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).replacingOccurrences(of: " ", with: "%20")) {
             if let scheme = url.scheme, let resourceSpecifier = url.resourceSpecifier, url.host == nil {
@@ -64,17 +55,16 @@ struct PaymentRequest {
     }
 
     init?(data: Data) {
-        self.paymentProtocolRequest = PaymentProtocolRequest(data: data)
+        paymentProtocolRequest = PaymentProtocolRequest(data: data)
         type = .local
     }
 
     func fetchRemoteRequest(completion: @escaping (PaymentRequest?) -> Void) {
-
         let request: NSMutableURLRequest
         if let url = r {
             request = NSMutableURLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 5.0)
         } else {
-            request = NSMutableURLRequest(url: remoteRequest! as URL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 5.0) //TODO - fix !
+            request = NSMutableURLRequest(url: remoteRequest! as URL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 5.0) // TODO: - fix !
         }
 
         request.setValue("application/litecoin-paymentrequest", forHTTPHeaderField: "Accept")
@@ -87,12 +77,11 @@ struct PaymentRequest {
             if response.mimeType?.lowercased() == "application/litecoin-paymentrequest" {
                 completion(PaymentRequest(data: data))
             } else if response.mimeType?.lowercased() == "text/uri-list" {
-                
                 guard let dataStringArray = String(data: data, encoding: .utf8)?.components(separatedBy: "\n") else {
                     NSLog("ERROR: Data string must not be empty")
                     return
                 }
-                
+
                 for line in dataStringArray {
                     if line.hasPrefix("#") { continue }
                     completion(PaymentRequest(string: line))

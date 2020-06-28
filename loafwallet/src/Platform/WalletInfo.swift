@@ -1,27 +1,19 @@
-//
-//  WalletInfo.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-03-11.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import Foundation
 
 let walletInfoKey = "wallet-info"
 
-class WalletInfo : BRKVStoreObject, BRCoding {
+class WalletInfo: BRKVStoreObject, BRCoding {
     var classVersion = 2
     var name = ""
     var creationDate = Date.zeroValue()
 
-    //Create new
+    // Create new
     init(name: String) {
         super.init(key: walletInfoKey, version: 0, lastModified: Date(), deleted: false, data: Data())
         self.name = name
     }
 
-    //Find existing
+    // Find existing
     init?(kvStore: BRReplicatedKVStore) {
         var ver: UInt64
         var date: Date
@@ -47,7 +39,7 @@ class WalletInfo : BRKVStoreObject, BRCoding {
         creationDate = s.creationDate
     }
 
-    required public init?(coder decoder: BRCoder) {
+    public required init?(coder decoder: BRCoder) {
         classVersion = decoder.decode("classVersion")
         name = decoder.decode("name")
         creationDate = decoder.decode("creationDate")

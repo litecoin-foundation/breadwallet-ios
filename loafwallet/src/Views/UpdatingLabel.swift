@@ -1,15 +1,6 @@
-//
-//  UpdatingLabel.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-04-15.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class UpdatingLabel : UILabel {
-
+class UpdatingLabel: UILabel {
     var formatter: NumberFormatter {
         didSet {
             setFormattedText(forValue: value)
@@ -69,8 +60,8 @@ class UpdatingLabel : UILabel {
             setFormattedText(forValue: endingValue)
             completion?()
         } else {
-            let percentProgress = progress/duration
-            let easedVal = 1.0-pow((1.0-percentProgress), easingRate)
+            let percentProgress = progress / duration
+            let easedVal = 1.0 - pow(1.0 - percentProgress, easingRate)
             setFormattedText(forValue: startingValue + (easedVal * (endingValue - startingValue)))
         }
     }
@@ -81,7 +72,7 @@ class UpdatingLabel : UILabel {
         sizeToFit()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

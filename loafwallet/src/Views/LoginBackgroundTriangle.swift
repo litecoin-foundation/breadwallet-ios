@@ -1,29 +1,22 @@
-//
-//  LoginBackgroundTriangle.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-01-19.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class LoginBackgroundTriangle : UIView {
+class LoginBackgroundTriangle: UIView {
+    // MARK: - Public
 
-    //MARK: - Public
     init(vertexLocation: CGFloat) {
         self.vertexLocation = vertexLocation
         super.init(frame: .zero)
         backgroundColor = .clear
     }
 
-    //MARK: - Private
-    private let vertexLocation: CGFloat //A percentage value (0.0->1.0) of the right vertex's vertical location
+    // MARK: - Private
+
+    private let vertexLocation: CGFloat // A percentage value (0.0->1.0) of the right vertex's vertical location
 
     override func layoutSubviews() {
         let bezierPath = UIBezierPath()
         bezierPath.move(to: CGPoint(x: 0, y: 0))
-        bezierPath.addLine(to: CGPoint(x: bounds.maxX, y: bounds.height*vertexLocation))
+        bezierPath.addLine(to: CGPoint(x: bounds.maxX, y: bounds.height * vertexLocation))
         bezierPath.addLine(to: CGPoint(x: 0, y: bounds.maxY))
         bezierPath.close()
 
@@ -37,7 +30,7 @@ class LoginBackgroundTriangle : UIView {
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
         context.move(to: CGPoint(x: 0, y: 0))
-        context.addLine(to: CGPoint(x: rect.maxX, y: bounds.height*vertexLocation))
+        context.addLine(to: CGPoint(x: rect.maxX, y: bounds.height * vertexLocation))
         context.addLine(to: CGPoint(x: 0, y: rect.maxY))
         context.closePath()
         context.clip()
@@ -48,7 +41,7 @@ class LoginBackgroundTriangle : UIView {
         context.drawLinearGradient(gradient, start: .zero, end: CGPoint(x: rect.width, y: 0.0), options: [])
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

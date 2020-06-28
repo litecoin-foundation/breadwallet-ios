@@ -1,16 +1,7 @@
-//
-//  SimpleUTXO.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-06-14.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
-import Foundation
 import BRCore
+import Foundation
 
 struct SimpleUTXO {
-
     let hash: UInt256
     let index: UInt32
     let script: [UInt8]
@@ -24,9 +15,9 @@ struct SimpleUTXO {
         guard let hashData = txid.hexToData,
             let scriptData = scriptPubKey.hexToData else { return nil }
 
-        self.hash = hashData.reverse.uInt256
-        self.index = UInt32(vout)
-        self.script = [UInt8](scriptData)
+        hash = hashData.reverse.uInt256
+        index = UInt32(vout)
+        script = [UInt8](scriptData)
         self.satoshis = satoshis
     }
 }

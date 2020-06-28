@@ -305,6 +305,7 @@
 		75C735AA1DAA1B9C00251ECF /* libunbound.c in Sources */ = {isa = PBXBuildFile; fileRef = 755CD4121DAA0E3E0075898E /* libunbound.c */; };
 		C3C4290E24A9511E002B5DAB /* LitewalletPartnerAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3C4290D24A9511E002B5DAB /* LitewalletPartnerAPI.framework */; };
 		C3C4290F24A9511E002B5DAB /* LitewalletPartnerAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C3C4290D24A9511E002B5DAB /* LitewalletPartnerAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C3C4291124A95319002B5DAB /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = C3C4291024A95319002B5DAB /* Makefile */; };
 		CE03EC741EF256AC0038E3A8 /* SimpleUTXO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE03EC731EF256AC0038E3A8 /* SimpleUTXO.swift */; };
 		CE0CD1591DBFBCF5004023DA /* ModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0CD1581DBFBCF5004023DA /* ModalPresenter.swift */; };
 		CE124CF81E67A8E500DFA146 /* TransactionDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE124CF71E67A8E500DFA146 /* TransactionDirection.swift */; };
@@ -1594,6 +1595,7 @@
 		B3154DD8B91FCA9927766D10 /* Pods-loafwalletTests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loafwalletTests.development.xcconfig"; path = "Target Support Files/Pods-loafwalletTests/Pods-loafwalletTests.development.xcconfig"; sourceTree = "<group>"; };
 		B58732AF816C61D45E38854A /* Pods-LitewalletTests.testnet.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LitewalletTests.testnet.xcconfig"; path = "Target Support Files/Pods-LitewalletTests/Pods-LitewalletTests.testnet.xcconfig"; sourceTree = "<group>"; };
 		C3C4290D24A9511E002B5DAB /* LitewalletPartnerAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LitewalletPartnerAPI.framework; path = PrivateFrameworks/LitewalletPartnerAPI.framework; sourceTree = "<group>"; };
+		C3C4291024A95319002B5DAB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		CA899DA394C8724FC0E64E02 /* Pods-loafwallet-dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loafwallet-dev.release.xcconfig"; path = "Target Support Files/Pods-loafwallet-dev/Pods-loafwallet-dev.release.xcconfig"; sourceTree = "<group>"; };
 		CBABF1A5804716F9AB38C7CA /* Pods-loafwalletUITests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loafwalletUITests.development.xcconfig"; path = "Target Support Files/Pods-loafwalletUITests/Pods-loafwalletUITests.development.xcconfig"; sourceTree = "<group>"; };
 		CE03EC731EF256AC0038E3A8 /* SimpleUTXO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleUTXO.swift; path = src/Models/SimpleUTXO.swift; sourceTree = "<group>"; };
@@ -3134,6 +3136,7 @@
 		75A2A7871DA5934300A983D8 = {
 			isa = PBXGroup;
 			children = (
+				C3C4291024A95319002B5DAB /* Makefile */,
 				24A619D3249C78D500FB1BC4 /* PrivateFrameworks */,
 				75A2A7921DA5934300A983D8 /* loafwallet */,
 				2465873723A5AAD100A32E9E /* loafwalletTests */,
@@ -4577,6 +4580,7 @@
 				CEC6AA401DEFC87300EE5AFD /* SendViewController.swift in Sources */,
 				CEAA9E8F1DC074410066731D /* StartPaperPhraseViewController.swift in Sources */,
 				1B3F74241FFB106200CCA50C /* BiometricsSpendingLimitViewController.swift in Sources */,
+				C3C4291124A95319002B5DAB /* Makefile in Sources */,
 				CEC6F8451E886723000795B8 /* PaymentRequest.swift in Sources */,
 				CE4C1CC81ED88B600063E184 /* URLController.swift in Sources */,
 				CE20C9171DBE6F2A00C8397A /* UIButton+BRWAdditions.swift in Sources */,

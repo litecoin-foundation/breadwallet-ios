@@ -1,11 +1,3 @@
-//
-//  RequestAmountViewController.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-05-03.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 private let qrSize: CGSize = CGSize(width: 186.0, height: 186.0)
@@ -14,8 +6,7 @@ private let buttonPadding: CGFloat = 20.0
 private let smallSharePadding: CGFloat = 12.0
 private let largeSharePadding: CGFloat = 20.0
 
-class RequestAmountViewController : UIViewController {
-
+class RequestAmountViewController: UIViewController {
     var presentEmail: PresentShare?
     var presentText: PresentShare?
 
@@ -25,7 +16,8 @@ class RequestAmountViewController : UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
-    //MARK - Private
+    // MARK: - Private
+
     private let amountView: AmountViewController
     private let qrCode = UIImageView()
     private let address = UILabel(font: .customBody(size: 14.0))
@@ -36,12 +28,14 @@ class RequestAmountViewController : UIViewController {
     private var topSharePopoutConstraint: NSLayoutConstraint?
     private let wallet: BRWallet
 
-    //MARK - PinPad State
+    // MARK: - PinPad State
+
     private var amount: Satoshis? {
         didSet {
             setQrCode()
         }
     }
+
     override func viewDidLoad() {
         addSubviews()
         addConstraints()
@@ -65,40 +59,47 @@ class RequestAmountViewController : UIViewController {
             amountView.view.constrain([
                 amountView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 amountView.view.topAnchor.constraint(equalTo: view.topAnchor),
-                amountView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor) ])
+                amountView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            ])
         })
         qrCode.constrain([
             qrCode.constraint(.width, constant: qrSize.width),
             qrCode.constraint(.height, constant: qrSize.height),
             qrCode.topAnchor.constraint(equalTo: amountView.view.bottomAnchor, constant: C.padding[2]),
-            qrCode.constraint(.centerX, toView: view) ])
+            qrCode.constraint(.centerX, toView: view),
+        ])
         address.constrain([
             address.constraint(toBottom: qrCode, constant: C.padding[1]),
-            address.constraint(.centerX, toView: view) ])
+            address.constraint(.centerX, toView: view),
+        ])
         addressPopout.heightConstraint = addressPopout.constraint(.height, constant: 0.0)
         addressPopout.constrain([
             addressPopout.constraint(toBottom: address, constant: 0.0),
             addressPopout.constraint(.centerX, toView: view),
             addressPopout.constraint(.width, toView: view),
-            addressPopout.heightConstraint ])
+            addressPopout.heightConstraint,
+        ])
         share.constrain([
             share.constraint(toBottom: addressPopout, constant: C.padding[2]),
             share.constraint(.centerX, toView: view),
             share.constraint(.width, constant: qrSize.width),
-            share.constraint(.height, constant: smallButtonHeight) ])
+            share.constraint(.height, constant: smallButtonHeight),
+        ])
         sharePopout.heightConstraint = sharePopout.constraint(.height, constant: 0.0)
         topSharePopoutConstraint = sharePopout.constraint(toBottom: share, constant: largeSharePadding)
         sharePopout.constrain([
             topSharePopoutConstraint,
             sharePopout.constraint(.centerX, toView: view),
             sharePopout.constraint(.width, toView: view),
-            sharePopout.heightConstraint ])
+            sharePopout.heightConstraint,
+        ])
         border.constrain([
             border.constraint(.width, toView: view),
             border.constraint(toBottom: sharePopout, constant: 0.0),
             border.constraint(.centerX, toView: view),
             border.constraint(.height, constant: 1.0),
-            border.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -C.padding[2]) ])
+            border.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -C.padding[2]),
+        ])
     }
 
     private func setData() {
@@ -122,7 +123,7 @@ class RequestAmountViewController : UIViewController {
         }
     }
 
-    private func setQrCode(){
+    private func setQrCode() {
         guard let amount = amount else { return }
         let request = PaymentRequest.requestString(withAddress: wallet.receiveAddress, forAmount: amount.rawValue)
         qrCode.image = UIImage.qrCode(data: request.data(using: .utf8)!, color: CIColor(color: .black))?
@@ -148,12 +149,14 @@ class RequestAmountViewController : UIViewController {
             email.constraint(.leading, toView: container, constant: C.padding[2]),
             email.constraint(.top, toView: container, constant: buttonPadding),
             email.constraint(.bottom, toView: container, constant: -buttonPadding),
-            email.trailingAnchor.constraint(equalTo: container.centerXAnchor, constant: -C.padding[1]) ])
+            email.trailingAnchor.constraint(equalTo: container.centerXAnchor, constant: -C.padding[1]),
+        ])
         text.constrain([
             text.constraint(.trailing, toView: container, constant: -C.padding[2]),
             text.constraint(.top, toView: container, constant: buttonPadding),
             text.constraint(.bottom, toView: container, constant: -buttonPadding),
-            text.leadingAnchor.constraint(equalTo: container.centerXAnchor, constant: C.padding[1]) ])
+            text.leadingAnchor.constraint(equalTo: container.centerXAnchor, constant: C.padding[1]),
+        ])
         sharePopout.contentView = container
         email.addTarget(self, action: #selector(RequestAmountViewController.emailTapped), for: .touchUpInside)
         text.addTarget(self, action: #selector(RequestAmountViewController.textTapped), for: .touchUpInside)
@@ -217,21 +220,21 @@ class RequestAmountViewController : UIViewController {
             self.address.isUserInteractionEnabled = true
             alertView.contentView?.isHidden = false
             if shouldShrinkAfter {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     if alertView.isExpanded {
                         self.toggle(alertView: alertView, shouldAdjustPadding: shouldAdjustPadding)
                     }
-                })
+                }
             }
         })
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-extension RequestAmountViewController : ModalDisplayable {
+extension RequestAmountViewController: ModalDisplayable {
     var faqArticleId: String? {
         return ArticleIds.requestAmount
     }

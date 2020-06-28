@@ -1,24 +1,15 @@
-//
-//  ShadowView.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-11-17.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 class MaskedShadow: UIView {
-
     var style: TransactionCellStyle = .middle {
         didSet {
             setNeedsLayout()
         }
     }
+
     private let shadowSize: CGFloat = 8.0
 
     override func layoutSubviews() {
-
         guard style != .single else {
             layer.mask = nil
             layer.shadowPath = UIBezierPath(rect: bounds).cgPath

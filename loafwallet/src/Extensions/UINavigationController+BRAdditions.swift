@@ -1,15 +1,6 @@
-//
-//  UINavigationController+BRAdditions.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-11-29.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 extension UINavigationController {
-
     func setDefaultStyle() {
         setClearNavbar()
         setBlackBackArrow()
@@ -19,7 +10,7 @@ extension UINavigationController {
         navigationBar.tintColor = .white
         navigationBar.titleTextAttributes = [
             NSAttributedStringKey.foregroundColor: UIColor.white,
-            NSAttributedStringKey.font: UIFont.customBold(size: 17.0)
+            NSAttributedStringKey.font: UIFont.customBold(size: 17.0),
         ]
         setTintableBackArrow()
     }
@@ -46,5 +37,4 @@ extension UINavigationController {
         navigationBar.backIndicatorImage = #imageLiteral(resourceName: "Back")
         navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "Back")
     }
-
 }

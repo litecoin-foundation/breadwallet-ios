@@ -1,22 +1,13 @@
-//
-//  UIControl+Callback.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-02-23.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-private class CallbackWrapper : NSObject, NSCopying {
-
+private class CallbackWrapper: NSObject, NSCopying {
     init(_ callback: @escaping () -> Void) {
         self.callback = callback
     }
 
     let callback: () -> Void
 
-    func copy(with zone: NSZone? = nil) -> Any {
+    func copy(with _: NSZone? = nil) -> Any {
         return CallbackWrapper(callback)
     }
 }

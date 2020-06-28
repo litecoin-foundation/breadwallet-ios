@@ -1,11 +1,3 @@
-//
-//  GradientView.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-11-22.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 protocol GradientDrawable {
@@ -14,7 +6,7 @@ protocol GradientDrawable {
 
 extension UIView {
     func drawGradient(_ rect: CGRect) {
-        guard !E.isIPhone4 && !E.isIPhone5 else {
+        guard !E.isIPhone4, !E.isIPhone5 else {
             addFallbackImageBackground()
             return
         }
@@ -35,7 +27,7 @@ extension UIView {
     }
 }
 
-class GradientView : UIView {
+class GradientView: UIView {
     override func draw(_ rect: CGRect) {
         drawGradient(rect)
     }

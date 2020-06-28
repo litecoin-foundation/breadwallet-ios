@@ -1,25 +1,18 @@
-//
-//  StartFlowPresenter.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-10-22.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class StartFlowPresenter : Subscriber {
+class StartFlowPresenter: Subscriber {
+    // MARK: - Public
 
-    //MARK: - Public
     init(store: Store, walletManager: WalletManager, rootViewController: UIViewController) {
         self.store = store
         self.walletManager = walletManager
         self.rootViewController = rootViewController
-        self.navigationControllerDelegate = StartNavigationDelegate(store: store)
+        navigationControllerDelegate = StartNavigationDelegate(store: store)
         addSubscriptions()
     }
 
-    //MARK: - Private
+    // MARK: - Private
+
     private let store: Store
     private let rootViewController: UIViewController
     private var navigationController: ModalNavigationController?
@@ -42,8 +35,8 @@ class StartFlowPresenter : Subscriber {
                         selector: { $0.isStartFlowVisible != $1.isStartFlowVisible },
                         callback: { self.handleStartFlowChange(state: $0) })
         store.lazySubscribe(self,
-                        selector: { $0.isLoginRequired != $1.isLoginRequired },
-                        callback: { self.handleLoginRequiredChange(state: $0) }) //TODO - this should probably be in modal presenter
+                            selector: { $0.isLoginRequired != $1.isLoginRequired },
+                            callback: { self.handleLoginRequiredChange(state: $0) }) // TODO: - this should probably be in modal presenter
         store.subscribe(self, name: .lock,
                         callback: { _ in self.presentLoginFlow(isPresentedForLock: true) })
     }
@@ -69,22 +62,22 @@ class StartFlowPresenter : Subscriber {
     private func presentStartFlow() {
         let startViewController = StartViewController(store: store,
                                                       didTapCreate: { [weak self] in
-            self?.pushPinCreationViewControllerForNewWallet()
-        },
+                                                          self?.pushPinCreationViewControllerForNewWallet()
+                                                      },
                                                       didTapRecover: { [weak self] in
-            guard let myself = self else { return }
-            let recoverIntro = RecoverWalletIntroViewController(didTapNext: myself.pushRecoverWalletView)
-            myself.navigationController?.setTintableBackArrow()
-            myself.navigationController?.setClearNavbar()
-            myself.navigationController?.modalPresentationStyle = .fullScreen
-            myself.navigationController?.setNavigationBarHidden(false, animated: false)
-            myself.navigationController?.pushViewController(recoverIntro, animated: true)
+                                                          guard let myself = self else { return }
+                                                          let recoverIntro = RecoverWalletIntroViewController(didTapNext: myself.pushRecoverWalletView)
+                                                          myself.navigationController?.setTintableBackArrow()
+                                                          myself.navigationController?.setClearNavbar()
+                                                          myself.navigationController?.modalPresentationStyle = .fullScreen
+                                                          myself.navigationController?.setNavigationBarHidden(false, animated: false)
+                                                          myself.navigationController?.pushViewController(recoverIntro, animated: true)
         })
 
         navigationController = ModalNavigationController(rootViewController: startViewController)
         navigationController?.delegate = navigationControllerDelegate
         navigationController?.modalPresentationStyle = .fullScreen
-        
+
         if let startFlow = navigationController {
             startFlow.setNavigationBarHidden(true, animated: false)
             rootViewController.present(startFlow, animated: false, completion: nil)
@@ -120,7 +113,7 @@ class StartFlowPresenter : Subscriber {
         navigationController?.setClearNavbar()
         navigationController?.pushViewController(pinCreationViewController, animated: true)
     }
-    
+
     private var pushPinCreationViewForRecoveredWallet: (String) -> Void {
         return { [weak self] phrase in
             guard let myself = self else { return }
@@ -136,18 +129,18 @@ class StartFlowPresenter : Subscriber {
             myself.navigationController?.pushViewController(pinCreationView, animated: true)
         }
     }
-    
+
     private func pushStartPaperPhraseCreationViewController(pin: String) {
         let paperPhraseViewController = StartPaperPhraseViewController(store: store, callback: { [weak self] in
             self?.pushWritePaperPhraseViewController(pin: pin)
         })
         paperPhraseViewController.title = S.SecurityCenter.Cells.paperKeyTitle
         paperPhraseViewController.navigationItem.setHidesBackButton(true, animated: false)
-        paperPhraseViewController.hideCloseNavigationItem() //Forces user to confirm paper-key
-  
+        paperPhraseViewController.hideCloseNavigationItem() // Forces user to confirm paper-key
+
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedStringKey.foregroundColor: UIColor.white,
-            NSAttributedStringKey.font: UIFont.customBold(size: 17.0)
+            NSAttributedStringKey.font: UIFont.customBold(size: 17.0),
         ]
         navigationController?.pushViewController(paperPhraseViewController, animated: true)
     }
@@ -162,18 +155,17 @@ class StartFlowPresenter : Subscriber {
     }
 
     private func pushConfirmPaperPhraseViewController(pin: String) {
-         
-        let confirmVC = UIStoryboard.init(name: "Phrase", bundle: nil).instantiateViewController(withIdentifier: "ConfirmPaperPhraseViewController") as? ConfirmPaperPhraseViewController
-            confirmVC?.store = self.store
-            confirmVC?.walletManager = self.walletManager
-            confirmVC?.pin = pin
-            confirmVC?.didCompleteConfirmation = { [weak self] in
-                guard let myself = self else { return }
-                myself.store.perform(action: Alert.Show(.paperKeySet(callback: {
-                    self?.store.perform(action: HideStartFlow())
+        let confirmVC = UIStoryboard(name: "Phrase", bundle: nil).instantiateViewController(withIdentifier: "ConfirmPaperPhraseViewController") as? ConfirmPaperPhraseViewController
+        confirmVC?.store = store
+        confirmVC?.walletManager = walletManager
+        confirmVC?.pin = pin
+        confirmVC?.didCompleteConfirmation = { [weak self] in
+            guard let myself = self else { return }
+            myself.store.perform(action: Alert.Show(.paperKeySet(callback: {
+                self?.store.perform(action: HideStartFlow())
                 })))
-            }
-            navigationController?.navigationBar.tintColor = .white
+        }
+        navigationController?.navigationBar.tintColor = .white
         if let confirmVC = confirmVC {
             navigationController?.pushViewController(confirmVC, animated: true)
         }
@@ -190,13 +182,13 @@ class StartFlowPresenter : Subscriber {
         loginViewController = loginView
         rootViewController.present(loginView, animated: false, completion: nil)
     }
-    
+
     private func handleWalletCreationError() {
         let alert = UIAlertController(title: S.Alert.error, message: "Could not create wallet", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: S.Button.ok, style: .default, handler: nil))
         navigationController?.present(alert, animated: true, completion: nil)
     }
-    
+
     private func dismissStartFlow() {
         navigationController?.dismiss(animated: true) { [weak self] in
             self?.navigationController = nil

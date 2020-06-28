@@ -1,16 +1,7 @@
-//
-//  NodeSelectorViewController.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-08-03.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
-import UIKit
 import BRCore
+import UIKit
 
-class NodeSelectorViewController : UIViewController, Trackable {
-
+class NodeSelectorViewController: UIViewController, Trackable {
     let titleLabel = UILabel(font: .customBold(size: 26.0), color: .darkText)
     private let nodeLabel = UILabel(font: .customBody(size: 14.0), color: .grayTextTint)
     private let node = UILabel(font: .customBody(size: 14.0), color: .darkText)
@@ -56,7 +47,8 @@ class NodeSelectorViewController : UIViewController, Trackable {
             button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: C.padding[2]),
             button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -C.padding[2]),
             button.topAnchor.constraint(equalTo: status.bottomAnchor, constant: C.padding[2]),
-            button.heightAnchor.constraint(equalToConstant: 44.0) ])
+            button.heightAnchor.constraint(equalToConstant: 44.0),
+        ])
     }
 
     private func setInitialData() {
@@ -83,7 +75,7 @@ class NodeSelectorViewController : UIViewController, Trackable {
     }
 
     private func switchToAuto() {
-        guard UserDefaults.customNodeIP != nil else { return } //noop if custom node is already nil
+        guard UserDefaults.customNodeIP != nil else { return } // noop if custom node is already nil
         saveEvent("nodeSelector.switchToAuto")
         UserDefaults.customNodeIP = nil
         UserDefaults.customNodePort = nil
@@ -97,7 +89,7 @@ class NodeSelectorViewController : UIViewController, Trackable {
     private func switchToManual() {
         let alert = UIAlertController(title: S.NodeSelector.enterTitle, message: S.NodeSelector.enterBody, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: S.Button.cancel, style: .cancel, handler: nil))
-        let okAction = UIAlertAction(title: S.Button.ok, style: .default, handler: { action in
+        let okAction = UIAlertAction(title: S.Button.ok, style: .default, handler: { _ in
             guard let ip = alert.textFields?.first, let port = alert.textFields?.last else { return }
             if let addressText = ip.text {
                 self.saveEvent("nodeSelector.switchToManual")
@@ -138,15 +130,15 @@ class NodeSelectorViewController : UIViewController, Trackable {
 
     @objc private func ipAddressDidChange(textField: UITextField) {
         if let text = textField.text {
-            if text.components(separatedBy: ".").count == 4 && ascii2addr(AF_INET, text, nil) > 0 {
-                self.okAction?.isEnabled = true
+            if text.components(separatedBy: ".").count == 4, ascii2addr(AF_INET, text, nil) > 0 {
+                okAction?.isEnabled = true
                 return
             }
         }
-        self.okAction?.isEnabled = false
+        okAction?.isEnabled = false
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

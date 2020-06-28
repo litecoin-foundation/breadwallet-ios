@@ -1,14 +1,6 @@
-//
-//  LoginViewController.swift
-//  breadwallet
-//  Modified by Kerry Washington
-//  Created by Adrian Corscadden on 2017-01-19.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
-import UIKit
-import LocalAuthentication
 import FirebaseCrashlytics
+import LocalAuthentication
+import UIKit
 
 private let biometricsSize: CGFloat = 32.0
 private let topControlHeight: CGFloat = 32.0
@@ -17,24 +9,25 @@ protocol LoginViewControllerDelegate {
     func didUnlockLogin()
 }
 
-class LoginViewController : UIViewController, Subscriber, Trackable {
+class LoginViewController: UIViewController, Subscriber, Trackable {
+    // MARK: - Public
 
-    //MARK: - Public
     var walletManager: WalletManager? {
         didSet {
             guard walletManager != nil else { return }
             pinView = PinView(style: .login, length: store.state.pinLength)
         }
     }
+
     var shouldSelfDismiss = false
-    
+
     init(store: Store, isPresentedForLock: Bool, walletManager: WalletManager? = nil) {
         self.store = store
         self.walletManager = walletManager
         self.isPresentedForLock = isPresentedForLock
-        self.disabledView = WalletDisabledView(store: store)
+        disabledView = WalletDisabledView(store: store)
         if walletManager != nil {
-            self.pinView = PinView(style: .login, length: store.state.pinLength)
+            pinView = PinView(style: .login, length: store.state.pinLength)
         }
         super.init(nibName: nil, bundle: nil)
     }
@@ -43,7 +36,8 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
         store.unsubscribe(self)
     }
 
-    //MARK: - Private
+    // MARK: - Private
+
     private let store: Store
     private let backgroundView = LoginBackgroundView()
     private let pinPadViewController = PinPadViewController(style: .clear, keyboardType: .pinPad, maxDigits: 0)
@@ -54,7 +48,7 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
     private let activityView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     private let wipeBannerButton = UIButton()
     var delegate: LoginViewControllerDelegate?
-    
+
     private var logo: UIImageView = {
         let image = UIImageView(image: #imageLiteral(resourceName: "coinBlueWhite"))
         image.contentMode = .scaleAspectFit
@@ -67,11 +61,12 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
         button.setImage(LAContext.biometricType() == .face ? #imageLiteral(resourceName: "FaceId") : #imageLiteral(resourceName: "TouchId"), for: .normal)
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.borderWidth = 1.0
-        button.layer.cornerRadius = biometricsSize/2.0
+        button.layer.cornerRadius = biometricsSize / 2.0
         button.layer.masksToBounds = true
         button.accessibilityLabel = LAContext.biometricType() == .face ? S.UnlockScreen.faceIdText : S.UnlockScreen.touchIdText
         return button
     }()
+
     private let enterPINLabel = UILabel(font: .barlowBold(size: 17), color: .white)
     private var pinPadBottom: NSLayoutConstraint?
     private var topControlTop: NSLayoutConstraint?
@@ -82,9 +77,9 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
     private var isResetting = false
     private let versionLabel = UILabel(font: .barlowLight(size: 14), color: .transparentWhite)
     private var isWalletEmpty = false
-  
+
     override func viewDidLoad() {
-        self.checkWalletBalance()
+        checkWalletBalance()
         addSubviews()
         addConstraints()
         addBiometricsButton()
@@ -98,7 +93,7 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
             guard let walletManager = self?.walletManager else { return }
             self?.isResetting = true
             let nc = UINavigationController()
-            let recover = EnterPhraseViewController(store: store, walletManager: walletManager, reason: .validateForResettingPin({ phrase in
+            let recover = EnterPhraseViewController(store: store, walletManager: walletManager, reason: .validateForResettingPin { phrase in
                 let updatePin = UpdatePinViewController(store: store, walletManager: walletManager, type: .creationWithPhrase, showsBackButton: false, phrase: phrase)
                 nc.pushViewController(updatePin, animated: true)
                 updatePin.resetFromDisabledWillSucceed = {
@@ -108,13 +103,13 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
                     self?.authenticationSucceded()
                     LWAnalytics.logEventWithParameters(itemName: ._20200217_DLWP)
                 }
-            }))
+            })
             recover.addCloseNavigationItem()
             nc.viewControllers = [recover]
             nc.navigationBar.tintColor = .darkText
             nc.navigationBar.titleTextAttributes = [
                 NSAttributedString.Key.foregroundColor: UIColor.darkText,
-                NSAttributedString.Key.font: UIFont.customBold(size: 17.0)
+                NSAttributedString.Key.font: UIFont.customBold(size: 17.0),
             ]
             nc.setClearNavbar()
             nc.navigationBar.isTranslucent = false
@@ -122,29 +117,28 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
             nc.viewControllers = [recover]
             self?.present(nc, animated: true, completion: nil)
         }
-        store.subscribe(self, name: .loginFromSend, callback: {_ in
+        store.subscribe(self, name: .loginFromSend, callback: { _ in
             self.authenticationSucceded()
         })
-      
+
         NotificationCenter.default.addObserver(forName: .WalletBalanceChangedNotification,
-                                               object: nil, queue: nil, using: { (note) in
-          
-            if let balance = note.userInfo?["balance"] as? Int {
-              
-              if balance == 0 {
-                self.isWalletEmpty = true
-              } else {
-                self.isWalletEmpty = false
-              }
-              self.addWipeWalletView()
-            }
+                                               object: nil, queue: nil, using: { note in
+
+                                                   if let balance = note.userInfo?["balance"] as? Int {
+                                                       if balance == 0 {
+                                                           self.isWalletEmpty = true
+                                                       } else {
+                                                           self.isWalletEmpty = false
+                                                       }
+                                                       self.addWipeWalletView()
+                                                   }
         })
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         guard UIApplication.shared.applicationState != .background else { return }
-        if shouldUseBiometrics && !hasAttemptedToShowBiometrics && !isPresentedForLock && UserDefaults.hasShownWelcome {
+        if shouldUseBiometrics, !hasAttemptedToShowBiometrics, !isPresentedForLock, UserDefaults.hasShownWelcome {
             hasAttemptedToShowBiometrics = true
             biometricsTapped()
         }
@@ -161,23 +155,25 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
     private func addPinView() {
         guard let pinView = pinView else { return }
         pinViewContainer.addSubview(pinView)
-        
+
         pinView.constrain([
             pinView.centerYAnchor.constraint(equalTo: pinPadViewController.view.topAnchor, constant: -90),
-        pinView.centerXAnchor.constraint(equalTo: pinViewContainer.centerXAnchor),
-        pinView.widthAnchor.constraint(equalToConstant: pinView.width),
-        pinView.heightAnchor.constraint(equalToConstant: pinView.itemSize) ])
-        
+            pinView.centerXAnchor.constraint(equalTo: pinViewContainer.centerXAnchor),
+            pinView.widthAnchor.constraint(equalToConstant: pinView.width),
+            pinView.heightAnchor.constraint(equalToConstant: pinView.itemSize),
+        ])
+
         enterPINLabel.constrain([
             enterPINLabel.topAnchor.constraint(equalTo: pinView.topAnchor, constant: -60),
-            enterPINLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor) ])
-       
+            enterPINLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
+
         logo.constrain([
             logo.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
             logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logo.constraint(.height, constant: 70),
-            logo.constraint(.width, constant: 70) ])
-        
+            logo.constraint(.width, constant: 70),
+        ])
     }
 
     private func addSubviews() {
@@ -204,7 +200,8 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
                     pinPadViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                     pinPadViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                     pinPadBottom,
-                    pinPadViewController.view.heightAnchor.constraint(equalToConstant: pinPadViewController.height) ])
+                    pinPadViewController.view.heightAnchor.constraint(equalToConstant: pinPadViewController.height),
+                ])
             })
         }
         pinViewContainer.constrain(toSuperviewEdges: nil)
@@ -213,60 +210,64 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
             versionLabel.constraint(.top, toView: view, constant: 30),
             versionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             versionLabel.widthAnchor.constraint(equalToConstant: 120.0),
-            versionLabel.heightAnchor.constraint(equalToConstant: 44.0) ])
-        
+            versionLabel.heightAnchor.constraint(equalToConstant: 44.0),
+        ])
+
         if walletManager != nil {
             pinPadBackground.constrain([
                 pinPadBackground.leadingAnchor.constraint(equalTo: pinPadViewController.view.leadingAnchor),
                 pinPadBackground.trailingAnchor.constraint(equalTo: pinPadViewController.view.trailingAnchor),
                 pinPadBackground.topAnchor.constraint(equalTo: pinPadViewController.view.topAnchor),
-                pinPadBackground.bottomAnchor.constraint(equalTo: pinPadViewController.view.bottomAnchor) ])
+                pinPadBackground.bottomAnchor.constraint(equalTo: pinPadViewController.view.bottomAnchor),
+            ])
         } else {
             activityView.constrain([
                 activityView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                activityView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20.0) ])
+                activityView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20.0),
+            ])
             activityView.startAnimating()
         }
-      
+
         enterPINLabel.text = S.UnlockScreen.enterPIN
         versionLabel.text = AppVersion.string
         versionLabel.textAlignment = .right
     }
-  
+
     private func deviceTopConstraintConstant() -> CGFloat {
-      let screenHeight = E.screenHeight
-      var constant  = 0.0
-      if screenHeight <= 640 {
-        constant = 35
-      } else if screenHeight > 640 && screenHeight < 800 {
-        constant = 45
-      } else {
-        constant = 55
-      }
-      return C.padding[1] + CGFloat(constant)
+        let screenHeight = E.screenHeight
+        var constant = 0.0
+        if screenHeight <= 640 {
+            constant = 35
+        } else if screenHeight > 640, screenHeight < 800 {
+            constant = 45
+        } else {
+            constant = 55
+        }
+        return C.padding[1] + CGFloat(constant)
     }
+
     private func addWipeWalletView() {
-        
         if isWalletEmpty {
             view.addSubview(wipeBannerButton)
             wipeBannerButton.translatesAutoresizingMaskIntoConstraints = true
             wipeBannerButton.backgroundColor = .clear
             wipeBannerButton.adjustsImageWhenHighlighted = true
-            
+
             wipeBannerButton.constrain([
-               wipeBannerButton.bottomAnchor.constraint(equalTo:pinPadViewController.view.topAnchor, constant: -20),
+                wipeBannerButton.bottomAnchor.constraint(equalTo: pinPadViewController.view.topAnchor, constant: -20),
                 wipeBannerButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 wipeBannerButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                wipeBannerButton.heightAnchor.constraint(equalToConstant: 40)])
-            
+                wipeBannerButton.heightAnchor.constraint(equalToConstant: 40),
+            ])
+
             wipeBannerButton.setTitle(S.WipeWallet.emptyWallet, for: .normal)
             wipeBannerButton.titleLabel?.font = .barlowBold(size: 17)
             wipeBannerButton.addTarget(self, action: #selector(wipeTapped), for: .touchUpInside)
         } else {
             wipeBannerButton.removeFromSuperview()
         }
-        
     }
+
     private func addBiometricsButton() {
         guard shouldUseBiometrics else { return }
         view.addSubview(biometrics)
@@ -275,9 +276,10 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
             biometrics.widthAnchor.constraint(equalToConstant: biometricsSize),
             biometrics.heightAnchor.constraint(equalToConstant: biometricsSize),
             biometrics.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -C.padding[2]),
-            biometrics.bottomAnchor.constraint(equalTo: pinPadViewController.view.topAnchor, constant: -C.padding[2]) ])
+            biometrics.bottomAnchor.constraint(equalTo: pinPadViewController.view.topAnchor, constant: -C.padding[2]),
+        ])
     }
-  
+
     private func addPinPadCallback() {
         pinPadViewController.ouputDidUpdate = { [weak self] pin in
             guard let myself = self else { return }
@@ -290,15 +292,15 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
             }
         }
     }
-  
+
     private func checkWalletBalance() {
-      if let wallet = self.walletManager?.wallet {
-        if wallet.balance == 0 {
-          isWalletEmpty = true
-        } else {
-          isWalletEmpty = false
+        if let wallet = walletManager?.wallet {
+            if wallet.balance == 0 {
+                isWalletEmpty = true
+            } else {
+                isWalletEmpty = false
+            }
         }
-      }
     }
 
     private func authenticate(pin: String) {
@@ -316,38 +318,40 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
         label.text = S.UnlockScreen.unlocked
         let lock = UIImageView(image: #imageLiteral(resourceName: "unlock"))
         lock.transform = .init(scaleX: 0.6, y: 0.6)
-         
-        if let _pinView = self.pinView {
+
+        if let _pinView = pinView {
             enterPINLabel.removeFromSuperview()
             _pinView.removeFromSuperview()
         }
-        
+
         view.addSubview(label)
         view.addSubview(lock)
 
         label.constrain([
             label.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -C.padding[1]),
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor) ])
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
         lock.constrain([
             lock.topAnchor.constraint(equalTo: label.bottomAnchor, constant: C.padding[1]),
-            lock.centerXAnchor.constraint(equalTo: label.centerXAnchor) ])
+            lock.centerXAnchor.constraint(equalTo: label.centerXAnchor),
+        ])
         view.layoutIfNeeded()
-  
-        self.logo.alpha = 0.0
-        self.wipeBannerButton.alpha = 1.0
-        
+
+        logo.alpha = 0.0
+        wipeBannerButton.alpha = 1.0
+
         UIView.spring(0.6, delay: 0.4, animations: {
             self.pinPadBottom?.constant = self.pinPadViewController.height
             self.topControlTop?.constant = -100.0
-             
+
             lock.alpha = 0.0
             label.alpha = 0.0
             self.wipeBannerButton.alpha = 0.0
             self.enterPINLabel.alpha = 0.0
             self.pinView?.alpha = 0.0
-            
+
             self.view.layoutIfNeeded()
-        }) { completion in
+        }) { _ in
             self.delegate?.didUnlockLogin()
             if self.shouldSelfDismiss {
                 self.dismiss(animated: true, completion: nil)
@@ -385,9 +389,9 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
             }
         })
     }
- 
+
     @objc func wipeTapped() {
-      store.perform(action: RootModalActions.Present(modal: .wipeEmptyWallet))
+        store.perform(action: RootModalActions.Present(modal: .wipeEmptyWallet))
     }
 
     private func lockIfNeeded() {
@@ -430,7 +434,7 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
 
     @objc private func unlock() {
         saveEvent("login.unlocked")
-        self.delegate?.didUnlockLogin()
+        delegate?.didUnlockLogin()
         enterPINLabel.pushNewText(S.UnlockScreen.enterPIN)
         pinPadViewController.view.isUserInteractionEnabled = true
         unlockTimer = nil
@@ -448,8 +452,7 @@ class LoginViewController : UIViewController, Subscriber, Trackable {
         }
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-

@@ -1,30 +1,5 @@
-//
-//  BRWalletPlugin.swift
-//  BreadWallet
-//
-//  Created by Samuel Sutch on 2/18/16.
-//  Copyright (c) 2016 breadwallet LLC
-//
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-//
-//  The above copyright notice and this permission notice shall be included in
-//  all copies or substantial portions of the Software.
-//
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//  THE SOFTWARE.
-
-import Foundation
 import BRCore
+import Foundation
 
 enum BitIdAuthResult {
     case success
@@ -60,39 +35,39 @@ class BRWalletPlugin: BRHTTPRouterPlugin, BRWebSocketClient, Trackable {
 
         let noteCenter = NotificationCenter.default
         noteCenter.addObserver(forName: NSNotification.Name.WalletSyncStartedNotification,
-                               object: nil, queue: nil) { (note) in
+                               object: nil, queue: nil) { _ in
             self.announce(["type": "sync_started"])
         }
         noteCenter.addObserver(forName: NSNotification.Name.WalletSyncStoppedNotification,
-                               object: nil, queue: nil) { (note) in
+                               object: nil, queue: nil) { _ in
             self.announce(["type": "sync_stopped"])
         }
         noteCenter.addObserver(forName: NSNotification.Name.WalletTxStatusUpdateNotification,
-                               object: nil, queue: nil) { (note) in
+                               object: nil, queue: nil) { _ in
             self.announce(["type": "tx_status"])
         }
         noteCenter.addObserver(forName: NSNotification.Name.WalletTxRejectedNotification,
-                               object: nil, queue: nil) { (note) in
+                               object: nil, queue: nil) { _ in
             self.announce(["type": "tx_status"])
         }
         noteCenter.addObserver(forName: NSNotification.Name.WalletBalanceChangedNotification,
-                               object: nil, queue: nil) { (note) in
+                               object: nil, queue: nil) { _ in
             if let wallet = self.walletManager.wallet {
                 self.announce(["type": "balance_changed", "balance": Int(wallet.balance)])
             }
         }
 
-        router.get("/_wallet/info") { (request, match) -> BRHTTPResponse in
-            return try BRHTTPResponse(request: request, code: 200, json: self.walletInfo())
+        router.get("/_wallet/info") { (request, _) -> BRHTTPResponse in
+            try BRHTTPResponse(request: request, code: 200, json: self.walletInfo())
         }
 
-        router.get("/_wallet/format") { (request, match) -> BRHTTPResponse in
-            if let amounts = request.query["amount"] , amounts.count > 0 {
+        router.get("/_wallet/format") { (request, _) -> BRHTTPResponse in
+            if let amounts = request.query["amount"], !amounts.isEmpty {
                 let amount = amounts[0]
                 var intAmount: Int64 = 0
                 if amount.contains(".") { // assume full bitcoins
                     if let x = Float(amount) {
-                        intAmount = Int64(x * 100000000.0)
+                        intAmount = Int64(x * 100_000_000.0)
                     }
                 } else {
                     if let x = Int64(amount) {
@@ -121,8 +96,8 @@ class BRWalletPlugin: BRHTTPRouterPlugin, BRWebSocketClient, Trackable {
         //      {
         //          "signature": "oibwaeofbawoefb" // base64-encoded signature
         //      }
-        router.post("/_wallet/sign_bitid") { (request, match) -> BRHTTPResponse in
-            guard let cts = request.headers["content-type"] , cts.count == 1 && cts[0] == "application/json" else {
+        router.post("/_wallet/sign_bitid") { (request, _) -> BRHTTPResponse in
+            guard let cts = request.headers["content-type"], cts.count == 1, cts[0] == "application/json" else {
                 return BRHTTPResponse(request: request, code: 400)
             }
             guard !self.isPresentingAuth else {
@@ -130,13 +105,13 @@ class BRWalletPlugin: BRHTTPRouterPlugin, BRWebSocketClient, Trackable {
             }
 
             guard let data = request.body(),
-                      let j = try? JSONSerialization.jsonObject(with: data, options: []),
-                      let json = j as? [String: String],
-                      let stringToSign = json["string_to_sign"],
-                      let bitidUrlString = json["bitid_url"],
-                      let bitidUrl = URL(string: bitidUrlString),
-                      let bii = json["bitid_index"],
-                      let bitidIndex = Int(bii) else {
+                let j = try? JSONSerialization.jsonObject(with: data, options: []),
+                let json = j as? [String: String],
+                let stringToSign = json["string_to_sign"],
+                let bitidUrlString = json["bitid_url"],
+                let bitidUrl = URL(string: bitidUrlString),
+                let bii = json["bitid_index"],
+                let bitidIndex = Int(bii) else {
                 return BRHTTPResponse(request: request, code: 400)
             }
             let asyncResp = BRHTTPResponse(async: request)
@@ -151,7 +126,7 @@ class BRWalletPlugin: BRHTTPRouterPlugin, BRWebSocketClient, Trackable {
                         if UserDefaults.isBiometricsEnabled {
                             asyncResp.provide(200, json: ["error": "proxy-shutdown"])
                         }
-                        self.store.trigger(name: .authenticateForBitId(prompt, { [weak self] result in
+                        self.store.trigger(name: .authenticateForBitId(prompt) { [weak self] result in
                             self?.isPresentingAuth = false
                             switch result {
                             case .success:
@@ -166,7 +141,7 @@ class BRWalletPlugin: BRHTTPRouterPlugin, BRWebSocketClient, Trackable {
                             case .failed:
                                 request.queue.async { asyncResp.provide(401) }
                             }
-                        }))
+                        })
                     }
                 }
             }
@@ -178,7 +153,7 @@ class BRWalletPlugin: BRHTTPRouterPlugin, BRWebSocketClient, Trackable {
                 return BRHTTPResponse(request: req, code: 400)
             }
             let name = nameArray[0]
-            if let body = req.body(), body.count > 0 {
+            if let body = req.body(), !body.isEmpty {
                 if let json = try? JSONSerialization.jsonObject(with: body, options: []) as? [String: String] {
                     self.saveEvent(name, attributes: json ?? [:])
                 } else {
@@ -192,18 +167,18 @@ class BRWalletPlugin: BRHTTPRouterPlugin, BRWebSocketClient, Trackable {
     }
 
     private func addKeyToCache(_ key: BRKey, url: String) {
-        self.tempBitIDKeys[url] = key
+        tempBitIDKeys[url] = key
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(60)) {
             self.tempBitIDKeys[url] = nil
         }
     }
 
-    private func sendBitIDResponse(_ stringToSign: String, usingKey key: BRKey, request: BRHTTPRequest, asyncResp: BRHTTPResponse) -> Void {
+    private func sendBitIDResponse(_ stringToSign: String, usingKey key: BRKey, request: BRHTTPRequest, asyncResp: BRHTTPResponse) {
         var key = key
         let sig = BRBitID.signMessage(stringToSign, usingKey: key)
         let json: [String: Any] = [
             "signature": sig,
-            "address": key.address() ?? ""
+            "address": key.address() ?? "",
         ]
         request.queue.async {
             asyncResp.provide(200, json: json)
@@ -211,12 +186,13 @@ class BRWalletPlugin: BRHTTPRouterPlugin, BRWebSocketClient, Trackable {
     }
 
     // MARK: - basic wallet functions
+
     func walletInfo() -> [String: Any] {
         var d = [String: Any]()
         d["no_wallet"] = walletManager.noWallet
         if let wallet = walletManager.wallet {
             d["receive_address"] = wallet.receiveAddress
-            //d["watch_only"] = TODO - add watch only
+            // d["watch_only"] = TODO - add watch only
         }
         d["btc_denomination_digits"] = store.state.maxDigits
         d["local_currency_code"] = store.state.defaultCurrencyCode
@@ -234,8 +210,9 @@ class BRWalletPlugin: BRHTTPRouterPlugin, BRWebSocketClient, Trackable {
     }
 
     // MARK: - socket handlers
+
     func sendWalletInfo(_ socket: BRWebSocket) {
-        var d = self.walletInfo()
+        var d = walletInfo()
         d["type"] = "wallet"
         if let jdata = try? JSONSerialization.data(withJSONObject: d, options: []),
             let jstring = NSString(data: jdata, encoding: String.Encoding.utf8.rawValue) {
@@ -259,7 +236,7 @@ class BRWalletPlugin: BRHTTPRouterPlugin, BRWebSocketClient, Trackable {
         socket.send(text)
     }
 
-    public func socket(_ socket: BRWebSocket, didReceiveData data: Data) {
+    public func socket(_: BRWebSocket, didReceiveData _: Data) {
         // nothing to do here
     }
 }

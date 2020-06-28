@@ -1,16 +1,7 @@
-//
-//  TouchIdEnabledTests.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-04-04.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import XCTest
 @testable import loafwallet
 
-class TouchIdEnabledTests : XCTestCase {
-
+class TouchIdEnabledTests: XCTestCase {
     override func setUp() {
         UserDefaults.standard.removeObject(forKey: "isbiometricsenabled")
     }
@@ -39,5 +30,4 @@ class TouchIdEnabledTests : XCTestCase {
         store.perform(action: Biometrics.setIsEnabled(false))
         XCTAssertFalse(UserDefaults.isBiometricsEnabled, "Actions should persist new value")
     }
-
 }

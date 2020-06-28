@@ -1,11 +1,3 @@
-//
-//  ReceiveViewController.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-11-30.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 private let qrSize: CGFloat = 186.0
@@ -16,9 +8,9 @@ private let largeSharePadding: CGFloat = 20.0
 
 typealias PresentShare = (String, UIImage) -> Void
 
-class ReceiveViewController : UIViewController, Subscriber, Trackable {
+class ReceiveViewController: UIViewController, Subscriber, Trackable {
+    // MARK: - Public
 
-    //MARK - Public
     var presentEmail: PresentShare?
     var presentText: PresentShare?
 
@@ -30,7 +22,8 @@ class ReceiveViewController : UIViewController, Subscriber, Trackable {
         super.init(nibName: nil, bundle: nil)
     }
 
-    //MARK - Private
+    // MARK: - Private
+
     private let qrCode = UIImageView()
     private let address = UILabel(font: .customBody(size: 14.0))
     private let addressPopout = InViewAlert(type: .primary)
@@ -42,7 +35,7 @@ class ReceiveViewController : UIViewController, Subscriber, Trackable {
     private var topSharePopoutConstraint: NSLayoutConstraint?
     private let wallet: BRWallet
     private let store: Store
-    private var balance: UInt64? = nil {
+    private var balance: UInt64? {
         didSet {
             if let newValue = balance, let oldValue = oldValue {
                 if newValue > oldValue {
@@ -51,6 +44,7 @@ class ReceiveViewController : UIViewController, Subscriber, Trackable {
             }
         }
     }
+
     fileprivate let isRequestAmountVisible: Bool
     private var requestTop: NSLayoutConstraint?
     private var requestBottom: NSLayoutConstraint?
@@ -83,33 +77,39 @@ class ReceiveViewController : UIViewController, Subscriber, Trackable {
             qrCode.constraint(.width, constant: qrSize),
             qrCode.constraint(.height, constant: qrSize),
             qrCode.constraint(.top, toView: view, constant: C.padding[4]),
-            qrCode.constraint(.centerX, toView: view) ])
+            qrCode.constraint(.centerX, toView: view),
+        ])
         address.constrain([
             address.constraint(toBottom: qrCode, constant: C.padding[1]),
-            address.constraint(.centerX, toView: view) ])
+            address.constraint(.centerX, toView: view),
+        ])
         addressPopout.heightConstraint = addressPopout.constraint(.height, constant: 0.0)
         addressPopout.constrain([
             addressPopout.constraint(toBottom: address, constant: 0.0),
             addressPopout.constraint(.centerX, toView: view),
             addressPopout.constraint(.width, toView: view),
-            addressPopout.heightConstraint ])
+            addressPopout.heightConstraint,
+        ])
         share.constrain([
             share.constraint(toBottom: addressPopout, constant: C.padding[2]),
             share.constraint(.centerX, toView: view),
             share.constraint(.width, constant: qrSize),
-            share.constraint(.height, constant: smallButtonHeight) ])
+            share.constraint(.height, constant: smallButtonHeight),
+        ])
         sharePopout.heightConstraint = sharePopout.constraint(.height, constant: 0.0)
         topSharePopoutConstraint = sharePopout.constraint(toBottom: share, constant: largeSharePadding)
         sharePopout.constrain([
             topSharePopoutConstraint,
             sharePopout.constraint(.centerX, toView: view),
             sharePopout.constraint(.width, toView: view),
-            sharePopout.heightConstraint ])
+            sharePopout.heightConstraint,
+        ])
         border.constrain([
             border.constraint(.width, toView: view),
             border.constraint(toBottom: sharePopout, constant: 0.0),
             border.constraint(.centerX, toView: view),
-            border.constraint(.height, constant: 1.0) ])
+            border.constraint(.height, constant: 1.0),
+        ])
         requestTop = request.constraint(toBottom: border, constant: C.padding[3])
         requestBottom = request.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: E.isIPhoneX ? -C.padding[5] : -C.padding[2])
         request.constrain([
@@ -117,12 +117,14 @@ class ReceiveViewController : UIViewController, Subscriber, Trackable {
             request.constraint(.leading, toView: view, constant: C.padding[2]),
             request.constraint(.trailing, toView: view, constant: -C.padding[2]),
             request.constraint(.height, constant: C.Sizes.buttonHeight),
-            requestBottom ])
+            requestBottom,
+        ])
         addressButton.constrain([
             addressButton.leadingAnchor.constraint(equalTo: address.leadingAnchor, constant: -C.padding[1]),
             addressButton.topAnchor.constraint(equalTo: qrCode.topAnchor),
             addressButton.trailingAnchor.constraint(equalTo: address.trailingAnchor, constant: C.padding[1]),
-            addressButton.bottomAnchor.constraint(equalTo: address.bottomAnchor, constant: C.padding[1]) ])
+            addressButton.bottomAnchor.constraint(equalTo: address.bottomAnchor, constant: C.padding[1]),
+        ])
     }
 
     private func setStyle() {
@@ -134,7 +136,8 @@ class ReceiveViewController : UIViewController, Subscriber, Trackable {
             border.isHidden = true
             request.isHidden = true
             request.constrain([
-                request.heightAnchor.constraint(equalToConstant: 0.0) ])
+                request.heightAnchor.constraint(equalToConstant: 0.0),
+            ])
             requestTop?.constant = 0.0
             requestBottom?.constant = 0.0
         }
@@ -184,12 +187,14 @@ class ReceiveViewController : UIViewController, Subscriber, Trackable {
             email.constraint(.leading, toView: container, constant: C.padding[2]),
             email.constraint(.top, toView: container, constant: buttonPadding),
             email.constraint(.bottom, toView: container, constant: -buttonPadding),
-            email.trailingAnchor.constraint(equalTo: container.centerXAnchor, constant: -C.padding[1]) ])
+            email.trailingAnchor.constraint(equalTo: container.centerXAnchor, constant: -C.padding[1]),
+        ])
         text.constrain([
             text.constraint(.trailing, toView: container, constant: -C.padding[2]),
             text.constraint(.top, toView: container, constant: buttonPadding),
             text.constraint(.bottom, toView: container, constant: -buttonPadding),
-            text.leadingAnchor.constraint(equalTo: container.centerXAnchor, constant: C.padding[1]) ])
+            text.leadingAnchor.constraint(equalTo: container.centerXAnchor, constant: C.padding[1]),
+        ])
         sharePopout.contentView = container
         email.addTarget(self, action: #selector(ReceiveViewController.emailTapped), for: .touchUpInside)
         text.addTarget(self, action: #selector(ReceiveViewController.textTapped), for: .touchUpInside)
@@ -250,21 +255,21 @@ class ReceiveViewController : UIViewController, Subscriber, Trackable {
             self.address.isUserInteractionEnabled = true
             alertView.contentView?.isHidden = false
             if shouldShrinkAfter {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     if alertView.isExpanded {
                         self.toggle(alertView: alertView, shouldAdjustPadding: shouldAdjustPadding)
                     }
-                })
+                }
             }
         })
     }
-    
-    required init?(coder aDecoder: NSCoder) {
+
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-extension ReceiveViewController : ModalDisplayable {
+extension ReceiveViewController: ModalDisplayable {
     var faqArticleId: String? {
         return ArticleIds.receiveBitcoin
     }

@@ -1,15 +1,6 @@
-//
-//  UIView+FrameChangeBlocking.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-12-14.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 extension UIView {
-
     private struct AssociatedKeys {
         static var frameBlockedKey = "FrameBlockedKey"
     }
@@ -28,7 +19,7 @@ extension UIView {
     static func swizzleSetFrame() {
         guard self == UIView.self else { return }
 
-        //This is now a way to do the equivalent of dispatch_once in swift 3
+        // This is now a way to do the equivalent of dispatch_once in swift 3
         let _: () = {
             let originalSelector = #selector(setter: UIView.frame)
             let swizzledSelector = #selector(UIView.requestSetFrame(_:))
@@ -40,7 +31,7 @@ extension UIView {
             if didAddMethod {
                 class_replaceMethod(self, swizzledSelector, method_getImplementation(originalMethod!), method_getTypeEncoding(originalMethod!))
             } else {
-                method_exchangeImplementations(originalMethod!, swizzledMethod!);
+                method_exchangeImplementations(originalMethod!, swizzledMethod!)
             }
 
         }()
@@ -48,6 +39,6 @@ extension UIView {
 
     @objc func requestSetFrame(_ frame: CGRect) {
         guard !isFrameChangeBlocked else { return }
-        self.requestSetFrame(frame)
+        requestSetFrame(frame)
     }
 }

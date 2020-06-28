@@ -1,16 +1,7 @@
-//
-//  PaymentRequestTests.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-03-26.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import XCTest
 @testable import loafwallet
 
-class PaymentRequestTests : XCTestCase {
-
+class PaymentRequestTests: XCTestCase {
     func testEmptyString() {
         XCTAssertNil(PaymentRequest(string: ""))
     }
@@ -31,14 +22,14 @@ class PaymentRequestTests : XCTestCase {
         let request = PaymentRequest(string: uri)
         XCTAssertNotNil(request)
         XCTAssertTrue(request?.toAddress == "LPnVRGLWT21mw5ZVkNL7o8BuyNuyTsGtdT")
-        XCTAssertTrue(request?.amount?.rawValue == 120000000)
+        XCTAssertTrue(request?.amount?.rawValue == 120_000_000)
     }
 
     func testRequestMetaData() {
         let uri = "litecoin:LPnVRGLWT21mw5ZVkNL7o8BuyNuyTsGtdT?amount=1.2&message=Payment&label=Satoshi"
         let request = PaymentRequest(string: uri)
         XCTAssertTrue(request?.toAddress == "LPnVRGLWT21mw5ZVkNL7o8BuyNuyTsGtdT")
-        XCTAssertTrue(request?.amount?.rawValue == 120000000)
+        XCTAssertTrue(request?.amount?.rawValue == 120_000_000)
         XCTAssertTrue(request?.message == "Payment")
         XCTAssertTrue(request?.label == "Satoshi")
     }
@@ -72,4 +63,3 @@ class PaymentRequestTests : XCTestCase {
 //        }
 //    }
 }
-

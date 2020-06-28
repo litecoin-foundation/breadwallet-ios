@@ -1,22 +1,18 @@
-//
-//  ChildViewTransitioningDelegate.swift
-//  loafwallet
-//
-//  Created by Kerry Washington on 12/20/19.
-//  Copyright © 2019 Litecoin Foundation. All rights reserved.
-//
-
 import UIKit
 
 class ChildViewTransitioningDelegate: NSObject {
-// TBD:
-    //MARK: - Public
+    // TBD:
+
+    // MARK: - Public
+
     override init() {
         super.init()
     }
 
     var shouldDismissInteractively = true
-    //MARK: - Private
+
+    // MARK: - Private
+
 //    fileprivate var isInteractive: Bool = false
 //    fileprivate let interactiveTransition = UIPercentDrivenInteractiveTransition()
 //    fileprivate var presentedViewController: UIViewController?
@@ -67,8 +63,8 @@ class ChildViewTransitioningDelegate: NSObject {
 //    }
 }
 
-extension ChildViewTransitioningDelegate : UIViewControllerTransitioningDelegate {
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+extension ChildViewTransitioningDelegate: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented _: UIViewController, presenting _: UIViewController, source _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 //        presentedViewController = presented
 //        return PresentModalAnimator(shouldCoverBottomGap: type == .regular, completion: {
 //            let panGr = UIPanGestureRecognizer(target: self, action: #selector(ModalTransitionDelegate.didUpdate(gr:)))
@@ -78,11 +74,11 @@ extension ChildViewTransitioningDelegate : UIViewControllerTransitioningDelegate
         return nil
     }
 
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forDismissed _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return nil
     }
 
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    func interactionControllerForDismissal(using _: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return nil
     }
 }

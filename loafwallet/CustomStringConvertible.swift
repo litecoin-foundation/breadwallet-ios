@@ -1,11 +1,11 @@
 extension Country: CustomStringConvertible {
     public var description: String {
-        return self.name
+        return name
     }
 }
 
 extension Province: CustomStringConvertible {
     public var description: String {
-        return self.rawValue
+        return rawValue
     }
 }

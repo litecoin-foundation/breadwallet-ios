@@ -1,33 +1,24 @@
-//
-//  VerifyPinViewController.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-01-17.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
-import UIKit
 import LocalAuthentication
+import UIKit
 
 typealias VerifyPinCallback = (String, UIViewController) -> Bool
 
 protocol ContentBoxPresenter {
-    var contentBox : UIView { get }
+    var contentBox: UIView { get }
     var blurView: UIVisualEffectView { get }
     var effect: UIBlurEffect { get }
 }
 
-class VerifyPinViewController : UIViewController, ContentBoxPresenter {
-
+class VerifyPinViewController: UIViewController, ContentBoxPresenter {
     init(bodyText: String, pinLength: Int, callback: @escaping VerifyPinCallback) {
         self.bodyText = bodyText
         self.callback = callback
         self.pinLength = pinLength
-        self.pinView = PinView(style: .create, length: pinLength)
+        pinView = PinView(style: .create, length: pinLength)
         super.init(nibName: nil, bundle: nil)
     }
 
-    var didCancel: (()->Void)?
+    var didCancel: (() -> Void)?
     let blurView = UIVisualEffectView()
     let effect = UIBlurEffect(style: .dark)
     let contentBox = UIView()
@@ -62,7 +53,8 @@ class VerifyPinViewController : UIViewController, ContentBoxPresenter {
                 pinPad.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 pinPad.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: LAContext.biometricType() == .face ? -C.padding[3] : 0.0),
                 pinPad.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                pinPad.view.heightAnchor.constraint(equalToConstant: pinPad.height) ])
+                pinPad.view.heightAnchor.constraint(equalToConstant: pinPad.height),
+            ])
         })
     }
 
@@ -70,31 +62,37 @@ class VerifyPinViewController : UIViewController, ContentBoxPresenter {
         contentBox.constrain([
             contentBox.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             contentBox.bottomAnchor.constraint(equalTo: pinPad.view.topAnchor, constant: -C.padding[12]),
-            contentBox.widthAnchor.constraint(equalToConstant: 256.0) ])
+            contentBox.widthAnchor.constraint(equalToConstant: 256.0),
+        ])
         titleLabel.constrainTopCorners(sidePadding: C.padding[2], topPadding: C.padding[2])
         body.constrain([
             body.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             body.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            body.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor) ])
+            body.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+        ])
         pinView.constrain([
             pinView.topAnchor.constraint(equalTo: body.bottomAnchor, constant: C.padding[2]),
             pinView.centerXAnchor.constraint(equalTo: body.centerXAnchor),
             pinView.widthAnchor.constraint(equalToConstant: pinView.width),
             pinView.heightAnchor.constraint(equalToConstant: pinView.itemSize),
-            pinView.bottomAnchor.constraint(equalTo: contentBox.bottomAnchor, constant: -C.padding[2]) ])
+            pinView.bottomAnchor.constraint(equalTo: contentBox.bottomAnchor, constant: -C.padding[2]),
+        ])
         toolbar.constrain([
             toolbar.leadingAnchor.constraint(equalTo: pinPad.view.leadingAnchor),
             toolbar.bottomAnchor.constraint(equalTo: pinPad.view.topAnchor),
             toolbar.trailingAnchor.constraint(equalTo: pinPad.view.trailingAnchor),
-            toolbar.heightAnchor.constraint(equalToConstant: 44.0) ])
+            toolbar.heightAnchor.constraint(equalToConstant: 44.0),
+        ])
         cancel.constrain([
             cancel.centerYAnchor.constraint(equalTo: toolbar.centerYAnchor),
-            cancel.trailingAnchor.constraint(equalTo: toolbar.trailingAnchor, constant: -C.padding[2]) ])
+            cancel.trailingAnchor.constraint(equalTo: toolbar.trailingAnchor, constant: -C.padding[2]),
+        ])
         toolbarBorder.constrain([
             toolbarBorder.leadingAnchor.constraint(equalTo: pinPad.view.leadingAnchor),
             toolbarBorder.bottomAnchor.constraint(equalTo: toolbar.topAnchor),
             toolbarBorder.trailingAnchor.constraint(equalTo: pinPad.view.trailingAnchor),
-            toolbarBorder.heightAnchor.constraint(equalToConstant: 1.0) ])
+            toolbarBorder.heightAnchor.constraint(equalToConstant: 1.0),
+        ])
     }
 
     private func setupSubviews() {
@@ -106,7 +104,7 @@ class VerifyPinViewController : UIViewController, ContentBoxPresenter {
         contentBox.layer.shadowOpacity = 0.15
         contentBox.layer.shadowRadius = 4.0
         contentBox.layer.shadowOffset = .zero
-        
+
         toolbar.backgroundColor = .clear
 
         titleLabel.text = S.VerifyPin.title
@@ -119,7 +117,7 @@ class VerifyPinViewController : UIViewController, ContentBoxPresenter {
             let attemptLength = output.utf8.count
             myself.pinView.fill(attemptLength)
             myself.pinPad.isAppendingDisabled = attemptLength < myself.pinLength ? false : true
-            
+
             if attemptLength == myself.pinLength {
                 if !myself.callback(output, myself) {
                     myself.authenticationFailed()
@@ -152,7 +150,7 @@ class VerifyPinViewController : UIViewController, ContentBoxPresenter {
         return true
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

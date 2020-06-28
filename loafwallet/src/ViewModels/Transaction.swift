@@ -1,16 +1,8 @@
-//
-//  Transaction.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-11-17.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
-import UIKit
 import BRCore
+import UIKit
 
-//Ideally this would be a struct, but it needs to be a class to allow
-//for lazy variables
+// Ideally this would be a struct, but it needs to be a class to allow
+// for lazy variables
 
 struct TransactionStatusTuple {
     var percentageString: String
@@ -18,11 +10,11 @@ struct TransactionStatusTuple {
 }
 
 class Transaction {
+    // MARK: - Public
 
-    //MARK: - Public
     init?(_ tx: BRTxRef, walletManager: WalletManager, kvStore: BRReplicatedKVStore?, rate: Rate?) {
         guard let wallet = walletManager.wallet else { return nil }
-        guard let peerManager = walletManager.peerManager  else { return nil }
+        guard let peerManager = walletManager.peerManager else { return nil }
 
         self.tx = tx
         self.wallet = wallet
@@ -34,33 +26,32 @@ class Transaction {
         let amountReceived = wallet.amountReceivedFromTx(tx)
         let amountSent = wallet.amountSentByTx(tx)
 
-        if amountSent > 0 && (amountReceived + fee) == amountSent {
-            self.direction = .moved
-            self.satoshis = amountSent
+        if amountSent > 0, (amountReceived + fee) == amountSent {
+            direction = .moved
+            satoshis = amountSent
         } else if amountSent > 0 {
-            self.direction = .sent
-            self.satoshis = amountSent - amountReceived - fee
+            direction = .sent
+            satoshis = amountSent - amountReceived - fee
         } else {
-            self.direction = .received
-            self.satoshis = amountReceived
+            direction = .received
+            satoshis = amountReceived
         }
-        self.timestamp = Int(tx.pointee.timestamp)
+        timestamp = Int(tx.pointee.timestamp)
 
-        self.isValid = wallet.transactionIsValid(tx)
+        isValid = wallet.transactionIsValid(tx)
         let transactionBlockHeight = tx.pointee.blockHeight
         self.blockHeight = tx.pointee.blockHeight == UInt32(INT32_MAX) ? S.TransactionDetails.notConfirmedBlockHeightLabel : "\(tx.pointee.blockHeight)"
 
         let blockHeight = peerManager.lastBlockHeight
         confirms = transactionBlockHeight > blockHeight ? 0 : Int(blockHeight - transactionBlockHeight) + 1
-        self.status = makeStatus(tx, wallet: wallet, peerManager: peerManager, confirms: confirms, direction: self.direction)
+        status = makeStatus(tx, wallet: wallet, peerManager: peerManager, confirms: confirms, direction: direction)
 
-        self.hash = tx.pointee.txHash.description
-        self.metaDataKey = tx.pointee.txHash.txKey
+        hash = tx.pointee.txHash.description
+        metaDataKey = tx.pointee.txHash.txKey
 
-        if let rate = rate, confirms < 6 && direction == .received {
+        if let rate = rate, confirms < 6, direction == .received {
             attemptCreateMetaData(tx: tx, rate: rate)
         }
-
     }
 
     func amountDescription(isLtcSwapped: Bool, rate: Rate, maxDigits: Int) -> String {
@@ -94,7 +85,7 @@ class Transaction {
 
         var exchangeRateInfo = ""
         if let metaData = metaData, let currentRate = rates.filter({ $0.code.lowercased() == metaData.exchangeRateCurrency.lowercased() }).first {
-            let difference = (currentRate.rate - metaData.exchangeRate)/metaData.exchangeRate*100.0
+            let difference = (currentRate.rate - metaData.exchangeRate) / metaData.exchangeRate * 100.0
             let prefix = difference > 0.0 ? "+" : "-"
             let firstLine = direction == .sent ? S.Transaction.exchangeOnDaySent : S.Transaction.exchangeOnDayReceived
             let nf = NumberFormatter()
@@ -108,38 +99,38 @@ class Transaction {
 
         return "\(amountString)\n\n\(startingString)\n\(endingString)\n\n\(exchangeRateInfo)"
     }
-    
-    func amountDetailsAmountString(isLtcSwapped: Bool, rate: Rate, rates: [Rate], maxDigits: Int) -> String {
+
+    func amountDetailsAmountString(isLtcSwapped: Bool, rate: Rate, rates _: [Rate], maxDigits: Int) -> String {
         let feeAmount = Amount(amount: fee, rate: rate, maxDigits: maxDigits)
         let feeString = direction == .sent ? String(format: S.Transaction.fee, "\(feeAmount.string(isLtcSwapped: isLtcSwapped))") : ""
         return "\(direction.sign)\(Amount(amount: satoshis, rate: rate, maxDigits: maxDigits).string(isLtcSwapped: isLtcSwapped)) \(feeString)"
     }
-    
-    func amountDetailsStartingBalanceString(isLtcSwapped: Bool, rate: Rate, rates: [Rate], maxDigits: Int) -> String {
+
+    func amountDetailsStartingBalanceString(isLtcSwapped: Bool, rate: Rate, rates _: [Rate], maxDigits: Int) -> String {
         return String(format: S.Transaction.starting, "\(Amount(amount: startingBalance, rate: rate, maxDigits: maxDigits).string(isLtcSwapped: isLtcSwapped))")
     }
-    
-    func amountDetailsEndingBalanceString(isLtcSwapped: Bool, rate: Rate, rates: [Rate], maxDigits: Int) -> String {
-        return  String(format: String(format: S.Transaction.ending, "\(Amount(amount: balanceAfter, rate: rate, maxDigits: maxDigits).string(isLtcSwapped: isLtcSwapped))"))
+
+    func amountDetailsEndingBalanceString(isLtcSwapped: Bool, rate: Rate, rates _: [Rate], maxDigits: Int) -> String {
+        return String(format: String(format: S.Transaction.ending, "\(Amount(amount: balanceAfter, rate: rate, maxDigits: maxDigits).string(isLtcSwapped: isLtcSwapped))"))
     }
-    
-    func amountExchangeString(isLtcSwapped: Bool, rate: Rate, rates: [Rate], maxDigits: Int) -> String {
+
+    func amountExchangeString(isLtcSwapped _: Bool, rate _: Rate, rates: [Rate], maxDigits _: Int) -> String {
         var exchangeRateInfo = ""
         if let metaData = metaData, let currentRate = rates.filter({ $0.code.lowercased() == metaData.exchangeRateCurrency.lowercased() }).first {
-            let difference = (currentRate.rate - metaData.exchangeRate)/metaData.exchangeRate*100.0
+            let difference = (currentRate.rate - metaData.exchangeRate) / metaData.exchangeRate * 100.0
             let prefix = difference > 0.0 ? "+" : "-"
             let nf = NumberFormatter()
             nf.currencySymbol = currentRate.currencySymbol
             nf.numberStyle = .currency
             if let rateString = nf.string(from: metaData.exchangeRate as NSNumber) {
-                ///TODO: Decide the usefulness of the rate percentage or a better way to describe it
+                // TODO: Decide the usefulness of the rate percentage or a better way to describe it
                 let secondLine = "\(rateString)/LTC \(prefix)\(String(format: "%.2f", difference))%"
                 exchangeRateInfo = "\(secondLine)"
             }
         }
-        return  exchangeRateInfo
+        return exchangeRateInfo
     }
-    
+
     let direction: TransactionDirection
     let status: String
     let timestamp: Int
@@ -150,12 +141,13 @@ class Transaction {
     private let confirms: Int
     private let metaDataKey: String
 
-    //MARK: - Private
+    // MARK: - Private
+
     private let tx: BRTxRef
     private let wallet: BRWallet
-    fileprivate let satoshis: UInt64
+    private let satoshis: UInt64
     private var kvStore: BRReplicatedKVStore?
-    
+
     lazy var toAddress: String? = {
         switch self.direction {
         case .sent:
@@ -194,7 +186,7 @@ class Transaction {
             return _metaData
         } else {
             guard let kvStore = self.kvStore else { return nil }
-            if let data = TxMetaData(txKey: self.metaDataKey, store: kvStore) {
+            if let data = TxMetaData(txKey: metaDataKey, store: kvStore) {
                 _metaData = data
                 return _metaData
             } else {
@@ -255,14 +247,14 @@ class Transaction {
         let secondsInHour = 3600
         let secondsInDay = 86400
         let secondsInWeek = secondsInDay * 7
-        if (difference < secondsInMinute) {
+        if difference < secondsInMinute {
             result = (String(format: S.TimeSince.seconds, "\(difference)"), true)
         } else if difference < secondsInHour {
-            result = (String(format: S.TimeSince.minutes, "\(difference/secondsInMinute)"), true)
+            result = (String(format: S.TimeSince.minutes, "\(difference / secondsInMinute)"), true)
         } else if difference < secondsInDay {
-            result = (String(format: S.TimeSince.hours, "\(difference/secondsInHour)"), false)
+            result = (String(format: S.TimeSince.hours, "\(difference / secondsInHour)"), false)
         } else if difference < secondsInWeek {
-            result = (String(format: S.TimeSince.days, "\(difference/secondsInDay)"), false)
+            result = (String(format: S.TimeSince.days, "\(difference / secondsInDay)"), false)
         } else {
             let df = DateFormatter()
             df.setLocalizedDateFormatFromTemplate("MMM dd")
@@ -281,7 +273,7 @@ class Transaction {
         let date = Date(timeIntervalSince1970: Double(timestamp))
         return Transaction.longDateFormatter.string(from: date)
     }
-    
+
     var shortTimestamp: String {
         guard timestamp > 0 else { return wallet.transactionIsValid(tx) ? S.Transaction.justNow : "" }
         let date = Date(timeIntervalSince1970: Double(timestamp))
@@ -301,7 +293,7 @@ class Transaction {
         df.setLocalizedDateFormatFromTemplate("MMMM d, yyy h:mm a")
         return df
     }()
-    
+
     static let shortDateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.setLocalizedDateFormatFromTemplate("MMM d, h:mm a")
@@ -311,13 +303,13 @@ class Transaction {
     private func attemptCreateMetaData(tx: BRTxRef, rate: Rate) {
         guard metaData == nil else { return }
         let newData = TxMetaData(transaction: tx.pointee,
-                                          exchangeRate: rate.rate,
-                                          exchangeRateCurrency: rate.code,
-                                          feeRate: 0.0,
-                                          deviceId: UserDefaults.standard.deviceID)
+                                 exchangeRate: rate.rate,
+                                 exchangeRateCurrency: rate.code,
+                                 feeRate: 0.0,
+                                 deviceId: UserDefaults.standard.deviceID)
         do {
-            let _ = try kvStore?.set(newData)
-        } catch let error {
+            _ = try kvStore?.set(newData)
+        } catch {
             print("could not update metadata: \(error)")
         }
     }
@@ -372,8 +364,8 @@ private func makeStatus(_ txRef: BRTxRef, wallet: BRWallet, peerManager: BRPeerM
     }
 }
 
-extension Transaction : Equatable {}
+extension Transaction: Equatable {}
 
-func ==(lhs: Transaction, rhs: Transaction) -> Bool {
+func == (lhs: Transaction, rhs: Transaction) -> Bool {
     return lhs.hash == rhs.hash && lhs.status == rhs.status && lhs.comment == rhs.comment && lhs.hasKvStore == rhs.hasKvStore
 }

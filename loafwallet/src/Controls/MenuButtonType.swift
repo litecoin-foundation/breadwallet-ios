@@ -1,11 +1,3 @@
-//
-//  MenuButtonType.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-11-30.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 enum MenuButtonType {
@@ -36,7 +28,7 @@ enum MenuButtonType {
         case .settings:
             return #imageLiteral(resourceName: "Settings")
         case .lock:
-            return #imageLiteral(resourceName: "Lock") 
+            return #imageLiteral(resourceName: "Lock")
         }
     }
 }

@@ -1,11 +1,3 @@
-//
-//  UIButton+BRWAdditions.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-10-24.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 extension UIButton {
@@ -16,10 +8,10 @@ extension UIButton {
         button.titleLabel?.font = UIFont.customMedium(size: 11.0)
         if let imageSize = button.imageView?.image?.size,
             let font = button.titleLabel?.font {
-            let spacing: CGFloat = C.padding[1]/2.0
-            let titleSize = NSString(string: title).size(withAttributes: [NSAttributedStringKey.font : font])
+            let spacing: CGFloat = C.padding[1] / 2.0
+            let titleSize = NSString(string: title).size(withAttributes: [NSAttributedStringKey.font: font])
 
-            //These edge insets place the image vertically above the title label
+            // These edge insets place the image vertically above the title label
             button.titleEdgeInsets = UIEdgeInsetsMake(0.0, -imageSize.width, -(imageSize.height + spacing), 0.0)
             button.imageEdgeInsets = UIEdgeInsetsMake(-(titleSize.height + spacing), 0.0, 0.0, -titleSize.width)
         }
@@ -57,13 +49,12 @@ extension UIButton {
 
     func tempDisable() {
         isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
             self?.isEnabled = true
-        })
+        }
     }
-    
+
     static func stylizeLitewalletBlueButton(title: String, frame: CGRect) -> UIButton {
-        
         let button = UIButton()
         button.frame = frame
         button.setTitle(title, for: .normal)
@@ -73,11 +64,11 @@ extension UIButton {
         button.clipsToBounds = true
         return button
     }
-    
-    static func textFieldMaxAmount(height: CGFloat = 44, image: UIImage = UIImage(), title: String = "max." ) -> UIButton {
+
+    static func textFieldMaxAmount(height: CGFloat = 44, image: UIImage = UIImage(), title: String = "max.") -> UIButton {
         let button = UIButton(type: .system)
-        button.frame = CGRect(x: 0, y: 0, width: 44, height: height+40)
-        //button.contentMode = .center
+        button.frame = CGRect(x: 0, y: 0, width: 44, height: height + 40)
+        // button.contentMode = .center
         button.setImage(image, for: .normal)
 
 //        if image == #imageLiteral(resourceName: "Close") {

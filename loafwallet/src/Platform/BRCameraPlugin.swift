@@ -1,26 +1,17 @@
-//
-//  BRCameraPlugin.swift
-//  BreadWallet
-//
-//  Created by Samuel Sutch on 10/9/16.
-//  Copyright © 2016 Aaron Voisine. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
 open class BRCameraPlugin: NSObject, BRHTTPRouterPlugin, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate, CameraOverlayDelegate {
-    
+    UINavigationControllerDelegate, CameraOverlayDelegate {
     weak var controller: UIViewController?
     var response: BRHTTPResponse?
     var picker: UIImagePickerController?
-    
+
     init(fromViewController: UIViewController) {
-        self.controller = fromViewController
+        controller = fromViewController
         super.init()
     }
-    
+
     open func hook(_ router: BRHTTPRouter) {
         // GET /_camera/take_picture
         //
@@ -33,7 +24,7 @@ UINavigationControllerDelegate, CameraOverlayDelegate {
         //   - 404: Camera is not available on this device
         //   - 423: Multiple concurrent take_picture requests. Only one take_picture request may be in flight at once.
         //
-        router.get("/_camera/take_picture") { (request, match) -> BRHTTPResponse in
+        router.get("/_camera/take_picture") { (request, _) -> BRHTTPResponse in
             if self.response != nil {
                 print("[BRCameraPlugin] already taking a picture")
                 return BRHTTPResponse(request: request, code: 423)
@@ -48,15 +39,15 @@ UINavigationControllerDelegate, CameraOverlayDelegate {
             }
             let response = BRHTTPResponse(async: request)
             self.response = response
-            
+
             DispatchQueue.main.async {
                 let picker = UIImagePickerController()
                 picker.delegate = self
                 picker.sourceType = .camera
                 picker.cameraCaptureMode = .photo
-                
+
                 // set overlay
-                if let overlay = request.query["overlay"] , overlay.count == 1 {
+                if let overlay = request.query["overlay"], overlay.count == 1 {
                     print(["BRCameraPlugin] overlay = \(overlay)"])
                     let screenBounds = UIScreen.main.bounds
                     if overlay[0] == "id" {
@@ -64,7 +55,7 @@ UINavigationControllerDelegate, CameraOverlayDelegate {
                         picker.allowsEditing = false
                         picker.hidesBarsOnTap = true
                         picker.isNavigationBarHidden = true
-                        
+
                         let overlay = IDCameraOverlay(frame: screenBounds)
                         overlay.delegate = self
                         overlay.backgroundColor = UIColor.clear
@@ -74,10 +65,10 @@ UINavigationControllerDelegate, CameraOverlayDelegate {
                 self.picker = picker
                 self.controller?.present(picker, animated: true, completion: nil)
             }
-            
+
             return response
         }
-        
+
         // GET /_camera/picture/(id)
         //
         // Return a picture as taken by take_picture
@@ -88,7 +79,7 @@ UINavigationControllerDelegate, CameraOverlayDelegate {
         //
         router.get("/_camera/picture/(id)") { (request, match) -> BRHTTPResponse in
             var id: String!
-            if let ids = match["id"] , ids.count == 1 {
+            if let ids = match["id"], ids.count == 1 {
                 id = ids[0]
             } else {
                 return BRHTTPResponse(request: request, code: 500)
@@ -113,7 +104,7 @@ UINavigationControllerDelegate, CameraOverlayDelegate {
                 imgDat = [UInt8](scaledImageDat)
                 // return img to client
                 var contentType = "image/jpeg"
-                if let b64opt = request.query["base64"], b64opt.count > 0 {
+                if let b64opt = request.query["base64"], !b64opt.isEmpty {
                     contentType = "text/plain"
                     let b64 = "data:image/jpeg;base64," + Data(imgDat).base64EncodedString()
                     guard let b64encoded = b64.data(using: .utf8) else {
@@ -130,9 +121,9 @@ UINavigationControllerDelegate, CameraOverlayDelegate {
             return resp
         }
     }
-    
+
     open func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        guard let resp = self.response else {
+        guard let resp = response else {
             return
         }
         defer {
@@ -143,15 +134,15 @@ UINavigationControllerDelegate, CameraOverlayDelegate {
         }
         resp.provide(204, json: nil)
     }
-    
+
     open func imagePickerController(_ picker: UIImagePickerController,
-                                    didFinishPickingMediaWithInfo info: [String : Any]) {
+                                    didFinishPickingMediaWithInfo info: [String: Any]) {
         defer {
             DispatchQueue.main.async {
                 picker.dismiss(animated: true, completion: nil)
             }
         }
-        guard let resp = self.response else {
+        guard let resp = response else {
             return
         }
         guard var img = info[UIImagePickerControllerOriginalImage] as? UIImage else {
@@ -179,17 +170,17 @@ UINavigationControllerDelegate, CameraOverlayDelegate {
             }
         }
     }
-    
+
     func takePhoto() {
-        self.picker?.takePicture()
+        picker?.takePicture()
     }
-    
+
     func cancelPhoto() {
         if let picker = self.picker {
-            self.imagePickerControllerDidCancel(picker)
+            imagePickerControllerDidCancel(picker)
         }
     }
-    
+
     func readImage(_ name: String) throws -> [UInt8] {
         let fm = FileManager.default
         let docsUrl = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -201,13 +192,13 @@ UINavigationControllerDelegate, CameraOverlayDelegate {
         let bp = (dat as NSData).bytes.bindMemory(to: UInt8.self, capacity: dat.count)
         return Array(UnsafeBufferPointer(start: bp, count: dat.count))
     }
-    
+
     func writeImage(_ image: UIImage) throws -> String {
         guard let dat = UIImageJPEGRepresentation(image, 0.5) else {
             throw ImageError.errorConvertingImage
         }
         let name = dat.sha256.base58
-        
+
         let fm = FileManager.default
         let docsUrl = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
         let picDirUrl = docsUrl.appendingPathComponent("pictures", isDirectory: true)
@@ -242,9 +233,9 @@ class IDCameraOverlay: UIView, CameraOverlay {
     let takePhotoButton: UIButton
     let cancelButton: UIButton
     let overlayRect: CGRect
-    
+
     override init(frame: CGRect) {
-        overlayRect = CGRect(x: 0, y: 0, width: frame.width, height: frame.width * CGFloat(4.0/3.0))
+        overlayRect = CGRect(x: 0, y: 0, width: frame.width, height: frame.width * CGFloat(4.0 / 3.0))
         takePhotoButton = UIButton(type: .custom)
         takePhotoButton.setImage(#imageLiteral(resourceName: "camera-btn"), for: UIControlState())
         takePhotoButton.setImage(#imageLiteral(resourceName: "camera-btn-pressed"), for: .highlighted)
@@ -263,32 +254,32 @@ class IDCameraOverlay: UIView, CameraOverlay {
                                   for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(IDCameraOverlay.doCancelPhoto(_:)),
                                for: .touchUpInside)
-        self.addSubview(cancelButton)
-        self.addSubview(takePhotoButton)
+        addSubview(cancelButton)
+        addSubview(takePhotoButton)
     }
-    
-    required init?(coder aDecoder: NSCoder) {
+
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) is not implemented")
     }
-    
-    @objc func doTakePhoto(_ target: UIControl) {
+
+    @objc func doTakePhoto(_: UIControl) {
         delegate?.takePhoto()
     }
-    
-    @objc func doCancelPhoto(_ target: UIControl) {
+
+    @objc func doCancelPhoto(_: UIControl) {
         delegate?.cancelPhoto()
     }
-    
+
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        
+
         UIColor.black.withAlphaComponent(0.92).setFill()
         UIRectFill(overlayRect)
         guard let ctx = UIGraphicsGetCurrentContext() else {
             return
         }
         ctx.setBlendMode(.destinationOut)
-        
+
         let width = rect.size.width * 0.9
         var cutout = CGRect(origin: overlayRect.origin,
                             size: CGSize(width: width, height: width * 0.65))
@@ -296,22 +287,22 @@ class IDCameraOverlay: UIView, CameraOverlay {
         cutout.origin.y = (overlayRect.size.height - cutout.size.height) * 0.5
         let path = UIBezierPath(rect: cutout.integral)
         path.fill()
-        
+
         ctx.setBlendMode(.normal)
-        
+
         let str = S.CameraPlugin.centerInstruction as NSString
-        
+
         let style = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
         style.alignment = .center
         let attr = [
             NSAttributedStringKey.paragraphStyle: style,
             NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),
-            NSAttributedStringKey.foregroundColor: UIColor.white
+            NSAttributedStringKey.foregroundColor: UIColor.white,
         ]
-        
+
         str.draw(in: CGRect(x: 0, y: cutout.maxY + 14.0, width: rect.width, height: 22), withAttributes: attr)
     }
-    
+
     func cropImage(_ image: UIImage) -> UIImage? {
         guard let cgimg = image.cgImage else {
             return nil
@@ -323,11 +314,11 @@ class IDCameraOverlay: UIView, CameraOverlay {
         cutout.origin.x = (rect.size.width - cutout.size.width) * 0.5
         cutout.origin.y = (rect.size.height - cutout.size.height) * 0.5
         cutout = cutout.integral
-        
+
         func rad(_ f: CGFloat) -> CGFloat {
             return f / 180.0 * CGFloat(Double.pi)
         }
-        
+
         var transform: CGAffineTransform!
         switch image.imageOrientation {
         case .left:
@@ -342,7 +333,7 @@ class IDCameraOverlay: UIView, CameraOverlay {
         }
         transform = transform.scaledBy(x: image.scale, y: image.scale)
         cutout = cutout.applying(transform)
-        
+
         guard let retRef = cgimg.cropping(to: cutout) else {
             return nil
         }

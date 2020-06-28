@@ -1,20 +1,12 @@
-//
-//  Types.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-05-20.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import Foundation
 
-//MARK: - Satishis
+// MARK: - Satishis
+
 struct Satoshis {
     let rawValue: UInt64
 }
 
 extension Satoshis {
-
     init(_ rawValue: UInt64) {
         self.rawValue = rawValue
     }
@@ -40,45 +32,45 @@ extension Satoshis {
     }
 }
 
-extension Satoshis : Equatable {}
+extension Satoshis: Equatable {}
 
-func ==(lhs: Satoshis, rhs: Satoshis) -> Bool {
+func == (lhs: Satoshis, rhs: Satoshis) -> Bool {
     return lhs.rawValue == rhs.rawValue
 }
 
-func ==(lhs: Satoshis?, rhs: UInt64) -> Bool {
+func == (lhs: Satoshis?, rhs: UInt64) -> Bool {
     return lhs?.rawValue == rhs
 }
 
-func +(lhs: Satoshis, rhs: UInt64) -> Satoshis {
+func + (lhs: Satoshis, rhs: UInt64) -> Satoshis {
     return Satoshis(lhs.rawValue + rhs)
 }
 
-func +(lhs: Satoshis, rhs: Satoshis) -> Satoshis {
+func + (lhs: Satoshis, rhs: Satoshis) -> Satoshis {
     return Satoshis(lhs.rawValue + rhs.rawValue)
 }
 
-func +=(lhs: inout Satoshis, rhs: UInt64) {
+func += (lhs: inout Satoshis, rhs: UInt64) {
     lhs = lhs + rhs
 }
 
-func >(lhs: Satoshis, rhs: UInt64) -> Bool {
+func > (lhs: Satoshis, rhs: UInt64) -> Bool {
     return lhs.rawValue > rhs
 }
 
-func <(lhs: Satoshis, rhs: UInt64) -> Bool {
+func < (lhs: Satoshis, rhs: UInt64) -> Bool {
     return lhs.rawValue < rhs
 }
 
-//MARK: - Bits
+// MARK: - Bits
+
 struct Bits {
     let rawValue: Double
 }
 
 extension Bits {
-
     init(satoshis: Satoshis) {
-        rawValue = Double(satoshis.rawValue)/100.0
+        rawValue = Double(satoshis.rawValue) / 100.0
     }
 
     init?(string: String) {
@@ -87,7 +79,8 @@ extension Bits {
     }
 }
 
-//MARK: - Bitcoin
+// MARK: - Bitcoin
+
 struct Bitcoin {
     let rawValue: Double
 }

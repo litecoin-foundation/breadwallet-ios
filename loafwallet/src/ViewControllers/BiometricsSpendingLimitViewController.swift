@@ -1,25 +1,16 @@
-//
-//  BiometricsSpendingLimitViewController.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-03-28.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
-import UIKit
 import LocalAuthentication
+import UIKit
 
 class BiometricsSpendingLimitViewController: UITableViewController, Subscriber {
-
     private let cellIdentifier = "CellIdentifier"
     private let store: Store
     private let walletManager: WalletManager
-    private let limits: [UInt64] = [0, 10000000, 100000000, 1000000000, 10000000000]
+    private let limits: [UInt64] = [0, 10_000_000, 100_000_000, 1_000_000_000, 10_000_000_000]
     private var selectedLimit: UInt64?
     private var header: UIView?
     private let amount = UILabel(font: .customMedium(size: 26.0), color: .darkText)
     private let body = UILabel.wrapping(font: .customBody(size: 13.0), color: .darkText)
-    
+
     init(walletManager: WalletManager, store: Store) {
         self.walletManager = walletManager
         self.store = store
@@ -48,7 +39,7 @@ class BiometricsSpendingLimitViewController: UITableViewController, Subscriber {
 
         body.text = S.TouchIdSpendingLimit.body
 
-        //If the user has a limit that is not a current option, we display their limit
+        // If the user has a limit that is not a current option, we display their limit
         if !limits.contains(walletManager.spendingLimit) {
             if let rate = store.state.currentRate {
                 let spendingLimit = Amount(amount: walletManager.spendingLimit, rate: rate, maxDigits: store.state.maxDigits)
@@ -57,11 +48,11 @@ class BiometricsSpendingLimitViewController: UITableViewController, Subscriber {
         }
     }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return limits.count
     }
 
@@ -90,11 +81,12 @@ class BiometricsSpendingLimitViewController: UITableViewController, Subscriber {
         walletManager.spendingLimit = newLimit
         amount.isHidden = true
         amount.constrain([
-            amount.heightAnchor.constraint(equalToConstant: 0.0) ])
+            amount.heightAnchor.constraint(equalToConstant: 0.0),
+        ])
         tableView.reloadData()
     }
 
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_: UITableView, viewForHeaderInSection _: Int) -> UIView? {
         if let header = self.header { return header }
         let header = UIView(color: .whiteTint)
         header.addSubview(amount)
@@ -104,7 +96,8 @@ class BiometricsSpendingLimitViewController: UITableViewController, Subscriber {
             body.leadingAnchor.constraint(equalTo: amount.leadingAnchor),
             body.topAnchor.constraint(equalTo: amount.bottomAnchor),
             body.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -C.padding[2]),
-            body.bottomAnchor.constraint(equalTo: header.bottomAnchor, constant: -C.padding[2]) ])
+            body.bottomAnchor.constraint(equalTo: header.bottomAnchor, constant: -C.padding[2]),
+        ])
         self.header = header
         return header
     }
@@ -113,7 +106,7 @@ class BiometricsSpendingLimitViewController: UITableViewController, Subscriber {
         amount.text = "\(limitAmount.bits) = \(limitAmount.localCurrency)"
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

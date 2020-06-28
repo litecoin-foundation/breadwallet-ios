@@ -1,11 +1,3 @@
-//
-//  UpdatePinViewController.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-02-16.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import LocalAuthentication
 import UIKit
 
@@ -26,7 +18,7 @@ class UpdatePinViewController: UIViewController, Subscriber {
         self.store = store
         self.walletManager = walletManager
         self.phrase = phrase
-        self.pinView = PinView(style: .create, length: store.state.pinLength)
+        pinView = PinView(style: .create, length: store.state.pinLength)
         self.showsBackButton = showsBackButton
         self.type = type
         super.init(nibName: nil, bundle: nil)
@@ -289,7 +281,7 @@ class UpdatePinViewController: UIViewController, Subscriber {
         }
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

@@ -1,14 +1,9 @@
-//
-//  BRWebViewController.swift
-//  BreadWallet
-
-
 import Foundation
 import UIKit
 import WebKit
 
 @available(iOS 8.0, *)
-@objc open class BRWebViewController : UIViewController, WKNavigationDelegate, BRWebSocketClient, WKScriptMessageHandler {
+@objc open class BRWebViewController: UIViewController, WKNavigationDelegate, BRWebSocketClient, WKScriptMessageHandler {
     var wkProcessPool: WKProcessPool
     var webView: WKWebView?
     var server = BRHTTPServer()
@@ -17,15 +12,15 @@ import WebKit
     var walletManager: WalletManager
     let store: Store
     let noAuthApiClient: BRAPIClient?
-    let partner : String?
-    let activityIndicator : UIActivityIndicatorView
+    let partner: String?
+    let activityIndicator: UIActivityIndicatorView
     var didLoad = false
     var didAppear = false
     var didLoadTimeout = 2500
     var waitTimeout = 90
     // we are also a socket server which sends didview/didload events to the listening client(s)
     var sockets = [String: BRWebSocket]()
-    
+
     // this is the data that occasionally gets sent to the above connected sockets
     var webViewInfo: [String: Any] {
         return [
@@ -33,46 +28,46 @@ import WebKit
             "loaded": didLoad,
         ]
     }
-    
+
     var indexUrl: URL {
         switch mountPoint {
-            case "/buy_simplex":
-                var appInstallDate: Date {
-                    if let documentsFolder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last {
-                        if let installDate = try! FileManager.default.attributesOfItem(atPath: documentsFolder.path)[.creationDate] as? Date {
-                            return installDate
-                        }
+        case "/buy_simplex":
+            var appInstallDate: Date {
+                if let documentsFolder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last {
+                    if let installDate = try! FileManager.default.attributesOfItem(atPath: documentsFolder.path)[.creationDate] as? Date {
+                        return installDate
                     }
-                    return Date()
                 }
-                let walletAddress = walletManager.wallet?.receiveAddress
-                let currencyCode = Locale.current.currencyCode ?? "USD"
-                let uuid = UIDevice.current.identifierForVendor!.uuidString
+                return Date()
+            }
+            let walletAddress = walletManager.wallet?.receiveAddress
+            let currencyCode = Locale.current.currencyCode ?? "USD"
+            let uuid = UIDevice.current.identifierForVendor!.uuidString
 
-                return URL(string: getSimplexParams(appInstallDate: appInstallDate, walletAddress: walletAddress, currencyCode: currencyCode, uuid: uuid))!
-            case "/buy_coinbase":
-                return URL(string: "https://api.loafwallet.org/buy")!
-            case "/support":
-                return URL(string: "https://api.loafwallet.org/support")!
-            case "/ea":
-                return URL(string: "https://api.loafwallet.org/ea")!
-            default:
-                return URL(string: "http://127.0.0.1:\(server.port)\(mountPoint)")!
+            return URL(string: getSimplexParams(appInstallDate: appInstallDate, walletAddress: walletAddress, currencyCode: currencyCode, uuid: uuid))!
+        case "/buy_coinbase":
+            return URL(string: "https://api.loafwallet.org/buy")!
+        case "/support":
+            return URL(string: "https://api.loafwallet.org/support")!
+        case "/ea":
+            return URL(string: "https://api.loafwallet.org/ea")!
+        default:
+            return URL(string: "http://127.0.0.1:\(server.port)\(mountPoint)")!
         }
     }
-    
+
     private func getSimplexParams(appInstallDate: Date?, walletAddress: String?, currencyCode: String?, uuid: String?) -> String {
         guard let appInstallDate = appInstallDate else { return "" }
         guard let walletAddress = walletAddress else { return "" }
         let currencyCode = Currency.returnSimplexSupportedFiat(givenCode: currencyCode!)
         guard let uuid = uuid else { return "" }
-        
+
         let timestamp = Int(appInstallDate.timeIntervalSince1970)
         return "https://buy.loafwallet.org/?address=\(walletAddress)&code=\(currencyCode)&idate=\(timestamp)&uid=\(uuid)"
     }
-    
+
     private let messageUIPresenter = MessageUIPresenter()
-    
+
     init(partner: String?, mountPoint: String = "/", walletManager: WalletManager, store: Store, noAuthApiClient: BRAPIClient? = nil) {
         wkProcessPool = WKProcessPool()
         self.mountPoint = mountPoint
@@ -80,21 +75,21 @@ import WebKit
         self.store = store
         self.noAuthApiClient = noAuthApiClient
         self.partner = partner ?? ""
-        self.activityIndicator = UIActivityIndicatorView()
+        activityIndicator = UIActivityIndicatorView()
         super.init(nibName: nil, bundle: nil)
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
+
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-  
-    override open var preferredStatusBarStyle: UIStatusBarStyle {
+
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-  
-    override open func loadView() {
+
+    open override func loadView() {
         didLoad = false
-        
+
         let contentController = WKUserContentController()
         contentController.add(self, name: "callback")
 
@@ -106,33 +101,33 @@ import WebKit
         config.userContentController = contentController
 
         let request = URLRequest(url: indexUrl)
-        
+
         view = UIView(frame: CGRect.zero)
-        view.backgroundColor = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.0)
-      
+        view.backgroundColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.0)
+
         webView = WKWebView(frame: CGRect.zero, configuration: config)
         webView?.navigationDelegate = self
-        webView?.backgroundColor = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.0)
+        webView?.backgroundColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.0)
         _ = webView?.load(request)
         webView?.autoresizingMask = [UIViewAutoresizing.flexibleHeight, UIViewAutoresizing.flexibleWidth]
         webView?.scrollView.contentInsetAdjustmentBehavior = .never
-       
+
         view.addSubview(webView!)
-      
+
         let center = NotificationCenter.default
-        center.addObserver(forName: .UIApplicationDidBecomeActive, object: nil, queue: .main) { [weak self] (_) in
+        center.addObserver(forName: .UIApplicationDidBecomeActive, object: nil, queue: .main) { [weak self] _ in
             self?.didAppear = true
             if let info = self?.webViewInfo {
                 self?.sendToAllSockets(data: info)
             }
         }
-        center.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: .main) { [weak self] (_) in
+        center.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: .main) { [weak self] _ in
             self?.didAppear = false
             if let info = self?.webViewInfo {
                 self?.sendToAllSockets(data: info)
             }
         }
-      
+
         activityIndicator.activityIndicatorViewStyle = .white
         activityIndicator.color = .darkGray
         activityIndicator.startAnimating()
@@ -141,13 +136,13 @@ import WebKit
         activityIndicator.autoresizingMask = [UIViewAutoresizing.flexibleHeight, UIViewAutoresizing.flexibleWidth]
         view.addSubview(activityIndicator)
     }
-  
-    override open func viewDidAppear(_ animated: Bool) {
+
+    open override func viewDidAppear(_: Bool) {
         didAppear = true
         sendToAllSockets(data: webViewInfo)
     }
-    
-    override open func viewDidDisappear(_ animated: Bool) {
+
+    open override func viewDidDisappear(_: Bool) {
         didAppear = false
         sendToAllSockets(data: webViewInfo)
     }
@@ -157,23 +152,24 @@ import WebKit
         didLoad = true
         sendToAllSockets(data: webViewInfo)
     }
-    
+
     fileprivate func closeNow() {
         store.trigger(name: .showStatusBar)
         dismiss(animated: true, completion: nil)
     }
-    
+
     open func preload() {
-        _ = self.view // force webview loading
+        _ = view // force webview loading
     }
-    
+
     open func refresh() {
         let request = URLRequest(url: indexUrl)
         _ = webView?.load(request)
     }
-    
+
     // MARK: - navigation delegate
-    open func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
+
+    open func webView(_: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
                       decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url?.absoluteString {
             let mutableurl = url
@@ -185,30 +181,30 @@ import WebKit
         }
         return decisionHandler(.allow)
     }
-  
-    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+
+    public func webView(_: WKWebView, didFinish _: WKNavigation!) {
         activityIndicator.stopAnimating()
         activityIndicator.isHidden = true
     }
-  
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+
+    public func userContentController(_: WKUserContentController, didReceive message: WKScriptMessage) {
         guard let response = message.body as? String else { return }
 
         let URLString = URL(string: "https://checkout.simplexcc.com/payments/new")
-        
+
         var req = URLRequest(url: URLString!)
         req.httpBody = Data(response.utf8)
         req.httpMethod = "POST"
-        
+
         DispatchQueue.main.async {
             let browser = BRBrowserViewController()
             browser.load(req)
             self.present(browser, animated: true, completion: nil)
         }
-        
     }
-    
+
     // MARK: - socket delegate
+
     func sendTo(socket: BRWebSocket, data: [String: Any]) {
         do {
             let j = try JSONSerialization.data(withJSONObject: data, options: [])
@@ -221,29 +217,29 @@ import WebKit
             print("LOCATION SOCKET FAILED ENCODE JSON: \(e)")
         }
     }
-    
+
     func sendToAllSockets(data: [String: Any]) {
         for (_, s) in sockets {
             sendTo(socket: s, data: data)
         }
     }
-    
+
     public func socketDidConnect(_ socket: BRWebSocket) {
         print("WEBVIEW SOCKET CONNECT \(socket.id)")
         sockets[socket.id] = socket
         sendTo(socket: socket, data: webViewInfo)
     }
-    
+
     public func socketDidDisconnect(_ socket: BRWebSocket) {
         print("WEBVIEW SOCKET DISCONNECT \(socket.id)")
         sockets.removeValue(forKey: socket.id)
     }
-    
-    public func socket(_ socket: BRWebSocket, didReceiveText text: String) {
+
+    public func socket(_: BRWebSocket, didReceiveText text: String) {
         print("WEBVIEW SOCKET RECV TEXT \(text)")
     }
-    
-    public func socket(_ socket: BRWebSocket, didReceiveData data: Data) {
+
+    public func socket(_: BRWebSocket, didReceiveData data: Data) {
         print("WEBVIEW SOCKET RECV TEXT \(data.hexString)")
     }
 }

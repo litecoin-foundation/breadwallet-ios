@@ -1,20 +1,12 @@
-//
-//  Amount.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-01-15.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import Foundation
 
 struct Amount {
+    // MARK: - Public
 
-    //MARK: - Public
-    let amount: UInt64 //amount in satoshis
+    let amount: UInt64 // amount in satoshis
     let rate: Rate
     let maxDigits: Int
-    
+
     var amountForLtcFormat: Double {
         var decimal = Decimal(self.amount)
         var amount: Decimal = 0.0
@@ -23,7 +15,7 @@ struct Amount {
     }
 
     var localAmount: Double {
-        return Double(amount)/100000000.0*rate.rate
+        return Double(amount) / 100_000_000.0 * rate.rate
     }
 
     var bits: String {
@@ -36,7 +28,7 @@ struct Amount {
     }
 
     var localCurrency: String {
-        guard let string = localFormat.string(from: Double(amount)/100000000.0*rate.rate as NSNumber) else { return "" }
+        guard let string = localFormat.string(from: Double(amount) / 100_000_000.0 * rate.rate as NSNumber) else { return "" }
         return string
     }
 
@@ -47,7 +39,7 @@ struct Amount {
         format.numberStyle = .currency
         format.generatesDecimalNumbers = true
         format.negativeFormat = format.positiveFormat.replacingCharacters(in: format.positiveFormat.range(of: "#")!, with: "-#")
-        guard let string = format.string(from: Double(amount)/100000000.0*rate.rate as NSNumber) else { return "" }
+        guard let string = format.string(from: Double(amount) / 100_000_000.0 * rate.rate as NSNumber) else { return "" }
         return string
     }
 
@@ -66,20 +58,20 @@ struct Amount {
         switch maxDigits {
         case 2: // photons
             format.currencySymbol = "m\(S.Symbols.lites)\(S.Symbols.narrowSpace)"
-            format.maximum = (C.maxMoney/C.satoshis)*100000 as NSNumber
+            format.maximum = (C.maxMoney / C.satoshis) * 100_000 as NSNumber
         case 5: // lites
             format.currencySymbol = "\(S.Symbols.lites)\(S.Symbols.narrowSpace)"
-            format.maximum = (C.maxMoney/C.satoshis)*1000 as NSNumber
+            format.maximum = (C.maxMoney / C.satoshis) * 1000 as NSNumber
         case 8: // litecoin
             format.currencySymbol = "\(S.Symbols.ltc)\(S.Symbols.narrowSpace)"
-            format.maximum = C.maxMoney/C.satoshis as NSNumber
+            format.maximum = C.maxMoney / C.satoshis as NSNumber
         default:
             format.currencySymbol = "\(S.Symbols.lites)\(S.Symbols.narrowSpace)"
         }
 
         format.maximumFractionDigits = maxDigits
         format.minimumFractionDigits = 0 // iOS 8 bug, minimumFractionDigits now has to be set after currencySymbol
-        format.maximum = Decimal(C.maxMoney)/(pow(10.0, maxDigits)) as NSNumber
+        format.maximum = Decimal(C.maxMoney) / pow(10.0, maxDigits) as NSNumber
 
         return format
     }
@@ -111,7 +103,7 @@ struct DisplayAmount {
 
     private var fiatDescription: String {
         guard let rate = selectedRate ?? state.currentRate else { return "" }
-        guard let string = localFormat.string(from: Double(amount.rawValue)/100000000.0*rate.rate as NSNumber) else { return "" }
+        guard let string = localFormat.string(from: Double(amount.rawValue) / 100_000_000.0 * rate.rate as NSNumber) else { return "" }
         return string
     }
 
@@ -152,13 +144,13 @@ struct DisplayAmount {
         switch state.maxDigits {
         case 2:
             format.currencySymbol = "m\(S.Symbols.lites)\(S.Symbols.narrowSpace)"
-            format.maximum = (C.maxMoney/C.satoshis)*100000 as NSNumber
+            format.maximum = (C.maxMoney / C.satoshis) * 100_000 as NSNumber
         case 5:
             format.currencySymbol = "\(S.Symbols.lites)\(S.Symbols.narrowSpace)"
-            format.maximum = (C.maxMoney/C.satoshis)*1000 as NSNumber
+            format.maximum = (C.maxMoney / C.satoshis) * 1000 as NSNumber
         case 8:
             format.currencySymbol = "\(S.Symbols.ltc)\(S.Symbols.narrowSpace)"
-            format.maximum = C.maxMoney/C.satoshis as NSNumber
+            format.maximum = C.maxMoney / C.satoshis as NSNumber
         default:
             format.currencySymbol = "\(S.Symbols.lites)\(S.Symbols.narrowSpace)"
         }
@@ -167,7 +159,7 @@ struct DisplayAmount {
         if let minimumFractionDigits = minimumFractionDigits {
             format.minimumFractionDigits = minimumFractionDigits
         }
-        format.maximum = Decimal(C.maxMoney)/(pow(10.0, state.maxDigits)) as NSNumber
+        format.maximum = Decimal(C.maxMoney) / pow(10.0, state.maxDigits) as NSNumber
 
         return format
     }

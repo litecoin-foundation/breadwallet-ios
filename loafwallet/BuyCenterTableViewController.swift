@@ -1,16 +1,8 @@
-//
-//  BuyCenterTableViewController.swift
-//  breadwallet
-//
-//  Created by Kerry Washington on 9/27/18.
-//  Copyright © 2018 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-//let buyCellReuseIdentifier = "buyCell"
+// let buyCellReuseIdentifier = "buyCell"
 
-//class BuyCenterTableViewController: UITableViewController, BuyCenterTableViewCellDelegate {
+// class BuyCenterTableViewController: UITableViewController, BuyCenterTableViewCellDelegate {
 //
 //    fileprivate let litecoinLogo = UIImageView(image:#imageLiteral(resourceName: "litecoinLogo"))
 //    private let store: Store
@@ -111,11 +103,10 @@ import UIKit
 //  @objc func dismissWebContainer() {
 //    dismiss(animated: true, completion: nil)
 //  }
-//}
+// }
 
+// extension BuyCenterTableViewController: ModalDisplayable {
 
-//extension BuyCenterTableViewController: ModalDisplayable {
-  
 //  var faqArticleId: String? {
 //    return nil
 //  }
@@ -123,6 +114,4 @@ import UIKit
 //  var modalTitle: String {
 //    return S.BuyCenter.buyModalTitle
 //  }
-//}
-
-
+// }

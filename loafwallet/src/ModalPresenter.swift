@@ -1,30 +1,22 @@
-//
-//  ModalPresenter.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-10-25.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
-import UIKit
 import LocalAuthentication
+import UIKit
 
+class ModalPresenter: Subscriber, Trackable {
+    // MARK: - Public
 
-class ModalPresenter : Subscriber, Trackable {
-
-    //MARK: - Public
     var walletManager: WalletManager?
     init(store: Store, walletManager: WalletManager, window: UIWindow, apiClient: BRAPIClient) {
         self.store = store
         self.window = window
         self.walletManager = walletManager
-        self.modalTransitionDelegate = ModalTransitionDelegate(type: .regular, store: store)
-        self.wipeNavigationDelegate = StartNavigationDelegate(store: store)
-        self.noAuthApiClient = apiClient        
+        modalTransitionDelegate = ModalTransitionDelegate(type: .regular, store: store)
+        wipeNavigationDelegate = StartNavigationDelegate(store: store)
+        noAuthApiClient = apiClient
         addSubscriptions()
     }
 
-    //MARK: - Private
+    // MARK: - Private
+
     private let store: Store
     private let window: UIWindow
     private let alertHeight: CGFloat = 260.0
@@ -41,20 +33,20 @@ class ModalPresenter : Subscriber, Trackable {
 
     private func addSubscriptions() {
         store.subscribe(self,
-                        selector: { $0.rootModal != $1.rootModal},
+                        selector: { $0.rootModal != $1.rootModal },
                         callback: { self.presentModal($0.rootModal) })
         store.subscribe(self,
                         selector: { $0.alert != $1.alert && $1.alert != nil },
                         callback: { self.handleAlertChange($0.alert) })
-        
+
         store.subscribe(self, name: .openFile(Data()), callback: {
             guard let trigger = $0 else { return }
-            if case .openFile(let file) = trigger {
+            if case let .openFile(file) = trigger {
                 self.handleFile(file)
             }
         })
-        
-        //Subscribe to prompt actions
+
+        // Subscribe to prompt actions
         store.subscribe(self, name: .promptUpgradePin, callback: { _ in
             self.presentUpgradePin()
         })
@@ -69,15 +61,15 @@ class ModalPresenter : Subscriber, Trackable {
         })
         store.subscribe(self, name: .openFile(Data()), callback: {
             guard let trigger = $0 else { return }
-            if case .openFile(let file) = trigger {
+            if case let .openFile(file) = trigger {
                 self.handleFile(file)
             }
         })
         store.subscribe(self, name: .recommendRescan, callback: { _ in
             self.presentRescan()
         })
- 
-        //URLs
+
+        // URLs
         store.subscribe(self, name: .receivedPaymentRequest(nil), callback: {
             guard let trigger = $0 else { return }
             if case let .receivedPaymentRequest(request) = trigger {
@@ -91,13 +83,13 @@ class ModalPresenter : Subscriber, Trackable {
         })
         store.subscribe(self, name: .copyWalletAddresses(nil, nil), callback: {
             guard let trigger = $0 else { return }
-            if case .copyWalletAddresses(let success, let error) = trigger {
+            if case let .copyWalletAddresses(success, error) = trigger {
                 self.handleCopyAddresses(success: success, error: error)
             }
         })
-        store.subscribe(self, name: .authenticateForBitId("", {_ in}), callback: {
+        store.subscribe(self, name: .authenticateForBitId("") { _ in }, callback: {
             guard let trigger = $0 else { return }
-            if case .authenticateForBitId(let prompt, let callback) = trigger {
+            if case let .authenticateForBitId(prompt, callback) = trigger {
                 self.authenticateForBitId(prompt: prompt, callback: callback)
             }
         })
@@ -123,16 +115,17 @@ class ModalPresenter : Subscriber, Trackable {
             }
         })
     }
-    
-    //MARK: - Prompts
+
+    // MARK: - Prompts
+
     private func presentRescan() {
-        let vc = ReScanViewController(store: self.store)
+        let vc = ReScanViewController(store: store)
         let nc = UINavigationController(rootViewController: vc)
         nc.setClearNavbar()
         vc.addCloseNavigationItem()
         topViewController?.present(nc, animated: true, completion: nil)
     }
-    
+
     func presentBiometricsSetting() {
         guard let walletManager = walletManager else { return }
         let biometricsSettings = BiometricsSettingsViewController(walletManager: walletManager, store: store)
@@ -172,11 +165,11 @@ class ModalPresenter : Subscriber, Trackable {
         updatePin.addCloseNavigationItem()
         topViewController?.present(nc, animated: true, completion: nil)
     }
-     
+
     private func presentModal(_ type: RootModal, configuration: ((UIViewController) -> Void)? = nil) {
         guard type != .loginScan else { return presentLoginScan() }
         guard let vc = rootModalViewController(type) else {
-            self.store.perform(action: RootModalActions.Present(modal: .none))
+            store.perform(action: RootModalActions.Present(modal: .none))
             return
         }
         vc.transitioningDelegate = modalTransitionDelegate
@@ -196,7 +189,7 @@ class ModalPresenter : Subscriber, Trackable {
         })
     }
 
-    private func presentAlert(_ type: AlertType, completion: @escaping ()->Void) {
+    private func presentAlert(_ type: AlertType, completion: @escaping () -> Void) {
         let alertView = AlertView(type: type)
         let window = UIApplication.shared.keyWindow!
         let size = window.bounds.size
@@ -207,7 +200,8 @@ class ModalPresenter : Subscriber, Trackable {
             alertView.constraint(.width, constant: size.width),
             alertView.constraint(.height, constant: alertHeight + 25.0),
             alertView.constraint(.leading, toView: window, constant: nil),
-            topConstraint ])
+            topConstraint,
+        ])
         window.layoutIfNeeded()
 
         UIView.spring(0.6, animations: {
@@ -219,14 +213,14 @@ class ModalPresenter : Subscriber, Trackable {
                 topConstraint?.constant = size.height
                 window.layoutIfNeeded()
             }, completion: { _ in
-                //TODO - Make these callbacks generic
-                if case .paperKeySet(let callback) = type {
+                // TODO: - Make these callbacks generic
+                if case let .paperKeySet(callback) = type {
                     callback()
                 }
-                if case .pinSet(let callback) = type {
+                if case let .pinSet(callback) = type {
                     callback()
                 }
-                if case .sweepSuccess(let callback) = type {
+                if case let .sweepSuccess(callback) = type {
                     callback()
                 }
                 completion()
@@ -237,11 +231,11 @@ class ModalPresenter : Subscriber, Trackable {
 
     private func presentWebView(_ mountPoint: String) {
         guard let walletManager = self.walletManager else { return }
-        let vc = WebViewContainer(mountPoint: mountPoint, walletManager: walletManager, store: store, apiClient: self.noAuthApiClient)
-        
+        let vc = WebViewContainer(mountPoint: mountPoint, walletManager: walletManager, store: store, apiClient: noAuthApiClient)
+
         vc.modalPresentationStyle = .overFullScreen
         vc.modalPresentationCapturesStatusBarAppearance = true
-        vc.transitioningDelegate = vc 
+        vc.transitioningDelegate = vc
         topViewController?.present(vc, animated: true, completion: {})
     }
 
@@ -256,7 +250,7 @@ class ModalPresenter : Subscriber, Trackable {
         case .menu:
             return menuViewController()
         case .loginScan:
-            return nil //The scan view needs a custom presentation
+            return nil // The scan view needs a custom presentation
         case .loginAddress:
             return receiveView(isRequestAmountVisible: false)
         case .manageWallet:
@@ -276,17 +270,16 @@ class ModalPresenter : Subscriber, Trackable {
             }
             return ModalViewController(childViewController: requestVc, store: store)
         }
-      
     }
-    private func wipeEmptyView() -> UIViewController? {
-      
-      guard let walletManager = walletManager else { return nil }
 
-      let wipeEmptyvc = WipeEmptyWalletViewController(walletManager: walletManager, store: store, didTapNext: ({ [weak self] in
-        guard let myself = self else { return }
-        myself.wipeWallet()
+    private func wipeEmptyView() -> UIViewController? {
+        guard let walletManager = walletManager else { return nil }
+
+        let wipeEmptyvc = WipeEmptyWalletViewController(walletManager: walletManager, store: store, didTapNext: ({ [weak self] in
+            guard let myself = self else { return }
+            myself.wipeWallet()
       }))
-      return ModalViewController(childViewController: wipeEmptyvc, store: store)
+        return ModalViewController(childViewController: wipeEmptyvc, store: store)
     }
 
     private func makeSendView() -> UIViewController? {
@@ -298,8 +291,8 @@ class ModalPresenter : Subscriber, Trackable {
         }
         guard let walletManager = walletManager else { return nil }
         guard let kvStore = walletManager.apiClient?.kv else { return nil }
- 
-        let sendVC = SendViewController(store: store, sender: Sender(walletManager: walletManager, kvStore: kvStore, store: store),  walletManager: walletManager, initialRequest: currentRequest)
+
+        let sendVC = SendViewController(store: store, sender: Sender(walletManager: walletManager, kvStore: kvStore, store: store), walletManager: walletManager, initialRequest: currentRequest)
         currentRequest = nil
 
         if store.state.isLoginRequired {
@@ -371,68 +364,66 @@ class ModalPresenter : Subscriber, Trackable {
         guard let top = topViewController else { return }
         let present = presentScan(parent: top)
         store.perform(action: RootModalActions.Present(modal: .none))
-        present({ paymentRequest in
+        present { paymentRequest in
             guard let request = paymentRequest else { return }
             self.currentRequest = request
             self.presentModal(.send)
-        })
+        }
     }
 
-   private func presentSettings() {
+    private func presentSettings() {
         guard let top = topViewController else { return }
         guard let walletManager = self.walletManager else { return }
         let settingsNav = UINavigationController()
         let sections = ["About", "Wallet", "Manage", "Support", "Blockchain"]
         let rows = [
             "About": [Setting(title: S.Settings.litewalletVersion, accessoryText: { [weak self] in
-                        return AppVersion.string
+                AppVersion.string
                         }, callback: {}),
                       Setting(title: S.Settings.litewalletEnvironment, accessoryText: { [weak self] in
-                        var envName = "Release"
-                        #if Debug || Testflight
-                            envName = "Debug" 
-                        #endif
-                        return envName
+                var envName = "Release"
+                #if Debug || Testflight
+                    envName = "Debug"
+                #endif
+                return envName
                       }, callback: {}),
                       Setting(title: S.Settings.socialLinks, callback: {
-                          settingsNav.pushViewController(AboutViewController(), animated: true)
-                      })
-            ],
+                settingsNav.pushViewController(AboutViewController(), animated: true)
+                      })],
             "Wallet": [Setting(title: S.Settings.importTile, callback: { [weak self] in
-                    guard let myself = self else { return }
-                    guard let walletManager = myself.walletManager else { return }
-                    let importNav = ModalNavigationController()
-                    importNav.setClearNavbar()
-                    importNav.setWhiteStyle()
-                    let start = StartImportViewController(walletManager: walletManager, store: myself.store)
-                    start.addCloseNavigationItem(tintColor: .white)
-                    start.navigationItem.title = S.Import.title
-                    importNav.viewControllers = [start]
-                    settingsNav.dismiss(animated: true, completion: {
-                        myself.topViewController?.present(importNav, animated: true, completion: nil)
+                guard let myself = self else { return }
+                guard let walletManager = myself.walletManager else { return }
+                let importNav = ModalNavigationController()
+                importNav.setClearNavbar()
+                importNav.setWhiteStyle()
+                let start = StartImportViewController(walletManager: walletManager, store: myself.store)
+                start.addCloseNavigationItem(tintColor: .white)
+                start.navigationItem.title = S.Import.title
+                importNav.viewControllers = [start]
+                settingsNav.dismiss(animated: true, completion: {
+                    myself.topViewController?.present(importNav, animated: true, completion: nil)
                     })
                 }),
-               Setting(title: S.Settings.wipe, callback: { [weak self] in
-                    guard let myself = self else { return }
-                    guard let walletManager = myself.walletManager else { return }
-                    let nc = ModalNavigationController()
-                    nc.setClearNavbar()
-                    nc.setWhiteStyle()
-                    nc.delegate = myself.wipeNavigationDelegate
-                    let start = StartWipeWalletViewController {
-                        let recover = EnterPhraseViewController(store: myself.store, walletManager: walletManager, reason: .validateForWipingWallet( {
-                            myself.wipeWallet()
-                        }))
-                        nc.pushViewController(recover, animated: true)
-                    }
-                    start.addCloseNavigationItem(tintColor: .white)
-                    start.navigationItem.title = S.WipeWallet.title
-                    nc.viewControllers = [start]
-                    settingsNav.dismiss(animated: true, completion: {
-                        myself.topViewController?.present(nc, animated: true, completion: nil)
+                       Setting(title: S.Settings.wipe, callback: { [weak self] in
+                guard let myself = self else { return }
+                guard let walletManager = myself.walletManager else { return }
+                let nc = ModalNavigationController()
+                nc.setClearNavbar()
+                nc.setWhiteStyle()
+                nc.delegate = myself.wipeNavigationDelegate
+                let start = StartWipeWalletViewController {
+                    let recover = EnterPhraseViewController(store: myself.store, walletManager: walletManager, reason: .validateForWipingWallet {
+                        myself.wipeWallet()
+                        })
+                    nc.pushViewController(recover, animated: true)
+                }
+                start.addCloseNavigationItem(tintColor: .white)
+                start.navigationItem.title = S.WipeWallet.title
+                nc.viewControllers = [start]
+                settingsNav.dismiss(animated: true, completion: {
+                    myself.topViewController?.present(nc, animated: true, completion: nil)
                     })
-               }),
-            ],
+               })],
             "Manage": [
                 Setting(title: S.Settings.languages, callback: strongify(self) { _ in
                     UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
@@ -447,7 +438,7 @@ class ModalPresenter : Subscriber, Trackable {
                 }),
                 Setting(title: S.Settings.currency, accessoryText: {
                     let code = self.store.state.defaultCurrencyCode
-                    let components: [String : String] = [NSLocale.Key.currencyCode.rawValue : code]
+                    let components: [String: String] = [NSLocale.Key.currencyCode.rawValue: code]
                     let identifier = Locale.identifier(fromComponents: components)
                     return Locale(identifier: identifier).currencyCode ?? ""
                 }, callback: {
@@ -460,15 +451,15 @@ class ModalPresenter : Subscriber, Trackable {
                 Setting(title: S.UpdatePin.updateTitle, callback: strongify(self) { myself in
                     let updatePin = UpdatePinViewController(store: myself.store, walletManager: walletManager, type: .update)
                     settingsNav.pushViewController(updatePin, animated: true)
-                })
+                }),
             ],
             "Support": [
                 Setting(title: S.Settings.shareData, callback: {
                     settingsNav.pushViewController(ShareDataViewController(store: self.store), animated: true)
-                })
+                }),
             ],
             "Blockchain": [
-                Setting(title:S.Settings.advancedTitle, callback: { [weak self] in
+                Setting(title: S.Settings.advancedTitle, callback: { [weak self] in
                     guard let myself = self else { return }
                     guard let walletManager = myself.walletManager else { return }
                     let sections = ["Network"]
@@ -477,8 +468,8 @@ class ModalPresenter : Subscriber, Trackable {
                         let nodeSelector = NodeSelectorViewController(walletManager: walletManager)
                         settingsNav.pushViewController(nodeSelector, animated: true)
                     })]
-                    
-// TODO: Develop this feature for issues with the TXID
+
+                    // TODO: Develop this feature for issues with the TXID
 //                    if UserDefaults.didSeeCorruption {
 //                        networkRows.append(
 //                            Setting(title: S.WipeWallet.deleteDatabase, callback: {
@@ -490,10 +481,10 @@ class ModalPresenter : Subscriber, Trackable {
                     let advancedSettings = ["Network": networkRows]
                     let advancedSettingsVC = SettingsViewController(sections: sections, rows: advancedSettings, optionalTitle: S.Settings.advancedTitle)
                     settingsNav.pushViewController(advancedSettingsVC, animated: true)
-                })
-            ]
+                }),
+            ],
         ]
-    
+
         let settings = SettingsViewController(sections: sections, rows: rows)
         settings.addCloseNavigationItem()
         settingsNav.viewControllers = [settings]
@@ -519,7 +510,7 @@ class ModalPresenter : Subscriber, Trackable {
                 scanCompletion(paymentRequest)
                 parent?.view.isFrameChangeBlocked = false
             }, isValidURI: { address in
-                return address.isValidAddress
+                address.isValidAddress
             })
             parent?.view.isFrameChangeBlocked = true
             parent?.present(vc, animated: true, completion: {})
@@ -586,7 +577,7 @@ class ModalPresenter : Subscriber, Trackable {
                     var write: WritePaperPhraseViewController?
                     write = WritePaperPhraseViewController(store: myself.store, walletManager: walletManager, pin: pin, callback: { [weak self] in
                         guard let myself = self else { return }
-                        let confirmVC = UIStoryboard.init(name: "Phrase", bundle: nil).instantiateViewController(withIdentifier: "ConfirmPaperPhraseViewController") as? ConfirmPaperPhraseViewController
+                        let confirmVC = UIStoryboard(name: "Phrase", bundle: nil).instantiateViewController(withIdentifier: "ConfirmPaperPhraseViewController") as? ConfirmPaperPhraseViewController
                         confirmVC?.store = myself.store
                         confirmVC?.walletManager = myself.walletManager
                         confirmVC?.pin = pin
@@ -594,17 +585,17 @@ class ModalPresenter : Subscriber, Trackable {
                             confirmVC?.dismiss(animated: true, completion: {
                                 myself.store.perform(action: Alert.Show(.paperKeySet(callback: {
                                     myself.store.perform(action: HideStartFlow())
-                                    
+
                                 })))
                             })
                         }
-                        //write?.navigationItem.title = S.SecurityCenter.Cells.paperKeyTitle
+                        // write?.navigationItem.title = S.SecurityCenter.Cells.paperKeyTitle
                         if let confirm = confirmVC {
                             paperPhraseNavigationController.pushViewController(confirm, animated: true)
                         }
                     })
                     write?.hideCloseNavigationItem()
-                   /// write?.navigationItem.title = S.SecurityCenter.Cells.paperKeyTitle
+                    /// write?.navigationItem.title = S.SecurityCenter.Cells.paperKeyTitle
 
                     vc.dismiss(animated: true, completion: {
                         guard let write = write else { return }
@@ -621,27 +612,25 @@ class ModalPresenter : Subscriber, Trackable {
             paperPhraseNavigationController.present(verify, animated: true, completion: nil)
         })
         start.navigationItem.title = S.SecurityCenter.Cells.paperKeyTitle
-        
-        
+
         var staticColor = UIColor()
-        
+
         if #available(iOS 11.0, *),
             let tempStaticColor = UIColor(named: "staticWhiteColor") {
             staticColor = tempStaticColor
         } else {
             staticColor = .whiteTint
         }
-        
+
         if UserDefaults.writePaperPhraseDate != nil {
             start.addCloseNavigationItem(tintColor: staticColor)
         } else {
             start.hideCloseNavigationItem()
         }
-        
+
         paperPhraseNavigationController.viewControllers = [start]
         vc.present(paperPhraseNavigationController, animated: true, completion: nil)
     }
- 
 
     private func wipeWallet() {
         let group = DispatchGroup()
@@ -651,36 +640,36 @@ class ModalPresenter : Subscriber, Trackable {
             self.topViewController?.dismiss(animated: true, completion: {
                 let activity = BRActivityViewController(message: S.WipeWallet.wiping)
                 self.topViewController?.present(activity, animated: true, completion: nil)
-                
+
                 group.enter()
                 DispatchQueue.walletQueue.async {
                     self.walletManager?.peerManager?.disconnect()
                     group.leave()
                 }
-                
+
                 group.enter()
                 DispatchQueue.walletQueue.asyncAfter(deadline: .now() + 2.0) {
                     print("Pausing to show 'Wiping' Dialog")
                     group.leave()
                 }
-               
+
                 group.notify(queue: .main) {
                     if let canForceWipeWallet = (self.walletManager?.wipeWallet(pin: "forceWipe")),
                         canForceWipeWallet {
-                       self.store.trigger(name: .reinitWalletManager({
-                         activity.dismiss(animated: true, completion: {})
-                       }))
+                        self.store.trigger(name: .reinitWalletManager {
+                            activity.dismiss(animated: true, completion: {})
+                       })
                     } else {
-                       let failure = UIAlertController(title: S.WipeWallet.failedTitle, message: S.WipeWallet.failedMessage, preferredStyle: .alert)
-                       failure.addAction(UIAlertAction(title: S.Button.ok, style: .default, handler: nil))
-                       self.topViewController?.present(failure, animated: true, completion: nil)
+                        let failure = UIAlertController(title: S.WipeWallet.failedTitle, message: S.WipeWallet.failedMessage, preferredStyle: .alert)
+                        failure.addAction(UIAlertAction(title: S.Button.ok, style: .default, handler: nil))
+                        self.topViewController?.present(failure, animated: true, completion: nil)
                     }
                 }
             })
         }))
         topViewController?.present(alert, animated: true, completion: nil)
     }
- 
+
     private func handleFile(_ file: Data) {
         if let request = PaymentProtocolRequest(data: file) {
             if let topVC = topViewController as? ModalViewController {
@@ -695,9 +684,9 @@ class ModalPresenter : Subscriber, Trackable {
                     modalTransitionDelegate.reset()
                     topVC.dismiss(animated: true, completion: {
                         self.store.perform(action: RootModalActions.Present(modal: .send))
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: { //This is a hack because present has no callback
-                            let _ = attemptConfirmRequest()
-                        })
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // This is a hack because present has no callback
+                            _ = attemptConfirmRequest()
+                        }
                     })
                 }
             }
@@ -707,7 +696,7 @@ class ModalPresenter : Subscriber, Trackable {
                 alert.addAction(UIAlertAction(title: S.Button.ok, style: .cancel, handler: nil))
                 topViewController?.present(alert, animated: true, completion: nil)
             }
-        //TODO - handle payment type
+            // TODO: - handle payment type
         } else {
             let alert = UIAlertController(title: S.Alert.error, message: S.PaymentProtocol.Errors.corruptedDocument, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: S.Button.ok, style: .cancel, handler: nil))
@@ -716,7 +705,7 @@ class ModalPresenter : Subscriber, Trackable {
     }
 
     private func handlePaymentRequest(request: PaymentRequest) {
-        self.currentRequest = request
+        currentRequest = request
         guard !store.state.isLoginRequired else { presentModal(.send); return }
 
         if topViewController is MainViewController {
@@ -744,7 +733,7 @@ class ModalPresenter : Subscriber, Trackable {
         }
     }
 
-    private func handleCopyAddresses(success: String?, error: String?) {
+    private func handleCopyAddresses(success: String?, error _: String?) {
         guard let walletManager = walletManager else { return }
         let alert = UIAlertController(title: S.URLHandling.addressListAlertTitle, message: S.URLHandling.addressListAlertMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: S.Button.cancel, style: .cancel, handler: nil))
@@ -756,7 +745,7 @@ class ModalPresenter : Subscriber, Trackable {
                     view.dismiss(animated: true, completion: {
                         self?.store.perform(action: Alert.Show(.addressesCopied))
                         if let success = success, let url = URL(string: success) {
-                          UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
                         }
                     })
                     return true
@@ -787,7 +776,7 @@ class ModalPresenter : Subscriber, Trackable {
                 }
             })
         } else {
-            self.verifyPinForBitId(prompt: prompt, callback: callback)
+            verifyPinForBitId(prompt: prompt, callback: callback)
         }
     }
 
@@ -812,7 +801,7 @@ class ModalPresenter : Subscriber, Trackable {
 
     private func copyAllAddressesToClipboard() {
         guard let wallet = walletManager?.wallet else { return }
-        let addresses = wallet.allAddresses.filter({wallet.addressIsUsed($0)})
+        let addresses = wallet.allAddresses.filter { wallet.addressIsUsed($0) }
         UIPasteboard.general.string = addresses.joined(separator: "\n")
     }
 
@@ -836,7 +825,8 @@ class ModalPresenter : Subscriber, Trackable {
             alert.constraint(.width, constant: size.width),
             alert.constraint(.height, constant: InAppAlert.height),
             alert.constraint(.leading, toView: window, constant: nil),
-            bottomConstraint ])
+            bottomConstraint,
+        ])
         window.layoutIfNeeded()
         alert.bottomConstraint = bottomConstraint
         alert.hide = {
@@ -845,7 +835,7 @@ class ModalPresenter : Subscriber, Trackable {
         UIView.spring(C.animationDuration, animations: {
             alert.bottomConstraint?.constant = InAppAlert.height
             window.layoutIfNeeded()
-        }, completion: {_ in})
+        }, completion: { _ in })
     }
 
     private func hideNotReachable() {
@@ -864,7 +854,8 @@ class ModalPresenter : Subscriber, Trackable {
         view.addSubview(alert)
         alert.constrain([
             alert.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            alert.centerYAnchor.constraint(equalTo: view.centerYAnchor) ])
+            alert.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
         alert.background.effect = nil
         UIView.animate(withDuration: 0.6, animations: {
             alert.background.effect = alert.effect
@@ -878,16 +869,14 @@ class ModalPresenter : Subscriber, Trackable {
     }
 }
 
-class SecurityCenterNavigationDelegate : NSObject, UINavigationControllerDelegate {
-
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-
+class SecurityCenterNavigationDelegate: NSObject, UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated _: Bool) {
         guard let coordinator = navigationController.topViewController?.transitionCoordinator else { return }
 
         if coordinator.isInteractive {
-          coordinator.notifyWhenInteractionChanges { context in
-                //We only want to style the view controller if the
-                //pop animation wasn't cancelled
+            coordinator.notifyWhenInteractionChanges { context in
+                // We only want to style the view controller if the
+                // pop animation wasn't cancelled
                 if !context.isCancelled {
                     self.setStyle(navigationController: navigationController, viewController: viewController)
                 }

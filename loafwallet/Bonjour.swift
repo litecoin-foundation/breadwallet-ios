@@ -1,11 +1,3 @@
-//
-//  Bonjour.swift
-//  breadwallet
-//
-//  Created by Samuel Sutch on 6/6/17.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import Foundation
 
 public class Bonjour: NSObject, NetServiceBrowserDelegate {
@@ -14,19 +6,19 @@ public class Bonjour: NSObject, NetServiceBrowserDelegate {
     var services = [NetService]()
     var serviceTimeout: Timer = Timer()
     var timeout: TimeInterval = 1.0
-    var serviceFoundClosure: (([NetService]) -> Void)
-    
+    var serviceFoundClosure: ([NetService]) -> Void
+
     override init() {
-        serviceFoundClosure = { (v) in return }
+        serviceFoundClosure = { _ in }
         super.init()
         serviceBrowser.delegate = self
     }
-    
+
     func findService(_ identifier: String, domain: String = "local.", found: @escaping ([NetService]) -> Void) -> Bool {
         if !isSearching {
             serviceTimeout = Timer.scheduledTimer(timeInterval: timeout, target: self,
-                                                selector: #selector(Bonjour.noServicesFound),
-                                                userInfo: nil, repeats: false)
+                                                  selector: #selector(Bonjour.noServicesFound),
+                                                  userInfo: nil, repeats: false)
             serviceBrowser.searchForServices(ofType: identifier, inDomain: domain)
             serviceFoundClosure = found
             isSearching = true
@@ -34,22 +26,22 @@ public class Bonjour: NSObject, NetServiceBrowserDelegate {
         }
         return false
     }
-    
+
     @objc func noServicesFound() {
         serviceFoundClosure(services)
         serviceBrowser.stop()
         isSearching = false
     }
-    
-    public func netServiceBrowserWillSearch(_ browser: NetServiceBrowser) {
+
+    public func netServiceBrowserWillSearch(_: NetServiceBrowser) {
         print("[Bonjour] netServiceBrowser willSearch")
     }
-    
-    public func netServiceBrowser(_ browser: NetServiceBrowser, didFindDomain domainString: String, moreComing: Bool) {
+
+    public func netServiceBrowser(_: NetServiceBrowser, didFindDomain domainString: String, moreComing: Bool) {
         print("[Bonjour] netServiceBrowser didFind domain = \(domainString) moreComing = \(moreComing)")
     }
-    
-    public func netServiceBrowser(_ browser: NetServiceBrowser, didFind service: NetService, moreComing: Bool) {
+
+    public func netServiceBrowser(_: NetServiceBrowser, didFind service: NetService, moreComing: Bool) {
         print("[Bonjour] netServiceBrowser didFind service = \(service) moreComing = \(moreComing)")
         serviceTimeout.invalidate()
         services.append(service)
@@ -59,21 +51,21 @@ public class Bonjour: NSObject, NetServiceBrowserDelegate {
             isSearching = false
         }
     }
-    
-    public func netServiceBrowser(_ browser: NetServiceBrowser, didNotSearch errorDict: [String : NSNumber]) {
+
+    public func netServiceBrowser(_: NetServiceBrowser, didNotSearch errorDict: [String: NSNumber]) {
         print("[Bonjour] netServiceBrowser didNotSearch errors = \(errorDict)")
         noServicesFound()
     }
-    
-    public func netServiceBrowserDidStopSearch(_ browser: NetServiceBrowser) {
+
+    public func netServiceBrowserDidStopSearch(_: NetServiceBrowser) {
         print("[Bonjour] netServiceBrowser didStopSearch")
     }
-    
-    public func netServiceBrowser(_ browser: NetServiceBrowser, didRemoveDomain domainString: String, moreComing: Bool) {
+
+    public func netServiceBrowser(_: NetServiceBrowser, didRemoveDomain domainString: String, moreComing: Bool) {
         print("[Bonjour] netServiceBrowser didRemove domain = \(domainString) moreComing = \(moreComing)")
     }
-    
-    public func netServiceBrowser(_ browser: NetServiceBrowser, didRemove service: NetService, moreComing: Bool) {
+
+    public func netServiceBrowser(_: NetServiceBrowser, didRemove service: NetService, moreComing: Bool) {
         print("[Bonjour] netServiceBrowser didRemove service = \(service) moreComing = \(moreComing)")
     }
 }

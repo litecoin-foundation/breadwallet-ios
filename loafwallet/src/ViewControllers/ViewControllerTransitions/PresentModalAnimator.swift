@@ -1,29 +1,21 @@
-//
-//  PresentModalAnimator.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-11-28.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class PresentModalAnimator : NSObject {
+class PresentModalAnimator: NSObject {
+    // MARK: - Public
 
-    //MARK: - Public
     init(shouldCoverBottomGap: Bool, completion: @escaping () -> Void) {
         self.completion = completion
         self.shouldCoverBottomGap = shouldCoverBottomGap
     }
 
-    //MARK: - Private
+    // MARK: - Private
+
     fileprivate let completion: () -> Void
     fileprivate let shouldCoverBottomGap: Bool
-
 }
 
-extension PresentModalAnimator : UIViewControllerAnimatedTransitioning {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+extension PresentModalAnimator: UIViewControllerAnimatedTransitioning {
+    func transitionDuration(using _: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.4
     }
 
@@ -38,9 +30,9 @@ extension PresentModalAnimator : UIViewControllerAnimatedTransitioning {
         blurView.alpha = 1.0
         container.addSubview(blurView)
 
-        //This mask view is placed below the bottom of the modal being presented.
-        //It needs to be there to cover up the gap left below the modal during the
-        //spring animation. It looks weird if it isn't there.
+        // This mask view is placed below the bottom of the modal being presented.
+        // It needs to be there to cover up the gap left below the modal during the
+        // spring animation. It looks weird if it isn't there.
         let fromFrame = container.frame
         var maskView: UIView?
         if shouldCoverBottomGap {

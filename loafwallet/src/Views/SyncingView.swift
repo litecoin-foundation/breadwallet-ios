@@ -1,17 +1,8 @@
-//
-//  SyncingView.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-03-02.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 private let progressHeight: CGFloat = 8.0
 
-class SyncingView : UIView {
-
+class SyncingView: UIView {
     init() {
         super.init(frame: .zero)
         setup()
@@ -46,7 +37,7 @@ class SyncingView : UIView {
 
     private let progressBackground: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = progressHeight/2.0
+        view.layer.cornerRadius = progressHeight / 2.0
         view.layer.masksToBounds = true
         view.backgroundColor = .secondaryShadow
         return view
@@ -54,7 +45,7 @@ class SyncingView : UIView {
 
     private let progressForeground: UIView = {
         let view = GradientView()
-        view.layer.cornerRadius = progressHeight/2.0
+        view.layer.cornerRadius = progressHeight / 2.0
         view.layer.masksToBounds = true
         return view
     }()
@@ -76,24 +67,28 @@ class SyncingView : UIView {
 
         header.constrain([
             header.leadingAnchor.constraint(equalTo: leadingAnchor, constant: C.padding[2]),
-            header.topAnchor.constraint(equalTo: topAnchor, constant: C.padding[2]) ])
+            header.topAnchor.constraint(equalTo: topAnchor, constant: C.padding[2]),
+        ])
 
         progressBackground.constrain([
             progressBackground.leadingAnchor.constraint(equalTo: header.leadingAnchor),
             progressBackground.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -C.padding[2]),
             progressBackground.topAnchor.constraint(equalTo: header.bottomAnchor, constant: C.padding[2]),
-            progressBackground.heightAnchor.constraint(equalToConstant: progressHeight) ])
+            progressBackground.heightAnchor.constraint(equalToConstant: progressHeight),
+        ])
 
         date.constrain([
             date.leadingAnchor.constraint(equalTo: progressBackground.leadingAnchor),
-            date.topAnchor.constraint(equalTo: progressBackground.bottomAnchor, constant: C.padding[1]) ])
+            date.topAnchor.constraint(equalTo: progressBackground.bottomAnchor, constant: C.padding[1]),
+        ])
 
         progressForegroundWidth = progressForeground.widthAnchor.constraint(equalTo: progressBackground.widthAnchor, multiplier: progress)
         progressForeground.constrain([
             progressForegroundWidth,
             progressForeground.leadingAnchor.constraint(equalTo: progressBackground.leadingAnchor),
             progressForeground.centerYAnchor.constraint(equalTo: progressBackground.centerYAnchor),
-            progressForeground.heightAnchor.constraint(equalTo: progressBackground.heightAnchor) ])
+            progressForeground.heightAnchor.constraint(equalTo: progressBackground.heightAnchor),
+        ])
 
         setInitialData()
     }
@@ -104,7 +99,7 @@ class SyncingView : UIView {
         date.text = ""
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

@@ -1,15 +1,6 @@
-//
-//  WebViewContainer.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-05-02.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class WebViewContainer : UIViewController {
-
+class WebViewContainer: UIViewController {
     init(mountPoint: String, walletManager: WalletManager, store: Store, apiClient: BRAPIClient) {
         #if Debug || Testflight
             webView = BRWebViewController(partner: "Simplex", mountPoint: mountPoint, walletManager: walletManager, store: store, noAuthApiClient: apiClient)
@@ -30,7 +21,8 @@ class WebViewContainer : UIViewController {
                 webView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 webView.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
                 webView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                webView.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor) ])
+                webView.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            ])
         })
         addTopCorners()
     }
@@ -46,23 +38,23 @@ class WebViewContainer : UIViewController {
         return .lightContent
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-extension WebViewContainer : UIViewControllerTransitioningDelegate {
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+extension WebViewContainer: UIViewControllerTransitioningDelegate {
+    func animationController(forDismissed _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return DismissSupportCenterAnimator()
     }
 
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forPresented _: UIViewController, presenting _: UIViewController, source _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return PresentSupportCenterAnimator()
     }
 }
 
-class PresentSupportCenterAnimator : NSObject, UIViewControllerAnimatedTransitioning {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+class PresentSupportCenterAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+    func transitionDuration(using _: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.4
     }
 
@@ -80,19 +72,17 @@ class PresentSupportCenterAnimator : NSObject, UIViewControllerAnimatedTransitio
         toView.frame = toView.frame.offsetBy(dx: 0, dy: toView.frame.height)
         container.addSubview(toView)
 
-
         UIView.spring(duration, animations: {
             blur.effect = UIBlurEffect(style: .dark)
             toView.frame = finalToViewFrame
         }, completion: { _ in
             transitionContext.completeTransition(true)
         })
-
     }
 }
 
-class DismissSupportCenterAnimator : NSObject, UIViewControllerAnimatedTransitioning {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+class DismissSupportCenterAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+    func transitionDuration(using _: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.4
     }
 
@@ -106,7 +96,7 @@ class DismissSupportCenterAnimator : NSObject, UIViewControllerAnimatedTransitio
             fromViewController.blur.effect = nil
             fromView.frame = fromView.frame.offsetBy(dx: 0, dy: fromView.frame.height)
         }, completion: { _ in
-            fromView.frame = originalFrame //Because this view gets reused, it's frame needs to be reset everytime
+            fromView.frame = originalFrame // Because this view gets reused, it's frame needs to be reset everytime
             transitionContext.completeTransition(true)
         })
     }

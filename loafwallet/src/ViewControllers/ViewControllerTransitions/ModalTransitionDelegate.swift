@@ -1,11 +1,3 @@
-//
-//  ModalTransitionDelegate.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-11-25.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 enum ModalType {
@@ -13,9 +5,9 @@ enum ModalType {
     case transactionDetail
 }
 
-class ModalTransitionDelegate : NSObject, Subscriber {
+class ModalTransitionDelegate: NSObject, Subscriber {
+    // MARK: - Public
 
-    //MARK: - Public
     init(type: ModalType, store: Store) {
         self.type = type
         self.store = store
@@ -32,7 +24,9 @@ class ModalTransitionDelegate : NSObject, Subscriber {
     }
 
     var shouldDismissInteractively = true
-    //MARK: - Private
+
+    // MARK: - Private
+
     fileprivate let type: ModalType
     fileprivate let store: Store
     fileprivate var isInteractive: Bool = false
@@ -54,7 +48,7 @@ class ModalTransitionDelegate : NSObject, Subscriber {
         case .changed:
             guard let vc = presentedViewController else { break }
             let yOffset = gr.translation(in: vc.view).y
-            let progress = yOffset/vc.view.bounds.height
+            let progress = yOffset / vc.view.bounds.height
             yVelocity = gr.velocity(in: vc.view).y
             self.progress = progress
             interactiveTransition.update(progress)
@@ -85,8 +79,8 @@ class ModalTransitionDelegate : NSObject, Subscriber {
     }
 }
 
-extension ModalTransitionDelegate : UIViewControllerTransitioningDelegate {
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+extension ModalTransitionDelegate: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting _: UIViewController, source _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         presentedViewController = presented
         return PresentModalAnimator(shouldCoverBottomGap: type == .regular, completion: {
             let panGr = UIPanGestureRecognizer(target: self, action: #selector(ModalTransitionDelegate.didUpdate(gr:)))
@@ -95,11 +89,11 @@ extension ModalTransitionDelegate : UIViewControllerTransitioningDelegate {
         })
     }
 
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forDismissed _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return DismissModalAnimator()
     }
 
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    func interactionControllerForDismissal(using _: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return isInteractive ? interactiveTransition : nil
     }
 }

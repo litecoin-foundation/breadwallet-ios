@@ -1,23 +1,13 @@
-//
-//  ReachabilityManager.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-06-17.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import Foundation
 import SystemConfiguration
 
-
-private func callback(reachability:SCNetworkReachability, flags: SCNetworkReachabilityFlags, info: UnsafeMutableRawPointer?) {
+private func callback(reachability: SCNetworkReachability, flags _: SCNetworkReachabilityFlags, info: UnsafeMutableRawPointer?) {
     guard let info = info else { return }
     let reachability = Unmanaged<ReachabilityMonitor>.fromOpaque(info).takeUnretainedValue()
     reachability.notify()
 }
 
-class ReachabilityMonitor : Trackable {
-
+class ReachabilityMonitor: Trackable {
     init() {
         networkReachability = SCNetworkReachabilityCreateWithName(kCFAllocatorDefault, "google.com")
         start()
@@ -51,8 +41,7 @@ class ReachabilityMonitor : Trackable {
         var flags = SCNetworkReachabilityFlags(rawValue: 0)
         if let reachability = networkReachability, withUnsafeMutablePointer(to: &flags, { SCNetworkReachabilityGetFlags(reachability, UnsafeMutablePointer($0)) }) == true {
             return flags
-        }
-        else {
+        } else {
             return []
         }
     }

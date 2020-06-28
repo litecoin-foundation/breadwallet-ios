@@ -1,21 +1,12 @@
-//
-//  LoadingProgressView.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-01-07.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 private let progressHeight: CGFloat = 4.0
 private let progressWidth: CGFloat = 150.0
 
-class LoadingProgressView : UIView, GradientDrawable {
-
+class LoadingProgressView: UIView, GradientDrawable {
     var progress: Double = 0.0 {
         didSet {
-            progressWidthConstraint?.constant = CGFloat(progress)*progressWidth
+            progressWidthConstraint?.constant = CGFloat(progress) * progressWidth
         }
     }
 
@@ -25,12 +16,12 @@ class LoadingProgressView : UIView, GradientDrawable {
 
     private var hasSetup = false
 
-    lazy private var progressBackground: UIView = self.makeProgressView(backgroundColor: .transparentBlack)
-    lazy private var progressForeground: UIView = self.makeProgressView(backgroundColor: .white)
+    private lazy var progressBackground: UIView = self.makeProgressView(backgroundColor: .transparentBlack)
+    private lazy var progressForeground: UIView = self.makeProgressView(backgroundColor: .white)
 
     private func makeProgressView(backgroundColor: UIColor) -> UIView {
         let view = UIView()
-        view.layer.cornerRadius = progressHeight/2.0
+        view.layer.cornerRadius = progressHeight / 2.0
         view.layer.masksToBounds = true
         view.backgroundColor = backgroundColor
         return view
@@ -51,19 +42,22 @@ class LoadingProgressView : UIView, GradientDrawable {
 
         label.constrain([
             label.centerXAnchor.constraint(equalTo: centerXAnchor),
-            label.bottomAnchor.constraint(equalTo: progressBackground.topAnchor, constant: -4.0) ])
+            label.bottomAnchor.constraint(equalTo: progressBackground.topAnchor, constant: -4.0),
+        ])
         progressBackground.constrain([
             progressBackground.centerXAnchor.constraint(equalTo: centerXAnchor),
             progressBackground.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -C.padding[1]),
             progressBackground.heightAnchor.constraint(equalToConstant: progressHeight),
-            progressBackground.widthAnchor.constraint(equalToConstant: progressWidth) ])
+            progressBackground.widthAnchor.constraint(equalToConstant: progressWidth),
+        ])
         progressBackground.addSubview(progressForeground)
         progressWidthConstraint = progressForeground.widthAnchor.constraint(equalToConstant: 0.0)
         progressForeground.constrain([
             progressWidthConstraint,
             progressForeground.leadingAnchor.constraint(equalTo: progressBackground.leadingAnchor),
             progressForeground.heightAnchor.constraint(equalTo: progressBackground.heightAnchor),
-            progressForeground.centerYAnchor.constraint(equalTo: progressBackground.centerYAnchor) ])
+            progressForeground.centerYAnchor.constraint(equalTo: progressBackground.centerYAnchor),
+        ])
         shadowView.backgroundColor = .transparentWhite
         shadowView.constrainTopCorners(height: 0.5)
     }
@@ -87,7 +81,7 @@ class LoadingProgressView : UIView, GradientDrawable {
         drawGradient(rect)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

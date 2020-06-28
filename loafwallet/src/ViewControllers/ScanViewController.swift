@@ -1,33 +1,24 @@
-//
-//  ScanViewController.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-12-12.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
-import UIKit
 import AVFoundation
+import UIKit
 
 typealias ScanCompletion = (PaymentRequest?) -> Void
 typealias KeyScanCompletion = (String) -> Void
 
-class ScanViewController : UIViewController, Trackable {
-    //TODO: Add a storyboard
-    @IBOutlet weak var cameraOverlayView: UIView!
-    @IBOutlet weak var toolbarView: UIView!
-    @IBOutlet weak var overlayViewTitleLabel: UILabel!
-     
-    @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var flashButton: UIButton!
+class ScanViewController: UIViewController, Trackable {
+    // TODO: Add a storyboard
+    @IBOutlet var cameraOverlayView: UIView!
+    @IBOutlet var toolbarView: UIView!
+    @IBOutlet var overlayViewTitleLabel: UILabel!
+
+    @IBOutlet var closeButton: UIButton!
+    @IBOutlet var flashButton: UIButton!
 
     static func presentCameraUnavailableAlert(fromRoot: UIViewController) {
         let alertController = UIAlertController(title: S.Send.cameraUnavailableTitle, message: S.Send.cameraUnavailableMessage, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: S.Button.cancel, style: .cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: S.Button.settings, style: .`default`, handler: { _ in
+        alertController.addAction(UIAlertAction(title: S.Button.settings, style: .default, handler: { _ in
             if let appSettings = URL(string: UIApplicationOpenSettingsURLString) {
-              UIApplication.shared.open(appSettings, options: [:] , completionHandler: nil)
-               
+                UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
             }
         }))
         fromRoot.present(alertController, animated: true, completion: nil)
@@ -50,14 +41,14 @@ class ScanViewController : UIViewController, Trackable {
 
     init(completion: @escaping ScanCompletion, isValidURI: @escaping (String) -> Bool) {
         self.completion = completion
-        self.scanKeyCompletion = nil
+        scanKeyCompletion = nil
         self.isValidURI = isValidURI
         super.init(nibName: nil, bundle: nil)
     }
 
     init(scanKeyCompletion: @escaping KeyScanCompletion, isValidURI: @escaping (String) -> Bool) {
         self.scanKeyCompletion = scanKeyCompletion
-        self.completion = nil
+        completion = nil
         self.isValidURI = isValidURI
         super.init(nibName: nil, bundle: nil)
     }
@@ -73,41 +64,46 @@ class ScanViewController : UIViewController, Trackable {
 
         toolbar.constrainBottomCorners(sidePadding: 0, bottomPadding: 0)
         if E.isIPhoneX {
-            toolbar.constrain([ toolbar.constraint(.height, constant: 60.0) ])
-            
+            toolbar.constrain([toolbar.constraint(.height, constant: 60.0)])
+
             close.constrain([
                 close.constraint(.leading, toView: toolbar),
                 close.constraint(.top, toView: toolbar, constant: 2.0),
                 close.constraint(.width, constant: 50.0),
-                close.constraint(.height, constant: 50.0) ])
-            
+                close.constraint(.height, constant: 50.0),
+            ])
+
             flash.constrain([
                 flash.constraint(.trailing, toView: toolbar),
                 flash.constraint(.top, toView: toolbar, constant: 2.0),
                 flash.constraint(.width, constant: 50.0),
-                flash.constraint(.height, constant: 50.0) ])
-            
+                flash.constraint(.height, constant: 50.0),
+            ])
+
         } else {
-            toolbar.constrain([ toolbar.constraint(.height, constant: 60.0) ])
-            
+            toolbar.constrain([toolbar.constraint(.height, constant: 60.0)])
+
             close.constrain([
                 close.constraint(.leading, toView: toolbar, constant: 10.0),
                 close.constraint(.top, toView: toolbar, constant: 2.0),
                 close.constraint(.bottom, toView: toolbar, constant: -2.0),
-                close.constraint(.width, constant: 50.0) ])
-            
+                close.constraint(.width, constant: 50.0),
+            ])
+
             flash.constrain([
                 flash.constraint(.trailing, toView: toolbar, constant: -10.0),
                 flash.constraint(.top, toView: toolbar, constant: 2.0),
                 flash.constraint(.bottom, toView: toolbar, constant: -2.0),
-                flash.constraint(.width, constant: 50.0) ])
+                flash.constraint(.width, constant: 50.0),
+            ])
         }
 
         guide.constrain([
             guide.constraint(.leading, toView: view, constant: C.padding[6]),
             guide.constraint(.trailing, toView: view, constant: -C.padding[6]),
             guide.constraint(.centerY, toView: view),
-            NSLayoutConstraint(item: guide, attribute: .width, relatedBy: .equal, toItem: guide, attribute: .height, multiplier: 1.0, constant: 0.0) ])
+            NSLayoutConstraint(item: guide, attribute: .width, relatedBy: .equal, toItem: guide, attribute: .height, multiplier: 1.0, constant: 0.0),
+        ])
         guide.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
 
         close.tap = { [weak self] in
@@ -140,7 +136,7 @@ class ScanViewController : UIViewController, Trackable {
         session.addOutput(output)
 
         if output.availableMetadataObjectTypes.contains(where: { objectType in
-            return objectType == AVMetadataObject.ObjectType.qr
+            objectType == AVMetadataObject.ObjectType.qr
         }) {
             output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
         } else {
@@ -162,7 +158,7 @@ class ScanViewController : UIViewController, Trackable {
                     } else {
                         self?.saveEvent("scan.torchOn")
                     }
-                } catch let error {
+                } catch {
                     print("Camera Torch error: \(error)")
                 }
             }
@@ -173,15 +169,15 @@ class ScanViewController : UIViewController, Trackable {
         return true
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-extension ScanViewController : AVCaptureMetadataOutputObjectsDelegate {
-    func metadataOutput(_ captureOutput: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
+    func metadataOutput(_: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from _: AVCaptureConnection) {
         if let data = metadataObjects as? [AVMetadataMachineReadableCodeObject] {
-            if data.count == 0 {
+            if data.isEmpty {
                 guide.state = .normal
             } else {
                 data.forEach {
@@ -189,9 +185,9 @@ extension ScanViewController : AVCaptureMetadataOutputObjectsDelegate {
                         NSLog("ERROR: URI String not found")
                         return
                     }
-                    if completion != nil && guide.state != .positive {
+                    if completion != nil, guide.state != .positive {
                         handleURI(uri)
-                    } else if scanKeyCompletion != nil && guide.state != .positive {
+                    } else if scanKeyCompletion != nil, guide.state != .positive {
                         handleKey(uri)
                     }
                 }
@@ -202,17 +198,17 @@ extension ScanViewController : AVCaptureMetadataOutputObjectsDelegate {
     }
 
     func handleURI(_ uri: String) {
-        if self.currentUri != uri {
-            self.currentUri = uri
+        if currentUri != uri {
+            currentUri = uri
             if let paymentRequest = PaymentRequest(string: uri) {
                 saveEvent("scan.litecoinUri")
                 guide.state = .positive
-                //Add a small delay so the green guide will be seen
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                // Add a small delay so the green guide will be seen
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     self.dismiss(animated: true, completion: {
                         self.completion?(paymentRequest)
                     })
-                })
+                }
             } else {
                 guide.state = .negative
             }
@@ -223,11 +219,11 @@ extension ScanViewController : AVCaptureMetadataOutputObjectsDelegate {
         if isValidURI(keyString) {
             saveEvent("scan.privateKey")
             guide.state = .positive
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.dismiss(animated: true, completion: {
                     self.scanKeyCompletion?(keyString)
                 })
-            })
+            }
         } else {
             guide.state = .negative
         }

@@ -1,18 +1,9 @@
-//
-//  LightWeightAlert.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-06-20.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class LightWeightAlert : UIView {
-
+class LightWeightAlert: UIView {
     init(message: String) {
         super.init(frame: .zero)
-        self.label.text = message
+        label.text = message
         setup()
     }
 
@@ -31,9 +22,8 @@ class LightWeightAlert : UIView {
         layer.cornerRadius = 4.0
         layer.masksToBounds = true
     }
-    
-    required init?(coder aDecoder: NSCoder) {
+
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }

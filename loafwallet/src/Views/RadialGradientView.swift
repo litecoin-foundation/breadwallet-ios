@@ -1,23 +1,16 @@
-//
-//  RadialGradientView.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-11-29.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class RadialGradientView : UIView {
+class RadialGradientView: UIView {
+    // MARK: - Public
 
-    //MARK: - Public
     init(backgroundColor: UIColor, offset: CGFloat = 0.0) {
         self.offset = offset
         super.init(frame: .zero)
         self.backgroundColor = backgroundColor
     }
 
-    //MARK: - Private
+    // MARK: - Private
+
     private let offset: CGFloat
 
     override func draw(_ rect: CGRect) {
@@ -33,7 +26,7 @@ class RadialGradientView : UIView {
         context.drawRadialGradient(gradient, startCenter: center, startRadius: 0.0, endCenter: center, endRadius: endRadius, options: [])
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

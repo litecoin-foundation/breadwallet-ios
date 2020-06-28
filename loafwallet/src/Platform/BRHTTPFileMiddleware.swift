@@ -1,44 +1,18 @@
-//
-//  BRHTTPFileMiddleware.swift
-//  BreadWallet
-//
-//  Created by Samuel Sutch on 2/8/16.
-//  Copyright (c) 2016 breadwallet LLC
-//
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-//
-//  The above copyright notice and this permission notice shall be included in
-//  all copies or substantial portions of the Software.
-//
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//  THE SOFTWARE.
-
 import Foundation
-
 
 open class BRHTTPFileMiddleware: BRHTTPMiddleware {
     var baseURL: URL
     var debugURL: URL?
-    
+
     init(baseURL: URL, debugURL: URL? = nil) {
         self.baseURL = baseURL
         self.debugURL = debugURL
     }
-    
+
     open func handle(_ request: BRHTTPRequest, next: @escaping (BRHTTPMiddlewareResponse) -> Void) {
         var fileURL: URL!
         var body: Data!
-        var contentTypeHint: String? = nil
+        var contentTypeHint: String?
         var headers = [String: [String]]()
         if debugURL == nil {
             // fetch the file locally
@@ -46,7 +20,7 @@ open class BRHTTPFileMiddleware: BRHTTPMiddleware {
             let fm = FileManager.default
             // read the file attributes
             guard let attrs = try? fm.attributesOfItem(atPath: fileURL.path) else {
-              print("[BRHTTPServer] file not found: \(String(describing: fileURL))")
+                print("[BRHTTPServer] file not found: \(String(describing: fileURL))")
                 return next(BRHTTPMiddlewareResponse(request: request, response: nil))
             }
             // generate an etag
@@ -54,7 +28,7 @@ open class BRHTTPFileMiddleware: BRHTTPMiddleware {
             headers["ETag"] = [etag]
             var modified = true
             // if the client sends an if-none-match header, determine if we have a newer version of the file
-            if let etagHeaders = request.headers["if-none-match"] , etagHeaders.count > 0 {
+            if let etagHeaders = request.headers["if-none-match"], !etagHeaders.isEmpty {
                 let etagHeader = etagHeaders[0]
                 if etag == etagHeader {
                     modified = false
@@ -67,7 +41,8 @@ open class BRHTTPFileMiddleware: BRHTTPMiddleware {
                 body = bb
             } else {
                 return next(BRHTTPMiddlewareResponse(
-                    request: request, response: BRHTTPResponse(request: request, code: 304)))
+                    request: request, response: BRHTTPResponse(request: request, code: 304)
+                ))
             }
         } else {
             // download the file from the debug endpoint
@@ -89,13 +64,13 @@ open class BRHTTPFileMiddleware: BRHTTPMiddleware {
             }).resume()
             _ = grp.wait(timeout: DispatchTime.now() + Double(Int64(30) * Int64(NSEC_PER_SEC)) / Double(NSEC_PER_SEC))
             if body == nil {
-              print("[BRHTTPServer] DEBUG file not found \(String(describing: fileURL))")
+                print("[BRHTTPServer] DEBUG file not found \(String(describing: fileURL))")
                 return next(BRHTTPMiddlewareResponse(request: request, response: nil))
             }
         }
-        
+
         headers["Content-Type"] = [contentTypeHint ?? fileURL.contentType]
-        
+
         do {
             let privReq = request as! BRHTTPRequestImpl
             let rangeHeader = try privReq.rangeHeader()
@@ -104,29 +79,32 @@ open class BRHTTPFileMiddleware: BRHTTPMiddleware {
                 let length = end - start
                 let range = NSRange(location: start, length: length + 1)
                 guard range.location + range.length <= body.count else {
-                    let r =  BRHTTPResponse(
+                    let r = BRHTTPResponse(
                         request: request, statusCode: 418, statusReason: "Request Range Not Satisfiable",
-                        headers: nil, body: nil)
+                        headers: nil, body: nil
+                    )
                     return next(BRHTTPMiddlewareResponse(request: request, response: r))
                 }
-                let subDat = body.subdata(in: start..<(start + range.length))
+                let subDat = body.subdata(in: start ..< (start + range.length))
                 let headers = [
                     "Content-Range": ["bytes \(start)-\(end)/\(body.count)"],
-                    "Content-Type": [fileURL.contentType]
+                    "Content-Type": [fileURL.contentType],
                 ]
                 var ary = [UInt8](repeating: 0, count: subDat.count)
                 (subDat as NSData).getBytes(&ary, length: subDat.count)
-                let r =  BRHTTPResponse(
-                    request: request, statusCode: 200, statusReason: "OK", headers: headers, body: ary)
+                let r = BRHTTPResponse(
+                    request: request, statusCode: 200, statusReason: "OK", headers: headers, body: ary
+                )
                 return next(BRHTTPMiddlewareResponse(request: request, response: r))
             }
         } catch {
             let r = BRHTTPResponse(
                 request: request, statusCode: 400, statusReason: "Bad Request", headers: nil,
-                body: [UInt8]("Invalid Range Header".utf8))
+                body: [UInt8]("Invalid Range Header".utf8)
+            )
             return next(BRHTTPMiddlewareResponse(request: request, response: r))
         }
-        
+
         var ary = [UInt8](repeating: 0, count: body.count)
         body.copyBytes(to: &ary, count: body.count)
         let r = BRHTTPResponse(
@@ -134,14 +112,15 @@ open class BRHTTPFileMiddleware: BRHTTPMiddleware {
             statusCode: 200,
             statusReason: "OK",
             headers: headers,
-            body: ary)
+            body: ary
+        )
         return next(BRHTTPMiddlewareResponse(request: request, response: r))
     }
 }
 
-fileprivate extension URL {
+private extension URL {
     var contentType: String {
-        let ext = self.pathExtension
+        let ext = pathExtension
         switch ext {
         case "ttf":
             return "application/font-truetype"

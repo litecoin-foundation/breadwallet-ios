@@ -1,22 +1,15 @@
-//
-//  MenuViewController.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-11-24.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class MenuViewController : UIViewController, Trackable {
+class MenuViewController: UIViewController, Trackable {
+    // MARK: - Public
 
-    //MARK: - Public
     var didTapSecurity: (() -> Void)?
     var didTapSupport: (() -> Void)?
     var didTapSettings: (() -> Void)?
     var didTapLock: (() -> Void)?
 
-    //MARK: - Private
+    // MARK: - Private
+
     fileprivate let buttonHeight: CGFloat = 72.0
     fileprivate let buttons: [MenuButton] = {
         let types: [MenuButtonType] = [.security, .support, .settings, .lock]
@@ -24,10 +17,10 @@ class MenuViewController : UIViewController, Trackable {
             return MenuButton(type: $0)
         }
     }()
+
     fileprivate let bottomPadding: CGFloat = 32.0
 
     override func viewDidLoad() {
-
         var previousButton: UIView?
         buttons.forEach { button in
             button.addTarget(self, action: #selector(MenuViewController.didTapButton(button:)), for: .touchUpInside)
@@ -42,19 +35,20 @@ class MenuViewController : UIViewController, Trackable {
                 topConstraint,
                 button.constraint(.leading, toView: view, constant: 0.0),
                 button.constraint(.trailing, toView: view, constant: 0.0),
-                button.constraint(.height, constant: buttonHeight) ])
+                button.constraint(.height, constant: buttonHeight),
+            ])
             previousButton = button
         }
 
         previousButton?.constrain([
-            previousButton?.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -C.padding[2]) ])
-        
+            previousButton?.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -C.padding[2]),
+        ])
+
         if #available(iOS 11.0, *) {
             view.backgroundColor = UIColor(named: "lfBackgroundColor")
         } else {
             view.backgroundColor = .white
         }
-        
     }
 
     @objc private func didTapButton(button: MenuButton) {
@@ -66,12 +60,12 @@ class MenuViewController : UIViewController, Trackable {
         case .settings:
             didTapSettings?()
         case .lock:
-            didTapLock?() 
+            didTapLock?()
         }
     }
 }
 
-extension MenuViewController : ModalDisplayable {
+extension MenuViewController: ModalDisplayable {
     var faqArticleId: String? {
         return nil
     }

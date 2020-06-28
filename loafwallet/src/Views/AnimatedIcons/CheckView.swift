@@ -1,15 +1,6 @@
-//
-//  CheckView.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-11-22.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class CheckView : UIView, AnimatableIcon {
-
+class CheckView: UIView, AnimatableIcon {
     public func animate() {
         let check = UIBezierPath()
         check.move(to: CGPoint(x: 32.5, y: 47.0))
@@ -37,8 +28,7 @@ class CheckView : UIView, AnimatableIcon {
         shape.add(animation, forKey: nil)
     }
 
-    override func draw(_ rect: CGRect) {
-
+    override func draw(_: CGRect) {
         let checkcircle = UIBezierPath()
         checkcircle.move(to: CGPoint(x: 47.76, y: -0))
         checkcircle.addCurve(to: CGPoint(x: 0, y: 47.76), controlPoint1: CGPoint(x: 21.38, y: -0), controlPoint2: CGPoint(x: 0, y: 21.38))
@@ -57,7 +47,7 @@ class CheckView : UIView, AnimatableIcon {
         UIColor.white.setFill()
         checkcircle.fill()
 
-        //This is the non-animated check left here for now as a reference
+        // This is the non-animated check left here for now as a reference
 //        let check = UIBezierPath()
 //        check.move(to: CGPoint(x: 30.06, y: 51.34))
 //        check.addCurve(to: CGPoint(x: 30.06, y: 44.75), controlPoint1: CGPoint(x: 28.19, y: 49.52), controlPoint2: CGPoint(x: 28.19, y: 46.57))

@@ -1,15 +1,6 @@
-//
-//  AddressCell.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-12-16.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class AddressCell : UIView {
-
+class AddressCell: UIView {
     init() {
         super.init(frame: .zero)
         setupViews()
@@ -43,18 +34,17 @@ class AddressCell : UIView {
     private let border = UIView(color: .secondaryShadow)
 
     private func setupViews() {
-        
         if #available(iOS 11.0, *) {
             guard let textColor = UIColor(named: "labelTextColor") else {
-               NSLog("ERROR: Main color")
-               return
+                NSLog("ERROR: Main color")
+                return
             }
             contentLabel.textColor = textColor
             label.textColor = textColor
         } else {
             contentLabel.textColor = .darkText
         }
-         
+
         addSubviews()
         addConstraints()
         setInitialData()
@@ -73,31 +63,38 @@ class AddressCell : UIView {
     private func addConstraints() {
         label.constrain([
             label.constraint(.centerY, toView: self),
-            label.constraint(.leading, toView: self, constant: C.padding[2]) ])
+            label.constraint(.leading, toView: self, constant: C.padding[2]),
+        ])
         contentLabel.constrain([
             contentLabel.constraint(.leading, toView: label),
             contentLabel.constraint(toBottom: label, constant: 0.0),
-            contentLabel.trailingAnchor.constraint(equalTo: paste.leadingAnchor, constant: -C.padding[1]) ])
+            contentLabel.trailingAnchor.constraint(equalTo: paste.leadingAnchor, constant: -C.padding[1]),
+        ])
         textField.constrain([
             textField.constraint(.leading, toView: label),
             textField.constraint(toBottom: label, constant: 0.0),
-            textField.trailingAnchor.constraint(equalTo: paste.leadingAnchor, constant: -C.padding[1]) ])
+            textField.trailingAnchor.constraint(equalTo: paste.leadingAnchor, constant: -C.padding[1]),
+        ])
         tapView.constrain([
             tapView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tapView.topAnchor.constraint(equalTo: topAnchor),
             tapView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            tapView.trailingAnchor.constraint(equalTo: paste.leadingAnchor) ])
+            tapView.trailingAnchor.constraint(equalTo: paste.leadingAnchor),
+        ])
         scan.constrain([
             scan.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -C.padding[2]),
-            scan.centerYAnchor.constraint(equalTo: centerYAnchor) ])
+            scan.centerYAnchor.constraint(equalTo: centerYAnchor),
+        ])
         paste.constrain([
             paste.centerYAnchor.constraint(equalTo: centerYAnchor),
-            paste.trailingAnchor.constraint(equalTo: scan.leadingAnchor, constant: -C.padding[1]) ])
+            paste.trailingAnchor.constraint(equalTo: scan.leadingAnchor, constant: -C.padding[1]),
+        ])
         border.constrain([
             border.leadingAnchor.constraint(equalTo: leadingAnchor),
             border.bottomAnchor.constraint(equalTo: bottomAnchor),
             border.trailingAnchor.constraint(equalTo: trailingAnchor),
-            border.heightAnchor.constraint(equalToConstant: 1.0) ])
+            border.heightAnchor.constraint(equalToConstant: 1.0),
+        ])
     }
 
     private func setInitialData() {
@@ -115,7 +112,7 @@ class AddressCell : UIView {
             myself.contentLabel.text = myself.textField.text
         }
 
-        //GR to start editing label
+        // GR to start editing label
         gr.addTarget(self, action: #selector(didTap))
         tapView.addGestureRecognizer(gr)
     }
@@ -126,13 +123,13 @@ class AddressCell : UIView {
         textField.isHidden = false
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-extension AddressCell : UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+extension AddressCell: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_: UITextField) {
         didBeginEditing?()
         contentLabel.isHidden = true
         gr.isEnabled = false
@@ -152,7 +149,7 @@ extension AddressCell : UITextFieldDelegate {
         return true
     }
 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(_: UITextField, shouldChangeCharactersIn _: NSRange, replacementString string: String) -> Bool {
         if let request = PaymentRequest(string: string) {
             didReceivePaymentRequest?(request)
             return false

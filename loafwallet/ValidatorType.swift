@@ -1,20 +1,10 @@
-//
-//  Validation.swift
-//  litewallet
-//
-//  Created by Kerry Washington on 8/25/19.
-//  Copyright © 2019 litecoin. All rights reserved.
-//
- 
 import Foundation
 
-class Validation {
-    
-}
+class Validation {}
 
 class ValidationError: Error {
     var message: String
-    
+
     init(_ message: String) {
         self.message = message
     }
@@ -51,68 +41,67 @@ enum VaildatorFactory {
         case .state: return StateValidator()
         case .postalCode: return PostalCodeValidator()
         case .mobileNumber: return MobileNumberValidator()
-        case .requiredField(let fieldName): return RequiredFieldValidator(fieldName)
+        case let .requiredField(fieldName): return RequiredFieldValidator(fieldName)
         }
     }
 }
 
 class FirstNameValidator: ValidatorConvertible {
     func validated(_ value: String) throws -> String {
-        guard value.count > 0 else {throw ValidationError("First Name is required")}
+        guard !value.isEmpty else { throw ValidationError("First Name is required") }
         return value
     }
 }
 
 class LastNameValidator: ValidatorConvertible {
     func validated(_ value: String) throws -> String {
-        guard value.count > 0 else {throw ValidationError("Last Name is required")}
+        guard !value.isEmpty else { throw ValidationError("Last Name is required") }
         return value
     }
 }
 
 class AddressValidator: ValidatorConvertible {
     func validated(_ value: String) throws -> String {
-        guard value.count > 0 else {throw ValidationError("Address is required")}
+        guard !value.isEmpty else { throw ValidationError("Address is required") }
         return value
     }
 }
 
 class CityValidator: ValidatorConvertible {
     func validated(_ value: String) throws -> String {
-        guard value.count > 0 else {throw ValidationError("City is required")}
+        guard !value.isEmpty else { throw ValidationError("City is required") }
         return value
     }
 }
 
 class CountryValidator: ValidatorConvertible {
     func validated(_ value: String) throws -> String {
-        guard value.count > 0 else {throw ValidationError("Country is required")}
+        guard !value.isEmpty else { throw ValidationError("Country is required") }
         return value
     }
 }
 
 class StateValidator: ValidatorConvertible {
     func validated(_ value: String) throws -> String {
-        guard value.count > 0 else {throw ValidationError("State is required")}
+        guard !value.isEmpty else { throw ValidationError("State is required") }
         return value
     }
 }
 
 class PostalCodeValidator: ValidatorConvertible {
     func validated(_ value: String) throws -> String {
-        guard value.count > 0 else {throw ValidationError("Postal code is required")}
+        guard !value.isEmpty else { throw ValidationError("Postal code is required") }
         return value
     }
 }
 
-
 struct MobileNumberValidator: ValidatorConvertible {
     func validated(_ value: String) throws -> String {
-        guard value != "" else {throw ValidationError("Mobile number is required")}
+        guard value != "" else { throw ValidationError("Mobile number is required") }
         guard value.count >= 10 else { throw ValidationError("Mobile number must have at least 10 digits") }
-        
+
         do {
-            if try NSRegularExpression(pattern: "^[0-9]*$",  options: .caseInsensitive).firstMatch(in: value, options: [], range: NSRange(location: 0, length: value.count)) == nil {
+            if try NSRegularExpression(pattern: "^[0-9]*$", options: .caseInsensitive).firstMatch(in: value, options: [], range: NSRange(location: 0, length: value.count)) == nil {
                 throw ValidationError("Mobile number must only have digits")
             }
         } catch {
@@ -122,14 +111,13 @@ struct MobileNumberValidator: ValidatorConvertible {
     }
 }
 
-
 struct RequiredFieldValidator: ValidatorConvertible {
     private let fieldName: String
-    
+
     init(_ field: String) {
         fieldName = field
     }
-    
+
     func validated(_ value: String) throws -> String {
         guard !value.isEmpty else {
             throw ValidationError("Required field " + fieldName)
@@ -140,11 +128,11 @@ struct RequiredFieldValidator: ValidatorConvertible {
 
 struct PasswordValidator: ValidatorConvertible {
     func validated(_ value: String) throws -> String {
-        guard value != "" else {throw ValidationError("Password is Required")}
+        guard value != "" else { throw ValidationError("Password is Required") }
         guard value.count >= 6 else { throw ValidationError("Password must have at least 6 characters") }
-        
+
         do {
-            if try NSRegularExpression(pattern: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$",  options: .caseInsensitive).firstMatch(in: value, options: [], range: NSRange(location: 0, length: value.count)) == nil {
+            if try NSRegularExpression(pattern: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$", options: .caseInsensitive).firstMatch(in: value, options: [], range: NSRange(location: 0, length: value.count)) == nil {
                 throw ValidationError("Password must be more than 6 characters, with at least one character and one numeric character")
             }
         } catch {

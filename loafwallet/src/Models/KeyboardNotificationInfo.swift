@@ -1,24 +1,17 @@
-//
-//  KeyboardNotificationInfo.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-12-28.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 struct KeyboardNotificationInfo {
-
     var deltaY: CGFloat {
         return endFrame.minY - startFrame.minY
     }
+
     var animationOptions: UIViewAnimationOptions {
         return UIViewAnimationOptions(rawValue: animationCurve << 16)
     }
+
     let animationDuration: Double
 
-    init?(_ userInfo: [AnyHashable : Any]?) {
+    init?(_ userInfo: [AnyHashable: Any]?) {
         guard let userInfo = userInfo else { return nil }
         guard let endFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue,
             let startFrame = userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue,

@@ -1,20 +1,9 @@
-//
-//  AmountTests.swift
-//  loafwalletTests
-//
-//  Created by Kerry Washington on 12/14/19.
-//  Copyright © 2019 Litecoin Foundation. All rights reserved.
-//
-
 import XCTest
 @testable import loafwallet
 
 class AmountTests: XCTestCase {
- 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        
-        
     }
 
     override func tearDown() {
@@ -22,32 +11,27 @@ class AmountTests: XCTestCase {
     }
 
     func testAmountString() {
-        
-        //Given:
-        //When:
-        //Then:
-     }
-    
+        // Given:
+        // When:
+        // Then:
+    }
+
     func testAmountForLtcFormat() {
-        
 //        //Given:
 //        let amount = MockSeeds.amount100
-//        
+//
 //        //When:
 //        if amount.amountForLtcFormat == 0.003 {
 //            XCTAssertFalse(true)
 //        }
 //        //Then:
 //        XCTAssert(amount.amount == 0)
-        
     }
-     
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measure {
+        measure {
             // Put the code you want to measure the time of here.
         }
     }
-
 }

@@ -1,28 +1,3 @@
-//
-//  BRHTTPServer.swift
-//  BreadWallet
-//
-//  Created by Samuel Sutch on 2/8/16.
-//  Copyright (c) 2016 breadwallet LLC
-//
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-//
-//  The above copyright notice and this permission notice shall be included in
-//  all copies or substantial portions of the Software.
-//
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//  THE SOFTWARE.
-
 import Foundation
 
 enum BRHTTPServerError: Error {
@@ -42,7 +17,7 @@ public protocol BRHTTPMiddleware {
 open class BRHTTPMiddlewareResponse {
     var request: BRHTTPRequest
     var response: BRHTTPResponse?
-    
+
     init(request: BRHTTPRequest, response: BRHTTPResponse?) {
         self.request = request
         self.response = response
@@ -58,21 +33,21 @@ open class BRHTTPMiddlewareResponse {
     var listenAddress: String = "127.0.0.1"
     private var isShutdownCancelled = false
     var Q: DispatchQueue = {
-        return DispatchQueue(label: "br_http_server", attributes: DispatchQueue.Attributes.concurrent)
+        DispatchQueue(label: "br_http_server", attributes: DispatchQueue.Attributes.concurrent)
     }()
-    
+
     func prependMiddleware(middleware mw: BRHTTPMiddleware) {
         middleware.insert(mw, at: 0)
     }
-    
+
     func appendMiddleware(middle mw: BRHTTPMiddleware) {
         middleware.append(mw)
     }
-    
+
     func resetMiddleware() {
         middleware.removeAll()
     }
-    
+
     func start() throws {
         for _ in 0 ..< 100 {
             // get a random port
@@ -94,10 +69,10 @@ open class BRHTTPMiddlewareResponse {
         }
         throw BRHTTPServerError.socketBindFailed
     }
-    
+
     func listenServer(_ port: in_port_t, maxPendingConnections: Int32 = SOMAXCONN) throws {
         shutdownServer()
-        
+
         let sfd = socket(AF_INET, SOCK_STREAM, 0)
         if sfd == -1 {
             throw BRHTTPServerError.socketCreationFailed
@@ -115,43 +90,43 @@ open class BRHTTPMiddlewareResponse {
         addr.sin_family = sa_family_t(AF_INET)
         addr.sin_port = Int(OSHostByteOrder()) == OSLittleEndian ? _OSSwapInt16(port) : port
         addr.sin_addr = in_addr(s_addr: inet_addr(listenAddress))
-        addr.sin_zero = (0, 0, 0, 0, 0, 0, 0 ,0)
-        
+        addr.sin_zero = (0, 0, 0, 0, 0, 0, 0, 0)
+
         var bind_addr = sockaddr()
         memcpy(&bind_addr, &addr, Int(MemoryLayout<sockaddr_in>.size))
-        
+
         if bind(sfd, &bind_addr, socklen_t(MemoryLayout<sockaddr_in>.size)) == -1 {
-            perror("bind error");
+            perror("bind error")
             _ = Darwin.shutdown(sfd, SHUT_RDWR)
             close(sfd)
             throw BRHTTPServerError.socketBindFailed
         }
-        
+
         if listen(sfd, maxPendingConnections) == -1 {
-            perror("listen error");
+            perror("listen error")
             _ = Darwin.shutdown(sfd, SHUT_RDWR)
             close(sfd)
             throw BRHTTPServerError.socketListenFailed
         }
-        
+
         fd = sfd
         acceptClients()
         print("[BRHTTPServer] listening on \(port)")
     }
-    
+
     func shutdownServer() {
         _ = Darwin.shutdown(fd, SHUT_RDWR)
         close(fd)
         fd = -1
         objc_sync_enter(self)
         defer { objc_sync_exit(self) }
-        for cli_fd in self.clients {
+        for cli_fd in clients {
             _ = Darwin.shutdown(cli_fd, SHUT_RDWR)
         }
-        self.clients.removeAll(keepingCapacity: true)
+        clients.removeAll(keepingCapacity: true)
         print("[BRHTTPServer] no longer listening")
     }
-    
+
     func stop() {
         shutdownServer()
         let nc = NotificationCenter.default
@@ -160,13 +135,13 @@ open class BRHTTPMiddlewareResponse {
         // foreground
         nc.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
     }
-    
+
     @objc func suspend(_: Notification) {
         if isStarted {
             objc_sync_enter(self)
             defer { objc_sync_exit(self) }
             isShutdownCancelled = false
-            if self.clients.count == 0 {
+            if clients.isEmpty {
                 shutdownServer()
                 print("[BRHTTPServer] suspended")
             } else {
@@ -201,19 +176,19 @@ open class BRHTTPMiddlewareResponse {
             print("[BRHTTPServer] already resumed")
         }
     }
-    
+
     func addClient(_ cli_fd: Int32) {
         objc_sync_enter(self)
         defer { objc_sync_exit(self) }
         clients.insert(cli_fd)
     }
-    
+
     func rmClient(_ cli_fd: Int32) {
         objc_sync_enter(self)
         defer { objc_sync_exit(self) }
         clients.remove(cli_fd)
     }
-    
+
     fileprivate func acceptClients() {
         Q.async {
             while true {
@@ -228,7 +203,7 @@ open class BRHTTPMiddlewareResponse {
                 self.addClient(cli_fd)
                 self.Q.async {
                     while let req = try? BRHTTPRequestImpl(readFromFd: cli_fd, queue: self.Q) {
-                        self.dispatch(middleware: self.middleware, req: req) { resp in
+                        self.dispatch(middleware: self.middleware, req: req) { _ in
                             _ = Darwin.shutdown(cli_fd, SHUT_RDWR)
                             close(cli_fd)
                             self.rmClient(cli_fd)
@@ -239,6 +214,7 @@ open class BRHTTPMiddlewareResponse {
             }
         }
     }
+
     // curl http://localhost:30079/_api/exchange -H 'X-Should-Authenticate: true' -H 'Accept: application/json'
     fileprivate func dispatch(middleware mw: [BRHTTPMiddleware], req: BRHTTPRequest, finish: @escaping (BRHTTPResponse) -> Void) {
         var newMw = mw
@@ -261,15 +237,16 @@ open class BRHTTPMiddlewareResponse {
             })
         } else {
             let resp = BRHTTPResponse(
-                request: req, statusCode: 404, statusReason: "Not Found", headers: nil, body: nil)
+                request: req, statusCode: 404, statusReason: "Not Found", headers: nil, body: nil
+            )
             logline(req, response: resp)
             _ = try? resp.send()
             finish(resp)
         }
     }
-    
+
     fileprivate func logline(_ request: BRHTTPRequest, response: BRHTTPResponse) {
-        let ms = Double(round((request.start.timeIntervalSinceNow * -1000.0)*1000)/1000)
+        let ms = Double(round((request.start.timeIntervalSinceNow * -1000.0) * 1000) / 1000)
         let b = response.body?.count ?? 0
         let c = response.statusCode ?? -1
         let s = response.statusReason ?? "Unknown"
@@ -303,15 +280,15 @@ open class BRHTTPRequestImpl: BRHTTPRequest {
     open var query = [String: [String]]()
     open var headers = [String: [String]]()
     open var start = Date()
-    
+
     open var isKeepAlive: Bool {
         return (headers["connection"] != nil
             && headers["connection"]?.count ?? 0 > 0
             && headers["connection"]![0] == "keep-alive")
     }
-    
+
     static let rangeRe = try! NSRegularExpression(pattern: "bytes=(\\d*)-(\\d*)", options: .caseInsensitive)
-    
+
     public required init(fromRequest r: BRHTTPRequest) {
         fd = r.fd
         queue = r.queue
@@ -325,7 +302,7 @@ open class BRHTTPRequestImpl: BRHTTPRequest {
             _body = ri._body
         }
     }
-    
+
     public required init(readFromFd: Int32, queue: DispatchQueue) throws {
         fd = readFromFd
         self.queue = queue
@@ -340,7 +317,7 @@ open class BRHTTPRequestImpl: BRHTTPRequest {
         if path.range(of: "?") != nil {
             let parts = path.components(separatedBy: "?")
             path = parts[0]
-            queryString = parts[1..<parts.count].joined(separator: "?")
+            queryString = parts[1 ..< parts.count].joined(separator: "?")
             let pairs = queryString.components(separatedBy: "&")
             for pair in pairs {
                 let pairSides = pair.components(separatedBy: "=")
@@ -360,7 +337,7 @@ open class BRHTTPRequestImpl: BRHTTPRequest {
             let hdrParts = hdr.components(separatedBy: ":")
             if hdrParts.count >= 2 {
                 let name = hdrParts[0].lowercased()
-                let hdrVal = hdrParts[1..<hdrParts.count].joined(separator: ":").trimmingCharacters(
+                let hdrVal = hdrParts[1 ..< hdrParts.count].joined(separator: ":").trimmingCharacters(
                     in: CharacterSet.whitespaces)
                 if headers[name] != nil {
                     headers[name]?.append(hdrVal)
@@ -370,20 +347,20 @@ open class BRHTTPRequestImpl: BRHTTPRequest {
             }
         }
     }
-    
+
     func readLine() throws -> String {
         var chars: String = ""
         var n = 0
         repeat {
-            n = self.read()
-            if (n > 13 /* CR */) { chars.append(Character(UnicodeScalar(n)!)) }
+            n = read()
+            if n > 13 /* CR */ { chars.append(Character(UnicodeScalar(n)!)) }
         } while n > 0 && n != 10 /* NL */
         if n == -1 {
             throw BRHTTPServerError.socketRecvFailed
         }
         return chars
     }
-    
+
     func read() -> Int {
         var buf = [UInt8](repeating: 0, count: 1)
         let n = recv(fd, &buf, 1, 0)
@@ -392,30 +369,30 @@ open class BRHTTPRequestImpl: BRHTTPRequest {
         }
         return Int(buf[0])
     }
-    
+
     open var hasBody: Bool {
         return method == "POST" || method == "PATCH" || method == "PUT"
     }
-    
+
     open var contentLength: Int {
-        if let hdrs = headers["content-length"] , hasBody && hdrs.count > 0 {
+        if let hdrs = headers["content-length"], hasBody, !hdrs.isEmpty {
             if let i = Int(hdrs[0]) {
                 return i
             }
         }
         return 0
     }
-    
+
     open var contentType: String {
-        if let hdrs = headers["content-type"] , hdrs.count > 0 { return hdrs[0] }
+        if let hdrs = headers["content-type"], !hdrs.isEmpty { return hdrs[0] }
         return "application/octet-stream"
     }
-    
+
     fileprivate var _body: [UInt8]?
     fileprivate var _bodyRead: Bool = false
-    
+
     open func body() -> Data? {
-        if _bodyRead && _body != nil {
+        if _bodyRead, _body != nil {
             let bp = UnsafeMutablePointer<UInt8>(UnsafeMutablePointer(mutating: _body!))
             return Data(bytesNoCopy: bp, count: contentLength, deallocator: .none)
         }
@@ -431,7 +408,7 @@ open class BRHTTPRequestImpl: BRHTTPRequest {
             if n < buffSize {
                 _bodyRead = true
             }
-            body += buf[0..<n]
+            body += buf[0 ..< n]
             if _bodyRead || total >= contentLength {
                 break
             }
@@ -440,7 +417,7 @@ open class BRHTTPRequestImpl: BRHTTPRequest {
         let bp = UnsafeMutablePointer<UInt8>(UnsafeMutablePointer(mutating: _body!))
         return Data(bytesNoCopy: bp, count: contentLength, deallocator: .none)
     }
-    
+
     open func json() -> AnyObject? {
         if let b = body() {
             if let j = try? JSONSerialization.jsonObject(with: b, options: []) {
@@ -449,16 +426,16 @@ open class BRHTTPRequestImpl: BRHTTPRequest {
         }
         return nil
     }
-    
+
     func rangeHeader() throws -> (Int, Int)? {
         if headers["range"] == nil {
             return nil
         }
         guard let rngHeader = headers["range"]?[0],
             let match = BRHTTPRequestImpl.rangeRe.matches(in: rngHeader, options: .anchored, range:
-                NSRange(location: 0, length: rngHeader.count)).first
-            , match.numberOfRanges == 3 else {
-                throw BRHTTPServerError.invalidRangeHeader
+                NSRange(location: 0, length: rngHeader.count)).first,
+            match.numberOfRanges == 3 else {
+            throw BRHTTPServerError.invalidRangeHeader
         }
         let startStr = (rngHeader as NSString).substring(with: match.range(at: 1))
         let endStr = (rngHeader as NSString).substring(with: match.range(at: 2))
@@ -475,12 +452,12 @@ open class BRHTTPResponse {
     var statusReason: String?
     var headers: [String: [String]]?
     var body: [UInt8]?
-    
+
     var async = false
     var onDone: (() -> Void)?
     var isDone = false
     var isKilled = false
-    
+
     static var reasonMap: [Int: String] = [
         100: "Continue",
         101: "Switching Protocols",
@@ -542,37 +519,38 @@ open class BRHTTPResponse {
         508: "Loop Detected",
         510: "Not Extended",
         511: "Network Authentication Required",
-        
     ]
-    
+
     init(request: BRHTTPRequest, statusCode: Int?, statusReason: String?, headers: [String: [String]]?, body: [UInt8]?) {
         self.request = request
         self.statusCode = statusCode
         self.statusReason = statusReason
         self.headers = headers
         self.body = body
-        self.isDone = true
+        isDone = true
     }
-    
+
     init(async request: BRHTTPRequest) {
         self.request = request
-        self.async = true
+        async = true
     }
-    
+
     convenience init(request: BRHTTPRequest, code: Int) {
         self.init(
-            request: request, statusCode: code, statusReason: BRHTTPResponse.reasonMap[code], headers: nil, body: nil)
+            request: request, statusCode: code, statusReason: BRHTTPResponse.reasonMap[code], headers: nil, body: nil
+        )
     }
-    
+
     convenience init(request: BRHTTPRequest, code: Int, json j: Any) throws {
         let jsonData = try JSONSerialization.data(withJSONObject: j, options: [])
         let bp = (jsonData as NSData).bytes.bindMemory(to: UInt8.self, capacity: jsonData.count)
         let bodyBuffer = UnsafeBufferPointer<UInt8>(start: bp, count: jsonData.count)
         self.init(
             request: request, statusCode: code, statusReason: BRHTTPResponse.reasonMap[code],
-            headers: ["Content-Type": ["application/json"]], body: Array(bodyBuffer))
+            headers: ["Content-Type": ["application/json"]], body: Array(bodyBuffer)
+        )
     }
-    
+
     func send() throws {
         if isKilled {
             return // do nothing... the connection should just be closed
@@ -580,7 +558,7 @@ open class BRHTTPResponse {
         let status = statusCode ?? 200
         let reason = statusReason ?? "OK"
         try writeUTF8("HTTP/1.1 \(status) \(reason)\r\n")
-        
+
         let length = body?.count ?? 0
         try writeUTF8("Content-Length: \(length)\r\n")
         if request.isKeepAlive {
@@ -592,18 +570,18 @@ open class BRHTTPResponse {
                 try writeUTF8("\(n): \(yv)\r\n")
             }
         }
-        
+
         try writeUTF8("\r\n")
-        
+
         if let b = body {
             try writeUInt8(b)
         }
     }
-    
+
     func writeUTF8(_ s: String) throws {
         try writeUInt8([UInt8](s.utf8))
     }
-    
+
     func writeUInt8(_ data: [UInt8]) throws {
         try data.withUnsafeBufferPointer { pointer in
             var sent = 0
@@ -616,7 +594,7 @@ open class BRHTTPResponse {
             }
         }
     }
-    
+
     func provide(_ status: Int) {
         objc_sync_enter(self)
         if isDone {
@@ -629,12 +607,12 @@ open class BRHTTPResponse {
         statusReason = BRHTTPResponse.reasonMap[status]
         objc_sync_enter(self)
         isDone = true
-        if self.onDone != nil {
-            self.onDone!()
+        if onDone != nil {
+            onDone!()
         }
         objc_sync_exit(self)
     }
-    
+
     func provide(_ status: Int, json: Any?) {
         objc_sync_enter(self)
         if isDone {
@@ -660,12 +638,12 @@ open class BRHTTPResponse {
         }
         objc_sync_enter(self)
         isDone = true
-        if self.onDone != nil {
-            self.onDone!()
+        if onDone != nil {
+            onDone!()
         }
         objc_sync_exit(self)
     }
-    
+
     func provide(_ status: Int, data: [UInt8], contentType: String) {
         objc_sync_enter(self)
         if isDone {
@@ -680,12 +658,12 @@ open class BRHTTPResponse {
         statusReason = BRHTTPResponse.reasonMap[status]
         objc_sync_enter(self)
         isDone = true
-        if self.onDone != nil {
-            self.onDone!()
+        if onDone != nil {
+            onDone!()
         }
         objc_sync_exit(self)
     }
-    
+
     func kill() {
         objc_sync_enter(self)
         if isDone {
@@ -694,16 +672,16 @@ open class BRHTTPResponse {
         }
         isDone = true
         isKilled = true
-        if self.onDone != nil {
-            self.onDone!()
+        if onDone != nil {
+            onDone!()
         }
         objc_sync_exit(self)
     }
-    
+
     func done(_ onDone: @escaping () -> Void) {
         objc_sync_enter(self)
         self.onDone = onDone
-        if self.isDone {
+        if isDone {
             self.onDone!()
         }
         objc_sync_exit(self)

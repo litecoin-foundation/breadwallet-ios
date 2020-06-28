@@ -1,19 +1,10 @@
-//
-//  UIImage+Utils.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-12-08.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
-import UIKit
 import CoreGraphics
+import UIKit
 
 private let inputImageKey = "inputImage"
 
 extension UIImage {
     static func qrCode(data: Data, color: CIColor) -> UIImage? {
-
         let qrFilter = CIFilter(name: "CIQRCodeGenerator")
         let maskFilter = CIFilter(name: "CIMaskToAlpha")
         let invertFilter = CIFilter(name: "CIColorInvert")

@@ -1,11 +1,3 @@
-//
-//  NumberFormatter+Additions.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-05-21.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import Foundation
 
 extension NumberFormatter {
@@ -20,7 +12,7 @@ extension NumberFormatter {
             }
             formatter.locale = rate.locale
             formatter.numberStyle = .currency
-            let value = (Double(amount.rawValue)/Double(C.satoshis))*rate.rate
+            let value = (Double(amount.rawValue) / Double(C.satoshis)) * rate.rate
             output = formatter.string(from: value as NSNumber) ?? "error"
         } else {
             formatter = displayAmount.ltcFormat

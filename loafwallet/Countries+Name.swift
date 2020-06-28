@@ -29,7 +29,7 @@ extension Country {
         case "Bhutan": self = .bhutan
         case "Bolivia": self = .bolivia
         case "Bosnia and Herzegovina": self = .bosniaAndHerzegovina
-        case "Botswana": self = .botswana 
+        case "Botswana": self = .botswana
         case "Brazil": self = .brazil
         case "British Indian Ocean Territory": self = .britishIndianOceanTerritory
         case "Brunei Darussalam": self = .bruneiDarussalam
@@ -76,7 +76,7 @@ extension Country {
         case "France": self = .france
         case "French Guiana": self = .frenchGuiana
         case "French Polynesia": self = .frenchPolynesia
-        case "French Southern Territories": self = .frenchSouthernTerritories 
+        case "French Southern Territories": self = .frenchSouthernTerritories
         case "Gabon": self = .gabon
         case "Gambia": self = .gambia
         case "Germany": self = .germany

@@ -1,15 +1,6 @@
-    
-//  RoundedContainer.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-11-17.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 class RoundedContainer: UIView {
-
     var style: TransactionCellStyle = .middle {
         didSet {
             setNeedsLayout()
@@ -17,9 +8,7 @@ class RoundedContainer: UIView {
     }
 
     override func layoutSubviews() {
-        
         if #available(iOS 11.0, *) {
-             
             guard let backgroundColor = UIColor(named: "lfBackgroundColor") else {
                 NSLog("ERROR: Custom color not found")
                 return
@@ -41,5 +30,4 @@ class RoundedContainer: UIView {
         maskLayer.path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: 4.0, height: 4.0)).cgPath
         layer.mask = maskLayer
     }
-
 }

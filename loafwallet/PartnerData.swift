@@ -1,31 +1,21 @@
-//
-//  ParnterData.swift
-//  breadwallet
-//
-//  Created by Kerry Washington on 9/30/18.
-//  Copyright © 2018 breadwallet LLC. All rights reserved.
-//
-
 import Foundation
 import UIKit
-
 
 enum PartnerPrefix: String {
     case simplex = "_simplex"
 }
- 
+
 struct Partner {
-    
     let logo: UIImage
     let headerTitle: String
     let details: String
-     
+
     static func partnerDataArray() -> [Partner] {
         let simplex = Partner(logo: UIImage(named: "simplexLogo")!, headerTitle: S.BuyCenter.Cells.simplexTitle, details: S.BuyCenter.Cells.simplexFinancialDetails)
         return [simplex]
     }
-     
-//TODO: Uncomment as integration progresses, kcw-grunt
+
+    // TODO: Uncomment as integration progresses, kcw-grunt
 //    let coinbaseDictionary =
 //      ["title":S.BuyCenter.Cells.coinbaseTitle as AnyObject,
 //       "details":S.BuyCenter.Cells.coinbaseFinancialDetails,

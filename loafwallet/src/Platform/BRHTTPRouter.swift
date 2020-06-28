@@ -1,30 +1,4 @@
-//
-//  BRHTTPRouter.swift
-//  BreadWallet
-//
-//  Created by Samuel Sutch on 2/8/16.
-//  Copyright (c) 2016 breadwallet LLC
-//
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-//
-//  The above copyright notice and this permission notice shall be included in
-//  all copies or substantial portions of the Software.
-//
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//  THE SOFTWARE.
-
 import Foundation
-
 
 public typealias BRHTTPRouteMatch = [String: [String]]
 
@@ -39,11 +13,11 @@ open class BRHTTPRoutePair {
     var path: String = "/"
     var regex: NSRegularExpression
     var captureGroups: [Int: String]
-    
+
     open var hashValue: Int {
         return method.hashValue ^ path.hashValue
     }
-    
+
     init(method m: String, path p: String) {
         method = m.uppercased()
         path = p
@@ -58,18 +32,18 @@ open class BRHTTPRoutePair {
         var reParts = [String]()
         var i = 0
         for part in parts {
-            if part.hasPrefix("(") && part.hasSuffix(")") {
+            if part.hasPrefix("("), part.hasSuffix(")") {
                 let w1 = part.index(part.endIndex, offsetBy: -2)
                 let w2 = part.index(part.endIndex, offsetBy: -1)
-                if String(part[w1..<w2]) == "*" { // a wild card capture (part*)
+                if String(part[w1 ..< w2]) == "*" { // a wild card capture (part*)
                     let i1 = part.index(part.startIndex, offsetBy: 1)
                     let i2 = part.index(part.endIndex, offsetBy: -2)
-                    captureGroups[i] = String(part[i1..<i2])
+                    captureGroups[i] = String(part[i1 ..< i2])
                     reParts.append("(.*)")
                 } else {
                     let i1 = part.index(part.startIndex, offsetBy: 1)
                     let i2 = part.index(part.endIndex, offsetBy: -1)
-                    captureGroups[i] = String(part[i1..<i2])
+                    captureGroups[i] = String(part[i1 ..< i2])
                     reParts.append("([^/]+)") // a capture (part)
                 }
                 i += 1
@@ -77,15 +51,15 @@ open class BRHTTPRoutePair {
                 reParts.append(part) // a non-captured component
             }
         }
-        
+
         let re = "^" + reParts.joined(separator: "/") + "$"
-        //print("\n\nroute: \n\n method: \(method)\n path: \(path)\n regex: \(re)\n captures: \(captureGroups)\n\n")
+        // print("\n\nroute: \n\n method: \(method)\n path: \(path)\n regex: \(re)\n captures: \(captureGroups)\n\n")
         guard let reg = try? NSRegularExpression(pattern: re, options: []) else {
             fatalError("unable to parse regex pattern: \(re)")
         }
         regex = reg
     }
-    
+
     open func match(_ request: BRHTTPRequest) -> BRHTTPRouteMatch? {
         if request.method.uppercased() != method {
             return nil
@@ -94,19 +68,19 @@ open class BRHTTPRoutePair {
         if p.hasSuffix("/") {
             p = String(request.path[..<request.path.index(request.path.endIndex, offsetBy: -1)])
         }
-        if let m = regex.firstMatch(in: request.path, options: [], range: NSMakeRange(0, p.count))
-            , m.numberOfRanges - 1 == captureGroups.count {
-                var match = BRHTTPRouteMatch()
-                for i in 1..<m.numberOfRanges {
-                    let key = captureGroups[i-1]!
-                    let captured = (p as NSString).substring(with: m.range(at: i))
-                    if match[key] == nil {
-                        match[key] = [captured]
-                    } else {
-                        match[key]?.append(captured)
-                    }
+        if let m = regex.firstMatch(in: request.path, options: [], range: NSMakeRange(0, p.count)),
+            m.numberOfRanges - 1 == captureGroups.count {
+            var match = BRHTTPRouteMatch()
+            for i in 1 ..< m.numberOfRanges {
+                let key = captureGroups[i - 1]!
+                let captured = (p as NSString).substring(with: m.range(at: i))
+                if match[key] == nil {
+                    match[key] = [captured]
+                } else {
+                    match[key]?.append(captured)
                 }
-                return match
+            }
+            return match
         }
         return nil
     }
@@ -116,10 +90,10 @@ open class BRHTTPRouter: BRHTTPMiddleware {
     var routes = [(BRHTTPRoutePair, BRHTTPRoute)]()
     var plugins = [BRHTTPRouterPlugin]()
     fileprivate var wsServer = BRWebSocketServer()
-    
+
     open func handle(_ request: BRHTTPRequest, next: @escaping (BRHTTPMiddlewareResponse) -> Void) {
-        var response: BRHTTPResponse? = nil
-        
+        var response: BRHTTPResponse?
+
         for (routePair, route) in routes {
             if let match = routePair.match(request) {
                 do {
@@ -131,38 +105,38 @@ open class BRHTTPRouter: BRHTTPMiddleware {
                 break
             }
         }
-        
+
         return next(BRHTTPMiddlewareResponse(request: request, response: response))
     }
-    
+
     open func get(_ pattern: String, route: @escaping BRHTTPRoute) {
         routes.append((BRHTTPRoutePair(method: "GET", path: pattern), route))
     }
-    
+
     open func post(_ pattern: String, route: @escaping BRHTTPRoute) {
         routes.append((BRHTTPRoutePair(method: "POST", path: pattern), route))
     }
-    
+
     open func put(_ pattern: String, route: @escaping BRHTTPRoute) {
         routes.append((BRHTTPRoutePair(method: "PUT", path: pattern), route))
     }
-    
+
     open func patch(_ pattern: String, route: @escaping BRHTTPRoute) {
         routes.append((BRHTTPRoutePair(method: "PATCH", path: pattern), route))
     }
-    
+
     open func delete(_ pattern: String, route: @escaping BRHTTPRoute) {
         routes.append((BRHTTPRoutePair(method: "DELETE", path: pattern), route))
     }
-    
+
     open func any(_ pattern: String, route: @escaping BRHTTPRoute) {
         for m in ["GET", "POST", "PUT", "PATCH", "DELETE"] {
             routes.append((BRHTTPRoutePair(method: m, path: pattern), route))
         }
     }
-    
+
     open func websocket(_ pattern: String, client: BRWebSocketClient) {
-        self.get(pattern) { [weak client] (request, match) -> BRHTTPResponse in
+        get(pattern) { [weak client] (request, match) -> BRHTTPResponse in
             guard let theClient = client else { return BRHTTPResponse(request: request, code: 500) }
             self.wsServer.serveForever()
             let resp = BRHTTPResponse(async: request)
@@ -176,12 +150,12 @@ open class BRHTTPRouter: BRHTTPMiddleware {
             return resp
         }
     }
-    
+
     open func plugin(_ plugin: BRHTTPRouterPlugin) {
         plugin.hook(self)
         plugins.append(plugin)
     }
-    
+
     open func printDebug() {
         for (r, _) in routes {
             print("[BRHTTPRouter] \(r.method) \(r.path)")

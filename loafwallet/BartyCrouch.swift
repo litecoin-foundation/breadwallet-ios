@@ -1,10 +1,3 @@
-//
-//  BartyCrouch.swift
-//  loafwallet
-//
-//  Created by Kerry Washington on 11/27/19.
-//  Copyright © 2019 Litecoin Foundation. All rights reserved.
-  
 //  This file is required in order for the `transform` task of the translation helper tool BartyCrouch to work.
 //  See here for more details: https://github.com/Flinesoft/BartyCrouch
 //
@@ -34,7 +27,7 @@ enum BartyCrouch {
         case swedish = "sv"
     }
 
-    static func translate(key: String, translations: [SupportedLanguage: String], comment: String? = nil) -> String {
+    static func translate(key: String, translations: [SupportedLanguage: String], comment _: String? = nil) -> String {
         let typeName = String(describing: BartyCrouch.self)
         let methodName = #function
 

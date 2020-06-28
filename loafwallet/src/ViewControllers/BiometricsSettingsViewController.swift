@@ -1,16 +1,7 @@
-//
-//  BiometricsSettingsViewController.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-03-27.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
-import UIKit
 import LocalAuthentication
+import UIKit
 
-class BiometricsSettingsViewController : UIViewController, Subscriber {
-
+class BiometricsSettingsViewController: UIViewController, Subscriber {
     var presentSpendingLimit: (() -> Void)?
     var didDismiss: (() -> Void)?
 
@@ -43,7 +34,7 @@ class BiometricsSettingsViewController : UIViewController, Subscriber {
         store.subscribe(self, selector: { $0.currentRate != $1.currentRate }, callback: {
             self.rate = $0.currentRate
         })
- 
+
         addSubviews()
         addConstraints()
         setData()
@@ -52,7 +43,7 @@ class BiometricsSettingsViewController : UIViewController, Subscriber {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         didTapSpendingLimit = false
-        self.spendingButton.title = spendingButtonText
+        spendingButton.title = spendingButtonText
     }
 
     private func addSubviews() {
@@ -72,51 +63,56 @@ class BiometricsSettingsViewController : UIViewController, Subscriber {
         header.constrain([header.heightAnchor.constraint(equalToConstant: C.Sizes.largeHeaderHeight)])
         illustration.constrain([
             illustration.centerXAnchor.constraint(equalTo: header.centerXAnchor),
-            illustration.centerYAnchor.constraint(equalTo: header.centerYAnchor, constant: E.isIPhoneX ? C.padding[4] : C.padding[2]) ])
+            illustration.centerYAnchor.constraint(equalTo: header.centerYAnchor, constant: E.isIPhoneX ? C.padding[4] : C.padding[2]),
+        ])
         dismissButton.constrain([
             dismissButton.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: C.padding[2]),
-            dismissButton.topAnchor.constraint(equalTo: view.topAnchor, constant: C.padding[2])])
+            dismissButton.topAnchor.constraint(equalTo: view.topAnchor, constant: C.padding[2]),
+        ])
         label.constrain([
             label.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: C.padding[2]),
             label.topAnchor.constraint(equalTo: header.bottomAnchor, constant: C.padding[2]),
-            label.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -C.padding[2]) ])
+            label.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -C.padding[2]),
+        ])
         switchLabel.constrain([
             switchLabel.leadingAnchor.constraint(equalTo: label.leadingAnchor),
-            switchLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: C.padding[2]) ])
+            switchLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: C.padding[2]),
+        ])
         toggle.constrain([
             toggle.centerYAnchor.constraint(equalTo: switchLabel.centerYAnchor),
-            toggle.trailingAnchor.constraint(equalTo: label.trailingAnchor) ])
+            toggle.trailingAnchor.constraint(equalTo: label.trailingAnchor),
+        ])
         spendingLimitLabel.constrain([
             spendingLimitLabel.leadingAnchor.constraint(equalTo: label.leadingAnchor),
-            spendingLimitLabel.topAnchor.constraint(equalTo: switchLabel.bottomAnchor, constant: C.padding[4]) ])
+            spendingLimitLabel.topAnchor.constraint(equalTo: switchLabel.bottomAnchor, constant: C.padding[4]),
+        ])
         spendingButton.constrain([
             spendingButton.centerYAnchor.constraint(equalTo: spendingLimitLabel.centerYAnchor),
-            spendingButton.trailingAnchor.constraint(equalTo: label.trailingAnchor) ])
+            spendingButton.trailingAnchor.constraint(equalTo: label.trailingAnchor),
+        ])
         separator.constrain([
             separator.leadingAnchor.constraint(equalTo: switchLabel.leadingAnchor),
             separator.topAnchor.constraint(equalTo: spendingButton.bottomAnchor, constant: C.padding[1]),
             separator.trailingAnchor.constraint(equalTo: spendingButton.trailingAnchor),
-            separator.heightAnchor.constraint(equalToConstant: 1.0) ])
+            separator.heightAnchor.constraint(equalToConstant: 1.0),
+        ])
     }
 
     private func setData() {
-         
-        
         spendingButton.addTarget(self, action: #selector(didTapSpendingButton), for: .touchUpInside)
-        if #available(iOS 11.0, *), let backGroundColor = UIColor(named:"lfBackgroundColor"),
+        if #available(iOS 11.0, *), let backGroundColor = UIColor(named: "lfBackgroundColor"),
             let textColor = UIColor(named: "labelTextColor") {
-            
             label.textColor = textColor
             switchLabel.textColor = textColor
             spendingLimitLabel.textColor = textColor
             view.backgroundColor = backGroundColor
-            
+
         } else {
             label.textColor = .darkText
             switchLabel.textColor = .darkText
             view.backgroundColor = .white
         }
-        
+
         title = LAContext.biometricType() == .face ? S.FaceIDSettings.title : S.TouchIdSettings.title
         label.text = LAContext.biometricType() == .face ? S.FaceIDSettings.label : S.TouchIdSettings.label
         switchLabel.text = LAContext.biometricType() == .face ? S.FaceIDSettings.switchLabel : S.TouchIdSettings.switchLabel
@@ -126,12 +122,12 @@ class BiometricsSettingsViewController : UIViewController, Subscriber {
         store.subscribe(self, selector: { $0.isBiometricsEnabled != $1.isBiometricsEnabled }, callback: {
             self.toggle.isOn = $0.isBiometricsEnabled
             if !hasSetToggleInitialValue {
-                self.toggle.sendActions(for: .valueChanged) //This event is needed because the gradient background gets set on valueChanged events
+                self.toggle.sendActions(for: .valueChanged) // This event is needed because the gradient background gets set on valueChanged events
             }
         })
         toggle.valueChanged = { [weak self] in
             guard let myself = self else { return }
-            
+
             if LAContext.canUseBiometrics {
                 myself.store.perform(action: Biometrics.setIsEnabled(myself.toggle.isOn))
                 myself.spendingButton.title = myself.spendingButtonText
@@ -140,11 +136,11 @@ class BiometricsSettingsViewController : UIViewController, Subscriber {
                 myself.toggle.isOn = false
             }
         }
-        
+
         dismissButton.setImage(#imageLiteral(resourceName: "Back"), for: .normal)
-        dismissButton.addTarget(self, action: #selector(didTapDismissButton), for: .touchUpInside) 
+        dismissButton.addTarget(self, action: #selector(didTapDismissButton), for: .touchUpInside)
     }
-  
+
     private var spendingButtonText: String {
         guard let rate = rate else { return "" }
         let amount = Amount(amount: walletManager.spendingLimit, rate: rate, maxDigits: store.state.maxDigits)
@@ -163,7 +159,7 @@ class BiometricsSettingsViewController : UIViewController, Subscriber {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
+
     @objc func didTapSpendingButton() {
         if LAContext.canUseBiometrics {
             didTapSpendingLimit = true
@@ -172,13 +168,12 @@ class BiometricsSettingsViewController : UIViewController, Subscriber {
             presentCantUseBiometricsAlert()
         }
     }
-    
+
     @objc func didTapDismissButton() {
         didDismiss?()
     }
-     
-    required init?(coder aDecoder: NSCoder) {
+
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
- 

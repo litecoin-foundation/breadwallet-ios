@@ -1,37 +1,11 @@
-//
-//  BRGeoLocationPlugin.swift
-//  BreadWallet
-//
-//  Created by Samuel Sutch on 2/8/16.
-//  Copyright (c) 2016 breadwallet LLC
-//
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-//
-//  The above copyright notice and this permission notice shall be included in
-//  all copies or substantial portions of the Software.
-//
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//  THE SOFTWARE.
-
-import Foundation
 import CoreLocation
-
+import Foundation
 
 class BRGeoLocationDelegate: NSObject, CLLocationManagerDelegate {
-    var manager: CLLocationManager? = nil
+    var manager: CLLocationManager?
     var response: BRHTTPResponse
-    var remove: (() -> Void)? = nil
-    
+    var remove: (() -> Void)?
+
     init(response: BRHTTPResponse) {
         self.response = response
         super.init()
@@ -40,20 +14,20 @@ class BRGeoLocationDelegate: NSObject, CLLocationManagerDelegate {
             self.manager?.delegate = self
         }
     }
-    
+
     func getOne() {
         DispatchQueue.main.async {
             self.manager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
             self.manager?.requestLocation()
         }
     }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+    func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         var j = [String: Any]()
         guard let l = locations.last else {
             j["error"] = "unknown error"
-            self.response.provide(500, json: j)
-            self.remove?()
+            response.provide(500, json: j)
+            remove?()
             return
         }
         j["timestamp"] = l.timestamp.description as AnyObject?
@@ -66,8 +40,8 @@ class BRGeoLocationDelegate: NSObject, CLLocationManagerDelegate {
             self.remove?()
         }
     }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+
+    func locationManager(_: CLLocationManager, didFailWithError error: Error) {
         var j = [String: AnyObject]()
         j["error"] = error.localizedDescription as AnyObject?
         response.request.queue.async {
@@ -81,16 +55,16 @@ open class BRGeoLocationPlugin: NSObject, BRHTTPRouterPlugin, CLLocationManagerD
     lazy var manager = CLLocationManager()
     var outstanding = [BRGeoLocationDelegate]()
     var sockets = [String: BRWebSocket]()
-    
+
     override init() {
         super.init()
-        self.manager.delegate = self
+        manager.delegate = self
     }
-    
-    open func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+
+    open func locationManager(_: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         print("new authorization status: \(status)")
     }
-    
+
     open func hook(_ router: BRHTTPRouter) {
         // GET /_permissions/geo
         //
@@ -105,7 +79,7 @@ open class BRGeoLocationPlugin: NSObject, BRHTTPRouterPlugin, CLLocationManagerD
         //
         // "user_queried" indicates whether or not the user has already been asked for geolocation
         // "location_enabled" indicates whether or not the user has geo location enabled on their phone
-        router.get("/_permissions/geo") { (request, match) -> BRHTTPResponse in
+        router.get("/_permissions/geo") { (request, _) -> BRHTTPResponse in
             let userDefaults = UserDefaults.standard
             let authzStatus = CLLocationManager.authorizationStatus()
             var retJson = [String: Any]()
@@ -125,7 +99,7 @@ open class BRGeoLocationPlugin: NSObject, BRHTTPRouterPlugin, CLLocationManagerD
             retJson["location_enabled"] = CLLocationManager.locationServicesEnabled()
             return try BRHTTPResponse(request: request, code: 200, json: retJson as AnyObject)
         }
-        
+
         // POST /_permissions/geo
         //
         // Call this method to request the geo permission from the user.
@@ -134,7 +108,7 @@ open class BRGeoLocationPlugin: NSObject, BRHTTPRouterPlugin, CLLocationManagerD
         // two ways the user can authorize geo access to the app. "inuse" will request
         // geo availability to the app when the app is foregrounded, and "always" will request
         // full time geo availability to the app
-        router.post("/_permissions/geo") { (request, match) -> BRHTTPResponse in
+        router.post("/_permissions/geo") { (request, _) -> BRHTTPResponse in
             if let j = request.json(), let dict = j as? NSDictionary, let style = dict["style"] as? String {
                 switch style {
                 case "inuse": self.manager.requestWhenInUseAuthorization()
@@ -146,7 +120,7 @@ open class BRGeoLocationPlugin: NSObject, BRHTTPRouterPlugin, CLLocationManagerD
             }
             return BRHTTPResponse(request: request, code: 400)
         }
-        
+
         // GET /_geo
         //
         // Calling this method will query CoreLocation for a location object. The returned value may not be returned
@@ -160,7 +134,7 @@ open class BRGeoLocationPlugin: NSObject, BRHTTPRouterPlugin, CLLocationManagerD
         // "description" = "a string representation of this object"
         // "timestamp" = "ISO-8601 timestamp of when this location was generated"
         // "horizontal_accuracy" = double
-        router.get("/_geo") { (request, match) -> BRHTTPResponse in
+        router.get("/_geo") { (request, _) -> BRHTTPResponse in
             if let authzErr = self.getAuthorizationError() {
                 return try BRHTTPResponse(request: request, code: 400, json: authzErr)
             }
@@ -168,7 +142,7 @@ open class BRGeoLocationPlugin: NSObject, BRHTTPRouterPlugin, CLLocationManagerD
             let del = BRGeoLocationDelegate(response: resp)
             del.remove = {
                 objc_sync_enter(self)
-                if let idx = self.outstanding.index(where: { (d) -> Bool in return d == del }) {
+                if let idx = self.outstanding.index(where: { (d) -> Bool in d == del }) {
                     self.outstanding.remove(at: idx)
                 }
                 objc_sync_exit(self)
@@ -176,25 +150,25 @@ open class BRGeoLocationPlugin: NSObject, BRHTTPRouterPlugin, CLLocationManagerD
             objc_sync_enter(self)
             self.outstanding.append(del)
             objc_sync_exit(self)
-            
+
             print("outstanding delegates: \(self.outstanding)")
-            
+
             // get location only once
             del.getOne()
-            
+
             return resp
         }
-        
+
         // GET /_geosocket
         //
         // This opens up a websocket to the location manager. It will return a new location every so often (but with no
         // predetermined interval) with the same exact structure that is sent via the GET /_geo call.
-        // 
+        //
         // It will start the location manager when there is at least one client connected and stop the location manager
         // when the last client disconnects.
         router.websocket("/_geosocket", client: self)
     }
-    
+
     func getAuthorizationError() -> [String: Any]? {
         var retJson = [String: Any]()
         if !CLLocationManager.locationServicesEnabled() {
@@ -202,18 +176,18 @@ open class BRGeoLocationPlugin: NSObject, BRHTTPRouterPlugin, CLLocationManagerD
             return retJson
         }
         let authzStatus = CLLocationManager.authorizationStatus()
-        if authzStatus != .authorizedWhenInUse && authzStatus != .authorizedAlways {
+        if authzStatus != .authorizedWhenInUse, authzStatus != .authorizedAlways {
             retJson["error"] = S.LocationPlugin.notAuthorized
             return retJson
         }
         return nil
     }
-    
+
     var lastLocation: [String: Any]?
     var isUpdatingSockets = false
-    
+
     // location manager for continuous websocket clients
-    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         var j = [String: Any]()
         guard let l = locations.last else {
             j["error"] = "unknown error"
@@ -228,13 +202,13 @@ open class BRGeoLocationPlugin: NSObject, BRHTTPRouterPlugin, CLLocationManagerD
         lastLocation = j
         sendToAllSockets(data: j)
     }
-    
-    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+
+    public func locationManager(_: CLLocationManager, didFailWithError error: Error) {
         var j = [String: Any]()
         j["error"] = error.localizedDescription as AnyObject?
         sendToAllSockets(data: j)
     }
-    
+
     func sendTo(socket: BRWebSocket, data: [String: Any]) {
         do {
             let j = try JSONSerialization.data(withJSONObject: data, options: [])
@@ -247,13 +221,13 @@ open class BRGeoLocationPlugin: NSObject, BRHTTPRouterPlugin, CLLocationManagerD
             print("LOCATION SOCKET FAILED ENCODE JSON: \(e)")
         }
     }
-    
+
     func sendToAllSockets(data: [String: Any]) {
         for (_, s) in sockets {
             sendTo(socket: s, data: data)
         }
     }
-    
+
     public func socketDidConnect(_ socket: BRWebSocket) {
         print("LOCATION SOCKET CONNECT \(socket.id)")
         sockets[socket.id] = socket
@@ -275,23 +249,23 @@ open class BRGeoLocationPlugin: NSObject, BRHTTPRouterPlugin, CLLocationManagerD
             sendTo(socket: socket, data: loc)
         }
     }
-    
+
     public func socketDidDisconnect(_ socket: BRWebSocket) {
         print("LOCATION SOCKET DISCONNECT \(socket.id)")
         sockets.removeValue(forKey: socket.id)
         // on last socket disconnect stop updating location
-        if sockets.count == 0 {
+        if sockets.isEmpty {
             isUpdatingSockets = false
             lastLocation = nil
-            self.manager.stopUpdatingLocation()
+            manager.stopUpdatingLocation()
         }
     }
-    
-    public func socket(_ socket: BRWebSocket, didReceiveText text: String) {
+
+    public func socket(_: BRWebSocket, didReceiveText text: String) {
         print("LOCATION SOCKET RECV TEXT \(text)")
     }
-    
-    public func socket(_ socket: BRWebSocket, didReceiveData data: Data) {
+
+    public func socket(_: BRWebSocket, didReceiveData data: Data) {
         print("LOCATION SOCKET RECV DATA \(data.hexString)")
     }
 }

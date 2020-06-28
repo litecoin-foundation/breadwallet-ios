@@ -1,15 +1,6 @@
-//
-//  RetryTimer.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-09-10.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import Foundation
 
 class RetryTimer {
-
     var callback: (() -> Void)?
     private var timer: Timer?
     private var fibA: TimeInterval = 0.0
@@ -31,5 +22,4 @@ class RetryTimer {
         fibB = newInterval
         timer = Timer.scheduledTimer(timeInterval: newInterval, target: self, selector: #selector(retry), userInfo: nil, repeats: false)
     }
-
 }

@@ -1,11 +1,3 @@
-//
-//  State.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-10-24.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 struct State {
@@ -30,28 +22,28 @@ struct State {
 
 extension State {
     static var initial: State {
-        return State(   isStartFlowVisible: false,
-                        isLoginRequired: true,
-                        rootModal: .none,
-                        walletState: WalletState.initial,
-                        isLtcSwapped: UserDefaults.isLtcSwapped,
-                        currentRate: UserDefaults.currentRate,
-                        rates: [],
-                        alert: nil,
-                        isBiometricsEnabled: UserDefaults.isBiometricsEnabled,
-                        defaultCurrencyCode: UserDefaults.defaultCurrencyCode,
-                        recommendRescan: false,
-                        isLoadingTransactions: false,
-                        maxDigits: UserDefaults.maxDigits,
-                        isPushNotificationsEnabled: UserDefaults.pushToken != nil,
-                        isPromptingBiometrics: false,
-                        pinLength: 6,
-                        fees: Fees.usingDefaultValues )
+        return State(isStartFlowVisible: false,
+                     isLoginRequired: true,
+                     rootModal: .none,
+                     walletState: WalletState.initial,
+                     isLtcSwapped: UserDefaults.isLtcSwapped,
+                     currentRate: UserDefaults.currentRate,
+                     rates: [],
+                     alert: nil,
+                     isBiometricsEnabled: UserDefaults.isBiometricsEnabled,
+                     defaultCurrencyCode: UserDefaults.defaultCurrencyCode,
+                     recommendRescan: false,
+                     isLoadingTransactions: false,
+                     maxDigits: UserDefaults.maxDigits,
+                     isPushNotificationsEnabled: UserDefaults.pushToken != nil,
+                     isPromptingBiometrics: false,
+                     pinLength: 6,
+                     fees: Fees.usingDefaultValues)
     }
 }
 
 enum RootModal {
-    case none 
+    case none
     case send
     case receive
     case menu
@@ -83,8 +75,8 @@ struct WalletState {
     }
 }
 
-extension WalletState : Equatable {}
+extension WalletState: Equatable {}
 
-func ==(lhs: WalletState, rhs: WalletState) -> Bool {
+func == (lhs: WalletState, rhs: WalletState) -> Bool {
     return lhs.isConnected == rhs.isConnected && lhs.syncProgress == rhs.syncProgress && lhs.syncState == rhs.syncState && lhs.balance == rhs.balance && lhs.transactions == rhs.transactions && lhs.name == rhs.name && lhs.creationDate == rhs.creationDate && lhs.isRescanning == rhs.isRescanning
 }

@@ -1,11 +1,3 @@
-//
-//  SearchHeaderView.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-05-02.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 enum SearchFilterType {
@@ -25,7 +17,7 @@ enum SearchFilterType {
             return S.Search.pending
         case .complete:
             return S.Search.complete
-        case .text(_):
+        case .text:
             return ""
         }
     }
@@ -40,7 +32,7 @@ enum SearchFilterType {
             return { $0.isPending }
         case .complete:
             return { !$0.isPending }
-        case .text(let text):
+        case let .text(text):
             return { transaction in
                 let loweredText = text.lowercased()
                 if transaction.hash.lowercased().contains(loweredText) {
@@ -62,9 +54,9 @@ enum SearchFilterType {
     }
 }
 
-extension SearchFilterType : Equatable {}
+extension SearchFilterType: Equatable {}
 
-func ==(lhs: SearchFilterType, rhs: SearchFilterType) -> Bool {
+func == (lhs: SearchFilterType, rhs: SearchFilterType) -> Bool {
     switch (lhs, rhs) {
     case (.sent, .sent):
         return true
@@ -81,11 +73,9 @@ func ==(lhs: SearchFilterType, rhs: SearchFilterType) -> Bool {
     }
 }
 
-
 typealias TransactionFilter = (Transaction) -> Bool
 
-class SearchHeaderView : UIView {
-
+class SearchHeaderView: UIView {
     init() {
         super.init(frame: .zero)
     }
@@ -110,8 +100,8 @@ class SearchHeaderView : UIView {
         }
     }
 
-    private let sentFilter: TransactionFilter = { return $0.direction == .sent }
-    private let receivedFilter: TransactionFilter = { return $0.direction == .received }
+    private let sentFilter: TransactionFilter = { $0.direction == .sent }
+    private let receivedFilter: TransactionFilter = { $0.direction == .received }
 
     override func layoutSubviews() {
         guard !hasSetup else { return }
@@ -133,30 +123,32 @@ class SearchHeaderView : UIView {
 
     private func addConstraints() {
         cancel.setTitle(S.Button.cancel, for: .normal)
-        let titleSize = NSString(string: cancel.titleLabel!.text!).size(withAttributes: [NSAttributedStringKey.font : cancel.titleLabel!.font])
+        let titleSize = NSString(string: cancel.titleLabel!.text!).size(withAttributes: [NSAttributedStringKey.font: cancel.titleLabel!.font])
         cancel.constrain([
             cancel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -C.padding[2]),
             cancel.centerYAnchor.constraint(equalTo: searchBar.centerYAnchor),
-            cancel.widthAnchor.constraint(equalToConstant: titleSize.width + C.padding[4])])
+            cancel.widthAnchor.constraint(equalToConstant: titleSize.width + C.padding[4]),
+        ])
         searchBar.constrain([
             searchBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: C.padding[1]),
             searchBar.topAnchor.constraint(equalTo: topAnchor, constant: E.isIPhoneX ? C.padding[5] : C.padding[2]),
-            searchBar.trailingAnchor.constraint(equalTo: cancel.leadingAnchor, constant: -C.padding[1]) ])
+            searchBar.trailingAnchor.constraint(equalTo: cancel.leadingAnchor, constant: -C.padding[1]),
+        ])
     }
 
     private func setData() {
         backgroundColor = .whiteTint
         searchBar.backgroundImage = UIImage()
         searchBar.delegate = self
-      
+
         cancel.tap = { [weak self] in
             self?.didChangeFilters?([])
             self?.searchBar.resignFirstResponder()
             self?.didCancel?()
         }
-        cancel.tintColor = UIColor(red: 52.0/255.0, green: 52.0/255.0, blue: 157.0/255.0, alpha: 1.0)
+        cancel.tintColor = UIColor(red: 52.0 / 255.0, green: 52.0 / 255.0, blue: 157.0 / 255.0, alpha: 1.0)
         cancel.titleLabel?.font = UIFont.customBody(size: 14.0)
-      
+
         sent.isToggleable = true
         received.isToggleable = true
         pending.isToggleable = true
@@ -222,7 +214,8 @@ class SearchHeaderView : UIView {
             stackView.constrain([
                 stackView.leadingAnchor.constraint(equalTo: searchBar.leadingAnchor),
                 stackView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: C.padding[1]),
-                stackView.trailingAnchor.constraint(equalTo: cancel.trailingAnchor) ])
+                stackView.trailingAnchor.constraint(equalTo: cancel.trailingAnchor),
+            ])
             stackView.addArrangedSubview(sent)
             stackView.addArrangedSubview(received)
             stackView.addArrangedSubview(pending)
@@ -234,26 +227,30 @@ class SearchHeaderView : UIView {
             addSubview(complete)
             sent.constrain([
                 sent.leadingAnchor.constraint(equalTo: searchBar.leadingAnchor),
-                sent.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: C.padding[1]) ])
+                sent.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: C.padding[1]),
+            ])
             received.constrain([
                 received.leadingAnchor.constraint(equalTo: sent.trailingAnchor, constant: C.padding[1]),
-                received.topAnchor.constraint(equalTo: sent.topAnchor)])
+                received.topAnchor.constraint(equalTo: sent.topAnchor),
+            ])
             pending.constrain([
                 pending.leadingAnchor.constraint(equalTo: received.trailingAnchor, constant: C.padding[1]),
-                pending.topAnchor.constraint(equalTo: received.topAnchor)])
+                pending.topAnchor.constraint(equalTo: received.topAnchor),
+            ])
             complete.constrain([
                 complete.leadingAnchor.constraint(equalTo: pending.trailingAnchor, constant: C.padding[1]),
-                complete.topAnchor.constraint(equalTo: sent.topAnchor) ])
+                complete.topAnchor.constraint(equalTo: sent.topAnchor),
+            ])
         }
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-extension SearchHeaderView : UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+extension SearchHeaderView: UISearchBarDelegate {
+    func searchBar(_: UISearchBar, textDidChange searchText: String) {
         let filter: SearchFilterType = .text(searchText)
         if let index = filters.index(of: filter) {
             filters.remove(at: index)

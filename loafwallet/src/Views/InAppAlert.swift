@@ -1,15 +1,6 @@
-//
-//  InAppAlert.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-06-17.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
-class InAppAlert : UIView {
-
+class InAppAlert: UIView {
     init(message: String, image: UIImage) {
         super.init(frame: .zero)
         setup()
@@ -42,14 +33,17 @@ class InAppAlert : UIView {
             close.topAnchor.constraint(equalTo: topAnchor, constant: C.padding[2]),
             close.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -C.padding[2]),
             close.widthAnchor.constraint(equalToConstant: 44.0),
-            close.heightAnchor.constraint(equalToConstant: 44.0) ])
+            close.heightAnchor.constraint(equalToConstant: 44.0),
+        ])
         image.constrain([
             image.centerXAnchor.constraint(equalTo: centerXAnchor),
-            image.topAnchor.constraint(equalTo: topAnchor, constant: C.padding[4]) ])
+            image.topAnchor.constraint(equalTo: topAnchor, constant: C.padding[4]),
+        ])
         message.constrain([
             message.leadingAnchor.constraint(equalTo: leadingAnchor, constant: C.padding[2]),
             message.topAnchor.constraint(equalTo: image.bottomAnchor, constant: C.padding[1]),
-            message.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -C.padding[2]) ])
+            message.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -C.padding[2]),
+        ])
         close.tap = { [weak self] in
             self?.dismiss()
         }
@@ -66,8 +60,7 @@ class InAppAlert : UIView {
         })
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }

@@ -1,15 +1,6 @@
-//
-//  GradientCircle.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-11-22.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 class GradientCircle: UIView, GradientDrawable {
-
     static let defaultSize: CGFloat = 64.0
 
     init() {
@@ -28,7 +19,7 @@ class GradientCircle: UIView, GradientDrawable {
         layer.mask = maskLayer
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

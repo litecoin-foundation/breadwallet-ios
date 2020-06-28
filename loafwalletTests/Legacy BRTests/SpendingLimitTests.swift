@@ -1,22 +1,13 @@
-//
-//  SpendingLimitTests.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2017-03-28.
-//  Copyright © 2017 breadwallet LLC. All rights reserved.
-//
-
 import XCTest
 @testable import loafwallet
 
-class SpendingLimitTests : XCTestCase {
-
+class SpendingLimitTests: XCTestCase {
     private let walletManager: WalletManager = try! WalletManager(store: Store(), dbPath: nil)
 
     override func setUp() {
         super.setUp()
         clearKeychain()
-        let _ = walletManager.setRandomSeedPhrase()
+        _ = walletManager.setRandomSeedPhrase()
     }
 
     func testDefaultValue() {
@@ -27,7 +18,7 @@ class SpendingLimitTests : XCTestCase {
     func testSaveSpendingLimit() {
         // TODO: re-write tests for case for sim wallet
         // walletManager.spendingLimit = 100
-        // XCTAssertTrue(walletManager.spendingLimit == 100)  
+        // XCTAssertTrue(walletManager.spendingLimit == 100)
     }
 
     func testSaveZero() {

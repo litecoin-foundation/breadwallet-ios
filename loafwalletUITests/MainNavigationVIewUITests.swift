@@ -1,15 +1,6 @@
-//
-//  MainNavigationVIewUITests.swift
-//  loafwalletUITests
-//
-//  Created by Kerry Washington on 12/14/19.
-//  Copyright © 2019 Litecoin Foundation. All rights reserved.
-//
-
 import XCTest
 
 class MainNavigationVIewUITests: XCTestCase {
-
     var app: XCUIApplication!
 
     override func setUp() {
@@ -29,25 +20,24 @@ class MainNavigationVIewUITests: XCTestCase {
         let tabBarsQuery = app.tabBars
         tabBarsQuery.buttons["History"].tap()
     }
-    
+
     func testTabBarReceiveTab() {
         let tabBarsQuery = app.tabBars
         tabBarsQuery.buttons["Receive"].tap()
     }
-    
+
     func testTabBarSendTab() {
         let tabBarsQuery = app.tabBars
         tabBarsQuery.buttons["Send"].tap()
     }
-    
+
     func testTabBarBuyTab() {
         let tabBarsQuery = app.tabBars
         tabBarsQuery.buttons["Buy"].tap()
     }
-     
+
     func testDisplayContentController() {
-        //contentController:UIViewController
-        ///TBD TabBarViewController: 350
+        // contentController:UIViewController
+        /// TBD TabBarViewController: 350
     }
- 
 }

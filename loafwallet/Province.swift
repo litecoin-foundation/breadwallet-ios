@@ -1,6 +1,6 @@
 public enum Province: String, Equatable, Hashable, CaseIterable, Codable {
-    
     // MARK: - Cases
+
     case ciudadAutónomaDeBuenosAires = "CIUDAD AUTÓNOMA DE BUENOS AIRES"
     case buenosAires = "BUENOS AIRES"
     case catamarca = "CATAMARCA"
@@ -454,8 +454,8 @@ public enum Province: String, Equatable, Hashable, CaseIterable, Codable {
     case mh = "MH"
     case mp = "MP"
     case pw = "PW"
-    
-    public init(from decoder: Decoder)throws {
+
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let code = try container.decode(String.self)
         if let state = Province(rawValue: code.uppercased()) {

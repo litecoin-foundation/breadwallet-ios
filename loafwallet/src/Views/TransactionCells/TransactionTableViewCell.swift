@@ -1,11 +1,3 @@
-//
-//  TransactionTableViewCell.swift
-//  breadwallet
-//
-//  Created by Adrian Corscadden on 2016-11-16.
-//  Copyright © 2016 breadwallet LLC. All rights reserved.
-//
-
 import UIKit
 
 enum TransactionCellStyle {
@@ -17,8 +9,7 @@ enum TransactionCellStyle {
 
 private let timestampRefreshRate: TimeInterval = 10.0
 
-class TransactionTableViewCell : UITableViewCell, Subscriber {
-
+class TransactionTableViewCell: UITableViewCell, Subscriber {
     private class TransactionTableViewCellWrapper {
         weak var target: TransactionTableViewCell?
         init(target: TransactionTableViewCell) {
@@ -30,7 +21,8 @@ class TransactionTableViewCell : UITableViewCell, Subscriber {
         }
     }
 
-    //MARK: - Public
+    // MARK: - Public
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -57,26 +49,26 @@ class TransactionTableViewCell : UITableViewCell, Subscriber {
         status.text = transaction.status
         comment.text = transaction.comment
         availability.text = transaction.shouldDisplayAvailableToSpend ? S.Transaction.available : ""
-        
+
         if #available(iOS 11.0, *) {
-                   guard let textColor = UIColor(named: "labelTextColor") else {
-                       NSLog("ERROR: Custom color not found")
-                       return
-                   }
-                   transactionLabel.textColor = textColor
-                   address.textColor = textColor
-                   comment.textColor = textColor
-                   status.textColor = textColor
-                   timestamp.textColor = textColor
-                   shadowView.layer.shadowColor = textColor.cgColor
-                      
-               } else {
-                   comment.textColor = .darkText
-                   status.textColor = .darkText
-                   timestamp.textColor = .grayTextTint
-                   shadowView.backgroundColor = .clear
-                   shadowView.layer.shadowColor = UIColor.black.cgColor
-               }
+            guard let textColor = UIColor(named: "labelTextColor") else {
+                NSLog("ERROR: Custom color not found")
+                return
+            }
+            transactionLabel.textColor = textColor
+            address.textColor = textColor
+            comment.textColor = textColor
+            status.textColor = textColor
+            timestamp.textColor = textColor
+            shadowView.layer.shadowColor = textColor.cgColor
+
+        } else {
+            comment.textColor = .darkText
+            status.textColor = .darkText
+            timestamp.textColor = .grayTextTint
+            shadowView.backgroundColor = .clear
+            shadowView.layer.shadowColor = UIColor.black.cgColor
+        }
 
         if transaction.status == S.Transaction.complete {
             status.isHidden = false
@@ -95,17 +87,18 @@ class TransactionTableViewCell : UITableViewCell, Subscriber {
 
         let identity: CGAffineTransform = .identity
         if transaction.direction == .received {
-            arrow.transform = identity.rotated(by: π/2.0)
+            arrow.transform = identity.rotated(by: π / 2.0)
             arrow.tintColor = .txListGreen
         } else {
-            arrow.transform = identity.rotated(by: 3.0*π/2.0)
+            arrow.transform = identity.rotated(by: 3.0 * π / 2.0)
             arrow.tintColor = .cameraGuideNegative
         }
     }
 
     let container = RoundedContainer()
 
-    //MARK: - Private
+    // MARK: - Private
+
     private let transactionLabel = UILabel()
     private let address = UILabel(font: UIFont.customBody(size: 13.0))
     private let status = UILabel(font: UIFont.customBody(size: 13.0))
@@ -117,7 +110,7 @@ class TransactionTableViewCell : UITableViewCell, Subscriber {
     private var style: TransactionCellStyle = .first
     private var transaction: Transaction?
     private let availability = UILabel(font: .customBold(size: 13.0), color: .txListGreen)
-    private var timer: Timer? = nil
+    private var timer: Timer?
     private let arrow = UIImageView(image: #imageLiteral(resourceName: "CircleArrow").withRenderingMode(.alwaysTemplate))
 
     private func setupViews() {
@@ -144,39 +137,47 @@ class TransactionTableViewCell : UITableViewCell, Subscriber {
         container.constrain(toSuperviewEdges: UIEdgeInsets(top: 0, left: C.padding[2], bottom: 0, right: -C.padding[2]))
         innerShadow.constrainBottomCorners(sidePadding: 0, bottomPadding: 0)
         innerShadow.constrain([
-            innerShadow.constraint(.height, constant: 1.0) ])
+            innerShadow.constraint(.height, constant: 1.0),
+        ])
         arrow.constrain([
             arrow.trailingAnchor.constraint(equalTo: timestamp.leadingAnchor, constant: -4.0),
             arrow.centerYAnchor.constraint(equalTo: timestamp.centerYAnchor),
             arrow.heightAnchor.constraint(equalToConstant: 14.0),
-            arrow.widthAnchor.constraint(equalToConstant: 14.0)])
+            arrow.widthAnchor.constraint(equalToConstant: 14.0),
+        ])
         transactionLabel.constrain([
             transactionLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: C.padding[2]),
             transactionLabel.constraint(.top, toView: container, constant: topPadding),
-            transactionLabel.trailingAnchor.constraint(lessThanOrEqualTo: timestamp.leadingAnchor, constant: -C.padding[1]) ])
+            transactionLabel.trailingAnchor.constraint(lessThanOrEqualTo: timestamp.leadingAnchor, constant: -C.padding[1]),
+        ])
         timestamp.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
         timestamp.constrain([
             timestamp.constraint(.trailing, toView: container, constant: -C.padding[2]),
-            timestamp.constraint(.top, toView: container, constant: topPadding) ])
+            timestamp.constraint(.top, toView: container, constant: topPadding),
+        ])
 
         address.constrain([
             address.leadingAnchor.constraint(equalTo: transactionLabel.leadingAnchor),
             address.topAnchor.constraint(equalTo: transactionLabel.bottomAnchor),
-            address.trailingAnchor.constraint(lessThanOrEqualTo: timestamp.leadingAnchor, constant: -C.padding[4])])
+            address.trailingAnchor.constraint(lessThanOrEqualTo: timestamp.leadingAnchor, constant: -C.padding[4]),
+        ])
         address.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
 
         comment.constrain([
             comment.constraint(.leading, toView: container, constant: C.padding[2]),
             comment.constraint(toBottom: address, constant: C.padding[1]),
-            comment.trailingAnchor.constraint(lessThanOrEqualTo: timestamp.leadingAnchor, constant: -C.padding[1]) ])
+            comment.trailingAnchor.constraint(lessThanOrEqualTo: timestamp.leadingAnchor, constant: -C.padding[1]),
+        ])
         status.constrain([
             status.constraint(.leading, toView: container, constant: C.padding[2]),
             status.constraint(toBottom: comment, constant: C.padding[1]),
-            status.constraint(.trailing, toView: container, constant: -C.padding[2]) ])
+            status.constraint(.trailing, toView: container, constant: -C.padding[2]),
+        ])
         availability.constrain([
             availability.leadingAnchor.constraint(equalTo: status.leadingAnchor),
             availability.topAnchor.constraint(equalTo: status.bottomAnchor),
-            availability.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -C.padding[2]) ])
+            availability.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -C.padding[2]),
+        ])
     }
 
     private func setupStyle() {
@@ -198,7 +199,6 @@ class TransactionTableViewCell : UITableViewCell, Subscriber {
 
         address.lineBreakMode = .byTruncatingMiddle
         address.numberOfLines = 1
-
     }
 
     func updateTimestamp() {
@@ -209,12 +209,11 @@ class TransactionTableViewCell : UITableViewCell, Subscriber {
             timer?.invalidate()
         }
     }
-    
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        //intentional noop for now
-        //The default selected state doesn't play nicely
-        //with this custom cell
+
+    override func setSelected(_: Bool, animated _: Bool) {
+        // intentional noop for now
+        // The default selected state doesn't play nicely
+        // with this custom cell
     }
 
 //    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
@@ -222,7 +221,7 @@ class TransactionTableViewCell : UITableViewCell, Subscriber {
 //        container.backgroundColor = highlighted ? .secondaryShadow : .white
 //    }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
