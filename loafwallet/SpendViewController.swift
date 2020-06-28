@@ -261,12 +261,12 @@ class SpendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         //TODO: Refactor whenTernio OAUTH is ready
 //        manager.createUser(userDataParams: <#T##[String : Any]#>, completion: <#T##(User?) -> Void#>)
-//          
+//
 //            var timestampString = ""
-//            
+//
 //            if user != nil,
 //                let jsonObject = try? JSONSerialization.data(withJSONObject: user, options: []) {
-//                
+//
 //                timestampString = "lastTimeReachedTimestamp" ///stripped from user timestamp
 //                UserDefaults.standard.set(timestampString, forKey: timeSinceLastLitecoinCardRequest)
 //                UserDefaults.standard.synchronize()
