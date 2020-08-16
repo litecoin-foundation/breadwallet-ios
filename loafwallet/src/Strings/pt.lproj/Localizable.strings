@@ -180,6 +180,12 @@
 /* Changelly Title */
 "BuyCenter.changellyTitle" = "Changelly";
 
+/* ChangeNOW buy financial Details */
+"BuyCenter.changeNowFinancialDetails" = "• Receber Litecoin de 200+ criptomoedas\n• Câmbio rápido e seguro\n• Sem registro";
+
+/* ChangeNOW Title */
+"BuyCenter.changeNowTitle" = "ChangeNOW";
+
 /* Buy Modal Title */
 "BuyCenter.ModalTitle" = "Comprar Łitecoin";
 

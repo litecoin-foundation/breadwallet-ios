@@ -179,6 +179,12 @@
 /* Changelly Title */
 "BuyCenter.changellyTitle" = "Changelly";
 
+/* ChangeNOW buy financial Details */
+"BuyCenter.changeNowFinancialDetails" = "•からLitecoinを取得200+暗号通貨\n•高速かつ安全な交換\n•アカウントは必要ありません";
+
+/* ChangeNOW Title */
+"BuyCenter.changeNowTitle" = "ChangeNOW";
+
 /* Buy Modal Title */
 "BuyCenter.ModalTitle" = "Litecoin を購入する";
 

@@ -179,6 +179,12 @@
 /* Changelly Title */
 "BuyCenter.changellyTitle" = "체인지";
 
+/* ChangeNOW buy financial Details */
+"BuyCenter.changeNowFinancialDetails" = "• 200 개 암호화 통화 에서 라이트 코인을 얻을\n• 빠르고 안전한 교환\n• 어떤 계정이 필요하지 않습니다";
+
+/* ChangeNOW Title */
+"BuyCenter.changeNowTitle" = "ChangeNOW";
+
 /* Buy Modal Title */
 "BuyCenter.ModalTitle" = "Łitecoin 구매";
 

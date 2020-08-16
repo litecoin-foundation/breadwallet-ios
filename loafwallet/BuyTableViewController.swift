@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CNIntegration
 
-class BuyTableViewController: UITableViewController { 
-     
+class BuyTableViewController: UITableViewController {
+
     @IBOutlet weak var simplexLogoImageView: UIImageView!
     @IBOutlet weak var simplexHeaderLabel: UILabel!
     @IBOutlet weak var simplexDetailsLabel: UILabel!
@@ -17,8 +18,21 @@ class BuyTableViewController: UITableViewController {
     
     @IBOutlet weak var chooseFiatLabel: UILabel!
     @IBOutlet weak var currencySegmentedControl: UISegmentedControl!
-    
+
+    @IBOutlet weak var changeNowHeaderLabel: UILabel!
+    @IBOutlet weak var changeNowDetailsLabel: UILabel!
+    @IBOutlet weak var changeNowLogoImageView: UIImageView!
+    @IBOutlet weak var changeNowLogoBackgroundView: UIView!
+    @IBOutlet weak var changeNowCellContainerView: UIView!
+
     private var currencyCode: String = "USD"
+
+    private lazy var changeNowIntegration: CNIntegration = {
+        return CNIntegration(apiKey: "4b18e6466b7ae3984dba1b9359d13b0a4b22f42c2ed423dbd1f72cddccac6632",
+                             theme: CNLiteWalletTheme(),
+                             navigationType: .sequence,
+                             exchangeType: .specific(currency: "ltc", address: nil))
+    }()
     
     @IBAction func didTapSimplex(_ sender: Any) {
         
@@ -39,7 +53,11 @@ class BuyTableViewController: UITableViewController {
             NSLog("ERROR: Storyboard not initialized")
         }
     }
- 
+
+    @IBAction func didTapChangeNow(_ sender: Any) {
+        present(changeNowIntegration.start(), animated: true, completion: nil)
+    }
+
     var store: Store?
     var walletManager: WalletManager?
     let mountPoint = ""
@@ -68,6 +86,16 @@ class BuyTableViewController: UITableViewController {
         simplexCellContainerView.clipsToBounds = true
         
         chooseFiatLabel.text = S.DefaultCurrency.chooseFiatLabel
+
+        let changeNowData = Partner.partnerDataArray()[1]
+        changeNowHeaderLabel.text = changeNowData.headerTitle
+        changeNowDetailsLabel.text = changeNowData.details
+        changeNowLogoImageView.image = changeNowData.logo
+        changeNowLogoBackgroundView.backgroundColor = UIColor(red: 0.208, green: 0.208, blue: 0.298, alpha: 1)
+        changeNowCellContainerView.layer.cornerRadius = 6.0
+        changeNowCellContainerView.layer.borderColor = UIColor.white.cgColor
+        changeNowCellContainerView.layer.borderWidth = 1.0
+        changeNowCellContainerView.clipsToBounds = true
     }
     
     @objc private func didChangeCurrency() {

@@ -197,6 +197,8 @@ enum S {
         static let changellyFinancialDetails = NSLocalizedString("BuyCenter.changellyFinancialDetails", value: "**• Change Litecoin for other cryptos\n• No ID Required\n• Buy via credit card\n• Global coverage**", comment: "Changelly buy financial details")
         static let bitrefillTitle = NSLocalizedString("BuyCenter.BitrefillTitle", value: "**Bitrefill**", comment: "Bitrefill Title")
         static let bitrefillFinancialDetails = NSLocalizedString("BuyCenter.bitrefillFinancialDetails", value: "**• Buy gift cards\n• Refill prepaid phones\n• Steam, Amazon, Hotels.com\n• Works in 170 countries**", comment: "Bitrefill buy financial details")
+        static let changeNowTitle = NSLocalizedString("BuyCenter.changeNowTitle", value: "**ChangeNOW**", comment: "ChangeNOW Title")
+        static let changeNowFinancialDetails = NSLocalizedString("BuyCenter.changeNowFinancialDetails", value: "**• Get Litecoin from 200+ crypto currencies\n• Fast and secure exchanges\n• No account needed**", comment: "ChangeNOW buy financial details")
         }
       static let barItemTitle = NSLocalizedString("BuyCenter.barItemTitle", value: "**Buy**", comment: "Buy Bar Item Title")
     }
