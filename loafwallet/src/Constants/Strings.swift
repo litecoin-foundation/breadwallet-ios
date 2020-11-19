@@ -95,6 +95,11 @@ enum S {
         static let loadingRequest = NSLocalizedString("Send.loadingRequest", value: "**Loading Request**", comment: "Loading request activity view message")
         static let insufficientFunds = NSLocalizedString("Send.insufficientFunds", value: "**Insufficient Funds**", comment: "Insufficient funds error")
         static let barItemTitle = NSLocalizedString("Send.barItemTitle", value: "**Send**", comment: "Send Bar Item Title")
+        
+        enum UnstoppableDomains {
+            static let placeholder = NSLocalizedString("Send.UnstoppableDomains.placeholder", value: "**Enter to match domain name to LTC Address**", comment: "Enter to match domain name to LTC Address")
+            
+        }
     }
 
     enum Receive {

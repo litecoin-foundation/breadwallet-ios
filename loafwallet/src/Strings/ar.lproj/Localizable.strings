@@ -1243,6 +1243,9 @@
 /* Menu button title */
 "MenuButton.customer.support" = "";
 
+/* Enter to match domain name to LTC Address */
+"Send.UnstoppableDomains.placeholder" = "";
+
 /* Delete database title */
 "WipeWallet.alertDeleteTitle" = "";
 

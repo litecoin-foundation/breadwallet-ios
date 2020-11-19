@@ -1254,3 +1254,6 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d di %2$d";
+
+/* Enter to match domain name to LTC Address */
+"Send.UnstoppableDomains.placeholder" = "Immettere un nome di dominio";

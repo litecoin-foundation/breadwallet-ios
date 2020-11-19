@@ -12,6 +12,10 @@ import Combine
 import UnstoppableDomainsResolution
 
 class UnstoppableDomainViewModel: ObservableObject {
+    
+    @Published
+    var searchString: String = ""
+    
     init() {
     }
 }
