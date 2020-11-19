@@ -7,10 +7,11 @@ platform :ios, '13.0'
 
 #Shared Cocopods
 def shared_pods
+
   pod 'Firebase/Crashlytics' 
   pod 'Firebase/Analytics'
-
-  # add after v2.6.0 pod 'SwiftLint'
+  pod 'UnstoppableDomainsResolution', '~> 0.1.6'
+  # add after v2.9.0 pod 'SwiftLint'
 end
 
 target 'loafwallet' do
