@@ -16,7 +16,10 @@ class UnstoppableDomainViewModel: ObservableObject {
     @Published
     var searchString: String = ""
     
-    init() {
+    @Published
+    var placeholderString: String = S.Send.UnstoppableDomains.placeholder
+    
+    init() { 
     }
 }
 //

@@ -25,41 +25,33 @@ struct UnstoppableDomainView: View {
         VStack {
             Spacer()
             HStack {
-                TextField(S.Send.UnstoppableDomains.placeholder, text: $viewModel.searchString) { (didChangeText) in
+                
+                TextField(viewModel.placeholderString, text: $viewModel.searchString) { (didChangeText) in
                     /// run domain search in model
                 } onCommit: {
                     //
                 }
+                .font(Font(UIFont.customBody(size: 16.0)))
+                .padding(.leading, 18)
+                .padding(.trailing, 5)
 
                 Button(action: {
                     print("Search Domain")
                 }) {
                     HStack(spacing: 10) {
-                        Spacer()
-                        Image("unstoppableLogo-color-light")
+                        Image("ud-logo-color-light")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(height: 40,
-                                   alignment: .center).padding(.trailing,10)
+                            .frame(height: 30, alignment: .center)
+                            .padding(.all, 5)
+                            .foregroundColor(Color(UIColor.grayTextTint))
+                            .background(Color(UIColor.secondaryButton))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 4)
+                                    .stroke(Color(UIColor.secondaryBorder))
+                            ).padding(.trailing, 16)
                     }
                 }
-                
-                
-//                Button({
-//                    Image()
-//
-//                    Text(S.SupportLitecoinFoundation.title)
-//                        .padding(.all,10)
-//                        .font(Font(UIFont.customMedium(size: 16.0)))
-//                        .foregroundColor(Color(UIColor.grayTextTint))
-//                        .background(Color(UIColor.secondaryButton))
-//                        .overlay(
-//                            RoundedRectangle(cornerRadius: 4)
-//                                .stroke(Color(UIColor.secondaryBorder))
-//                        )
-//                }, action: {
-//
-//                }
             }
             Spacer()
             Rectangle()
