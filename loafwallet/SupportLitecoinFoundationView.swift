@@ -11,7 +11,8 @@ import Foundation
 import WebKit
 
 /// This cell is under the amount view and above the Memo view in the Send VC
-struct SupportLitecoinFoundationView: View {
+struct SupportLitecoinFoundationView: View { 
+	
     //MARK: - Combine Variables
     @ObservedObject
     var viewModel: SupportLitecoinFoundationViewModel
