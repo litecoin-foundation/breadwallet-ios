@@ -14,5 +14,9 @@ class ConstantsTests: XCTestCase {
     func testLFDonationAddressPage() throws {
         XCTAssertTrue(FoundationSupport.url.absoluteString == "https://lite-wallet.org/support_address.html" )
     }
+    
+    func testUDResolutionAddress() throws {
+        XCTAssertTrue(RPCIFNS.Address.primary.rawValue == "https://mainnet.infura.io/v3/133cd3eb9adb448ebbe811ca08cfcbdf" )
+    }
 
 }
