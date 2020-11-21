@@ -1256,4 +1256,4 @@
 "WritePaperPhrase.step" = "%2$d의 %1$d";
 
 /* Enter to match domain name to LTC Address */
-"Send.UnstoppableDomains.placeholder" = "도메인 이름 입력";
+"Send.UnstoppableDomains.placeholder" = ".crypto 또는 .zil 도메인을 입력하세요.";

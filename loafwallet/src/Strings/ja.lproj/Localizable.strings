@@ -1256,4 +1256,4 @@
 "WritePaperPhrase.step" = "%2$dの%1$d";
 
 /* Enter to match domain name to LTC Address */
-"Send.UnstoppableDomains.placeholder" = "ドメイン名を入力してください";
+"Send.UnstoppableDomains.placeholder" = ".cryptoまたは.zilドメインを入力してください";

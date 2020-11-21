@@ -1256,4 +1256,4 @@
 "WritePaperPhrase.step" = "%1$d dari %2$d";
 
 /* Enter to match domain name to LTC Address */
-"Send.UnstoppableDomains.placeholder" = "Masukkan nama domain";
+"Send.UnstoppableDomains.placeholder" = "Masukkan domain .crypto atau .zil";
