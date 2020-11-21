@@ -34,6 +34,9 @@ enum CustomEvent: String {
     case _20200225_DCD = "DID_CANCEL_DONATE"
     case _20200301_DUDFPK = "DID_USE_DEFAULT_FEE_PER_KB"
     case _20201118_DTS = "DID_TAP_SUPPORT_LF"
+    case _20201121_UIA = "USED_IPFS_ADDRESS"
+    case _20201121_DRIA = "DID_RESOLVE_IPFS_ADDRESS"
+    case _20201121_FRIA = "FAILED_RESOLVE_IPFS_ADDRESS"
 }
 
 struct FoundationSupport {
@@ -44,7 +47,6 @@ struct FoundationSupport {
     /// As of Nov 14th, 2020
     static let supportLTCAddress = "MVZj7gBRwcVpa9AAWdJm8A3HqTst112eJe"
 }
-
 
 struct APIServer {
      
