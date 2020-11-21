@@ -185,6 +185,13 @@ class SendViewController : UIViewController, Subscriber, ModalPresentable, Track
                 self?.descriptionCell.textView.resignFirstResponder()
                 self?.addressCell.textField.resignFirstResponder()
             }
+        }  
+        unstoppableCell.rootView.viewModel.didResolveUDAddress = { resolvedUDAddress in
+            
+            ///Paste in Unstoppable Domain resolved LTC address to textField
+            self.addressCell.textField.text = resolvedUDAddress
+            self.addressCell.textField.becomeFirstResponder()
+            self.addressCell.textField.isHidden = false
         } 
     }
     
