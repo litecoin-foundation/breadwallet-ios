@@ -16,7 +16,7 @@ class ConstantsTests: XCTestCase {
     }
     
     func testUDResolutionAddress() throws {
-        XCTAssertTrue(RPCIFNS.Address.primary.rawValue == "https://mainnet.infura.io/v3/133cd3eb9adb448ebbe811ca08cfcbdf" )
+        XCTAssertTrue(RPCIFNS.Address.primary.rawValue == "https://mainnet.infura.io/v3/" )
     }
 
 }

@@ -42,7 +42,7 @@ class UnstoppableDomainViewModel: ObservableObject {
     
     private func resolveUDAddress(domainName: String) {
      
-        let providerURLString: String = RPCIFNS.Address.primary.rawValue
+        let providerURLString: String = String(RPCIFNS.Address.primary.rawValue + PartnerKeys().infuraKey)
         LWAnalytics.logEventWithParameters(itemName: CustomEvent._20201121_UIA,
                                            properties:
                                             ["Address": RPCIFNS.Address.primary.rawValue])
