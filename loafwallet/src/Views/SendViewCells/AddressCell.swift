@@ -101,7 +101,7 @@ class AddressCell : UIView {
     }
 
     private func setInitialData() {
-        label.text = S.Send.toLabel
+        label.text = S.Send.enterLTCAddressLabel
         textField.font = contentLabel.font
         textField.textColor = contentLabel.textColor
         textField.isHidden = true

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Logo-Full-Light.png",
+      "filename" : "Logo-Full-Mono.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Logo-Full-Light@2x.png",
+      "filename" : "Logo-Full-Mono@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Logo-Full-Light@3x.png",
+      "filename" : "Logo-Full-Mono@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

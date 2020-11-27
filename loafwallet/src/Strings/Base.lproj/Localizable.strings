@@ -1271,4 +1271,4 @@
 "MenuButton.customer.support" = "Customer support";
 
 /* Enter to match domain name to LTC Address */
-"Send.UnstoppableDomains.placeholder" = "Enter a .crypto or .zil domain";
+"Send.UnstoppableDomains.placeholder" = "Enter a .crypto or .zil domain"; 

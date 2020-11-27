@@ -796,6 +796,9 @@
 /* Send money to label */
 "Send.toLabel" = "宛先";
 
+/* Enter to match domain name to LTC Address */
+"Send.UnstoppableDomains.placeholder" = ".cryptoまたは.zilドメインを入力してください";
+
 /* Adress already used alert message - first part */
 "Send.UsedAddress.firstLine" = "リテコインアドレスは、個人利用のみを想定しています。";
 
@@ -1255,5 +1258,8 @@
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%2$dの%1$d";
 
-/* Enter to match domain name to LTC Address */
-"Send.UnstoppableDomains.placeholder" = ".cryptoまたは.zilドメインを入力してください";
+/* Or */
+"Fragment.or" = "";
+
+/* Enter LTC Address */
+"Send.enterLTCAddress" = "";

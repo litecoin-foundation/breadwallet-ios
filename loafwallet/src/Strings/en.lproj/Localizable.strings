@@ -796,6 +796,9 @@
 /* Send money to label */
 "Send.toLabel" = "To";
 
+/* Enter to match domain name to LTC Address */
+"Send.UnstoppableDomains.placeholder" = "Enter a .crypto or .zil domain";
+
 /* Adress already used alert message - first part */
 "Send.UsedAddress.firstLine" = "Litecoin addresses are intended for single use only.";
 
@@ -1255,5 +1258,8 @@
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d of %2$d";
 
-/* Enter to match domain name to LTC Address */
-"Send.UnstoppableDomains.placeholder" = "Enter a .crypto or .zil domain";
+/* Or */
+"Fragment.or" = "";
+
+/* Enter LTC Address */
+"Send.enterLTCAddress" = "";

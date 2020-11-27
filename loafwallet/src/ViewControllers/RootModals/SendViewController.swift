@@ -52,6 +52,7 @@ class SendViewController : UIViewController, Subscriber, ModalPresentable, Track
     private let walletManager: WalletManager
     private let amountView: AmountViewController
     private let addressCell = AddressCell()
+    private var orLabelView = UIView()
     private let unstoppableCell = UIHostingController(rootView: UnstoppableDomainView(viewModel: UnstoppableDomainViewModel()))
     private let descriptionCell = DescriptionSendCell(placeholder: S.Send.descriptionLabel)
     private var sendButton = ShadowButton(title: S.Send.sendLabel, type: .flatLitecoinBlue)
@@ -103,8 +104,7 @@ class SendViewController : UIViewController, Subscriber, ModalPresentable, Track
                                                             amountView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                                                             amountView.view.topAnchor.constraint(equalTo: unstoppableCell.view.bottomAnchor),
                                                             amountView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor) ]) })
-    
-        unstoppableCell.view.constrain([
+         unstoppableCell.view.constrain([
                                         unstoppableCell.view.topAnchor.constraint(equalTo: addressCell.bottomAnchor),
                                         unstoppableCell.view.widthAnchor.constraint(equalTo: amountView.view.widthAnchor),
                                         unstoppableCell.view.leadingAnchor.constraint(equalTo: amountView.view.leadingAnchor),

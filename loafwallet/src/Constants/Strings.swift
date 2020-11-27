@@ -66,6 +66,7 @@ enum S {
     enum Send {
         static let title = NSLocalizedString("Send.title", value: "**Send**", comment: "Send modal title")
         static let toLabel = NSLocalizedString("Send.toLabel", value: "**To**", comment: "Send money to label")
+        static let enterLTCAddressLabel = NSLocalizedString("Send.enterLTCAddress", value: "**Enter LTC Address**", comment: "Enter LTC Address")
         static let amountLabel = NSLocalizedString("Send.amountLabel", value: "**Amount**", comment: "Send money amount label")
         static let descriptionLabel = NSLocalizedString("Send.descriptionLabel", value: "**Memo**", comment: "Description for sending money label")
         static let sendLabel = NSLocalizedString("Send.sendLabel", value: "**Send**", comment: "Send button label")
@@ -666,5 +667,9 @@ enum S {
     enum Welcome {
         static let title = NSLocalizedString("Welcome.title", value: "**Welcome to Litewallet**", comment: "Welcome view title")
         static let body = NSLocalizedString("Welcome.body", value: "**Litewallet now has a brand new look and some new features.\n\nAll coins are displayed in lites (ł). 1 Litecoin (Ł) = 1000 lites (ł).**", comment: "Welcome view body text")
+    }
+    
+    enum Fragments {
+        static let or = NSLocalizedString("Fragment.or", value: "**or**", comment: "Or")
     }
 }

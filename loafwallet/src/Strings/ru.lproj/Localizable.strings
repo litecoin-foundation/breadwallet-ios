@@ -796,6 +796,9 @@
 /* Send money to label */
 "Send.toLabel" = "На";
 
+/* Enter to match domain name to LTC Address */
+"Send.UnstoppableDomains.placeholder" = "Введите доменное имя";
+
 /* Adress already used alert message - first part */
 "Send.UsedAddress.firstLine" = "Биткойн-адреса предназначены исключительно для однократного использования.";
 
@@ -1255,5 +1258,8 @@
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d из %2$d";
 
-/* Enter to match domain name to LTC Address */
-"Send.UnstoppableDomains.placeholder" = "Введите доменное имя";
+/* Or */
+"Fragment.or" = "";
+
+/* Enter LTC Address */
+"Send.enterLTCAddress" = "";

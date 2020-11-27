@@ -796,6 +796,9 @@
 /* Send money to label */
 "Send.toLabel" = "Pour";
 
+/* Enter to match domain name to LTC Address */
+"Send.UnstoppableDomains.placeholder" = "Entrez un nom de domaine";
+
 /* Adress already used alert message - first part */
 "Send.UsedAddress.firstLine" = "Les adresses Litecoin sont destinées à une utilisation unique.";
 
@@ -1255,5 +1258,8 @@
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d de %2$d";
 
-/* Enter to match domain name to LTC Address */
-"Send.UnstoppableDomains.placeholder" = "Entrez un nom de domaine";
+/* Or */
+"Fragment.or" = "";
+
+/* Enter LTC Address */
+"Send.enterLTCAddress" = "";

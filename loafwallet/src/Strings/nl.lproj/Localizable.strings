@@ -796,6 +796,9 @@
 /* Send money to label */
 "Send.toLabel" = "Naar";
 
+/* Enter to match domain name to LTC Address */
+"Send.UnstoppableDomains.placeholder" = "Voer een domeinnaam in";
+
 /* Adress already used alert message - first part */
 "Send.UsedAddress.firstLine" = "Litecoin adressen zijn alleen bedoeld voor enkel gebruik.";
 
@@ -1255,5 +1258,8 @@
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d van %2$d";
 
-/* Enter to match domain name to LTC Address */
-"Send.UnstoppableDomains.placeholder" = "Voer een domeinnaam in";
+/* Or */
+"Fragment.or" = "";
+
+/* Enter LTC Address */
+"Send.enterLTCAddress" = "";
