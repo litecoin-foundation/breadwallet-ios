@@ -40,36 +40,8 @@ class UnstoppableDomainViewModel: ObservableObject {
         }
     }
     
-    private func resolveUDAddress(domainName: String) {
-     
-        let providerURLString: String = String(RPCIFNS.Address.primary.rawValue + PartnerKeys().infuraKey)
-        LWAnalytics.logEventWithParameters(itemName: CustomEvent._20201121_UIA,
-                                           properties:
-                                            ["Address": RPCIFNS.Address.primary.rawValue])
-
-        guard let resolution = try? Resolution(providerUrl: providerURLString, network: "mainnet") else {
-            print ("Init of Resolution instance with custom parameters failed...")
-            return
-        }
-         
-        resolution.addr(domain: domainName, ticker: "ltc") { [self] result in
-            switch result {
-                case .success(let returnValue):
-                    
-                    self.didResolveUDAddress?(returnValue)
-                     
-                    LWAnalytics.logEventWithParameters(itemName: CustomEvent._20201121_DRIA,
-                                                       properties:
-                                                        ["Address": RPCIFNS.Address.primary.rawValue])
-
-                case .failure(let error):
-                    print("Expected LTC Address, but got \(error.localizedDescription)")
-                    LWAnalytics.logEventWithParameters(itemName: CustomEvent._20201121_FRIA,
-                                                       properties:
-                                                        ["Address": RPCIFNS.Address.primary.rawValue])
-
-            }
-        }
+    private func resolveUDAddress(domainName: String) -> String {
+        return ResolutionModel().resolveUDAddress(domainName: domainName)
     }
 }
  

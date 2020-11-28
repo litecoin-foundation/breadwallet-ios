@@ -316,6 +316,9 @@
 /* Fee Selector title */
 "FeeSelector.title" = "Behandlingshastighed";
 
+/* Or */
+"Fragment.or" = "eller";
+
 /* History Bar Item Title */
 "History.barItemTitle" = "HISTORIE";
 
@@ -745,6 +748,9 @@
 /* Emtpy pasteboard error message */
 "Send.emptyPasteboard" = "Tegnebord er tomt";
 
+/* Enter LTC Address */
+"Send.enterLTCAddress" = "Indtast en LTC-adresse";
+
 /* Network Fee: $0.01 */
 "Send.fee" = "Netværksafgift: %1$@";
 
@@ -837,6 +843,9 @@
 
 /* Litewallet environment */
 "Settings.litewallet.environment" = "Miljø:";
+
+/* Litewallet Partners */
+"Settings.litewallet.partners" = "Litewallet-partnere";
 
 /* Litewallet version */
 "Settings.litewallet.version" = "Litewallet version:";
@@ -1257,9 +1266,3 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d af %2$d";
-
-/* Or */
-"Fragment.or" = "";
-
-/* Enter LTC Address */
-"Send.enterLTCAddress" = "";

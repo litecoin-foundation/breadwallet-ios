@@ -316,6 +316,9 @@
 /* Fee Selector title */
 "FeeSelector.title" = "Verwerkingssnelheid";
 
+/* Or */
+"Fragment.or" = "of";
+
 /* History Bar Item Title */
 "History.barItemTitle" = "GESCHIEDENIS";
 
@@ -745,6 +748,9 @@
 /* Emtpy pasteboard error message */
 "Send.emptyPasteboard" = "Plakbord is leeg";
 
+/* Enter LTC Address */
+"Send.enterLTCAddress" = "Voer een LTC-adres in";
+
 /* Network Fee: $0.01 */
 "Send.fee" = "Netwerkkosten: %1$@";
 
@@ -837,6 +843,9 @@
 
 /* Litewallet environment */
 "Settings.litewallet.environment" = "Milieu:";
+
+/* Litewallet Partners */
+"Settings.litewallet.partners" = "Litewallet-partners";
 
 /* Litewallet version */
 "Settings.litewallet.version" = "Litewallet-versie:";
@@ -1257,9 +1266,3 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d van %2$d";
-
-/* Or */
-"Fragment.or" = "";
-
-/* Enter LTC Address */
-"Send.enterLTCAddress" = "";

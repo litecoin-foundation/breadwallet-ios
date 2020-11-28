@@ -268,6 +268,11 @@
 		75A2A8141DA5936F00A983D8 /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 75A2A8081DA5936F00A983D8 /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		75C735AA1DAA1B9C00251ECF /* libunbound.c in Sources */ = {isa = PBXBuildFile; fileRef = 755CD4121DAA0E3E0075898E /* libunbound.c */; };
 		BB66CB271F7F2FD1936AA04B /* Pods_loafwalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEAAB89A265CC043F53CC51 /* Pods_loafwalletTests.framework */; };
+		C35ABCFF257404A9002BB9BB /* SocialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35ABCFE257404A9002BB9BB /* SocialView.swift */; };
+		C35ABD0B25740537002BB9BB /* SocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35ABD0A25740537002BB9BB /* SocialViewModel.swift */; };
+		C35ABD232574070A002BB9BB /* PartnersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35ABD222574070A002BB9BB /* PartnersView.swift */; };
+		C35ABD332574073F002BB9BB /* PartnersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35ABD322574073F002BB9BB /* PartnersViewModel.swift */; };
+		C35ABD4325741E19002BB9BB /* ResolutionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35ABD4225741E19002BB9BB /* ResolutionModel.swift */; };
 		C3B7C3B9255EABBF00E98A64 /* SupportSafariViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B7C3B8255EABBF00E98A64 /* SupportSafariViewModel.swift */; };
 		C3B7C3C2255EAF1200E98A64 /* SupportSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B7C3C1255EAF1200E98A64 /* SupportSafariView.swift */; };
 		C3B7C3EE255FF59200E98A64 /* ConstantsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B7C3ED255FF59200E98A64 /* ConstantsTests.swift */; };
@@ -1417,6 +1422,11 @@
 		9AA160F2A4C1674AC8595E65 /* Pods-loafwalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loafwalletTests.debug.xcconfig"; path = "Target Support Files/Pods-loafwalletTests/Pods-loafwalletTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9C4905F581557D8FD607EB73 /* Pods-loafwallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loafwallet.release.xcconfig"; path = "Target Support Files/Pods-loafwallet/Pods-loafwallet.release.xcconfig"; sourceTree = "<group>"; };
 		C34C1E7D257187AB0010ECB1 /* TestPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		C35ABCFE257404A9002BB9BB /* SocialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialView.swift; sourceTree = "<group>"; };
+		C35ABD0A25740537002BB9BB /* SocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewModel.swift; sourceTree = "<group>"; };
+		C35ABD222574070A002BB9BB /* PartnersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnersView.swift; sourceTree = "<group>"; };
+		C35ABD322574073F002BB9BB /* PartnersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnersViewModel.swift; sourceTree = "<group>"; };
+		C35ABD4225741E19002BB9BB /* ResolutionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionModel.swift; sourceTree = "<group>"; };
 		C3B7C3B8255EABBF00E98A64 /* SupportSafariViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportSafariViewModel.swift; sourceTree = "<group>"; };
 		C3B7C3C1255EAF1200E98A64 /* SupportSafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportSafariView.swift; sourceTree = "<group>"; };
 		C3B7C3ED255FF59200E98A64 /* ConstantsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsTests.swift; sourceTree = "<group>"; };
@@ -2883,7 +2893,6 @@
 			isa = PBXGroup;
 			children = (
 				C34C1E7D257187AB0010ECB1 /* TestPlayground.playground */,
-				C3D4379E2566EA3E00F423E1 /* LWActivityIndicator.swift */,
 				75A2A7921DA5934300A983D8 /* loafwallet */,
 				2465873723A5AAD100A32E9E /* loafwalletTests */,
 				75A2A80B1DA5936F00A983D8 /* TodayExtension */,
@@ -2912,6 +2921,7 @@
 		75A2A7921DA5934300A983D8 /* loafwallet */ = {
 			isa = PBXGroup;
 			children = (
+				C35ABD07257404C6002BB9BB /* SwiftUI+UIKit */,
 				75A2A87C1DA59E4E00A983D8 /* loafwallet.entitlements */,
 				75A2A7931DA5934300A983D8 /* AppDelegate.swift */,
 				CE20C8F11DBAF71500C8397A /* ApplicationController.swift */,
@@ -2935,7 +2945,6 @@
 				24306795238F3DDF00EBEA99 /* BartyCrouch */,
 				24AF00FB221B32EC00FF636F /* Storyboards */,
 				CE20C90A1DBC59C500C8397A /* FlowControllers */,
-				C3D783A52565EA1E0004FF70 /* Unstoppable */,
 				CEE20C321EA5B2EC0086F724 /* Constants */,
 				2412367B24035B7F00FFA499 /* Emitters */,
 				CE20C8EF1DBAF6D300C8397A /* ViewControllers */,
@@ -3020,6 +3029,46 @@
 			path = Modules/sqlite3;
 			sourceTree = "<group>";
 		};
+		C35ABD07257404C6002BB9BB /* SwiftUI+UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				C35ABD08257404D2002BB9BB /* Partners */,
+				C35ABD21257406AB002BB9BB /* Social */,
+				C35ABD0925740518002BB9BB /* About */,
+				C3F55643255A1916005F786F /* SupportLitecoinFoundation */,
+				C3D783A52565EA1E0004FF70 /* Unstoppable */,
+				C3B7C3C1255EAF1200E98A64 /* SupportSafariView.swift */,
+				C3B7C3B8255EABBF00E98A64 /* SupportSafariViewModel.swift */,
+				C3D4379E2566EA3E00F423E1 /* LWActivityIndicator.swift */,
+			);
+			name = "SwiftUI+UIKit";
+			sourceTree = "<group>";
+		};
+		C35ABD08257404D2002BB9BB /* Partners */ = {
+			isa = PBXGroup;
+			children = (
+				C35ABD222574070A002BB9BB /* PartnersView.swift */,
+				C35ABD322574073F002BB9BB /* PartnersViewModel.swift */,
+			);
+			name = Partners;
+			sourceTree = "<group>";
+		};
+		C35ABD0925740518002BB9BB /* About */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = About;
+			sourceTree = "<group>";
+		};
+		C35ABD21257406AB002BB9BB /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				C35ABCFE257404A9002BB9BB /* SocialView.swift */,
+				C35ABD0A25740537002BB9BB /* SocialViewModel.swift */,
+			);
+			name = Social;
+			sourceTree = "<group>";
+		};
 		C3B7C3EC255FF56100E98A64 /* Constants Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -3032,6 +3081,7 @@
 			isa = PBXGroup;
 			children = (
 				C3D783A62565EA4A0004FF70 /* UnstoppableDomainView.swift */,
+				C35ABD4225741E19002BB9BB /* ResolutionModel.swift */,
 				C3D783B62565EA6B0004FF70 /* UstoppableDomainViewModel.swift */,
 			);
 			name = Unstoppable;
@@ -3158,8 +3208,6 @@
 		CE20C90F1DBE5B5100C8397A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C3B7C3C1255EAF1200E98A64 /* SupportSafariView.swift */,
-				C3F55643255A1916005F786F /* SupportLitecoinFoundation */,
 				24BA90C52410129E001E3825 /* FeeSelectorView.swift */,
 				CE6BCF5C1EE9E89A0029849C /* CustomTitleView.swift */,
 				CED341321EF5A5C00014912A /* InAppAlert.swift */,
@@ -3303,7 +3351,6 @@
 		CEBF33021DDE177F00348FC6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				C3B7C3B8255EABBF00E98A64 /* SupportSafariViewModel.swift */,
 				CEBF33031DDE17A600348FC6 /* Transaction.swift */,
 				CE27F9581E2C8EA300F7F7F2 /* Amount.swift */,
 				CE124CF71E67A8E500DFA146 /* TransactionDirection.swift */,
@@ -3777,7 +3824,7 @@
 		};
 		2430679A238F538C00EBEA99 /* Update Localizable using BartyCrouch */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -3785,7 +3832,7 @@
 			name = "Update Localizable using BartyCrouch";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "##  This only notates strings that have yet to be localized. The Base Localizable file is wnere the change needs to be changed.\n\nif which bartycrouch > /dev/null; then\n    bartycrouch update -x\n    bartycrouch lint -x\nelse\n    echo \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
 		};
@@ -4045,6 +4092,7 @@
 				24306797238F3DF900EBEA99 /* BartyCrouch.swift in Sources */,
 				C3D783B72565EA6B0004FF70 /* UstoppableDomainViewModel.swift in Sources */,
 				CEC6AA3B1DEE4EB000EE5AFD /* CGRect+Additions.swift in Sources */,
+				C35ABD4325741E19002BB9BB /* ResolutionModel.swift in Sources */,
 				CE45C1FB1E74F89C002C3847 /* WalletInfo.swift in Sources */,
 				CEE659E71F65A936001FF29D /* RetryTimer.swift in Sources */,
 				248BFE2623AB302200CE1A71 /* BuyWKWebViewController.swift in Sources */,
@@ -4081,6 +4129,7 @@
 				24A6DCFC2230BD9000505F44 /* WipeEmptyWalletViewController.swift in Sources */,
 				CE92F9F61DEDF6890046B516 /* UIViewControllerContextTransitioning+BRAdditions.swift in Sources */,
 				CEA362681E00EE320061FC0E /* CameraGuideView.swift in Sources */,
+				C35ABD232574070A002BB9BB /* PartnersView.swift in Sources */,
 				CE03EC741EF256AC0038E3A8 /* SimpleUTXO.swift in Sources */,
 				24016D9023F913C1006A6791 /* LWAnalytics.swift in Sources */,
 				CE124CFC1E68932C00DFA146 /* FeeManager.swift in Sources */,
@@ -4132,6 +4181,7 @@
 				C3D4379F2566EA3E00F423E1 /* LWActivityIndicator.swift in Sources */,
 				CECCE5AE1E04AD6300D99448 /* AddressCell.swift in Sources */,
 				CE6BCF5D1EE9E89A0029849C /* CustomTitleView.swift in Sources */,
+				C35ABCFF257404A9002BB9BB /* SocialView.swift in Sources */,
 				CE83DE2A1E9EB7F600D07636 /* SendAmountCell.swift in Sources */,
 				22A9A9521DF61945000F0016 /* BRKVStorePlugin.swift in Sources */,
 				CEAFC8611E5D5B0500E4FD06 /* SegmentedButton.swift in Sources */,
@@ -4140,6 +4190,7 @@
 				22A9A9581DF61945000F0016 /* BRWebViewController.swift in Sources */,
 				CEC4CF091F0C84AB00E5C82E /* UIViewController+Alerts.swift in Sources */,
 				CE27F9591E2C8EA300F7F7F2 /* Amount.swift in Sources */,
+				C35ABD0B25740537002BB9BB /* SocialViewModel.swift in Sources */,
 				CE1280F61EEA855C00D27649 /* Date+Additions.swift in Sources */,
 				CED82D4E1E575A5500507A9B /* _main.swift in Sources */,
 				CEEC708E1E954AAB00EF788E /* AboutCell.swift in Sources */,
@@ -4187,6 +4238,7 @@
 				CE6D0F991DE8B75900BD4BCF /* DismissModalAnimator.swift in Sources */,
 				CE4C1CC61ED65D830063E184 /* DrawableCircle.swift in Sources */,
 				CE8CD8E31E31978100785E02 /* LoginBackgroundTriangle.swift in Sources */,
+				C35ABD332574073F002BB9BB /* PartnersViewModel.swift in Sources */,
 				CEEC708C1E95461A00EF788E /* AboutViewController.swift in Sources */,
 				CEF61B141ED0D10000C7EA6A /* Types.swift in Sources */,
 				CEEC708A1E945E3B00EF788E /* UnEditableTextView.swift in Sources */,

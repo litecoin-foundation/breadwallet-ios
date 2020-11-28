@@ -316,6 +316,9 @@
 /* Fee Selector title */
 "FeeSelector.title" = "Скорость обработки";
 
+/* Or */
+"Fragment.or" = "или";
+
 /* History Bar Item Title */
 "History.barItemTitle" = "ИСТОРИЯ";
 
@@ -745,6 +748,9 @@
 /* Emtpy pasteboard error message */
 "Send.emptyPasteboard" = "Буфер обмена пуст";
 
+/* Enter LTC Address */
+"Send.enterLTCAddress" = "Введите адрес LTC";
+
 /* Network Fee: $0.01 */
 "Send.fee" = "Комиссия сети: %1$@";
 
@@ -837,6 +843,9 @@
 
 /* Litewallet environment */
 "Settings.litewallet.environment" = "Окружающая среда:";
+
+/* Litewallet Partners */
+"Settings.litewallet.partners" = "Партнеры Litewallet";
 
 /* Litewallet version */
 "Settings.litewallet.version" = "Litewallet версия:";
@@ -1257,9 +1266,3 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d из %2$d";
-
-/* Or */
-"Fragment.or" = "";
-
-/* Enter LTC Address */
-"Send.enterLTCAddress" = "";

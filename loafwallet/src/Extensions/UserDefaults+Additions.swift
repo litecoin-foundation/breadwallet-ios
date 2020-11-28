@@ -169,11 +169,6 @@ extension UserDefaults {
         } else {
             return true
         }
-        
-        if let legacyWalletNeedsBackup = UserDefaults.legacyWalletNeedsBackup, legacyWalletNeedsBackup == true {
-            return true
-        }
-        return false
     }
 }
 

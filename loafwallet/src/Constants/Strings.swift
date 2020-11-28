@@ -328,6 +328,7 @@ enum S {
         static let litewalletVersion = NSLocalizedString("Settings.litewallet.version", value: "**Litewallet Version:**", comment: "Litewallet version")
         static let litewalletEnvironment = NSLocalizedString("Settings.litewallet.environment", value: "**Litewallet Environment:**", comment: "Litewallet environment")
         static let socialLinks = NSLocalizedString("Settings.socialLinks", value: "**Social Links:**", comment: "Litewallet Social links")
+        static let litewalletPartners = NSLocalizedString("Settings.litewallet.partners", value: "**Litewallet Partners:**", comment: "Litewallet Partners")
     }
 
     enum About {

@@ -1271,4 +1271,13 @@
 "MenuButton.customer.support" = "Customer support";
 
 /* Enter to match domain name to LTC Address */
-"Send.UnstoppableDomains.placeholder" = "Enter a .crypto or .zil domain"; 
+"Send.UnstoppableDomains.placeholder" = "Enter a .crypto or .zil domain";
+
+/* Or */
+"Fragment.or" = "or";
+
+/* Enter LTC Address */
+"Send.enterLTCAddress" = "Enter an LTC Address";
+
+/* Litewallet Partners */
+"Settings.litewallet.partners" = "";

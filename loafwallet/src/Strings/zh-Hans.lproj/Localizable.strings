@@ -316,6 +316,9 @@
 /* Fee Selector title */
 "FeeSelector.title" = "处理速度";
 
+/* Or */
+"Fragment.or" = "要么";
+
 /* History Bar Item Title */
 "History.barItemTitle" = "历史";
 
@@ -745,6 +748,9 @@
 /* Emtpy pasteboard error message */
 "Send.emptyPasteboard" = "粘贴板为空";
 
+/* Enter LTC Address */
+"Send.enterLTCAddress" = "输入一个LTC地址";
+
 /* Network Fee: $0.01 */
 "Send.fee" = "网络费：%1$@";
 
@@ -837,6 +843,9 @@
 
 /* Litewallet environment */
 "Settings.litewallet.environment" = "环境：";
+
+/* Litewallet Partners */
+"Settings.litewallet.partners" = "Litewallet合作伙伴";
 
 /* Litewallet version */
 "Settings.litewallet.version" = "Litewallet版本：";
@@ -1257,9 +1266,3 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d / %2$d";
-
-/* Or */
-"Fragment.or" = "";
-
-/* Enter LTC Address */
-"Send.enterLTCAddress" = "";

@@ -316,6 +316,9 @@
 /* Fee Selector title */
 "FeeSelector.title" = "処理速度";
 
+/* Or */
+"Fragment.or" = "或いは";
+
 /* History Bar Item Title */
 "History.barItemTitle" = "歴史";
 
@@ -745,6 +748,9 @@
 /* Emtpy pasteboard error message */
 "Send.emptyPasteboard" = "ペーストボードが空です";
 
+/* Enter LTC Address */
+"Send.enterLTCAddress" = "LTCアドレスを入力してください";
+
 /* Network Fee: $0.01 */
 "Send.fee" = "ネットワーク手数料: %1$@";
 
@@ -837,6 +843,9 @@
 
 /* Litewallet environment */
 "Settings.litewallet.environment" = "環境：";
+
+/* Litewallet Partners */
+"Settings.litewallet.partners" = "Litewalletパートナー";
 
 /* Litewallet version */
 "Settings.litewallet.version" = "Litewalletバージョン：";
@@ -1257,9 +1266,3 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%2$dの%1$d";
-
-/* Or */
-"Fragment.or" = "";
-
-/* Enter LTC Address */
-"Send.enterLTCAddress" = "";

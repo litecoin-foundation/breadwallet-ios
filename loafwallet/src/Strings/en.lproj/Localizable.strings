@@ -316,6 +316,9 @@
 /* Fee Selector title */
 "FeeSelector.title" = "Processing Speed";
 
+/* Or */
+"Fragment.or" = "or";
+
 /* History Bar Item Title */
 "History.barItemTitle" = "HISTORY";
 
@@ -745,6 +748,9 @@
 /* Empty pasteboard error message */
 "Send.emptyPasteboard" = "Pasteboard is empty";
 
+/* Enter LTC Address */
+"Send.enterLTCAddress" = "Enter an LTC Address";
+
 /* Network Fee: $0.01 */
 "Send.fee" = "Network Fee: %1$@";
 
@@ -837,6 +843,9 @@
 
 /* Litewallet environment */
 "Settings.litewallet.environment" = "Environment:";
+
+/* Litewallet Partners */
+"Settings.litewallet.partners" = "Litewallet partners";
 
 /* Litewallet version */
 "Settings.litewallet.version" = "Litewallet version:";
@@ -1257,9 +1266,3 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d of %2$d";
-
-/* Or */
-"Fragment.or" = "";
-
-/* Enter LTC Address */
-"Send.enterLTCAddress" = "";

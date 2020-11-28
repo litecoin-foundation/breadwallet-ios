@@ -1243,6 +1243,9 @@
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = "";
 
+/* Litewallet Partners */
+"Settings.litewallet.partners" = "";
+
 /* Delete database title */
 "WipeWallet.alertDeleteTitle" = "";
 
