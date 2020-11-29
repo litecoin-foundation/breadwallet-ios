@@ -88,7 +88,7 @@ struct UnstoppableDomainView: View {
                     .font(Font(UIFont.customBody(size: 15.0)))
                     .foregroundColor(Color(UIColor.grayTextTint))
                     .background(Color.white)
-                    .padding(.top, -38)
+                    .padding(.top, -35)
                     .padding(.leading, 60)
                 Spacer()
             }

@@ -803,7 +803,7 @@
 "Send.toLabel" = "На";
 
 /* Enter to match domain name to LTC Address */
-"Send.UnstoppableDomains.placeholder" = "Введите доменное имя";
+"Send.UnstoppableDomains.placeholder" = "Введите домен .crypto или .zil";
 
 /* Adress already used alert message - first part */
 "Send.UsedAddress.firstLine" = "Биткойн-адреса предназначены исключительно для однократного использования.";

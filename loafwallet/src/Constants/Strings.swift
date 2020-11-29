@@ -98,7 +98,7 @@ enum S {
         static let barItemTitle = NSLocalizedString("Send.barItemTitle", value: "**Send**", comment: "Send Bar Item Title")
         
         enum UnstoppableDomains {
-            static let placeholder = NSLocalizedString("Send.UnstoppableDomains.placeholder", value: "**Enter to match domain name to LTC Address**", comment: "Enter to match domain name to LTC Address")
+            static let placeholder = NSLocalizedString("Send.UnstoppableDomains.placeholder", value: "**Enter a .crypto or .zil domain**", comment: "Enter a .crypto or .zil domain")
             
         }
     }

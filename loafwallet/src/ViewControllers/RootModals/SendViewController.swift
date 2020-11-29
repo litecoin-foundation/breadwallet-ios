@@ -187,12 +187,11 @@ class SendViewController : UIViewController, Subscriber, ModalPresentable, Track
             }
         }  
         unstoppableCell.rootView.viewModel.didResolveUDAddress = { resolvedUDAddress in
-            
             ///Paste in Unstoppable Domain resolved LTC address to textField
             self.addressCell.textField.text = resolvedUDAddress
             self.addressCell.textField.becomeFirstResponder()
             self.addressCell.textField.isHidden = false
-        } 
+        }
     }
     
     private func balanceTextForAmount(amount: Satoshis?, rate: Rate?) -> (NSAttributedString?, NSAttributedString?) {

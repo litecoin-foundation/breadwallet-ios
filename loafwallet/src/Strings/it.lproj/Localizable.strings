@@ -803,7 +803,7 @@
 "Send.toLabel" = "A";
 
 /* Enter to match domain name to LTC Address */
-"Send.UnstoppableDomains.placeholder" = "Immettere un nome di dominio";
+"Send.UnstoppableDomains.placeholder" = "Inserisci un dominio .crypto o .zil";
 
 /* Adress already used alert message - first part */
 "Send.UsedAddress.firstLine" = "Gli indirizzi Litecoin dovrebbero essere utilizzati una sola volta.";
