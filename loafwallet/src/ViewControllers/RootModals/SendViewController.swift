@@ -53,7 +53,6 @@ class SendViewController : UIViewController, Subscriber, ModalPresentable, Track
     private let amountView: AmountViewController
     private let addressCell = AddressCell()
     private let descriptionCell = DescriptionSendCell(placeholder: S.Send.descriptionLabel)
-    private let supportLitecoinFoundationCell = UIHostingController(rootView: SupportLitecoinFoundationView(viewModel: SupportLitecoinFoundationViewModel()))
     private var sendButton = ShadowButton(title: S.Send.sendLabel, type: .flatLitecoinBlue)  
     private let currency: ShadowButton
     private let currencyBorder = UIView(color: .secondaryShadow)
@@ -82,7 +81,6 @@ class SendViewController : UIViewController, Subscriber, ModalPresentable, Track
         walletManager.wallet?.feePerKb = store.state.fees.regular
 
         view.addSubview(addressCell)
-        view.addSubview(supportLitecoinFoundationCell.view)
         view.addSubview(descriptionCell)
         view.addSubview(sendButton)
         
@@ -92,16 +90,10 @@ class SendViewController : UIViewController, Subscriber, ModalPresentable, Track
                 amountView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 amountView.view.topAnchor.constraint(equalTo: addressCell.bottomAnchor),
                 amountView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor) ]) })
-        
-        supportLitecoinFoundationCell.view.constrain([
-                supportLitecoinFoundationCell.view.widthAnchor.constraint(equalTo: amountView.view.widthAnchor),
-                supportLitecoinFoundationCell.view.topAnchor.constraint(equalTo: amountView.view.bottomAnchor),
-                supportLitecoinFoundationCell.view.leadingAnchor.constraint(equalTo: amountView.view.leadingAnchor),
-                supportLitecoinFoundationCell.view.heightAnchor.constraint(equalToConstant: SendCell.defaultHeight)])
-        
+      
         descriptionCell.constrain([
             descriptionCell.widthAnchor.constraint(equalTo: amountView.view.widthAnchor),
-            descriptionCell.topAnchor.constraint(equalTo: supportLitecoinFoundationCell.view.bottomAnchor),
+                                    descriptionCell.topAnchor.constraint(equalTo: amountView.view.bottomAnchor),
             descriptionCell.leadingAnchor.constraint(equalTo: amountView.view.leadingAnchor),
             descriptionCell.heightAnchor.constraint(equalTo: descriptionCell.textView.heightAnchor, constant: C.padding[3]) ])
 
@@ -177,21 +169,6 @@ class SendViewController : UIViewController, Subscriber, ModalPresentable, Track
             }
         }
             
-        supportLitecoinFoundationCell.rootView.viewModel.didGetLTCAddress = { ltcAddress in
-            
-            ///Paste in Support Litecoin Foundation address to textField
-            self.addressCell.textField.text = ltcAddress
-            self.addressCell.textField.becomeFirstResponder()
-            self.addressCell.textField.isHidden = false
-            
-            /// Paste in Memo
-            self.descriptionCell.clearPlaceholder()
-            self.descriptionCell.textView.text = "Litecoin Foundation"
-            
-            /// Track Support LF Taps
-            LWAnalytics.logEventWithParameters(itemName:._20201118_DTS)
-
-        }
     }
 
     private func balanceTextForAmount(amount: Satoshis?, rate: Rate?) -> (NSAttributedString?, NSAttributedString?) {

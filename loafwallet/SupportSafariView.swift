@@ -40,23 +40,6 @@ struct SupportSafariView: UIViewRepresentable {
         ///   - navigation: nil
         func webView(_ webView: WKWebView,
                      didFinish navigation: WKNavigation!) {
-            
-            // MARK: - Parse LF LTC Address
-            webView.evaluateJavaScript("document.documentElement.outerHTML.toString()",
-                                       completionHandler: { ( htmlString: Any, error: Error?) in
-                                            if let string = htmlString as? String,
-                                               let suffix = string.components(separatedBy:"<a href=").last {
-                                               let content = suffix.components(separatedBy:">")
-                                               let element = content.filter{ $0.contains("</a")}.first
-                                                
-                                                if ((element?.contains(FoundationSupport.supportLTCAddress)) != nil) {
-                                                    UIPasteboard.general.string = FoundationSupport.supportLTCAddress
-                                                    self.parent.viewModel.supportLTCAddress = FoundationSupport.supportLTCAddress
-                                                } else {
-                                                    print("ERROR: Incorrect LTC Address")
-                                                }
-                                            }
-            })
         }
     }
     

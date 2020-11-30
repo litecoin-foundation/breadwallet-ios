@@ -14,15 +14,11 @@ import Combine
 class SupportLitecoinFoundationViewModel: ObservableObject {
     
     //MARK: - Combine Variables
-    @Published
-    var supportLTCAddress: String = ""
+//    @Published
+//    var supportLTCAddress: String = ""
     
     //MARK: - Public Variables
     var didGetLTCAddress: ((String) -> Void)?
     
     init() {}
-    
-    func updateAddressString(address: String) {
-        didGetLTCAddress?(address)
-    }
 }

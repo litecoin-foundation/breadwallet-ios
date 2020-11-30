@@ -48,13 +48,7 @@ struct SupportLitecoinFoundationView: View {
                             .stroke(Color(UIColor.secondaryBorder))
                     )
             }
-            .sheet(isPresented: self.$showSupportLFPage,
-                onDismiss: {
-                    viewModel.updateAddressString(address: supportSafariView
-                                                    .viewModel
-                                                    .supportLTCAddress)
-                }
-            ) {
+            .sheet(isPresented: self.$showSupportLFPage) {
                 VStack {
                     Spacer()
                     supportSafariView
@@ -62,24 +56,47 @@ struct SupportLitecoinFoundationView: View {
                                alignment: .center
                         )
                         .padding(.bottom, 50)
+                    
+                    // Copy the LF Address and paste into the SendViewController
                     Button(action: {
+                        UIPasteboard.general.string = FoundationSupport.supportLTCAddress
+                        self.viewModel.didGetLTCAddress?(FoundationSupport.supportLTCAddress)
                         self.showSupportLFPage = false
+                        
                     }) {
                         Text(S.URLHandling.copy)
                             .padding([.leading,.trailing],20)
                             .padding([.top,.bottom],10)
                             .font(Font(UIFont.customMedium(size: 16.0)))
-                            .foregroundColor(Color(UIColor.grayTextTint))
-                            .background(Color(UIColor.secondaryButton))
+                            .foregroundColor(Color(UIColor.white))
+                            .background(Color(UIColor.liteWalletBlue))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 4)
+                                    .stroke(Color(UIColor.liteWalletBlue))
+                            ) 
+                    }
+                    .padding(.bottom, 30)
+                    .padding([.leading,.trailing], 20)
+                    
+                    // Cancel
+                    Button(action: {
+                        self.showSupportLFPage = false
+                    }) {
+                        Text(S.Button.cancel)
+                            .padding([.leading,.trailing],20)
+                            .padding([.top,.bottom],10)
+                            .font(Font(UIFont.customMedium(size: 16.0)))
+                            .foregroundColor(Color(UIColor.liteWalletBlue))
+                            .background(Color(UIColor.white))
                             .overlay(
                                 RoundedRectangle(cornerRadius: 4)
                                     .stroke(Color(UIColor.secondaryBorder))
-                            ) 
+                            )
                     }
                     .padding(.bottom, 50)
-                    .padding([.leading,.trailing], 50)
+                    .padding([.leading,.trailing], 20)
                 }
-            }
+             }
             Spacer()
             Rectangle()
                 .fill(Color(UIColor.secondaryBorder))
