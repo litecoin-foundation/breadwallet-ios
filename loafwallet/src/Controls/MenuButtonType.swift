@@ -11,6 +11,7 @@ import UIKit
 enum MenuButtonType {
     case security
     case support
+    case supportLF
     case settings
     case lock
 
@@ -20,6 +21,8 @@ enum MenuButtonType {
             return S.MenuButton.security
         case .support:
             return S.MenuButton.support
+        case .supportLF:
+            return S.SupportLitecoinFoundation.title
         case .settings:
             return S.MenuButton.settings
         case .lock:
@@ -33,6 +36,8 @@ enum MenuButtonType {
             return #imageLiteral(resourceName: "Shield")
         case .support:
             return #imageLiteral(resourceName: "FaqFill")
+        case .supportLF:
+            return #imageLiteral(resourceName: "BuyLitecoin")
         case .settings:
             return #imageLiteral(resourceName: "Settings")
         case .lock:

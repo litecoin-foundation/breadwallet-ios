@@ -425,6 +425,9 @@
 "MenuButton.buy" = "リテコインを購入";
 
 /* Menu button title */
+"MenuButton.customer.support" = "顧客サポート";
+
+/* Menu button title */
 "MenuButton.lock" = "ウォレットにロックを設定する";
 
 /* Menu button title */

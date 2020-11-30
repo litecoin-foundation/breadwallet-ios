@@ -8,7 +8,7 @@
 
 import UIKit
 import LocalAuthentication
-
+import SwiftUI
 
 class ModalPresenter : Subscriber, Trackable {
 
@@ -355,6 +355,13 @@ class ModalPresenter : Subscriber, Trackable {
                 self?.messagePresenter.presentSupportCompose()
             })
         }
+        
+        menu.didTapSupportLF = { [weak self, weak menu] in
+            menu?.dismiss(animated: true, completion: {
+                self?.presentSupportLF()
+            })
+        }
+        
         menu.didTapLock = { [weak self, weak menu] in
             menu?.dismiss(animated: true) {
                 self?.store.trigger(name: .lock)
@@ -526,7 +533,27 @@ class ModalPresenter : Subscriber, Trackable {
             parent?.present(vc, animated: true, completion: {})
         }
     }
+    // MARK: - Present Support LF View
+    private func presentSupportLF() {
+        
+        let supportLFView = UIHostingController(rootView: SupportLitecoinFoundationView(viewModel: SupportLitecoinFoundationViewModel()))
+            
+        supportLFView.rootView.viewModel.didCancel = {
+            supportLFView.dismiss(animated: true) {
+                //TODO: Track in Analytics
+            }
+        }
+        
+        supportLFView.rootView.viewModel.didCopyLTCAddress = {
+            supportLFView.dismiss(animated: true) {
+                //TODO: Track in Analytics
+            }
+        }
+         
+        window.rootViewController?.present(supportLFView, animated: true, completion: nil)
 
+    }
+    
     private func presentSecurityCenter() {
         guard let walletManager = walletManager else { return }
         let securityCenter = SecurityCenterViewController(store: store, walletManager: walletManager)

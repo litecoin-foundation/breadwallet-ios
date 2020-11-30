@@ -1266,3 +1266,6 @@
 
 /* Support the Litecoin Foundation */
 "SupportTheFoundation.title" = "Support the Litecoin Foundation";
+
+/* Menu button title */
+"MenuButton.customer.support" = "Customer support";

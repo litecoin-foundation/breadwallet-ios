@@ -423,7 +423,7 @@ enum S {
 
     enum MenuButton {
         static let security = NSLocalizedString("MenuButton.security", value: "**Security Center**", comment: "Menu button title")
-        static let support = NSLocalizedString("MenuButton.support", value: "**Support**", comment: "Menu button title")
+        static let support = NSLocalizedString("MenuButton.customer.support", value: "**Customer support**", comment: "Menu button title")
         static let settings = NSLocalizedString("MenuButton.settings", value: "**Settings**", comment: "Menu button title")
         static let lock = NSLocalizedString("MenuButton.lock", value: "**Lock Wallet**", comment: "Menu button title")
         static let buy = NSLocalizedString("MenuButton.buy", value: "**Buy Litecoin**", comment: "Buy Litecoin title")

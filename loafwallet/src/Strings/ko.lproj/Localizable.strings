@@ -425,6 +425,9 @@
 "MenuButton.buy" = "Litecoin 구매";
 
 /* Menu button title */
+"MenuButton.customer.support" = "고객 지원";
+
+/* Menu button title */
 "MenuButton.lock" = "지갑 잠그기";
 
 /* Menu button title */

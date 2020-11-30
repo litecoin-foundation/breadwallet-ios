@@ -425,6 +425,9 @@
 "MenuButton.buy" = "Купить Litecoin";
 
 /* Menu button title */
+"MenuButton.customer.support" = "Служба поддержки";
+
+/* Menu button title */
 "MenuButton.lock" = "Заблокировать кошелек";
 
 /* Menu button title */

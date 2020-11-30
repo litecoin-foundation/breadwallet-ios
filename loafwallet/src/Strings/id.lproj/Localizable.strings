@@ -425,6 +425,9 @@
 "MenuButton.buy" = "Membeli Litecoin";
 
 /* Menu button title */
+"MenuButton.customer.support" = "Dukungan pelanggan";
+
+/* Menu button title */
 "MenuButton.lock" = "Dompet Kunci";
 
 /* Menu button title */
