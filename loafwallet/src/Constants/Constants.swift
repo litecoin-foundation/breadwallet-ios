@@ -45,6 +45,7 @@ struct FoundationSupport {
     static let supportLTCAddress = "MVZj7gBRwcVpa9AAWdJm8A3HqTst112eJe"
 }
 
+
 struct APIServer {
      
     #if DEBUG

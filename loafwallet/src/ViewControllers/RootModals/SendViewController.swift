@@ -90,7 +90,7 @@ class SendViewController : UIViewController, Subscriber, ModalPresentable, Track
                 amountView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 amountView.view.topAnchor.constraint(equalTo: addressCell.bottomAnchor),
                 amountView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor) ]) })
-      
+				
         descriptionCell.constrain([
             descriptionCell.widthAnchor.constraint(equalTo: amountView.view.widthAnchor),
                                     descriptionCell.topAnchor.constraint(equalTo: amountView.view.bottomAnchor),
@@ -168,7 +168,6 @@ class SendViewController : UIViewController, Subscriber, ModalPresentable, Track
                 self?.addressCell.textField.resignFirstResponder()
             }
         }
-            
     }
 
     private func balanceTextForAmount(amount: Satoshis?, rate: Rate?) -> (NSAttributedString?, NSAttributedString?) {
