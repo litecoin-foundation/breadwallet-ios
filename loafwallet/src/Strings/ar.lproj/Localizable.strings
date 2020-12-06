@@ -1255,15 +1255,6 @@
 /* Litewallet Partners */
 "Settings.litewallet.partners" = "";
 
-/* Tap copy instructions */
-"SupportTheFoundation.copy.step" = "";
-
-/* Choose the amount then send */
-"SupportTheFoundation.enter.step" = "";
-
-/* Tap the Send tab then tap Paste */
-"SupportTheFoundation.paste.step" = "";
-
 /* Delete database title */
 "WipeWallet.alertDeleteTitle" = "";
 
