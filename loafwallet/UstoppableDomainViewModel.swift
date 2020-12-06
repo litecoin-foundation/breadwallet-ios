@@ -58,10 +58,9 @@ class UnstoppableDomainViewModel: ObservableObject {
         
         self.resolveUDAddress(domainName: searchString)
         
+        ///Fallback resolution: Set in case it takes a longer time to resolve.
         DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
-            
             self.didResolveUDAddress?(self.ltcAddress)
-            
             self.isDomainResolving = false
         }
     }
@@ -81,9 +80,12 @@ class UnstoppableDomainViewModel: ObservableObject {
                                                                 CustomEvent._20201121_DRIA,
                                                                properties:
                                                                 ["success_time": timestamp])
-                                
                             
-                            self.ltcAddress = returnValue
+                            ///Quicker resolution: When the resolution is done, the activity indicatior stops and the address is  updated
+                            DispatchQueue.main.async {
+                                self.didResolveUDAddress?(returnValue)
+                                self.isDomainResolving = false
+                            }
                             
                         case .failure(let error):
                             
