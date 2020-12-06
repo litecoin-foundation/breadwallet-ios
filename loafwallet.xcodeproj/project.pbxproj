@@ -268,8 +268,6 @@
 		75A2A8141DA5936F00A983D8 /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 75A2A8081DA5936F00A983D8 /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		75C735AA1DAA1B9C00251ECF /* libunbound.c in Sources */ = {isa = PBXBuildFile; fileRef = 755CD4121DAA0E3E0075898E /* libunbound.c */; };
 		BB66CB271F7F2FD1936AA04B /* Pods_loafwalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEAAB89A265CC043F53CC51 /* Pods_loafwalletTests.framework */; };
-		C35ABCFF257404A9002BB9BB /* SocialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35ABCFE257404A9002BB9BB /* SocialView.swift */; };
-		C35ABD0B25740537002BB9BB /* SocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35ABD0A25740537002BB9BB /* SocialViewModel.swift */; };
 		C35ABD232574070A002BB9BB /* PartnersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35ABD222574070A002BB9BB /* PartnersView.swift */; };
 		C35ABD332574073F002BB9BB /* PartnersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35ABD322574073F002BB9BB /* PartnersViewModel.swift */; };
 		C35ABD4325741E19002BB9BB /* ResolutionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35ABD4225741E19002BB9BB /* ResolutionModel.swift */; };
@@ -1421,8 +1419,6 @@
 		93035AB774472BF9805FD3F9 /* Pods-loafwallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loafwallet.debug.xcconfig"; path = "Target Support Files/Pods-loafwallet/Pods-loafwallet.debug.xcconfig"; sourceTree = "<group>"; };
 		9AA160F2A4C1674AC8595E65 /* Pods-loafwalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loafwalletTests.debug.xcconfig"; path = "Target Support Files/Pods-loafwalletTests/Pods-loafwalletTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9C4905F581557D8FD607EB73 /* Pods-loafwallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loafwallet.release.xcconfig"; path = "Target Support Files/Pods-loafwallet/Pods-loafwallet.release.xcconfig"; sourceTree = "<group>"; };
-		C35ABCFE257404A9002BB9BB /* SocialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialView.swift; sourceTree = "<group>"; };
-		C35ABD0A25740537002BB9BB /* SocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewModel.swift; sourceTree = "<group>"; };
 		C35ABD222574070A002BB9BB /* PartnersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnersView.swift; sourceTree = "<group>"; };
 		C35ABD322574073F002BB9BB /* PartnersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnersViewModel.swift; sourceTree = "<group>"; };
 		C35ABD4225741E19002BB9BB /* ResolutionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionModel.swift; sourceTree = "<group>"; };
@@ -3031,7 +3027,6 @@
 			isa = PBXGroup;
 			children = (
 				C35ABD08257404D2002BB9BB /* Partners */,
-				C35ABD21257406AB002BB9BB /* Social */,
 				C35ABD0925740518002BB9BB /* About */,
 				C3F55643255A1916005F786F /* SupportLitecoinFoundation */,
 				C3D783A52565EA1E0004FF70 /* Unstoppable */,
@@ -3056,15 +3051,6 @@
 			children = (
 			);
 			name = About;
-			sourceTree = "<group>";
-		};
-		C35ABD21257406AB002BB9BB /* Social */ = {
-			isa = PBXGroup;
-			children = (
-				C35ABCFE257404A9002BB9BB /* SocialView.swift */,
-				C35ABD0A25740537002BB9BB /* SocialViewModel.swift */,
-			);
-			name = Social;
 			sourceTree = "<group>";
 		};
 		C3B7C3EC255FF56100E98A64 /* Constants Tests */ = {
@@ -4179,7 +4165,6 @@
 				C3D4379F2566EA3E00F423E1 /* LWActivityIndicator.swift in Sources */,
 				CECCE5AE1E04AD6300D99448 /* AddressCell.swift in Sources */,
 				CE6BCF5D1EE9E89A0029849C /* CustomTitleView.swift in Sources */,
-				C35ABCFF257404A9002BB9BB /* SocialView.swift in Sources */,
 				CE83DE2A1E9EB7F600D07636 /* SendAmountCell.swift in Sources */,
 				22A9A9521DF61945000F0016 /* BRKVStorePlugin.swift in Sources */,
 				CEAFC8611E5D5B0500E4FD06 /* SegmentedButton.swift in Sources */,
@@ -4188,7 +4173,6 @@
 				22A9A9581DF61945000F0016 /* BRWebViewController.swift in Sources */,
 				CEC4CF091F0C84AB00E5C82E /* UIViewController+Alerts.swift in Sources */,
 				CE27F9591E2C8EA300F7F7F2 /* Amount.swift in Sources */,
-				C35ABD0B25740537002BB9BB /* SocialViewModel.swift in Sources */,
 				CE1280F61EEA855C00D27649 /* Date+Additions.swift in Sources */,
 				CED82D4E1E575A5500507A9B /* _main.swift in Sources */,
 				CEEC708E1E954AAB00EF788E /* AboutCell.swift in Sources */,
