@@ -1,5 +1,5 @@
 //
-//  UstoppableDomainViewModel.swift
+//  UnstoppableDomainViewModel.swift
 //  loafwallet
 //
 //  Created by Kerry Washington on 11/18/20.
@@ -42,6 +42,7 @@ class UnstoppableDomainViewModel: ObservableObject {
         
         //Triggers 'failed' RPC connection
         _ = ResolutionModel.shared.resolution
+        
     }
     
     func resolveDomain() {
@@ -83,7 +84,8 @@ class UnstoppableDomainViewModel: ObservableObject {
                             
                             ///Quicker resolution: When the resolution is done, the activity indicatior stops and the address is  updated
                             DispatchQueue.main.async {
-                                self.didResolveUDAddress?(returnValue)
+                                self.ltcAddress = returnValue
+                                self.didResolveUDAddress?(self.ltcAddress)
                                 self.isDomainResolving = false
                             }
                             
@@ -94,7 +96,8 @@ class UnstoppableDomainViewModel: ObservableObject {
                             LWAnalytics.logEventWithParameters(itemName:
                                                                 CustomEvent._20201121_FRIA,
                                                                properties:
-                                                                ["failure_time": timestamp])
+                                                                ["failure_time": timestamp,
+                                                                 "error":error.localizedDescription])
                             
                             print("Expected LTC Address, but got \(error.localizedDescription)")
 

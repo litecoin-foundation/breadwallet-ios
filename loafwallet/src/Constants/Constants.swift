@@ -47,6 +47,7 @@ struct FoundationSupport {
     /// As of Nov 14th, 2020
     static let supportLTCAddress = "MVZj7gBRwcVpa9AAWdJm8A3HqTst112eJe"
 }
+ 
 
 struct APIServer {
      

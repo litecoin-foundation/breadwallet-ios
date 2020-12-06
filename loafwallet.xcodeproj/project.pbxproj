@@ -277,8 +277,9 @@
 		C3B7C43F25620D4400E98A64 /* SupportLitecoinFoundationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B7C43E25620D4400E98A64 /* SupportLitecoinFoundationViewModelTests.swift */; };
 		C3D4379F2566EA3E00F423E1 /* LWActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D4379E2566EA3E00F423E1 /* LWActivityIndicator.swift */; };
 		C3D783A72565EA4B0004FF70 /* UnstoppableDomainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D783A62565EA4A0004FF70 /* UnstoppableDomainView.swift */; };
-		C3D783B72565EA6B0004FF70 /* UstoppableDomainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D783B62565EA6B0004FF70 /* UstoppableDomainViewModel.swift */; };
+		C3D783B72565EA6B0004FF70 /* UnstoppableDomainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D783B62565EA6B0004FF70 /* UnstoppableDomainViewModel.swift */; };
 		C3D783C02565ECF60004FF70 /* UnstoppableDomainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D783BF2565ECF60004FF70 /* UnstoppableDomainViewModelTests.swift */; };
+		C3EB574C257D95B7003E3949 /* partner-keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3EB574B257D95B7003E3949 /* partner-keys.plist */; };
 		C3F55645255A193D005F786F /* SupportLitecoinFoundationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F55644255A193D005F786F /* SupportLitecoinFoundationView.swift */; };
 		C3F55655255A195B005F786F /* SupportLitecoinFoundationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F55654255A195B005F786F /* SupportLitecoinFoundationViewModel.swift */; };
 		CE03EC741EF256AC0038E3A8 /* SimpleUTXO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE03EC731EF256AC0038E3A8 /* SimpleUTXO.swift */; };
@@ -1428,8 +1429,9 @@
 		C3B7C43E25620D4400E98A64 /* SupportLitecoinFoundationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportLitecoinFoundationViewModelTests.swift; sourceTree = "<group>"; };
 		C3D4379E2566EA3E00F423E1 /* LWActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LWActivityIndicator.swift; sourceTree = "<group>"; };
 		C3D783A62565EA4A0004FF70 /* UnstoppableDomainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnstoppableDomainView.swift; sourceTree = "<group>"; };
-		C3D783B62565EA6B0004FF70 /* UstoppableDomainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UstoppableDomainViewModel.swift; sourceTree = "<group>"; };
+		C3D783B62565EA6B0004FF70 /* UnstoppableDomainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnstoppableDomainViewModel.swift; sourceTree = "<group>"; };
 		C3D783BF2565ECF60004FF70 /* UnstoppableDomainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnstoppableDomainViewModelTests.swift; sourceTree = "<group>"; };
+		C3EB574B257D95B7003E3949 /* partner-keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "partner-keys.plist"; sourceTree = "<group>"; };
 		C3F55644255A193D005F786F /* SupportLitecoinFoundationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportLitecoinFoundationView.swift; sourceTree = "<group>"; };
 		C3F55654255A195B005F786F /* SupportLitecoinFoundationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportLitecoinFoundationViewModel.swift; sourceTree = "<group>"; };
 		CE03EC731EF256AC0038E3A8 /* SimpleUTXO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleUTXO.swift; path = src/Models/SimpleUTXO.swift; sourceTree = "<group>"; };
@@ -2915,6 +2917,7 @@
 		75A2A7921DA5934300A983D8 /* loafwallet */ = {
 			isa = PBXGroup;
 			children = (
+				C3EB574B257D95B7003E3949 /* partner-keys.plist */,
 				C35ABD07257404C6002BB9BB /* SwiftUI+UIKit */,
 				75A2A87C1DA59E4E00A983D8 /* loafwallet.entitlements */,
 				75A2A7931DA5934300A983D8 /* AppDelegate.swift */,
@@ -3066,7 +3069,7 @@
 			children = (
 				C3D783A62565EA4A0004FF70 /* UnstoppableDomainView.swift */,
 				C35ABD4225741E19002BB9BB /* ResolutionModel.swift */,
-				C3D783B62565EA6B0004FF70 /* UstoppableDomainViewModel.swift */,
+				C3D783B62565EA6B0004FF70 /* UnstoppableDomainViewModel.swift */,
 			);
 			name = Unstoppable;
 			sourceTree = "<group>";
@@ -3768,6 +3771,7 @@
 				24016D8E23F887C3006A6791 /* GoogleService-Info.plist in Resources */,
 				24393B5C23C259400075218D /* Phrase.storyboard in Resources */,
 				24313CA723824F5800A83F69 /* Spend.storyboard in Resources */,
+				C3EB574C257D95B7003E3949 /* partner-keys.plist in Resources */,
 				75A2A79B1DA5934300A983D8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4074,7 +4078,7 @@
 				754AE0BC1DFE8A46007FD001 /* BRCore.swift in Sources */,
 				22A9A94A1DF61945000F0016 /* BRCameraPlugin.swift in Sources */,
 				24306797238F3DF900EBEA99 /* BartyCrouch.swift in Sources */,
-				C3D783B72565EA6B0004FF70 /* UstoppableDomainViewModel.swift in Sources */,
+				C3D783B72565EA6B0004FF70 /* UnstoppableDomainViewModel.swift in Sources */,
 				CEC6AA3B1DEE4EB000EE5AFD /* CGRect+Additions.swift in Sources */,
 				C35ABD4325741E19002BB9BB /* ResolutionModel.swift in Sources */,
 				CE45C1FB1E74F89C002C3847 /* WalletInfo.swift in Sources */,
