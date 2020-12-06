@@ -543,14 +543,8 @@ class ModalPresenter : Subscriber, Trackable {
     private func presentSupportLF() {
         
         let supportLFView = UIHostingController(rootView: SupportLitecoinFoundationView(viewModel: SupportLitecoinFoundationViewModel()))
-            
-        supportLFView.rootView.viewModel.didCancel = {
-            supportLFView.dismiss(animated: true) {
-                //TODO: Track in Analytics
-            }
-        }
-        
-        supportLFView.rootView.viewModel.didCopyLTCAddress = {
+         
+        supportLFView.rootView.viewModel.didTapToDismiss = {
             supportLFView.dismiss(animated: true) {
                 //TODO: Track in Analytics
             }

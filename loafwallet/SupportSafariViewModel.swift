@@ -9,9 +9,6 @@
 import Foundation
 
 class SupportSafariViewModel: ObservableObject {
-    
-    @Published
-    var supportLTCAddress = ""
-        
+      
     init() { }
 }

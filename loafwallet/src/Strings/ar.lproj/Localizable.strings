@@ -301,6 +301,9 @@
 /* Fee Selector title */
 "FeeSelector.title" = "Processing Speed";
 
+/* Or */
+"Fragment.or" = "or";
+
 /* History Bar Item Title */
 "History.barItemTitle" = "HISTORY";
 
@@ -1240,11 +1243,26 @@
 /* Message for luxury fee */
 "FeeSelector.luxuryMessage" = "";
 
+/* Menu button title */
+"MenuButton.customer.support" = "";
+
+/* Enter LTC Address */
+"Send.enterLTCAddress" = "";
+
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = "";
 
 /* Litewallet Partners */
 "Settings.litewallet.partners" = "";
+
+/* Tap copy instructions */
+"SupportTheFoundation.copy.step" = "";
+
+/* Choose the amount then send */
+"SupportTheFoundation.enter.step" = "";
+
+/* Tap the Send tab then tap Paste */
+"SupportTheFoundation.paste.step" = "";
 
 /* Delete database title */
 "WipeWallet.alertDeleteTitle" = "";

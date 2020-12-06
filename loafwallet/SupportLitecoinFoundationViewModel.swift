@@ -16,11 +16,7 @@ class SupportLitecoinFoundationViewModel: ObservableObject {
     //MARK: - Combine Variables
     
     //MARK: - Public Variables
-    
-    
-    var didCancel: (()->())?
-    
-    var didCopyLTCAddress: (()->())?
+    var didTapToDismiss: (()->())? 
     
     init() {}
 }

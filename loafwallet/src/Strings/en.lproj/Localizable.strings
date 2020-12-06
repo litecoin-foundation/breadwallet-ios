@@ -910,6 +910,15 @@
 /* Start view message */
 "StartViewController.message" = "The most secure and safest way to use Litecoin.";
 
+/* Tap copy instructions */
+"SupportTheFoundation.copy.step" = "After tapping the copy button, the Litecoin Foundation address is copied to the pasteboard";
+
+/* Choose the amount then send */
+"SupportTheFoundation.enter.step" = "Choose the amount then send to support the Litecoin Foundation";
+
+/* Tap the Send tab then tap Paste */
+"SupportTheFoundation.paste.step" = "After tapping SEND, tap Paste";
+
 /* Support the Litecoin Foundation */
 "SupportTheFoundation.title" = "Support the Litecoin Foundation";
 

@@ -1267,7 +1267,7 @@
 /* Support the Litecoin Foundation */
 "SupportTheFoundation.title" = "Support the Litecoin Foundation";
 
- /* Menu button title */
+/* Menu button title */
 "MenuButton.customer.support" = "Customer support";
 
 /* Enter to match domain name to LTC Address */
@@ -1280,4 +1280,4 @@
 "Send.enterLTCAddress" = "Enter an LTC Address";
 
 /* Litewallet Partners */
-"Settings.litewallet.partners" = "Litewallet partners";
+"Settings.litewallet.partners" = "Litewallet partners"; 

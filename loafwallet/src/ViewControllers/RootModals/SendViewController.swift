@@ -38,7 +38,6 @@ class SendViewController : UIViewController, Subscriber, ModalPresentable, Track
         self.amountView = AmountViewController(store: store, isPinPadExpandedAtLaunch: false)
         super.init(nibName: nil, bundle: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: .UIKeyboardWillHide, object: nil)
     }
     
     //MARK - Private
@@ -78,40 +77,33 @@ class SendViewController : UIViewController, Subscriber, ModalPresentable, Track
         } else {
             view.backgroundColor = .white
         }
-        
+         
         // set as regular at didLoad
         walletManager.wallet?.feePerKb = store.state.fees.regular
         
-        view.addSubview(addressCell) 
+        view.addSubview(addressCell)
         view.addSubview(unstoppableCell.view)
         view.addSubview(descriptionCell)
         view.addSubview(sendButton)
         
         addressCell.constrainTopCorners(height: SendCell.defaultHeight)
+        
+        
         addChildViewController(amountView, layout: {
-            amountView.view.constrain([
-                amountView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                amountView.view.topAnchor.constraint(equalTo: addressCell.bottomAnchor),
-                amountView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor) ]) })
-				
-        descriptionCell.constrain([
-            descriptionCell.widthAnchor.constraint(equalTo: amountView.view.widthAnchor),
-                                    descriptionCell.topAnchor.constraint(equalTo: amountView.view.bottomAnchor),
-            descriptionCell.leadingAnchor.constraint(equalTo: amountView.view.leadingAnchor),
-            descriptionCell.heightAnchor.constraint(equalTo: descriptionCell.textView.heightAnchor, constant: C.padding[3]) ])
-
                                 amountView.view.constrain([
                                                             amountView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                                                             amountView.view.topAnchor.constraint(equalTo: unstoppableCell.view.bottomAnchor),
                                                             amountView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor) ]) })
-         unstoppableCell.view.constrain([
+        
+        unstoppableCell.view.constrain([
                                         unstoppableCell.view.topAnchor.constraint(equalTo: addressCell.bottomAnchor),
                                         unstoppableCell.view.widthAnchor.constraint(equalTo: amountView.view.widthAnchor),
                                         unstoppableCell.view.leadingAnchor.constraint(equalTo: amountView.view.leadingAnchor),
-                                        unstoppableCell.view.heightAnchor.constraint(equalToConstant: SendCell.defaultHeight 
+                                        unstoppableCell.view.heightAnchor.constraint(equalToConstant: SendCell.defaultHeight) ])
+        
         descriptionCell.constrain([
                                     descriptionCell.widthAnchor.constraint(equalTo: amountView.view.widthAnchor),
-                                    descriptionCell.topAnchor.constraint(equalTo: unstoppableCell.view.bottomAnchor),
+                                    descriptionCell.topAnchor.constraint(equalTo: amountView.view.bottomAnchor),
                                     descriptionCell.leadingAnchor.constraint(equalTo: amountView.view.leadingAnchor),
                                     descriptionCell.heightAnchor.constraint(equalTo: descriptionCell.textView.heightAnchor, constant: C.padding[3]) ])
         
@@ -185,7 +177,8 @@ class SendViewController : UIViewController, Subscriber, ModalPresentable, Track
                 self?.descriptionCell.textView.resignFirstResponder()
                 self?.addressCell.textField.resignFirstResponder()
             }
-        }  
+        }
+        
         unstoppableCell.rootView.viewModel.didResolveUDAddress = { resolvedUDAddress in
             ///Paste in Unstoppable Domain resolved LTC address to textField
             self.addressCell.textField.text = resolvedUDAddress
@@ -479,4 +472,5 @@ extension SendViewController : ModalDisplayable {
         return S.Send.title
     }
 }
+
 

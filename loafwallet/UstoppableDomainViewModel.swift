@@ -30,7 +30,7 @@ class UnstoppableDomainViewModel: ObservableObject {
     private var ltcAddress = ""
     
     
-    private lazy var dateFormatter: DateFormatter? {
+    private var dateFormatter: DateFormatter? {
         
         didSet {
             dateFormatter = DateFormatter()

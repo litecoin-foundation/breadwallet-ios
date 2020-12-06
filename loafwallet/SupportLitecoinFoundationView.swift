@@ -11,17 +11,15 @@ import Foundation
 import WebKit
 
 /// This cell is under the amount view and above the Memo view in the Send VC
-struct SupportLitecoinFoundationView: View { 
-	
+struct SupportLitecoinFoundationView: View {
+    
     //MARK: - Combine Variables
     @ObservedObject
     var viewModel: SupportLitecoinFoundationViewModel
     
     @State
-    var supportLTCAddress = ""
-    
-    @State
     private var showSupportLFPage: Bool = false
+     
     
     //MARK: - Public
     var supportSafariView = SupportSafariView(url: FoundationSupport.url,
@@ -32,53 +30,67 @@ struct SupportLitecoinFoundationView: View {
     }
     
     var body: some View {
-        
         VStack {
-            Spacer()
+            Spacer(minLength: 40)
+
             supportSafariView
-                .frame(height: 500,
-                       alignment: .center
-                )
-                .padding(.bottom, 50)
+                .frame(height: 300,
+                       alignment: .center)
+                .padding([.bottom, .top], 10)
             
             // Copy the LF Address and paste into the SendViewController
             Button(action: {
                 UIPasteboard.general.string = FoundationSupport.supportLTCAddress
-                self.viewModel.didCopyLTCAddress?()
-                
+                self.viewModel.didTapToDismiss?()
             }) {
-                Text(S.URLHandling.copy)
-                    .padding([.leading,.trailing],20)
-                    .padding([.top,.bottom],10)
+                Text(S.URLHandling.copy.uppercased())
                     .font(Font(UIFont.customMedium(size: 16.0)))
+                    .padding()
+                    .frame(maxWidth: .infinity)
                     .foregroundColor(Color(UIColor.white))
                     .background(Color(UIColor.liteWalletBlue))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 4)
-                            .stroke(Color(UIColor.liteWalletBlue))
-                    )
+                    .cornerRadius(4.0)
             }
-            .padding(.bottom, 30)
-            .padding([.leading,.trailing], 20)
-            
+            .padding([.leading, .trailing], 40)
+            .padding(.bottom, 10)
+
             // Cancel
             Button(action: {
-                self.viewModel.didCancel?()
+                self.viewModel.didTapToDismiss?()
             }) {
-                Text(S.Button.cancel)
-                    .padding([.leading,.trailing],20)
-                    .padding([.top,.bottom],10)
+                Text(S.Button.cancel.uppercased())
                     .font(Font(UIFont.customMedium(size: 16.0)))
+                    .padding()
+                    .frame(maxWidth: .infinity)
                     .foregroundColor(Color(UIColor.liteWalletBlue))
                     .background(Color(UIColor.white))
+                    .cornerRadius(4.0)
                     .overlay(
                         RoundedRectangle(cornerRadius: 4)
                             .stroke(Color(UIColor.secondaryBorder))
                     )
             }
-            .padding(.bottom, 50)
-            .padding([.leading,.trailing], 20)
+            .padding([.leading, .trailing], 40)
+            
+            Spacer(minLength: 100)
         }
-        Spacer()
     }
 }
+
+struct SupportLitecoinFoundationView_Previews: PreviewProvider {
+    
+    static let viewModel = SupportLitecoinFoundationViewModel()
+    
+    static var previews: some View {
+        Group {
+            SupportLitecoinFoundationView(viewModel: viewModel)
+                .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro Max"))
+                .previewDisplayName("iPhone 12 Pro Max")
+            
+            SupportLitecoinFoundationView(viewModel: viewModel)
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+                .previewDisplayName("iPhone SE")
+        }
+    }
+}
+

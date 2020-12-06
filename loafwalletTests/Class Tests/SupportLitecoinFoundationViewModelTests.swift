@@ -18,15 +18,13 @@ class SupportLitecoinFoundationViewModelTests: XCTestCase {
         viewModel = SupportLitecoinFoundationViewModel()
     }
      
-    /// Checks the domain address closure
-    /// - Throws: Error
-    func testDidGetLTCAddress() throws {
+    /// Checks the user taps on the closure
+    func testDidTapToDismiss() throws {
         
-        self.viewModel.didGetLTCAddress?("RESOLVED_LTC_ADDRESS")
-        
-        //DEV: This test succeeds incorrectly
-        viewModel.didGetLTCAddress = { address in
-            XCTAssertTrue(address == "RESOLVED_LTC_ADDRESS")
+        self.viewModel.didTapToDismiss?()
+  
+        viewModel.didTapToDismiss = {
+            XCTAssert(true, "Tap did work")
         }
     }
     
