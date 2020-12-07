@@ -749,7 +749,7 @@
 "Send.emptyPasteboard" = "Буфер обмена пуст";
 
 /* Enter LTC Address */
-"Send.enterLTCAddress" = "Введите адрес LTC";
+"Send.enterLTCAddress" = "Введите адрес Litecoin";
 
 /* Network Fee: $0.01 */
 "Send.fee" = "Комиссия сети: %1$@";

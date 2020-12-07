@@ -749,7 +749,7 @@
 "Send.emptyPasteboard" = "Pasteboard ist leer.";
 
 /* Enter LTC Address */
-"Send.enterLTCAddress" = "Geben Sie eine LTC-Adresse ein";
+"Send.enterLTCAddress" = "Geben Sie eine Litecoin-Adresse ein";
 
 /* Network Fee: $0.01 */
 "Send.fee" = "Netzwerkgebühr: %1$@";

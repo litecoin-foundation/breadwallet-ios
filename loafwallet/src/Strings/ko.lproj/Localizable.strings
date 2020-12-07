@@ -749,7 +749,7 @@
 "Send.emptyPasteboard" = "클립보드가 비어 있습니다";
 
 /* Enter LTC Address */
-"Send.enterLTCAddress" = "LTC 주소 입력";
+"Send.enterLTCAddress" = "라이트 코인 주소를 입력하세요";
 
 /* Network Fee: $0.01 */
 "Send.fee" = "네트워크 비용: %1$@";

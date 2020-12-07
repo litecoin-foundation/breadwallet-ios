@@ -1277,7 +1277,7 @@
 "Fragment.or" = "or";
 
 /* Enter LTC Address */
-"Send.enterLTCAddress" = "Enter an LTC Address";
+"Send.enterLTCAddress" = "Enter a Litecoin address";
 
 /* Litewallet Partners */
 "Settings.litewallet.partners" = "Litewallet partners";

@@ -749,7 +749,7 @@
 "Send.emptyPasteboard" = "剪貼板是空的";
 
 /* Enter LTC Address */
-"Send.enterLTCAddress" = "輸入一個LTC地址";
+"Send.enterLTCAddress" = "輸入萊特幣地址";
 
 /* Network Fee: $0.01 */
 "Send.fee" = "網路費：%1$@";
