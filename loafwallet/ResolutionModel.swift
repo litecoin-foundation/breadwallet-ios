@@ -17,14 +17,12 @@ class ResolutionModel: NSObject {
     
     override init() {
         super.init()
-        
-        var keypath: String = ""
-        
+         
          if let path = Bundle.main.path(forResource: "partner-keys", ofType: "plist"),
             let dictionary = NSDictionary(contentsOfFile:path) as? Dictionary<String, AnyObject>,
             let key = dictionary["infura"] as? String {
-                keypath = "https://mainnet.infura.io/v3/" + key
-            
+            let keypath = "https://mainnet.infura.io/v3/" + key
+          
             do {
                 guard let resolution = try? Resolution(providerUrl: keypath, network: "mainnet") else {
                     print ("Init of Resolution instance with custom parameters failed...")
@@ -35,6 +33,6 @@ class ResolutionModel: NSObject {
             } catch {
                 print("Unstoppable Domains Error: \(String(describing: self.resolution))")
             }
-        }
+         }
     }
 }
