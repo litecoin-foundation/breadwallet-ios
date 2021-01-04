@@ -61,6 +61,12 @@
 /* Alert Header label (the PIN was set) */
 "Alerts.pinSet" = "PIN indstillet";
 
+/* Resolved Success */
+"Alerts.resolvedSuccess" = "Domæneopløsning";
+
+/* No comment provided by engineer. */
+"Alerts.resolvedSuccessSubheader" = "Din adresse blev løst!";
+
 /* Send failure alert header label (the send failed to happen) */
 "Alerts.sendFailure" = "Afsendelse mislykkedes";
 
@@ -1266,3 +1272,6 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d af %2$d";
+
+/* Lookup */
+"Send.UnstoppableDomains.lookup" = "Kig op";

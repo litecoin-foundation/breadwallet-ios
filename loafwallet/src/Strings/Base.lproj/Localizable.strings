@@ -1281,3 +1281,12 @@
 
 /* Litewallet Partners */
 "Settings.litewallet.partners" = "Litewallet partners";
+
+/* Resolved Success */
+"Alerts.resolvedSuccess" = "Domain Resolution";
+
+/* No comment provided by engineer. */
+"Alerts.resolvedSuccessSubheader" = "Address was resolved!";
+
+/* Lookup */
+"Send.UnstoppableDomains.lookup" = "Lookup";

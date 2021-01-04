@@ -25,10 +25,11 @@ class UnstoppableDomainViewModel: ObservableObject {
       
     //MARK: - Public Variables
     var didResolveUDAddress: ((String) -> Void)?
+     
+    var shouldClearAddressField: (() -> Void)?
     
     //MARK: - Private Variables
     private var ltcAddress = ""
-    
     
     private var dateFormatter: DateFormatter? {
         
@@ -49,6 +50,9 @@ class UnstoppableDomainViewModel: ObservableObject {
         
         isDomainResolving = true
         
+        //Clear existing LTC Address to avoid confusion
+        self.shouldClearAddressField?()
+        
         // Added timing peroformance probes to see what the average time is
         let timestamp: String = self.dateFormatter?.string(from: Date()) ?? ""
 
@@ -60,7 +64,7 @@ class UnstoppableDomainViewModel: ObservableObject {
         self.resolveUDAddress(domainName: searchString)
         
         ///Fallback resolution: Set in case it takes a longer time to resolve.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.didResolveUDAddress?(self.ltcAddress)
             self.isDomainResolving = false
         }

@@ -320,6 +320,11 @@ class ModalPresenter : Subscriber, Trackable {
         sendVC.onPublishSuccess = { [weak self] in
             self?.presentAlert(.sendSuccess, completion: {})
         }
+        
+        sendVC.onResolvedSuccess = { [weak self] in
+            self?.presentAlert(.resolvedSuccess, completion: {})
+        }
+        
         return root
     }
     

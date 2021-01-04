@@ -40,3 +40,17 @@ class GradientView : UIView {
         drawGradient(rect)
     }
 }
+
+protocol SolidColorDrawable {
+    func drawColor(color: UIColor, _ rect: CGRect)
+}
+
+extension UIView {
+    func drawColor(color: UIColor = .liteWalletBlue, _ rect: CGRect) {
+        let image = UIImageView(image: #imageLiteral(resourceName: "colorImageBlue"))
+        image.contentMode = .scaleToFill
+        addSubview(image)
+        image.constrain(toSuperviewEdges: nil)
+        sendSubview(toBack: image)
+    }
+}

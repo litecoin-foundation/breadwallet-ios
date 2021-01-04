@@ -1234,6 +1234,12 @@
 /* Corruption Error alert title */
 "Alert.corruptionMessage" = "";
 
+/* Resolved Success */
+"Alerts.resolvedSuccess" = "";
+
+/* No comment provided by engineer. */
+"Alerts.resolvedSuccessSubheader" = "";
+
 /* Luxury fee */
 "FeeSelector.luxury" = "";
 
@@ -1248,6 +1254,9 @@
 
 /* Enter LTC Address */
 "Send.enterLTCAddress" = "";
+
+/* Lookup */
+"Send.UnstoppableDomains.lookup" = "";
 
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = "";

@@ -61,6 +61,12 @@
 /* Alert Header label (the PIN was set) */
 "Alerts.pinSet" = "PIN Set.";
 
+/* Resolved Success */
+"Alerts.resolvedSuccess" = "Domeinresolutie";
+
+/* No comment provided by engineer. */
+"Alerts.resolvedSuccessSubheader" = "Uw adres is opgelost!";
+
 /* Send failure alert header label (the send failed to happen) */
 "Alerts.sendFailure" = "Zending mislukt";
 
@@ -1266,3 +1272,6 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d van %2$d";
+
+/* Lookup */
+"Send.UnstoppableDomains.lookup" = "Opzoeken";

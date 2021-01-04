@@ -61,6 +61,12 @@
 /* Alert Header label (the PIN was set) */
 "Alerts.pinSet" = "PINコードのセット";
 
+/* Resolved Success */
+"Alerts.resolvedSuccess" = "ドメイン解決";
+
+/* No comment provided by engineer. */
+"Alerts.resolvedSuccessSubheader" = "あなたの住所は解決されました！";
+
 /* Send failure alert header label (the send failed to happen) */
 "Alerts.sendFailure" = "送金に失敗しました";
 
@@ -1266,3 +1272,6 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%2$dの%1$d";
+
+/* Lookup */
+"Send.UnstoppableDomains.lookup" = "調べる";

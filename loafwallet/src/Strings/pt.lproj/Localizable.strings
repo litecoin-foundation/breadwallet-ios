@@ -62,6 +62,12 @@
 /* Alert Header label (the PIN was set) */
 "Alerts.pinSet" = "PIN Definido";
 
+/* Resolved Success */
+"Alerts.resolvedSuccess" = "Resolução de Domínio";
+
+/* No comment provided by engineer. */
+"Alerts.resolvedSuccessSubheader" = "Seu endereço foi resolvido!";
+
 /* Send failure alert header label (the send failed to happen) */
 "Alerts.sendFailure" = "Falha no envio";
 
@@ -1267,3 +1273,6 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d de %2$d";
+
+/* Lookup */
+"Send.UnstoppableDomains.lookup" = "Olho para cima";

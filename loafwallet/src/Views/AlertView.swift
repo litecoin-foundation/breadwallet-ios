@@ -12,6 +12,7 @@ enum AlertType {
     case pinSet(callback: () -> Void)
     case paperKeySet(callback: () -> Void)
     case sendSuccess
+    case resolvedSuccess
     case addressesCopied
     case sweepSuccess(callback: () -> Void)
 
@@ -23,6 +24,8 @@ enum AlertType {
             return S.Alerts.paperKeySet
         case .sendSuccess:
             return S.Alerts.sendSuccess
+        case .resolvedSuccess:
+            return S.Alerts.resolvedSuccess
         case .addressesCopied:
             return S.Alerts.copiedAddressesHeader
         case .sweepSuccess:
@@ -38,6 +41,8 @@ enum AlertType {
             return S.Alerts.paperKeySetSubheader
         case .sendSuccess:
             return S.Alerts.sendSuccessSubheader
+        case .resolvedSuccess:
+            return S.Alerts.resolvedSuccessSubheader
         case .addressesCopied:
             return S.Alerts.copiedAddressesSubheader
         case .sweepSuccess:
@@ -60,6 +65,8 @@ func ==(lhs: AlertType, rhs: AlertType) -> Bool {
         return true
     case (.sendSuccess, .sendSuccess):
         return true
+    case (.resolvedSuccess, .resolvedSuccess):
+            return true
     case (.addressesCopied, .addressesCopied):
         return true
     case (.sweepSuccess(_), .sweepSuccess(_)):
@@ -69,7 +76,7 @@ func ==(lhs: AlertType, rhs: AlertType) -> Bool {
     }
 }
 
-class AlertView : UIView, GradientDrawable {
+class AlertView : UIView, SolidColorDrawable {
 
     private let type: AlertType
     private let header = UILabel()
@@ -81,7 +88,7 @@ class AlertView : UIView, GradientDrawable {
 
     init(type: AlertType) {
         self.type = type
-        self.icon = type.icon
+        self.icon = type.icon 
 
         super.init(frame: .zero)
         layer.cornerRadius = 6.0
@@ -107,7 +114,7 @@ class AlertView : UIView, GradientDrawable {
     private func setData() {
         header.text = type.header
         header.textAlignment = .center
-        header.font = UIFont.customBold(size: 14.0)
+        header.font = UIFont.barlowBold(size: 16.0)
         header.textColor = .white
 
         icon.backgroundColor = .clear
@@ -115,7 +122,7 @@ class AlertView : UIView, GradientDrawable {
 
         subheader.text = type.subheader
         subheader.textAlignment = .center
-        subheader.font = UIFont.customBody(size: 14.0)
+        subheader.font = UIFont.barlowSemiBold(size: 16.0)
         subheader.textColor = .white
     }
 
@@ -143,7 +150,7 @@ class AlertView : UIView, GradientDrawable {
     }
 
     override func draw(_ rect: CGRect) {
-        drawGradient(rect)
+        drawColor(color: .liteWalletBlue, rect)
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -61,6 +61,12 @@
 /* Alert Header label (the PIN was set) */
 "Alerts.pinSet" = "PIN 已設定";
 
+/* Resolved Success */
+"Alerts.resolvedSuccess" = "域解析";
+
+/* No comment provided by engineer. */
+"Alerts.resolvedSuccessSubheader" = "您的地址已解決";
+
 /* Send failure alert header label (the send failed to happen) */
 "Alerts.sendFailure" = "寄出失敗";
 
@@ -1266,3 +1272,6 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%2$d 之 %1$d";
+
+/* Lookup */
+"Send.UnstoppableDomains.lookup" = "抬頭";

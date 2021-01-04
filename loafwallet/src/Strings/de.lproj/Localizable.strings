@@ -61,6 +61,12 @@
 /* Alert Header label (the PIN was set) */
 "Alerts.pinSet" = "PIN festgelegt";
 
+/* Resolved Success */
+"Alerts.resolvedSuccess" = "Domänenauflösung";
+
+/* No comment provided by engineer. */
+"Alerts.resolvedSuccessSubheader" = "Die Adresse wurde aufgelöst!";
+
 /* Send failure alert header label (the send failed to happen) */
 "Alerts.sendFailure" = "Versand fehlgeschlagen";
 
@@ -1266,3 +1272,6 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d von %2$d";
+
+/* Lookup */
+"Send.UnstoppableDomains.lookup" = "Nachsehen";
