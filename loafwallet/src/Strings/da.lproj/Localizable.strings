@@ -808,6 +808,9 @@
 /* Send money to label */
 "Send.toLabel" = "Til";
 
+/* Lookup */
+"Send.UnstoppableDomains.lookup" = "Kig op";
+
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = "Indtast et .crypto- eller .zil-domæne";
 
@@ -1272,6 +1275,3 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d af %2$d";
-
-/* Lookup */
-"Send.UnstoppableDomains.lookup" = "Kig op";

@@ -808,6 +808,9 @@
 /* Send money to label */
 "Send.toLabel" = "To";
 
+/* Lookup */
+"Send.UnstoppableDomains.lookup" = "Lookup";
+
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = "Enter a .crypto or .zil domain";
 
@@ -1272,6 +1275,3 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d of %2$d";
-
-/* Lookup */
-"Send.UnstoppableDomains.lookup" = "Lookup";

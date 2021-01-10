@@ -809,6 +809,9 @@
 /* Send money to label */
 "Send.toLabel" = "Para";
 
+/* Lookup */
+"Send.UnstoppableDomains.lookup" = "Olho para cima";
+
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = "Insira um domínio .crypto ou .zil";
 
@@ -1273,6 +1276,3 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d de %2$d";
-
-/* Lookup */
-"Send.UnstoppableDomains.lookup" = "Olho para cima";

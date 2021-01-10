@@ -808,6 +808,9 @@
 /* Send money to label */
 "Send.toLabel" = "至";
 
+/* Lookup */
+"Send.UnstoppableDomains.lookup" = "抬头";
+
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = "输入.crypto或.zil域";
 
@@ -1272,6 +1275,3 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d / %2$d";
-
-/* Lookup */
-"Send.UnstoppableDomains.lookup" = "抬头";
