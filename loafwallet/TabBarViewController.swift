@@ -333,13 +333,13 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
             transactionVC.walletManager = self.walletManager
             transactionVC.isLtcSwapped = self.store?.state.isLtcSwapped
         
-        
-//            case "loafwallet.CardViewController":
-//                guard let cardVC = contentController as? CardViewController else  {
-//                    return
-//            } 
-//             
-//            cardVC.parentFrame = self.containerView.frame
+            //DEV: Unhiding when launching Litecoin Card v1
+            // case "loafwallet.CardViewController":
+            // guard let cardVC = contentController as? CardViewController else  {
+            //  return
+            //  }
+            //
+            // cardVC.parentFrame = self.containerView.frame
            
             case "loafwallet.BuyTableViewController":
                 guard let buyVC = contentController as? BuyTableViewController else  {
