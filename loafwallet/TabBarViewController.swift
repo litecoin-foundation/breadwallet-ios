@@ -40,8 +40,8 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     private var regularConstraints: [NSLayoutConstraint] = []
     private var swappedConstraints: [NSLayoutConstraint] = []
     private let currencyTapView = UIView()
-    private let storyboardNames:[String] = ["Transactions","Send","Card","Receive","Buy"]
-    var storyboardIDs:[String] = ["TransactionsViewController","SendLTCViewController","CardViewController","ReceiveLTCViewController","BuyTableViewController"]
+    private let storyboardNames:[String] = ["Transactions","Send","Receive","Buy"]
+    var storyboardIDs:[String] = ["TransactionsViewController","SendLTCViewController","ReceiveLTCViewController","BuyTableViewController"]
     var viewControllers:[UIViewController] = []
     var activeController:UIViewController? = nil
        
@@ -303,9 +303,10 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
             switch item.tag {
             case 0: item.title = S.History.barItemTitle
             case 1: item.title = S.Send.barItemTitle
-            case 2: item.title = S.LitecoinCard.barItemTitle
-            case 3: item.title = S.Receive.barItemTitle
-            case 4: item.title = S.BuyCenter.barItemTitle
+            //DEV: re-add when launching v1
+            //case 2: item.title = S.LitecoinCard.barItemTitle
+            case 2: item.title = S.Receive.barItemTitle
+            case 3: item.title = S.BuyCenter.barItemTitle
             default:
                 item.title = "NO-TITLE"
                 NSLog("ERROR: UITabbar item count is wrong")
@@ -333,12 +334,12 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
             transactionVC.isLtcSwapped = self.store?.state.isLtcSwapped
         
         
-            case "loafwallet.CardViewController":
-                guard let cardVC = contentController as? CardViewController else  {
-                    return
-            } 
-             
-            cardVC.parentFrame = self.containerView.frame
+//            case "loafwallet.CardViewController":
+//                guard let cardVC = contentController as? CardViewController else  {
+//                    return
+//            } 
+//             
+//            cardVC.parentFrame = self.containerView.frame
            
             case "loafwallet.BuyTableViewController":
                 guard let buyVC = contentController as? BuyTableViewController else  {
@@ -383,6 +384,8 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
         if let tempActiveController = activeController {
             self.hideContentController(contentController: tempActiveController)
         }
+        
+        //DEV: This happens because it relies on the tab in the storyboard tag
         self.displayContentController(contentController: viewControllers[item.tag])
     }
 }
