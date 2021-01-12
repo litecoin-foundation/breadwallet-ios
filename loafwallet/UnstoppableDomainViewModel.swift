@@ -11,6 +11,13 @@ import SwiftUI
 import Combine
 import UnstoppableDomainsResolution
 
+public typealias KeyPathResult = (Result<String, DocumentError>) -> Void
+
+public enum DocumentError: Error {
+    case decodingError
+    case encodingError
+}
+
 class UnstoppableDomainViewModel: ObservableObject {
     
     //MARK: - Combine Variables
@@ -41,8 +48,7 @@ class UnstoppableDomainViewModel: ObservableObject {
         }
     }
     
-    init() {
-    }
+    init() { }
     
     func resolveDomain() {
         
@@ -60,12 +66,6 @@ class UnstoppableDomainViewModel: ObservableObject {
                                             ["start_time": timestamp])
         
         self.resolveUDAddress(domainName: searchString)
-        
-        ///Fallback resolution: Set in case it takes a longer time to resolve.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.didResolveUDAddress?(self.ltcAddress)
-            self.isDomainResolving = false
-        }
     }
     
     private func resolveUDAddress(domainName: String) {
@@ -73,89 +73,72 @@ class UnstoppableDomainViewModel: ObservableObject {
         // This group is created to allow the threads to complete.
         // Otherwise, we may never get in the callback relative to UDR v0.1.6
         let group = DispatchGroup()
- 
-        if let path = Bundle.main.path(forResource: "partner-keys", ofType: "plist"),
-           let dictionary = NSDictionary(contentsOfFile:path) as? Dictionary<String, AnyObject>,
-           let key = dictionary["infura-api"] as? String {
-           let keypath = "https://mainnet.infura.io/v3/" + key
-            
-            guard let resolution = try? Resolution(providerUrl: keypath, network: "mainnet") else {
-                print ("Init of Resolution instance with custom parameters failed...")
-                return
-            }
-            
-            group.enter()
-
-            resolution.addr(domain: domainName, ticker: "ltc") { result in
-           
-                switch result {
-                    case .success(let returnValue):
-                        
-                        let timestamp: String = self.dateFormatter?.string(from: Date()) ?? ""
-                        
-                        LWAnalytics.logEventWithParameters(itemName:
-                                                            CustomEvent._20201121_DRIA,
-                                                           properties:
-                                                            ["success_time": timestamp])
-                        
-                        ///Quicker resolution: When the resolution is done, the activity indicatior stops and the address is  updated
-                        DispatchQueue.main.async {
-                            self.ltcAddress = returnValue
-                            self.didResolveUDAddress?(self.ltcAddress)
-                            self.isDomainResolving = false
-                        }
-                        
-                    case .failure(let error):
-                        
-                        let timestamp: String = self.dateFormatter?.string(from: Date()) ?? ""
-                        
-                        LWAnalytics.logEventWithParameters(itemName:
-                                                            CustomEvent._20201121_FRIA,
-                                                           properties:
-                                                            ["failure_time": timestamp,
-                                                             "error":error.localizedDescription])
-                        
-                        print("Expected LTC Address, but got \(error.localizedDescription)")
-                        
-                }
-                
-                group.leave()
-            }
-            
-            group.wait()
-
-        } else {
-            print("Error: resolution is not setup")
+        
+        guard let keyPath = fetchKeyPath() else {
+            print ("Error: Key path not found")
+            return
         }
+        
+        guard let resolution = try? Resolution(providerUrl: keyPath, network: "mainnet") else {
+            print ("Error: Init of Resolution instance with custom parameters failed...")
+            return
+        }
+        
+        group.enter()
+        
+        resolution.addr(domain: domainName, ticker: "ltc") { result in
+            
+            switch result {
+                case .success(let returnValue):
+                    
+                    let timestamp: String = self.dateFormatter?.string(from: Date()) ?? ""
+                    
+                    LWAnalytics.logEventWithParameters(itemName:
+                                                        CustomEvent._20201121_DRIA,
+                                                       properties:
+                                                        ["success_time": timestamp])
+                    
+                    ///Quicker resolution: When the resolution is done, the activity indicatior stops and the address is  updated
+                    DispatchQueue.main.async {
+                        self.ltcAddress = returnValue
+                        self.didResolveUDAddress?(self.ltcAddress)
+                        self.isDomainResolving = false
+                    }
+                    
+                case .failure(let error):
+                    
+                    let timestamp: String = self.dateFormatter?.string(from: Date()) ?? ""
+                    
+                    LWAnalytics.logEventWithParameters(itemName:
+                                                        CustomEvent._20201121_FRIA,
+                                                       properties:
+                                                        ["failure_time": timestamp,
+                                                         "error":error.localizedDescription])
+                    
+                    ///Quicker resolution: When the resolution is done, the activity indicatior stops and the address is  updated
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3,
+                                                  execute: {
+                       print("Expected LTC Address, but got \(error.localizedDescription)")
+                                                    
+                       self.isDomainResolving = false
+                                                    
+                    })
+            }
+            group.leave()
+        }
+        group.wait()
     }
-}
-
-
-class ResolutionModel: NSObject {
     
-    static let shared = ResolutionModel()
-    
-    var resolution: Resolution?
-    
-    override init() {
-        super.init()
+    /// Lookup the API Key
+    /// - Returns: <String, Error>
+    private func fetchKeyPath()  -> String? {
         
         if let path = Bundle.main.path(forResource: "partner-keys", ofType: "plist"),
            let dictionary = NSDictionary(contentsOfFile:path) as? Dictionary<String, AnyObject>,
-           let key = dictionary["infura"] as? String {
-            let keypath = "https://mainnet.infura.io/v3/" + key
-            
-            do {
-                guard let resolution = try? Resolution(providerUrl: keypath, network: "mainnet") else {
-                    print ("Init of Resolution instance with custom parameters failed...")
-                    return
-                }
-                self.resolution = resolution
-                
-            } catch {
-                print("Unstoppable Domains Error: \(String(describing: self.resolution))")
-            }
+           let key = dictionary["infura-api"] as? String {
+            return "https://mainnet.infura.io/v3/" + key
+        } else {
+            return nil
         }
     }
 }
-
