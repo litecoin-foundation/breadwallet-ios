@@ -283,7 +283,6 @@
 		C354C4632590059500675E0E /* TransactionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354C4622590059500675E0E /* TransactionsViewModel.swift */; };
 		C35ABD232574070A002BB9BB /* PartnersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35ABD222574070A002BB9BB /* PartnersView.swift */; };
 		C35ABD332574073F002BB9BB /* PartnersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35ABD322574073F002BB9BB /* PartnersViewModel.swift */; };
-		C35ABD4325741E19002BB9BB /* ResolutionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35ABD4225741E19002BB9BB /* ResolutionModel.swift */; };
 		C379F228259B9BF000B25883 /* RegistrationAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C379F227259B9BF000B25883 /* RegistrationAlertView.swift */; };
 		C3A4647D259A646A00D74D81 /* DataValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A4647C259A646A00D74D81 /* DataValidation.swift */; };
 		C3B7C3B9255EABBF00E98A64 /* SupportSafariViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B7C3B8255EABBF00E98A64 /* SupportSafariViewModel.swift */; };
@@ -1457,7 +1456,6 @@
 		C354C4622590059500675E0E /* TransactionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewModel.swift; sourceTree = "<group>"; };
 		C35ABD222574070A002BB9BB /* PartnersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnersView.swift; sourceTree = "<group>"; };
 		C35ABD322574073F002BB9BB /* PartnersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnersViewModel.swift; sourceTree = "<group>"; };
-		C35ABD4225741E19002BB9BB /* ResolutionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionModel.swift; sourceTree = "<group>"; };
 		C379F227259B9BF000B25883 /* RegistrationAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationAlertView.swift; sourceTree = "<group>"; };
 		C3A4647C259A646A00D74D81 /* DataValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataValidation.swift; sourceTree = "<group>"; };
 		C3B7C3B8255EABBF00E98A64 /* SupportSafariViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportSafariViewModel.swift; sourceTree = "<group>"; };
@@ -3129,7 +3127,6 @@
 			isa = PBXGroup;
 			children = (
 				C3D783A62565EA4A0004FF70 /* UnstoppableDomainView.swift */,
-				C35ABD4225741E19002BB9BB /* ResolutionModel.swift */,
 				C3D783B62565EA6B0004FF70 /* UnstoppableDomainViewModel.swift */,
 			);
 			name = Unstoppable;
@@ -4155,7 +4152,6 @@
 				24306797238F3DF900EBEA99 /* BartyCrouch.swift in Sources */,
 				C3D783B72565EA6B0004FF70 /* UnstoppableDomainViewModel.swift in Sources */,
 				CEC6AA3B1DEE4EB000EE5AFD /* CGRect+Additions.swift in Sources */,
-				C35ABD4325741E19002BB9BB /* ResolutionModel.swift in Sources */,
 				CE45C1FB1E74F89C002C3847 /* WalletInfo.swift in Sources */,
 				CEE659E71F65A936001FF29D /* RetryTimer.swift in Sources */,
 				248BFE2623AB302200CE1A71 /* BuyWKWebViewController.swift in Sources */,
