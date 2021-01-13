@@ -30,9 +30,7 @@ class UnstoppableDomainViewModel: ObservableObject {
     
     //MARK: - Private Variables
     private var ltcAddress = ""
-    
-    private var resolution: Resolution?
-    
+        
     private var dateFormatter: DateFormatter? {
         
         didSet {
@@ -123,7 +121,7 @@ class UnstoppableDomainViewModel: ObservableObject {
     }
     
     /// Lookup the API Key
-    /// - Returns: <String, Error>
+    /// - Returns: String or nil
     private func fetchKeyPath()  -> String? {
         
         if let path = Bundle.main.path(forResource: "partner-keys", ofType: "plist"),
