@@ -10,14 +10,7 @@ import Foundation
 import SwiftUI
 import Combine
 import UnstoppableDomainsResolution
-
-public typealias KeyPathResult = (Result<String, DocumentError>) -> Void
-
-public enum DocumentError: Error {
-    case decodingError
-    case encodingError
-}
-
+   
 class UnstoppableDomainViewModel: ObservableObject {
     
     //MARK: - Combine Variables
