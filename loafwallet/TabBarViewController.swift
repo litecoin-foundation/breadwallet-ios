@@ -6,7 +6,7 @@
 //  Copyright © 2019 Litecoin Foundation. All rights reserved.
 
 import UIKit
-import Foundation 
+import Foundation
 
 enum TabViewControllerIndex: Int {
     case transactions = 0
@@ -14,9 +14,9 @@ enum TabViewControllerIndex: Int {
     case buy = 2
     case receive = 3
 }
-  
+
 class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDelegate {
-      
+    
     let kInitialChildViewControllerIndex = 0 // TransactionsViewController
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var containerView: UIView!
@@ -26,9 +26,7 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     @IBOutlet weak var timeStampLabel: UILabel!
     @IBOutlet weak var timeStampStackView: UIStackView!
     @IBOutlet weak var timeStampStackViewHeight: NSLayoutConstraint!
-    
-    
-    
+     
     var primaryBalanceLabel: UpdatingLabel?
     var secondaryBalanceLabel: UpdatingLabel?
     private let largeFontSize: CGFloat = 24.0
@@ -40,11 +38,11 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     private var regularConstraints: [NSLayoutConstraint] = []
     private var swappedConstraints: [NSLayoutConstraint] = []
     private let currencyTapView = UIView()
-    private let storyboardNames:[String] = ["Transactions","Send","Receive","Buy"]
-    var storyboardIDs:[String] = ["TransactionsViewController","SendLTCViewController","ReceiveLTCViewController","BuyTableViewController"]
+    private let storyboardNames:[String] = ["Transactions","Send","Card","Receive","Buy"]
+    var storyboardIDs:[String] = ["TransactionsViewController","SendLTCViewController","CardViewController","ReceiveLTCViewController","BuyTableViewController"]
     var viewControllers:[UIViewController] = []
     var activeController:UIViewController? = nil
-       
+    
     var updateTimer: Timer?
     var store: Store?
     var walletManager: WalletManager?
@@ -68,14 +66,13 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
         store.perform(action: RootModalActions.Present(modal: .menu))
     }
     
-      
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         configurePriceLabels()
         addSubscriptions()
         dateFormatter.setLocalizedDateFormatFromTemplate("MMM d, h:mm a")
-  
+        
         for (index, storyboardID) in self.storyboardIDs.enumerated() {
             let controller = UIStoryboard.init(name: storyboardNames[index], bundle: nil).instantiateViewController(withIdentifier: storyboardID)
             viewControllers.append(controller)
@@ -98,36 +95,36 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     
     private func setupViews() {
         
-       if #available(iOS 11.0, *),
-            let  backgroundColor = UIColor(named: "mainColor") {
+        if #available(iOS 11.0, *),
+           let  backgroundColor = UIColor(named: "mainColor") {
             headerView.backgroundColor = backgroundColor
             tabBar.barTintColor = backgroundColor
             containerView.backgroundColor = backgroundColor
             self.view.backgroundColor = backgroundColor
-       } else {
+        } else {
             headerView.backgroundColor = .liteWalletBlue
             tabBar.barTintColor = .liteWalletBlue
             containerView.backgroundColor = .liteWalletBlue
             self.view.backgroundColor = .liteWalletBlue
-       }
+        }
     }
     
     private func configurePriceLabels() {
-
+        
         //TODO: Debug the reizing of label...very important
         guard let primaryLabel = self.primaryBalanceLabel ,
-            let secondaryLabel = self.secondaryBalanceLabel else {
-          NSLog("ERROR: Price labels not initialized")
-                return
+              let secondaryLabel = self.secondaryBalanceLabel else {
+            NSLog("ERROR: Price labels not initialized")
+            return
         }
-         
+        
         let priceLabelArray = [primaryBalanceLabel,secondaryBalanceLabel,equalsLabel]
         
         priceLabelArray.enumerated().forEach { (index, view) in
             view?.backgroundColor = .clear
             view?.textColor = .white
         }
- 
+        
         primaryLabel.font = UIFont.barlowSemiBold(size: largeFontSize)
         secondaryLabel.font = UIFont.barlowSemiBold(size: largeFontSize)
         
@@ -136,10 +133,10 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
         headerView.addSubview(secondaryLabel)
         headerView.addSubview(equalsLabel)
         headerView.addSubview(currencyTapView)
- 
+        
         secondaryLabel.constrain([
-            secondaryLabel.constraint(.firstBaseline, toView: primaryLabel, constant: 0.0) ])
-
+                                    secondaryLabel.constraint(.firstBaseline, toView: primaryLabel, constant: 0.0) ])
+        
         equalsLabel.translatesAutoresizingMaskIntoConstraints = false
         primaryLabel.translatesAutoresizingMaskIntoConstraints = false
         regularConstraints = [
@@ -148,50 +145,48 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
             equalsLabel.firstBaselineAnchor.constraint(equalTo: primaryLabel.firstBaselineAnchor, constant: 0),
             equalsLabel.leadingAnchor.constraint(equalTo: primaryLabel.trailingAnchor, constant: C.padding[1]/2.0),
             secondaryLabel.leadingAnchor.constraint(equalTo: equalsLabel.trailingAnchor, constant: C.padding[1]/2.0),
-         ]
-         
+        ]
+        
         swappedConstraints = [
             secondaryLabel.firstBaselineAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -12),
             secondaryLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: C.padding[1]*1.25),
             equalsLabel.firstBaselineAnchor.constraint(equalTo: secondaryLabel.firstBaselineAnchor, constant: 0),
             equalsLabel.leadingAnchor.constraint(equalTo: secondaryLabel.trailingAnchor, constant: C.padding[1]/2.0),
             primaryLabel.leadingAnchor.constraint(equalTo: equalsLabel.trailingAnchor, constant: C.padding[1]/2.0),
-         ]
+        ]
         
         if let isLTCSwapped = self.isLtcSwapped {
             NSLayoutConstraint.activate(isLTCSwapped ? self.swappedConstraints : self.regularConstraints)
         }
         
         currencyTapView.constrain([
-                   currencyTapView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 0),
-                   currencyTapView.trailingAnchor.constraint(equalTo: self.timeStampStackView.leadingAnchor, constant: 0),
-                   currencyTapView.topAnchor.constraint(equalTo: primaryLabel.topAnchor, constant: 0),
-                   currencyTapView.bottomAnchor.constraint(equalTo: primaryLabel.bottomAnchor, constant: C.padding[1]) ])
-
-         let gr = UITapGestureRecognizer(target: self, action: #selector(currencySwitchTapped))
-         currencyTapView.addGestureRecognizer(gr)
+                                    currencyTapView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 0),
+                                    currencyTapView.trailingAnchor.constraint(equalTo: self.timeStampStackView.leadingAnchor, constant: 0),
+                                    currencyTapView.topAnchor.constraint(equalTo: primaryLabel.topAnchor, constant: 0),
+                                    currencyTapView.bottomAnchor.constraint(equalTo: primaryLabel.bottomAnchor, constant: C.padding[1]) ])
+        
+        let gr = UITapGestureRecognizer(target: self, action: #selector(currencySwitchTapped))
+        currencyTapView.addGestureRecognizer(gr)
     }
-    
+    //MARK: - Adding Subscriptions
     private func addSubscriptions() {
-        
-        
-        
+         
         guard let store = self.store else {
             NSLog("ERROR - Store not passed")
             return
         }
         
         guard let primaryLabel = self.primaryBalanceLabel ,
-            let secondaryLabel = self.secondaryBalanceLabel else {
-          NSLog("ERROR: Price labels not initialized")
-                return
+              let secondaryLabel = self.secondaryBalanceLabel else {
+            NSLog("ERROR: Price labels not initialized")
+            return
         }
         
         store.subscribe(self, selector: { $0.walletState.syncProgress != $1.walletState.syncProgress },
                         callback: { _ in
                             self.tabBar.selectedItem = self.tabBar.items?.first
-        })
- 
+                        })
+        
         store.lazySubscribe(self,
                             selector: { $0.isLtcSwapped != $1.isLtcSwapped },
                             callback: { self.isLtcSwapped = $0.isLtcSwapped })
@@ -205,7 +200,7 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
                                     
                                 }
                                 self.exchangeRate = $0.currentRate
-        })
+                            })
         
         store.lazySubscribe(self,
                             selector: { $0.maxDigits != $1.maxDigits},
@@ -216,7 +211,7 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
                                     primaryLabel.formatter = placeholderAmount.ltcFormat
                                     self.setBalances()
                                 }
-        })
+                            })
         
         store.subscribe(self,
                         selector: {$0.walletState.balance != $1.walletState.balance },
@@ -233,13 +228,13 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
             return
         }
         guard let primaryLabel = self.primaryBalanceLabel,
-            let secondaryLabel = self.secondaryBalanceLabel else {
-                NSLog("ERROR: Price labels not initialized")
-                return
+              let secondaryLabel = self.secondaryBalanceLabel else {
+            NSLog("ERROR: Price labels not initialized")
+            return
         }
-         
+        
         let amount = Amount(amount: balance, rate: rate, maxDigits: store.state.maxDigits)
-
+        
         if !hasInitialized {
             let amount = Amount(amount: balance, rate: exchangeRate!, maxDigits: store.state.maxDigits)
             NSLayoutConstraint.deactivate(isLTCSwapped ? self.regularConstraints : self.swappedConstraints)
@@ -256,7 +251,7 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
             if primaryLabel.isHidden {
                 primaryLabel.isHidden = false
             }
-
+            
             if secondaryLabel.isHidden {
                 secondaryLabel.isHidden = false
             }
@@ -277,9 +272,9 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
         let fiatRate = Double(round(100*rate.rate)/100)
         let formattedFiatString = String(format: "%.02f", fiatRate)
         self.currentLTCPriceLabel.text = Currency.getSymbolForCurrencyCode(code: rate.code)! + formattedFiatString
-       
+        
     }
-   
+    
     private func transform(forView: UIView) ->  CGAffineTransform {
         forView.transform = .identity //Must reset the view's transform before we calculate the next transform
         let scaleFactor: CGFloat = smallFontSize/largeFontSize
@@ -290,7 +285,7 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
+        
         super.viewWillAppear(animated)
         
         guard let array = self.tabBar.items else {
@@ -301,68 +296,66 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
         array.forEach { item in
             
             switch item.tag {
-            case 0: item.title = S.History.barItemTitle
-            case 1: item.title = S.Send.barItemTitle
-            //DEV: re-add when launching v1
-            //case 2: item.title = S.LitecoinCard.barItemTitle
-            case 2: item.title = S.Receive.barItemTitle
-            case 3: item.title = S.BuyCenter.barItemTitle
-            default:
-                item.title = "NO-TITLE"
-                NSLog("ERROR: UITabbar item count is wrong")
+                case 0: item.title = S.History.barItemTitle
+                case 1: item.title = S.Send.barItemTitle
+                case 2: item.title = S.LitecoinCard.barItemTitle
+                case 3: item.title = S.Receive.barItemTitle
+                case 4: item.title = S.BuyCenter.barItemTitle
+                default:
+                    item.title = "NO-TITLE"
+                    NSLog("ERROR: UITabbar item count is wrong")
             }
         }
-     }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.displayContentController(contentController: viewControllers[kInitialChildViewControllerIndex])
     }
- 
+    
     func displayContentController(contentController:UIViewController) {
         
         //MARK: - Tab View Controllers Configuration
         switch NSStringFromClass(contentController.classForCoder) {
-        case "loafwallet.TransactionsViewController":
-
-            guard let transactionVC = contentController as? TransactionsViewController else  {
-                return
-            }
-            
-            transactionVC.store = self.store
-            transactionVC.walletManager = self.walletManager
-            transactionVC.isLtcSwapped = self.store?.state.isLtcSwapped
-        
-            //DEV: Unhiding when launching Litecoin Card v1
-            // case "loafwallet.CardViewController":
-            // guard let cardVC = contentController as? CardViewController else  {
-            //  return
-            //  }
-            //
-            // cardVC.parentFrame = self.containerView.frame
-           
+            case "loafwallet.TransactionsViewController":
+                
+                guard let transactionVC = contentController as? TransactionsViewController else  {
+                    return
+                }
+                
+                transactionVC.store = self.store
+                transactionVC.walletManager = self.walletManager
+                transactionVC.isLtcSwapped = self.store?.state.isLtcSwapped
+                
+            case "loafwallet.CardViewController":
+                guard let cardVC = contentController as? CardViewController else  {
+                    return
+                }
+                
+                cardVC.parentFrame = self.containerView.frame
+                
             case "loafwallet.BuyTableViewController":
                 guard let buyVC = contentController as? BuyTableViewController else  {
                     return
-            }
-            buyVC.store = self.store
-            buyVC.walletManager = self.walletManager
-            
-        case "loafwallet.SendLTCViewController":
-            guard let sendVC = contentController as? SendLTCViewController else  {
-                return
-            }
-            
-            sendVC.store = self.store
-            
-        case "loafwallet.ReceiveLTCViewController":
-            guard let receiveVC = contentController as? ReceiveLTCViewController else  {
-                return
-            }
-            receiveVC.store = self.store
-            
-        default:
-            fatalError("Tab viewController not set")
+                }
+                buyVC.store = self.store
+                buyVC.walletManager = self.walletManager
+                
+            case "loafwallet.SendLTCViewController":
+                guard let sendVC = contentController as? SendLTCViewController else  {
+                    return
+                }
+                
+                sendVC.store = self.store
+                
+            case "loafwallet.ReceiveLTCViewController":
+                guard let receiveVC = contentController as? ReceiveLTCViewController else  {
+                    return
+                }
+                receiveVC.store = self.store
+                
+            default:
+                fatalError("Tab viewController not set")
         }
         self.exchangeRate = TransactionManager.sharedInstance.rate
         
@@ -378,14 +371,12 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
         contentController.view .removeFromSuperview()
         contentController.removeFromParentViewController()
     }
-      
+    
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
         if let tempActiveController = activeController {
             self.hideContentController(contentController: tempActiveController)
         }
-        
-        //DEV: This happens because it relies on the tab in the storyboard tag
         self.displayContentController(contentController: viewControllers[item.tag])
     }
 }
@@ -397,11 +388,11 @@ extension TabBarViewController {
         guard let store = self.store else { return }
         guard let isLTCSwapped = self.isLtcSwapped else { return }
         guard let primaryLabel = self.primaryBalanceLabel,
-            let secondaryLabel = self.secondaryBalanceLabel else {
-                NSLog("ERROR: Price labels not initialized")
-                return
+              let secondaryLabel = self.secondaryBalanceLabel else {
+            NSLog("ERROR: Price labels not initialized")
+            return
         }
-
+        
         UIView.spring(0.7, animations: {
             primaryLabel.transform = primaryLabel.transform.isIdentity ? self.transform(forView: primaryLabel) : .identity
             secondaryLabel.transform = secondaryLabel.transform.isIdentity ? self.transform(forView: secondaryLabel) : .identity
@@ -413,8 +404,3 @@ extension TabBarViewController {
         store.perform(action: CurrencyChange.toggle())
     }
 }
-
-
-
-
- 
