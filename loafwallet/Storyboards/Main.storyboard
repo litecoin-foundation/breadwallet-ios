@@ -39,7 +39,7 @@
                                 <items>
                                     <tabBarItem title="History" image="history_icon" selectedImage="history_icon" id="qwA-9l-CfE" userLabel="History"/>
                                     <tabBarItem tag="1" title="Send" image="send_icon" selectedImage="send_icon" id="Idu-CT-kfl" userLabel="Send"/>
-                                    <tabBarItem tag="2" title="Item" image="card_icon" selectedImage="card_icon" id="DPD-tH-DDL" userLabel="Card"/>
+                                    <tabBarItem tag="2" title="Card" image="card_icon" selectedImage="card_icon" id="DPD-tH-DDL" userLabel="Card"/>
                                     <tabBarItem tag="3" title="Receive" image="receive_icon" selectedImage="receive_icon" id="1Ar-eJ-M87" userLabel="Receive"/>
                                     <tabBarItem tag="4" title="Buy" image="litecoin_cutout24" selectedImage="litecoin_cutout24" id="spP-38-fzY" userLabel="Buy"/>
                                 </items>
