@@ -233,17 +233,7 @@ class ModalPresenter : Subscriber, Trackable {
                 alertView.removeFromSuperview()
             })
         })
-    }
-    
-    private func presentWebView(_ mountPoint: String) {
-        guard let walletManager = self.walletManager else { return }
-        let vc = WebViewContainer(mountPoint: mountPoint, walletManager: walletManager, store: store, apiClient: self.noAuthApiClient)
-        
-        vc.modalPresentationStyle = .overFullScreen
-        vc.modalPresentationCapturesStatusBarAppearance = true
-        vc.transitioningDelegate = vc
-        topViewController?.present(vc, animated: true, completion: {})
-    }
+    } 
     
     private func rootModalViewController(_ type: RootModal) -> UIViewController? {
         switch type {
