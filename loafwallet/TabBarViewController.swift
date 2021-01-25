@@ -6,15 +6,14 @@
 //  Copyright © 2019 Litecoin Foundation. All rights reserved.
 
 import UIKit
-import Foundation
+import Foundation 
 
 enum TabViewControllerIndex: Int {
     case transactions = 0
     case send = 1
     case buy = 2
     case receive = 3
-}
-
+} 
 class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDelegate {
     
     let kInitialChildViewControllerIndex = 0 // TransactionsViewController
@@ -42,7 +41,6 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     var storyboardIDs:[String] = ["TransactionsViewController","SendLTCViewController","CardViewController","ReceiveLTCViewController","BuyTableViewController"]
     var viewControllers:[UIViewController] = []
     var activeController:UIViewController? = nil
-    
     var updateTimer: Timer?
     var store: Store?
     var walletManager: WalletManager?
@@ -170,7 +168,6 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
     }
     //MARK: - Adding Subscriptions
     private func addSubscriptions() {
-         
         guard let store = self.store else {
             NSLog("ERROR - Store not passed")
             return
@@ -333,7 +330,6 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
                 }
                 
                 cardVC.parentFrame = self.containerView.frame
-                
             case "loafwallet.BuyTableViewController":
                 guard let buyVC = contentController as? BuyTableViewController else  {
                     return
@@ -377,6 +373,8 @@ class TabBarViewController: UIViewController, Subscriber, Trackable, UITabBarDel
         if let tempActiveController = activeController {
             self.hideContentController(contentController: tempActiveController)
         }
+        
+        //DEV: This happens because it relies on the tab in the storyboard tag
         self.displayContentController(contentController: viewControllers[item.tag])
     }
 }
