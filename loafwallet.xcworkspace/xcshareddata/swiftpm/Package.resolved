@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/litecoin-foundation/LitewalletPartnerAPI.git",
         "state": {
           "branch": null,
-          "revision": "3dc7a74f5c4a3dd054b5eaacfe68909e68e99766",
-          "version": "0.3.0"
+          "revision": "5fafe40f4eac370440d39192d73916a387b0f36e",
+          "version": "0.5.0"
         }
       },
       {
