@@ -28,8 +28,7 @@ class BuyTableViewController: UITableViewController {
             self.view.addSubview(vcWKVC.view)
             vcWKVC.didMove(toParentViewController: self)
             
-            vcWKVC.didDismissChildView = { [weak self] in
-                guard self != nil else { return }
+            vcWKVC.didDismissChildView = { 
                 vcWKVC.willMove(toParentViewController: nil)
                 vcWKVC.view.removeFromSuperview()
                 vcWKVC.removeFromParentViewController()
