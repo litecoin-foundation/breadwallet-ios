@@ -63,13 +63,14 @@ class BuyWKWebViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         config.processPool = wkProcessPool
         config.userContentController = contentController
         
-        let wkWithFooter = CGRect(x: 0, y: 0, width: self.wkWebContainerView.bounds.width, height: self.wkWebContainerView.bounds.height-100)
+        let wkWithFooter = CGRect(x: 0, y: 0, width: self.wkWebContainerView.bounds.width,
+                                  height: self.wkWebContainerView.bounds.height - 100)
         let wkWebView = WKWebView(frame:wkWithFooter, configuration: config)
         wkWebView.navigationDelegate = self
         wkWebView.allowsBackForwardNavigationGestures = true
-        wkWebView.scrollView.contentInset = UIEdgeInsetsMake(-50, 0, 0, 0)
-
-        wkWebView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        wkWebView.contentMode = .scaleAspectFit
+        wkWebView.autoresizesSubviews = true
+        wkWebView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.wkWebContainerView.addSubview(wkWebView)
         
         let timestamp = Int(appInstallDate.timeIntervalSince1970)
