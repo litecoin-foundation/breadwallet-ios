@@ -28,6 +28,8 @@ class UnstoppableDomainViewModel: ObservableObject {
      
     var shouldClearAddressField: (() -> Void)?
     
+    var didFailToResolve: ((String) -> Void)?
+    
     //MARK: - Private Variables
     private var ltcAddress = "" 
 	
@@ -107,9 +109,10 @@ class UnstoppableDomainViewModel: ObservableObject {
                                                          "error":error.localizedDescription])
                     
                     ///Quicker resolution: When the resolution is done, the activity indicatior stops and the address is  updated
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3,
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2,
                                                   execute: {
-                       print("Expected LTC Address, but got \(error.localizedDescription)")
+                                                    
+                       self.didFailToResolve?(error.localizedDescription)
                                                     
                        self.isDomainResolving = false
                                                     

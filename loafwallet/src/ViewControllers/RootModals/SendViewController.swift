@@ -25,6 +25,7 @@ class SendViewController : UIViewController, Subscriber, ModalPresentable, Track
     var presentVerifyPin: ((String, @escaping VerifyPinCallback)->Void)?
     var onPublishSuccess: (()->Void)?
     var onResolvedSuccess: (()->Void)?
+    var onResolutionFailure: ((String)->Void)?
     var parentView: UIView? //ModalPresentable
     var initialAddress: String?
     var isPresentedFromLock = false
@@ -200,6 +201,12 @@ class SendViewController : UIViewController, Subscriber, ModalPresentable, Track
                 self.onResolvedSuccess?()
                 self.addressCell.textField.text = resolvedUDAddress
             }
+            
+        }
+        
+        unstoppableCell.rootView.viewModel.didFailToResolve = { errorMessage in
+            // Toast the failure
+            self.onResolutionFailure?(errorMessage)
         }
          
     }
