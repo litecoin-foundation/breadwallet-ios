@@ -886,6 +886,9 @@
 /* Lookup */
 "Send.UnstoppableDomains.lookup" = "抬头";
 
+/* lookupFailureHeader */
+"Send.UnstoppableDomains.lookupFailureHeader" = "查找失败";
+
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = "输入.crypto或.zil域";
 

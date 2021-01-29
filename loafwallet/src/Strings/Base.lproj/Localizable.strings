@@ -1374,3 +1374,7 @@
 
 /* Beta Testing Litecoin Card */
 "LitecoinCard.Disclaimer.title" = "Litecoin Card Beta";
+
+/* lookupFailureHeader */
+"Send.UnstoppableDomains.lookupFailureHeader" = "Lookup failed";
+ 

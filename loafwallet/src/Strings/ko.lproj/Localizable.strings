@@ -886,6 +886,9 @@
 /* Lookup */
 "Send.UnstoppableDomains.lookup" = "조회";
 
+/* lookupFailureHeader */
+"Send.UnstoppableDomains.lookupFailureHeader" = "조회 실패";
+
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = ".crypto 또는 .zil 도메인을 입력하세요.";
 

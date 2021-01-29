@@ -886,6 +886,9 @@
 /* Lookup */
 "Send.UnstoppableDomains.lookup" = "調べる";
 
+/* lookupFailureHeader */
+"Send.UnstoppableDomains.lookupFailureHeader" = "ルックアップに失敗しました";
+
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = ".cryptoまたは.zilドメインを入力してください";
 
