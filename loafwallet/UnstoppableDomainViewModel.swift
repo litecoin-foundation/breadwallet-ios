@@ -114,7 +114,9 @@ class UnstoppableDomainViewModel: ObservableObject {
                     ///Quicker resolution: When the resolution is done, the activity indicatior stops and the address is  updated
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2,
                                                   execute: {
-                                                    
+                                        
+                       self.didFailToResolve?(error.localizedDescription)
+                                                     
                                                     self.didFailToResolve?(errorMessage)
                                                     self.isDomainResolving = false
                                                     

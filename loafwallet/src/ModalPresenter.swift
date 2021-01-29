@@ -254,7 +254,7 @@ class ModalPresenter : Subscriber, Trackable {
         failureAlertView.constrain([
                                     failureAlertView.constraint(.width, constant: size.width),
                                     failureAlertView.constraint(.height, constant: alertHeight + 50.0),
-                                    failureAlertView.constraint(.leading, toView: window, constant: nil),
+                                     failureAlertView.constraint(.leading, toView: window, constant: nil),
                                 topConstraint ])
         window.layoutIfNeeded()
         
