@@ -79,7 +79,7 @@ class UnstoppableDomainViewModel: ObservableObject {
         
         group.enter()
         
-        resolution.addr(domain: domainName, ticker: "btc") { result in
+        resolution.addr(domain: domainName, ticker: "ltc") { result in
             
             switch result {
                 case .success(let returnValue):
@@ -97,9 +97,9 @@ class UnstoppableDomainViewModel: ObservableObject {
                         self.didResolveUDAddress?(self.ltcAddress)
                         self.isDomainResolving = false
                     }
-                    
+                                                                                                                                                            
                 case .failure(let error):
-                    
+                    print(error)
                     let errorMessage = DomainResolutionFailure().messageWith(error: error)
                     
                     let timestamp: String = self.dateFormatter?.string(from: Date()) ?? ""
