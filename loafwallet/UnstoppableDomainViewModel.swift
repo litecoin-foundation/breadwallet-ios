@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 import Combine
 import UnstoppableDomainsResolution
-   
+
 class UnstoppableDomainViewModel: ObservableObject {
     
     //MARK: - Combine Variables
@@ -25,14 +25,14 @@ class UnstoppableDomainViewModel: ObservableObject {
     
     //MARK: - Public Variables
     var didResolveUDAddress: ((String) -> Void)?
-     
+    
     var shouldClearAddressField: (() -> Void)?
     
     var didFailToResolve: ((String) -> Void)?
     
     //MARK: - Private Variables
-    private var ltcAddress = "" 
-	
+    private var ltcAddress = ""
+    
     private var dateFormatter: DateFormatter? {
         
         didSet {
@@ -58,7 +58,7 @@ class UnstoppableDomainViewModel: ObservableObject {
                                            properties:
                                             ["start_time": timestamp])
         
-        self.resolveUDAddress(domainName: searchString) 
+        self.resolveUDAddress(domainName: searchString)
     }
     
     private func resolveUDAddress(domainName: String) {
@@ -79,7 +79,7 @@ class UnstoppableDomainViewModel: ObservableObject {
         
         group.enter()
         
-        resolution.addr(domain: domainName, ticker: "ltc") { result in
+        resolution.addr(domain: domainName, ticker: "btc") { result in
             
             switch result {
                 case .success(let returnValue):
@@ -100,23 +100,25 @@ class UnstoppableDomainViewModel: ObservableObject {
                     
                 case .failure(let error):
                     
+                    let errorMessage = DomainResolutionFailure().messageWith(error: error)
+                    
                     let timestamp: String = self.dateFormatter?.string(from: Date()) ?? ""
                     
                     LWAnalytics.logEventWithParameters(itemName:
                                                         CustomEvent._20201121_FRIA,
                                                        properties:
                                                         ["failure_time": timestamp,
+                                                         "error_message":errorMessage,
                                                          "error":error.localizedDescription])
                     
                     ///Quicker resolution: When the resolution is done, the activity indicatior stops and the address is  updated
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2,
                                                   execute: {
                                                     
-                       self.didFailToResolve?(error.localizedDescription)
+                                                    self.didFailToResolve?(errorMessage)
+                                                    self.isDomainResolving = false
                                                     
-                       self.isDomainResolving = false
-                                                    
-                    })
+                                                  })
             }
             group.leave()
         }
@@ -136,3 +138,4 @@ class UnstoppableDomainViewModel: ObservableObject {
         }
     }
 }
+
