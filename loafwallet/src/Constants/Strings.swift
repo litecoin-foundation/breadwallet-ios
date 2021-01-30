@@ -101,8 +101,9 @@ enum S {
         enum UnstoppableDomains {
             static let placeholder = NSLocalizedString("Send.UnstoppableDomains.placeholder", value: "**Enter a .crypto or .zil domain**", comment: "Enter a .crypto or .zil domain")
             static let lookup = NSLocalizedString("Send.UnstoppableDomains.lookup", value: "**Lookup**", comment: "Lookup")
-           
             static let lookupFailureHeader = NSLocalizedString("Send.UnstoppableDomains.lookupFailureHeader", value: "**LookupFailureHeader**", comment: "lookupFailureHeader")
+            static let lookupDomainError = NSLocalizedString("Send.UnstoppableDomains.lookupDomainError", value: "**LookupDomainError**", comment: "LookupDomainError")
+            static let udSystemError = NSLocalizedString("Send.UnstoppableDomains.udSystemError", value: "**UDSystemError**", comment: "UDSystemError")
         }
     }
 
@@ -635,8 +636,7 @@ enum S {
             static let highFees = NSLocalizedString("Import.Error.highFees", value: "**Transaction fees would cost more than the funds available on this private key.**", comment: "High fees error message")
             static let signing = NSLocalizedString("Import.Error.signing", value: "**Error signing transaction**", comment: "Import signing error message")
         }
-    } 
-    
+     }   
     enum SupportLitecoinFoundation {
         static let title = NSLocalizedString("SupportTheFoundation.title", value: "**Support the Litecoin Foundation**", comment: "Support the Litecoin Foundation")
     }

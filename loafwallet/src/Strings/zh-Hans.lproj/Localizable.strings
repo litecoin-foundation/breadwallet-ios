@@ -886,11 +886,17 @@
 /* Lookup */
 "Send.UnstoppableDomains.lookup" = "抬头";
 
+/* LookupDomainError */
+"Send.UnstoppableDomains.lookupDomainError" = "抱歉，找不到域。 [错误: %2$d]";
+
 /* lookupFailureHeader */
 "Send.UnstoppableDomains.lookupFailureHeader" = "查找失败";
 
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = "输入.crypto或.zil域";
+
+/* UDSystemError */
+"Send.UnstoppableDomains.udSystemError" = "系统查找问题。 [错误: %2$d]";
 
 /* Adress already used alert message - first part */
 "Send.UsedAddress.firstLine" = "莱特币地址仅供一次性使用。";

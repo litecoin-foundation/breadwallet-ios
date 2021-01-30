@@ -886,11 +886,17 @@
 /* Lookup */
 "Send.UnstoppableDomains.lookup" = "Slå upp";
 
+/* LookupDomainError */
+"Send.UnstoppableDomains.lookupDomainError" = "Tyvärr hittades inte domänen. [Fel: %2$d]";
+
 /* lookupFailureHeader */
 "Send.UnstoppableDomains.lookupFailureHeader" = "Sökningen misslyckades";
 
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = "Ange en .crypto- eller .zil-domän";
+
+/* UDSystemError */
+"Send.UnstoppableDomains.udSystemError" = "Problem med systemuppslag. [Fel: %2$d]";
 
 /* Adress already used alert message - first part */
 "Send.UsedAddress.firstLine" = "Litecoin-adresser är avsedda för engångsanvändning.";

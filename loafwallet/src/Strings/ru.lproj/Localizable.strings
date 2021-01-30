@@ -886,11 +886,17 @@
 /* Lookup */
 "Send.UnstoppableDomains.lookup" = "Искать";
 
+/* LookupDomainError */
+"Send.UnstoppableDomains.lookupDomainError" = "К сожалению, домен не найден. [Ошибка: %2$d]";
+
 /* lookupFailureHeader */
 "Send.UnstoppableDomains.lookupFailureHeader" = "Ошибка поиска";
 
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = "Введите домен .crypto или .zil";
+
+/* UDSystemError */
+"Send.UnstoppableDomains.udSystemError" = "Проблема с поиском в системе. [Ошибка: %2$d]";
 
 /* Adress already used alert message - first part */
 "Send.UsedAddress.firstLine" = "Биткойн-адреса предназначены исключительно для однократного использования.";

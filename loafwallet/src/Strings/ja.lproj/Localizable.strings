@@ -886,11 +886,17 @@
 /* Lookup */
 "Send.UnstoppableDomains.lookup" = "調べる";
 
+/* LookupDomainError */
+"Send.UnstoppableDomains.lookupDomainError" = "申し訳ありませんが、ドメインが見つかりませんでした。 [エラー: %2$d]";
+
 /* lookupFailureHeader */
 "Send.UnstoppableDomains.lookupFailureHeader" = "ルックアップに失敗しました";
 
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = ".cryptoまたは.zilドメインを入力してください";
+
+/* UDSystemError */
+"Send.UnstoppableDomains.udSystemError" = "システムルックアップの問題。 [エラー: %2$d]";
 
 /* Adress already used alert message - first part */
 "Send.UsedAddress.firstLine" = "リテコインアドレスは、個人利用のみを想定しています。";

@@ -886,11 +886,17 @@
 /* Lookup */
 "Send.UnstoppableDomains.lookup" = "Lihatlah";
 
+/* LookupDomainError */
+"Send.UnstoppableDomains.lookupDomainError" = "Masalah sistem, domain tidak ditemukan. [Kesalahan: %2$d]";
+
 /* lookupFailureHeader */
 "Send.UnstoppableDomains.lookupFailureHeader" = "Pencarian gagal";
 
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = "Masukkan domain .crypto atau .zil";
+
+/* UDSystemError */
+"Send.UnstoppableDomains.udSystemError" = "Masalah pencarian sistem. [Kesalahan: %2$d]";
 
 /* Adress already used alert message - first part */
 "Send.UsedAddress.firstLine" = "Alamat Litecoin hanya ditujukan untuk penggunaan tunggal.";

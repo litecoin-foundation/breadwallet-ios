@@ -887,11 +887,17 @@
 /* Lookup */
 "Send.UnstoppableDomains.lookup" = "Buscar";
 
+/* LookupDomainError */
+"Send.UnstoppableDomains.lookupDomainError" = "Lo sentimos, no se encontró el dominio. [Error: %2$d]";
+
 /* lookupFailureHeader */
 "Send.UnstoppableDomains.lookupFailureHeader" = "Búsqueda fallida";
 
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = "Ingrese un dominio .crypto o .zil";
+
+/* UDSystemError */
+"Send.UnstoppableDomains.udSystemError" = "Problema de búsqueda del sistema. [Error: %2$d]";
 
 /* Adress already used alert message - first part */
 "Send.UsedAddress.firstLine" = "Las direcciones Litecoin están diseñadas para un solo uso.";

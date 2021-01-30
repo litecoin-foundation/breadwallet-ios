@@ -1376,5 +1376,10 @@
 "LitecoinCard.Disclaimer.title" = "Litecoin Card Beta";
 
 /* lookupFailureHeader */
-"Send.UnstoppableDomains.lookupFailureHeader" = "Lookup failed";
- 
+"Send.UnstoppableDomains.lookupFailureHeader" = "Lookup failed"; 
+
+/* LookupDomainError */
+"Send.UnstoppableDomains.lookupDomainError" = "Sorry, domain was not found. [Error: %2$d]";
+
+/* UDSystemError */
+"Send.UnstoppableDomains.udSystemError" = "System lookup problem. [Error: %2$d]";

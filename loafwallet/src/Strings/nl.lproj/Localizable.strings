@@ -886,11 +886,17 @@
 /* Lookup */
 "Send.UnstoppableDomains.lookup" = "Opzoeken";
 
+/* LookupDomainError */
+"Send.UnstoppableDomains.lookupDomainError" = "Sorry, het domein is niet gevonden. [Fout: %2$d]";
+
 /* lookupFailureHeader */
 "Send.UnstoppableDomains.lookupFailureHeader" = "Opzoeken mislukt";
 
 /* Enter to match domain name to LTC Address */
 "Send.UnstoppableDomains.placeholder" = "Voer een .crypto- of .zil-domein in";
+
+/* UDSystemError */
+"Send.UnstoppableDomains.udSystemError" = "Systeem opzoeken probleem. [Fout: %2$d]";
 
 /* Adress already used alert message - first part */
 "Send.UsedAddress.firstLine" = "Litecoin adressen zijn alleen bedoeld voor enkel gebruik.";
