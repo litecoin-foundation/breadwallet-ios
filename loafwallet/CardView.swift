@@ -12,6 +12,7 @@ import UIKit
 
 struct CardView: View {
       
+    //MARK: - Combine Variables
     @ObservedObject
     var viewModel: CardViewModel
     

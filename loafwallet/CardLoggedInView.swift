@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CardLoggedInView: View {
     
+    //MARK: - Combine Variables
     @ObservedObject
     var viewModel: CardViewModel
     

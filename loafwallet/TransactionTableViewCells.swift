@@ -71,6 +71,7 @@ class TransactionTableViewCellv2 : UITableViewCell, Subscriber {
     //MARK: - Public
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        expandCardView.alpha = 0.0
         setupViews()
     }
 
@@ -103,7 +104,6 @@ class TransactionTableViewCellv2 : UITableViewCell, Subscriber {
     func setTransaction(_ transaction: Transaction, isLtcSwapped: Bool, rate: Rate, maxDigits: Int, isSyncing: Bool) {
         
        self.transaction = transaction
-       expandCardView.alpha = 0.0
 
        amountLabel.attributedText = transaction.descriptionString(isLtcSwapped: isLtcSwapped, rate: rate, maxDigits: maxDigits)
        addressLabel.text = String(format: transaction.direction.addressTextFormat, transaction.toAddress ?? "")
@@ -187,7 +187,6 @@ class TransactionTableViewCellv2 : UITableViewCell, Subscriber {
    }
  
     override func setSelected(_ selected: Bool, animated: Bool) {
-        
 
     }
 

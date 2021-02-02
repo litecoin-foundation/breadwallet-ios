@@ -10,6 +10,7 @@ import SwiftUI
 
 struct AnimatedCardView: View {
     
+    //MARK: - Combine Variables
     @ObservedObject
     var viewModel: AnimatedCardViewModel
     

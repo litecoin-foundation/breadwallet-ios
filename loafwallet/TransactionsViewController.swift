@@ -64,9 +64,11 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
              assertionFailure("PEER MAANAGER Not initialized")
              return
         }
-        
+        self.tableView.register(HostingTransactionCell<TransactionCellView>.self, forCellReuseIdentifier: "HostingTransactionCell<TransactionCellView>")
         self.transactions = TransactionManager.sharedInstance.transactions
         self.rate = TransactionManager.sharedInstance.rate
+        
+        
         tableView.backgroundColor = .liteWalletBlue
         initSyncingHeaderView(completion: {})
         attemptShowPrompt()
@@ -176,7 +178,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
        store.subscribe(self, name: .txMemoUpdated(""), callback: {
            guard let trigger = $0 else { return }
            if case .txMemoUpdated(let txHash) = trigger {
-               self.reload(txHash: txHash)
+               self.updateTransactions(txHash: txHash)
            }
        })
        reload()
@@ -210,11 +212,14 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    private func reload(txHash: String) {
+    /// Update displayed transactions. Used mainly when the database needs an update
+    /// - Parameter txHash: String reprsentation of the TX
+    private func updateTransactions(txHash: String) {
         self.transactions.enumerated().forEach { i, tx in
             if tx.hash == txHash {
                 DispatchQueue.main.async {
                     self.tableView.beginUpdates()
+                    
                     self.tableView.reloadRows(at: [IndexPath(row: i, section: self.hasExtraSection ? 1 : 0)], with: .automatic)
                     self.tableView.endUpdates()
                 }
@@ -276,7 +281,13 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         } else {
             let transaction = transactions[indexPath.row]
             let selectedIndex = selectedIndexes[indexPath] as? Bool
-            return configureTransactionCell(transaction: transaction, wasSelected: selectedIndex ?? false, indexPath: indexPath)
+            
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "HostingTransactionCell<TransactionCellView>", for: indexPath) as! HostingTransactionCell<TransactionCellView>
+                cell.set(rootView: TransactionCellView(viewModel: TransactionCellViewModel(),
+                                                       transaction: transaction, indexPath: indexPath),parentController: self)
+            return cell
+            //configureTransactionCell(transaction: transaction, wasSelected: selectedIndex ?? false, indexPath: indexPath)
         }
     }
     
@@ -407,22 +418,3 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         return messageLabel
     }
 }
- 
-//struct TransactionsSwiftUIView: UIViewControllerRepresentable {
-//    
-//     
-//
-//    typealias UIViewControllerType = TransactionsViewController
-//    
-//  
-//
-//    func makeUIViewController(context: UIViewControllerRepresentableContext<TransactionsSwiftUIView>) -> TransactionsSwiftUIView.UIViewControllerType {
-//        let viewModel = TransactionsViewModel(store: Store(), walletManager: WalletManager(store: Store()))
-//
-//        return TransactionsViewController(viewModel: viewModel, store: )
-//    }
-//
-//    func updateUIViewController(_ uiViewController: TransactionsSwiftUIView.UIViewControllerType, context: UIViewControllerRepresentableContext<TransactionsSwiftUIView>) {
-//        //
-//    }
-//}

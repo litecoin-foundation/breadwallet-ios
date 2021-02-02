@@ -10,6 +10,7 @@ import SwiftUI
 
 struct PartnersView: View {
     
+    //MARK: - Combine Variables
     @ObservedObject
     var viewModel: PartnerViewModel
     
