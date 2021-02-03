@@ -219,7 +219,6 @@ class Transaction {
         }
     }()
 
-    // return: (timestampString, shouldStartTimer)
     var timeSince: (String, Bool) {
         if let cached = timeSinceCache {
             return cached

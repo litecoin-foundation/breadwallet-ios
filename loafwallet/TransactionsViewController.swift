@@ -10,8 +10,11 @@ import UIKit
 import SwiftUI
 import LocalAuthentication
 
-private let promptDelay: TimeInterval = 0.6
-private let qrImageSize = 120.0
+private let promptDelay: TimeInterval = 0.6 
+private let timestampRefreshRate: TimeInterval = 10.0
+let kNormalTransactionCellHeight: CGFloat = 50.0
+let kProgressHeaderHeight: CGFloat = 50.0
+let kPromptCellHeight : CGFloat = 120.0
  
 class TransactionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Subscriber, Trackable {
 
@@ -237,7 +240,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
      
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if shouldBeSyncing { return kProgressHeaderHeight }
-        return 0.0
+        return 5.0
     }
     
     // MARK: - Table view data source
@@ -266,11 +269,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         if hasExtraSection && indexPath.section == 0 {
             return kPromptCellHeight
         } else {
-            if cellIsSelected(indexPath: indexPath) {
-                return kMaxTransactionCellHeight
-            } else {
-                return kNormalTransactionCellHeight
-            }
+            return kNormalTransactionCellHeight
         }
     }
     
@@ -280,14 +279,21 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
             return configurePromptCell(promptType: currentPromptType, indexPath: indexPath)
         } else {
             let transaction = transactions[indexPath.row]
-            let selectedIndex = selectedIndexes[indexPath] as? Bool
             
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "HostingTransactionCell<TransactionCellView>", for: indexPath) as? HostingTransactionCell<TransactionCellView> else {
+                NSLog("ERROR No cell found")
+                return UITableViewCell()
+            }
+             
+            if let rate = rate,
+               let store = self.store,
+               let isLtcSwapped = self.isLtcSwapped {
+                let viewModel = TransactionCellViewModel(transaction: transaction, isLtcSwapped: isLtcSwapped, rate: rate, maxDigits: store.state.maxDigits, isSyncing: store.state.walletState.syncState != .success)
+                cell.set(rootView: TransactionCellView(viewModel: viewModel), parentController: self)
+                cell.selectionStyle = .default
+            }
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "HostingTransactionCell<TransactionCellView>", for: indexPath) as! HostingTransactionCell<TransactionCellView>
-                cell.set(rootView: TransactionCellView(viewModel: TransactionCellViewModel(),
-                                                       transaction: transaction, indexPath: indexPath),parentController: self)
             return cell
-            //configureTransactionCell(transaction: transaction, wasSelected: selectedIndex ?? false, indexPath: indexPath)
         }
     }
     
@@ -319,55 +325,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         
         return cell
     }
-      
-    private func configureTransactionCell(transaction:Transaction?, wasSelected: Bool?, indexPath: IndexPath) -> TransactionTableViewCellv2 {
-        
-        //TODO: Polish animation based on 'wasSelected'
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTVC2", for: indexPath) as? TransactionTableViewCellv2 else {
-            NSLog("ERROR: No cell found")
-            return TransactionTableViewCellv2()
-        } 
-        
-        if let transaction = transaction {
-            if transaction.direction == .received {
-                cell.showQRModalAction = { [unowned self] in
-                    
-                    if let addressString = transaction.toAddress,
-                        let qrImage =  UIImage.qrCode(data: addressString.data(using: .utf8) ?? Data(), color: CIColor(color: .black))?.resize(CGSize(width: qrImageSize, height: qrImageSize)),
-                        let receiveLTCtoAddressModal = UIStoryboard.init(name: "Alerts", bundle: nil).instantiateViewController(withIdentifier: "LFModalReceiveQRViewController") as? LFModalReceiveQRViewController {
-                        
-                        receiveLTCtoAddressModal.providesPresentationContextTransitionStyle = true
-                        receiveLTCtoAddressModal.definesPresentationContext = true
-                        receiveLTCtoAddressModal.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-                        receiveLTCtoAddressModal.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-                        receiveLTCtoAddressModal.dismissQRModalAction = { [unowned self] in
-                            self.dismiss(animated: true, completion: nil)
-                        }
-                        self.present(receiveLTCtoAddressModal, animated: true) {
-                             receiveLTCtoAddressModal.receiveModalTitleLabel.text = S.TransactionDetails.receiveModaltitle
-                             receiveLTCtoAddressModal.addressLabel.text = addressString
-                             receiveLTCtoAddressModal.qrImageView.image = qrImage
-                         }
-                    }
-                }
-            }
-               
-            if let rate = rate,
-                let store = self.store,
-                let isLtcSwapped = self.isLtcSwapped {
-                cell.setTransaction(transaction, isLtcSwapped: isLtcSwapped, rate: rate, maxDigits: store.state.maxDigits, isSyncing: store.state.walletState.syncState != .success)
-            }
-            
-            cell.staticBlockLabel.text = S.TransactionDetails.blockHeightLabel
-            cell.staticCommentLabel.text = S.TransactionDetails.commentsHeader
-            cell.staticAmountDetailLabel.text = S.Transaction.amountDetailLabel
-        }
-        else {
-            assertionFailure("Transaction must exist")
-        }
-        return cell
-    }
+  
       
     private func cellIsSelected(indexPath: IndexPath) -> Bool {
         
@@ -377,31 +335,20 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRow(at: indexPath, animated: true)
-        tableView.beginUpdates()
-        let isSelected = !self.cellIsSelected(indexPath: indexPath)
-        let selectedIndex = NSNumber(value: isSelected)
-        selectedIndexes[indexPath] = selectedIndex
-
-        if let selectedCell = tableView.cellForRow(at: indexPath) as? TransactionTableViewCellv2 {
-             
-            let identity: CGAffineTransform = .identity
+        let transaction = transactions[indexPath.row]
+        
+        if let rate = rate,
+           let store = self.store,
+           let isLtcSwapped = self.isLtcSwapped {
+            let viewModel = TransactionCellViewModel(transaction: transaction, isLtcSwapped: isLtcSwapped, rate: rate, maxDigits: store.state.maxDigits, isSyncing: store.state.walletState.syncState != .success)
+            let hostingController = UIHostingController(rootView: TransactionModalView(viewModel: viewModel))
             
-            if isSelected {
-                let newAlpha = 1.0
-                UIView.animate(withDuration: 0.1, delay: 0.0, animations: {
-                    selectedCell.expandCardView.alpha = CGFloat(newAlpha)
-                    selectedCell.dropArrowImageView.transform = identity.rotated(by: π)
-                })
-            } else {
-                let newAlpha = 0.0
-                UIView.animate(withDuration: 0.1, delay: 0.0, animations: {
-                    selectedCell.expandCardView.alpha = CGFloat(newAlpha)
-                    selectedCell.dropArrowImageView.transform = identity.rotated(by: -4.0*π/2.0)
-                })
+            hostingController.modalPresentationStyle = .formSheet
+            
+            self.present(hostingController, animated: true) {
+                tableView.cellForRow(at: indexPath)?.isSelected = false
             }
         }
-        tableView.endUpdates()
     }
     
     private func emptyMessageView() -> UILabel {
