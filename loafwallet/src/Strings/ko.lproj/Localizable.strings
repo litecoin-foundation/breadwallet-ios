@@ -85,57 +85,6 @@
 /* API Token error message */
 "ApiClient.tokenError" = "API 토큰을 가져올 수 없습니다";
 
-/* Send BCH view body. */
-"BCH.body" = "아래의 목적지 BCH 주소를 입력하세요. 분기 시점(%1$@)에 귀하의 월렛에 있는 모든 BCH를 보냅니다.";
-
-/* Confirm sending <$5.00> to <address>? */
-"BCH.confirmationMessage" = "%1$@를 %2$@(으)로 보내기를 확인";
-
-/* Confirmation alert title */
-"BCH.confirmationTitle" = "확정";
-
-/* Generic bch erorr message */
-"BCH.genericError" = "귀하의 계정에는 BCH가 없거나, 분기 이후에 BCH를 받으셨습니다.";
-
-/* Transaction ID copied message */
-"BCH.hashCopiedMessage" = "Transaction ID 복사됨";
-
-/* No address error message */
-"BCH.noAddressError" = "주소를 입력해 주세요";
-
-/* Attempted to scan unsupported qr code error message. */
-"BCH.paymentProtocolError" = "Payment Protocol Request는 BCH 트랜잭션에서 지원되지 않습니다";
-
-/* BCH successfully sent alert message */
-"BCH.successMessage" = "BCH를 성공적으로 보냈습니다.";
-
-/* Widthdraw BCH view title */
-"BCH.title" = "BCH 인출";
-
-/* Tx Hash button header */
-"BCH.txHashHeader" = "BCH Transaction ID";
-
-/* Approve button label */
-"BitID.approve" = "승인";
-
-/* <sitename> is requesting authentication using your Litecoin wallet */
-"BitID.authenticationRequest" = "%1$@(이)가 귀하의 Litecoin 월렛 이용에 대한 인증을 요청하고 있습니다.";
-
-/* Deny button label */
-"BitID.deny" = "거부";
-
-/* BitID error alert title */
-"BitID.error" = "인증 오류";
-
-/* BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) */
-"BitID.errorMessage" = "서비스 측에 확인해 주세요. 다시 시도해야 할 수도 있습니다.";
-
-/* BitID success alert title */
-"BitID.success" = "성공적으로 인증됨";
-
-/* BitID Authentication Request alert view title */
-"BitID.title" = "BitID 인증 요청";
-
 /* buy button */
 "Button.buy" = "구입";
 

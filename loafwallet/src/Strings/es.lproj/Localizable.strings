@@ -85,57 +85,6 @@
 /* API Token error message */
 "ApiClient.tokenError" = "No se puede recuperar el token de API";
 
-/* Send BCH view body. */
-"BCH.body" = "Introduce una dirección de destino BCH a continuación. Se enviarán todos los BCH de tu cartera en el momento del fork (%1$@).";
-
-/* Confirm sending <$5.00> to <address>? */
-"BCH.confirmationMessage" = "Confirmar enviando %1$@ a %2$@";
-
-/* Confirmation alert title */
-"BCH.confirmationTitle" = "Confirmación";
-
-/* Generic bch erorr message */
-"BCH.genericError" = "Tu cuenta no contiene ningún BCH o recibiste BCH después del fork.";
-
-/* Transaction ID copied message */
-"BCH.hashCopiedMessage" = "Se ha copiado el ID de la transacción";
-
-/* No address error message */
-"BCH.noAddressError" = "Por favor, introduce una dirección";
-
-/* Attempted to scan unsupported qr code error message. */
-"BCH.paymentProtocolError" = "No se admiten solicitudes de protocolo de pago en transacciones BCH";
-
-/* BCH successfully sent alert message */
-"BCH.successMessage" = "BCH se ha enviado correctamente.";
-
-/* Widthdraw BCH view title */
-"BCH.title" = "Retirar BCH";
-
-/* Tx Hash button header */
-"BCH.txHashHeader" = "Identificador de transacción BCH";
-
-/* Approve button label */
-"BitID.approve" = "Aprobar";
-
-/* <sitename> is requesting authentication using your Litecoin wallet */
-"BitID.authenticationRequest" = "%1$@ está solicitando autenticación mediante tu cartera Litecoin";
-
-/* Deny button label */
-"BitID.deny" = "Denegar";
-
-/* BitID error alert title */
-"BitID.error" = "Error de autenticación";
-
-/* BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) */
-"BitID.errorMessage" = "Consulta con el servicio. Es posible que debas intentarlo de nuevo.";
-
-/* BitID success alert title */
-"BitID.success" = "Autenticado con éxito";
-
-/* BitID Authentication Request alert view title */
-"BitID.title" = "Solicitud de autenticación de BitID";
-
 /* buy button */
 "Button.buy" = "COMPRAR";
 

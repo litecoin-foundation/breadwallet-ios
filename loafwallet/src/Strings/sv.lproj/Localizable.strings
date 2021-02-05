@@ -85,57 +85,6 @@
 /* API Token error message */
 "ApiClient.tokenError" = "Kan inte ta emot API-symbol";
 
-/* Send BCH view body. */
-"BCH.body" = "Ange mottagarens BCH-adress nedan. Alla BCH i din plånbok vid nästa fork (%1$@) kommer skickas.";
-
-/* Confirm sending <$5.00> to <address>? */
-"BCH.confirmationMessage" = "Bekräfta skickar %1$@ till %2$@";
-
-/* Confirmation alert title */
-"BCH.confirmationTitle" = "Bekräftelse";
-
-/* Generic bch erorr message */
-"BCH.genericError" = "Ditt konto har inte några BCH, eller så tar du emot BCH först efter nästa fork.";
-
-/* Transaction ID copied message */
-"BCH.hashCopiedMessage" = "Transaktions-ID kopierat";
-
-/* No address error message */
-"BCH.noAddressError" = "Var god ange en adress";
-
-/* Attempted to scan unsupported qr code error message. */
-"BCH.paymentProtocolError" = "Betalningsprotokollsbegäran stöds inte för BCH-transaktioner";
-
-/* BCH successfully sent alert message */
-"BCH.successMessage" = "BCH skickades.";
-
-/* Widthdraw BCH view title */
-"BCH.title" = "Ta ut BCH";
-
-/* Tx Hash button header */
-"BCH.txHashHeader" = "BCH transaktions-ID";
-
-/* Approve button label */
-"BitID.approve" = "Godkänn";
-
-/* <sitename> is requesting authentication using your Litecoin wallet */
-"BitID.authenticationRequest" = "%1$@ begär autentisering med hjälp av din Litecoin-plånbok";
-
-/* Deny button label */
-"BitID.deny" = "Avslå";
-
-/* BitID error alert title */
-"BitID.error" = "Autentiseringsfel";
-
-/* BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) */
-"BitID.errorMessage" = "Var god kontrollera med tjänsten. Du kan behöva försöka igen.";
-
-/* BitID success alert title */
-"BitID.success" = "Autentiseringen lyckades";
-
-/* BitID Authentication Request alert view title */
-"BitID.title" = "BitId autentiseringsförfrågan";
-
 /* buy button */
 "Button.buy" = "köpa";
 

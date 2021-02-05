@@ -85,57 +85,6 @@
 /* API Token error message */
 "ApiClient.tokenError" = "Impossible de récupérer le jeton de l'API";
 
-/* Send BCH view body. */
-"BCH.body" = "Entrez une adresse BCH de destination ci-dessous. Tous les BCH dans votre portefeuille au moment où la fourchette (%1$@) seront envoyés.";
-
-/* Confirm sending <$5.00> to <address>? */
-"BCH.confirmationMessage" = "Confirmer l'envoi de %1$@ à %2$@";
-
-/* Confirmation alert title */
-"BCH.confirmationTitle" = "Confirmation";
-
-/* Generic bch erorr message */
-"BCH.genericError" = "Votre compte ne contient aucun BCH ou vous avez reçu le BCH après la fourchette.";
-
-/* Transaction ID copied message */
-"BCH.hashCopiedMessage" = "ID de transaction copiée";
-
-/* No address error message */
-"BCH.noAddressError" = "Veuillez entrer une adresse";
-
-/* Attempted to scan unsupported qr code error message. */
-"BCH.paymentProtocolError" = "Les demandes de protocole de paiement ne sont pas prises en charge pour les transactions BCH";
-
-/* BCH successfully sent alert message */
-"BCH.successMessage" = "BCH envoyés avec succès.";
-
-/* Widthdraw BCH view title */
-"BCH.title" = "Retirer les BCH";
-
-/* Tx Hash button header */
-"BCH.txHashHeader" = "ID de transaction BCH";
-
-/* Approve button label */
-"BitID.approve" = "Approuver";
-
-/* <sitename> is requesting authentication using your Litecoin wallet */
-"BitID.authenticationRequest" = "%1$@ requiert l'authentification en utilisant le portefeuille Litecoin";
-
-/* Deny button label */
-"BitID.deny" = "Refuser";
-
-/* BitID error alert title */
-"BitID.error" = "Erreur d'authentification";
-
-/* BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) */
-"BitID.errorMessage" = "Veuillez vérifier avec le service. Vous pourriez avoir à essayer de nouveau.";
-
-/* BitID success alert title */
-"BitID.success" = "Authentification réussie";
-
-/* BitID Authentication Request alert view title */
-"BitID.title" = "Demande d'authentification BitID";
-
 /* buy button */
 "Button.buy" = "ACHETER";
 

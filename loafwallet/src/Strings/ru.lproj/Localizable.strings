@@ -85,57 +85,6 @@
 /* API Token error message */
 "ApiClient.tokenError" = "Не удалось извлечь токен API";
 
-/* Send BCH view body. */
-"BCH.body" = "Введите адрес адресата BCH ниже. Вся сумма BCH в вашем кошельке во время форка (%1$@) будет отправлена.";
-
-/* Confirm sending <$5.00> to <address>? */
-"BCH.confirmationMessage" = "Подтвердить отправку %1$@ на %2$@";
-
-/* Confirmation alert title */
-"BCH.confirmationTitle" = "Подтверждение";
-
-/* Generic bch erorr message */
-"BCH.genericError" = "На Вашем аккаунте нет BCH, или вы получили BCH после форка.";
-
-/* Transaction ID copied message */
-"BCH.hashCopiedMessage" = "Идентификатор транзакции скопирован";
-
-/* No address error message */
-"BCH.noAddressError" = "Пожалуйста, введите и адрес";
-
-/* Attempted to scan unsupported qr code error message. */
-"BCH.paymentProtocolError" = "Запросы протокола платежей не поддерживаются для транзакций BCH";
-
-/* BCH successfully sent alert message */
-"BCH.successMessage" = "BCH был успешно отправлен.";
-
-/* Widthdraw BCH view title */
-"BCH.title" = "Снять BCH";
-
-/* Tx Hash button header */
-"BCH.txHashHeader" = "Идентификатор транзакции BCH";
-
-/* Approve button label */
-"BitID.approve" = "Одобрить";
-
-/* <sitename> is requesting authentication using your Litecoin wallet */
-"BitID.authenticationRequest" = "%1$@ запрашивает аутентификацию, используя ваш биткойн-кошелек";
-
-/* Deny button label */
-"BitID.deny" = "Отказаться";
-
-/* BitID error alert title */
-"BitID.error" = "Ошибка аутентификации";
-
-/* BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) */
-"BitID.errorMessage" = "Пожалуйста, обратитесь в эту службу. Возможно, вам придется попробовать еще раз.";
-
-/* BitID success alert title */
-"BitID.success" = "Аутентификация пройдена успешно";
-
-/* BitID Authentication Request alert view title */
-"BitID.title" = "Запрос на аутентификацию BitID";
-
 /* buy button */
 "Button.buy" = "купить";
 

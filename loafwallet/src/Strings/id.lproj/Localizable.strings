@@ -85,57 +85,6 @@
 /* API Token error message */
 "ApiClient.tokenError" = "Tidak mampu mendapatkan kembali bukti API";
 
-/* Send BCH view body. */
-"BCH.body" = "Masukan tujuan alamat BCH dibawah. Semua BCH di dompet Anda pada waktu untuk percabangan (%1$@) akan dikirim.";
-
-/* Confirm sending <$5.00> to <address>? */
-"BCH.confirmationMessage" = "Konfirmasi pengiriman %1$@ to %2$@";
-
-/* Confirmation alert title */
-"BCH.confirmationTitle" = "Mengkonfirmasi";
-
-/* Generic bch erorr message */
-"BCH.genericError" = "Akun Anda tidak mengandung BCH, atau Anda menerima BCH setelah percabangan.";
-
-/* Transaction ID copied message */
-"BCH.hashCopiedMessage" = "ID Transaksi tersalin";
-
-/* No address error message */
-"BCH.noAddressError" = "Silahkan masukkan alamat";
-
-/* Attempted to scan unsupported qr code error message. */
-"BCH.paymentProtocolError" = "Permintaan Protokol Pembayaran tidak didukung untuk transaksi BCH";
-
-/* BCH successfully sent alert message */
-"BCH.successMessage" = "BCH berhasil terkirim.";
-
-/* Widthdraw BCH view title */
-"BCH.title" = "Mengambil BCH";
-
-/* Tx Hash button header */
-"BCH.txHashHeader" = "ID transaksi BCH";
-
-/* Approve button label */
-"BitID.approve" = "Menyetujui";
-
-/* <sitename> is requesting authentication using your Litecoin wallet */
-"BitID.authenticationRequest" = "%1$@ meminta otentikasi menggunakan dompet Litecoin Anda";
-
-/* Deny button label */
-"BitID.deny" = "Menyangkal";
-
-/* BitID error alert title */
-"BitID.error" = "Salah Otentikasi";
-
-/* BitID error alert messaage */
-"BitID.errorMessage" = "Silahkan periksa dengan layanan. Anda mungkin perlu coba lagi.";
-
-/* BitID success alert title */
-"BitID.success" = "Berhasil diotentikasi";
-
-/* BitID Authentication Request alert view title */
-"BitID.title" = "Permintaan Otentikasi BitID";
-
 /* buy button */
 "Button.buy" = "membeli";
 

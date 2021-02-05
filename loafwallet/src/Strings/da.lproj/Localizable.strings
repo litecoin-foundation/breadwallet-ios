@@ -85,57 +85,6 @@
 /* API Token error message */
 "ApiClient.tokenError" = "Kunne ikke hente API-nøgle";
 
-/* Send BCH view body. */
-"BCH.body" = "Indtast en BCH destinationsadresse nedenfor. Alle BCH i din wallet ved fork-tidspunktet (%1$@) vil blive afsendt.";
-
-/* Confirm sending <$5.00> to <address>? */
-"BCH.confirmationMessage" = "Bekræft afsendelse af %1$@ til %2$@";
-
-/* Confirmation alert title */
-"BCH.confirmationTitle" = "Bekræftelse";
-
-/* Generic bch erorr message */
-"BCH.genericError" = "Din konto indeholder ikke nogle BCH eller du modtog BCH efter fork.";
-
-/* Transaction ID copied message */
-"BCH.hashCopiedMessage" = "Transaktions-ID kopieret";
-
-/* No address error message */
-"BCH.noAddressError" = "Indtast venligst en adresse";
-
-/* Attempted to scan unsupported qr code error message. */
-"BCH.paymentProtocolError" = "Betalingsprotokolanmodninger er ikke understøttet for BCH-transaktioner";
-
-/* BCH successfully sent alert message */
-"BCH.successMessage" = "BCH blev afsendt uden problemer.";
-
-/* Widthdraw BCH view title */
-"BCH.title" = "Tilbagetræk BCH";
-
-/* Tx Hash button header */
-"BCH.txHashHeader" = "BCH transaktions-ID";
-
-/* Approve button label */
-"BitID.approve" = "Godkend";
-
-/* <sitename> is requesting authentication using your Litecoin wallet */
-"BitID.authenticationRequest" = "%1$@ anmoder om godkendelse ved hjælp af din Litecoin-wallet";
-
-/* Deny button label */
-"BitID.deny" = "Afvis";
-
-/* BitID error alert title */
-"BitID.error" = "Godkendelsesfejl";
-
-/* BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) */
-"BitID.errorMessage" = "Tjek venligst tjenesten. Det kan være nødvendigt at prøve igen.";
-
-/* BitID success alert title */
-"BitID.success" = "Godkendt uden problemer";
-
-/* BitID Authentication Request alert view title */
-"BitID.title" = "BitID godkendelsesanmodning";
-
 /* buy button */
 "Button.buy" = "købe";
 

@@ -85,57 +85,6 @@
 /* API Token error message */
 "ApiClient.tokenError" = "Impossibile recuperare il token API";
 
-/* Send BCH view body. */
-"BCH.body" = "Inserisci un indirizzo di destinazione BCH qui sotto. Verranno invitai tutti i BCH nel tuo portafogli al momento dell'intervallo (%1$@).";
-
-/* Confirm sending <$5.00> to <address>? */
-"BCH.confirmationMessage" = "Conferma l'invio di %1$@ a %2$@";
-
-/* Confirmation alert title */
-"BCH.confirmationTitle" = "Conferma";
-
-/* Generic bch erorr message */
-"BCH.genericError" = "Il tuo account non contiene alcun BCH, oppure hai ricevuto BCH dopo l'intervallo.";
-
-/* Transaction ID copied message */
-"BCH.hashCopiedMessage" = "ID della transazione copiato";
-
-/* No address error message */
-"BCH.noAddressError" = "Per favore inserisci e invia";
-
-/* Attempted to scan unsupported qr code error message. */
-"BCH.paymentProtocolError" = "Le richieste di protocollo del pagamento non sono supportate per le transazioni in BCH";
-
-/* BCH successfully sent alert message */
-"BCH.successMessage" = "BCH inviati con successo.";
-
-/* Widthdraw BCH view title */
-"BCH.title" = "Ritira BCH";
-
-/* Tx Hash button header */
-"BCH.txHashHeader" = "ID transazione BCH";
-
-/* Approve button label */
-"BitID.approve" = "Approva";
-
-/* <sitename> is requesting authentication using your Litecoin wallet */
-"BitID.authenticationRequest" = "%1$@ richiede l'autenticazione usando il tuo portafogli Litecoin";
-
-/* Deny button label */
-"BitID.deny" = "Nega";
-
-/* BitID error alert title */
-"BitID.error" = "Errore di autenticazione";
-
-/* BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) */
-"BitID.errorMessage" = "Per favore verifica con il servizio. Potresti dover riprovare.";
-
-/* BitID success alert title */
-"BitID.success" = "Autenticato con successo";
-
-/* BitID Authentication Request alert view title */
-"BitID.title" = "Richiesta autenticazione BitID";
-
 /* buy button */
 "Button.buy" = "acquistare";
 

@@ -86,57 +86,6 @@
 /* API Token error message */
 "ApiClient.tokenError" = "Não foi possível obter o token API";
 
-/* Send BCH view body. */
-"BCH.body" = "Introduza abaixo um endereço de destino da BCH. Toda a BCH que estiver na sua conta no momento da divisão (%1$@) será enviada.";
-
-/* Confirm sending <$5.00> to <address>? */
-"BCH.confirmationMessage" = "Confirme o envio de %1$@ para %2$@";
-
-/* Confirmation alert title */
-"BCH.confirmationTitle" = "Confirmação";
-
-/* Generic bch erorr message */
-"BCH.genericError" = "A sua conta não contém qualquer BCH, ou recebeu as BCH depois da divisão.";
-
-/* Transaction ID copied message */
-"BCH.hashCopiedMessage" = "ID da transação copiado";
-
-/* No address error message */
-"BCH.noAddressError" = "Por favor, introduza um endereço";
-
-/* Attempted to scan unsupported qr code error message. */
-"BCH.paymentProtocolError" = "Não são suportados pedidos de protocolo de pagamento para transações de BCH";
-
-/* BCH successfully sent alert message */
-"BCH.successMessage" = "A BCH foi enviada com sucesso";
-
-/* Widthdraw BCH view title */
-"BCH.title" = "Levantar BCH";
-
-/* Tx Hash button header */
-"BCH.txHashHeader" = "ID da transação de BCH";
-
-/* Approve button label */
-"BitID.approve" = "Aprovar";
-
-/* <sitename> is requesting authentication using your Litecoin wallet */
-"BitID.authenticationRequest" = "%1$@ está a solicitar autenticação utilizando a sua carteira de Litecoin";
-
-/* Deny button label */
-"BitID.deny" = "Recusar";
-
-/* BitID error alert title */
-"BitID.error" = "Erro de autenticação";
-
-/* BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) */
-"BitID.errorMessage" = "Por favor, verifique o serviço. Pode ser que precise de tentar novamente.";
-
-/* BitID success alert title */
-"BitID.success" = "Autenticado com sucesso";
-
-/* BitID Authentication Request alert view title */
-"BitID.title" = "Pedido de autenticação BitID";
-
 /* buy button */
 "Button.buy" = "COMPRAR";
 

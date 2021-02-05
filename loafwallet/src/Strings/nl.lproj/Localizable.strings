@@ -85,57 +85,6 @@
 /* API Token error message */
 "ApiClient.tokenError" = "Niet in staat op API teken te vinden";
 
-/* Send BCH view body. */
-"BCH.body" = "Voer hieronder een BCH bestemmingsadres in. Alle BCH die op het moment van de fork  (%1$@) in in je portomonnee zitten, zullen worden gestuurd.";
-
-/* Confirm sending <$5.00> to <address>? */
-"BCH.confirmationMessage" = "Sturen van %1$@ naar %2$@ bevestigen";
-
-/* Confirmation alert title */
-"BCH.confirmationTitle" = "Bevestiging";
-
-/* Generic bch erorr message */
-"BCH.genericError" = "Je account bevat geen BCH of je hebt BCH ontvangen na de fork.";
-
-/* Transaction ID copied message */
-"BCH.hashCopiedMessage" = "Transactie-ID gekopieerd";
-
-/* No address error message */
-"BCH.noAddressError" = "Voer alstublieft een adres in";
-
-/* Attempted to scan unsupported qr code error message. */
-"BCH.paymentProtocolError" = "Betalingsprotocol-aanvragen worden niet ondersteund voor tranacties met BCH";
-
-/* BCH successfully sent alert message */
-"BCH.successMessage" = "BCH succesvol verstuurd.";
-
-/* Widthdraw BCH view title */
-"BCH.title" = "BCH opnemen";
-
-/* Tx Hash button header */
-"BCH.txHashHeader" = "BCH Transactie-ID.";
-
-/* Approve button label */
-"BitID.approve" = "Keur goed";
-
-/* <sitename> is requesting authentication using your Litecoin wallet */
-"BitID.authenticationRequest" = "%1$@ vraagt om authenticatie om je Litecoin-portemonnee te gebruiken";
-
-/* Deny button label */
-"BitID.deny" = "Weigeren";
-
-/* BitID error alert title */
-"BitID.error" = "Authenticatie Fout";
-
-/* BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) */
-"BitID.errorMessage" = "Vraag het na bij de service. Je moet het mogelijk opnieuw proberen.";
-
-/* BitID success alert title */
-"BitID.success" = "Succesvol geautenticeerd";
-
-/* BitID Authentication Request alert view title */
-"BitID.title" = "BitID Authenticatieverzoek";
-
 /* buy button */
 "Button.buy" = "kopen";
 

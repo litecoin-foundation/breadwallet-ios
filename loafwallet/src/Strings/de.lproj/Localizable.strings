@@ -85,57 +85,6 @@
 /* API Token error message */
 "ApiClient.tokenError" = "API-Token konnte nicht abgerufen werden";
 
-/* Send BCH view body. */
-"BCH.body" = "Geben Sie unten eine Ziel-BCH-Adresse ein. Das gesamte BCH Guthaben aus Ihrem Wallet zur Zeit der Aufspaltung (%1$@) wird versendet.";
-
-/* Confirm sending <$5.00> to <address>? */
-"BCH.confirmationMessage" = "Senden von %1$@ an %2$@ bestätigen";
-
-/* Confirmation alert title */
-"BCH.confirmationTitle" = "Bestätigung";
-
-/* Generic bch erorr message */
-"BCH.genericError" = "Ihr Konto enthält kein BCH oder Sie haben BCH nach dem Fork erhalten.";
-
-/* Transaction ID copied message */
-"BCH.hashCopiedMessage" = "Transaktions-ID kopiert";
-
-/* No address error message */
-"BCH.noAddressError" = "Bitte geben Sie die Adresse ein";
-
-/* Attempted to scan unsupported qr code error message. */
-"BCH.paymentProtocolError" = "Zahlungsprotokoll-Anfragen werden bei BCH-Transaktionen nicht unterstützt";
-
-/* BCH successfully sent alert message */
-"BCH.successMessage" = "BCH wurde erfolgreich versendet.";
-
-/* Widthdraw BCH view title */
-"BCH.title" = "BCH abheben";
-
-/* Tx Hash button header */
-"BCH.txHashHeader" = "BCH-Transaktions-ID";
-
-/* Approve button label */
-"BitID.approve" = "Bestätigen";
-
-/* <sitename> is requesting authentication using your Litecoin wallet */
-"BitID.authenticationRequest" = "%1$@ fordert die Authentifizierung über Ihr Litecoin-Wallet an";
-
-/* Deny button label */
-"BitID.deny" = "Ablehnen";
-
-/* BitID error alert title */
-"BitID.error" = "Authentifizierungsfehler";
-
-/* BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) */
-"BitID.errorMessage" = "Bitte den Service überprüfen. Es könnte ein erneuter Versuch erforderlich sein.";
-
-/* BitID success alert title */
-"BitID.success" = "Erfolgreich authentifiziert";
-
-/* BitID Authentication Request alert view title */
-"BitID.title" = "BitID-Authentifizierungsanfrage";
-
 /* buy button */
 "Button.buy" = "kaufen";
 

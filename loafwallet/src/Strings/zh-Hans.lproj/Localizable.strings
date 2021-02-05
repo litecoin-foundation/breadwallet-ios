@@ -85,57 +85,6 @@
 /* API Token error message */
 "ApiClient.tokenError" = "无法检索 API 令牌";
 
-/* Send BCH view body. */
-"BCH.body" = "在下方输入目标 BCH 地址。您钱包中此分叉 (%1$@) 时的所有 BCH 都将被发送。";
-
-/* Confirm sending <$5.00> to <address>? */
-"BCH.confirmationMessage" = "确认将 %1$@ 发送到 %2$@";
-
-/* Confirmation alert title */
-"BCH.confirmationTitle" = "确认";
-
-/* Generic bch erorr message */
-"BCH.genericError" = "您的账户不包含任何 BCH，或您在分叉后才接收到 BCH。";
-
-/* Transaction ID copied message */
-"BCH.hashCopiedMessage" = "已拷贝交易 ID";
-
-/* No address error message */
-"BCH.noAddressError" = "请输入地址";
-
-/* Attempted to scan unsupported qr code error message. */
-"BCH.paymentProtocolError" = "支付协议请求不支持 BCH 交易";
-
-/* BCH successfully sent alert message */
-"BCH.successMessage" = "BCH 已成功发送。";
-
-/* Widthdraw BCH view title */
-"BCH.title" = "取出 BCH";
-
-/* Tx Hash button header */
-"BCH.txHashHeader" = "BCH 交易 ID";
-
-/* Approve button label */
-"BitID.approve" = "批准";
-
-/* <sitename> is requesting authentication using your Litecoin wallet */
-"BitID.authenticationRequest" = "%1$@ 正使用您的莱特币钱包请求验证";
-
-/* Deny button label */
-"BitID.deny" = "拒绝";
-
-/* BitID error alert title */
-"BitID.error" = "验证错误";
-
-/* BitID error alert messaage (The payment service you are trying to use isn't working. Please contact them, as you may need to try again) */
-"BitID.errorMessage" = "请检查此服务。您可能需要重试。";
-
-/* BitID success alert title */
-"BitID.success" = "验证成功";
-
-/* BitID Authentication Request alert view title */
-"BitID.title" = "BitID 验证请求";
-
 /* buy button */
 "Button.buy" = "购买";
 

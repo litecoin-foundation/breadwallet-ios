@@ -25,11 +25,7 @@ extension String {
         guard lengthOfBytes(using: .utf8) > 0 else { return false }
         return BRAddressIsValid(self) != 0
     }
-
-    var isValidBCHAddress: Bool {
-        return isValidAddress
-    }
-      
+    
     var sanitized: String {
         return applyingTransform(.toUnicodeName, reverse: false) ?? ""
     }
