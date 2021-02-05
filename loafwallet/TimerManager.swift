@@ -21,13 +21,3 @@ class TimerManager: NSObject {
      
 }
 
-
-
-//let timestampInfo = transaction.timeSince
-////       timedateLabel.text = timestampInfo.0
-////       if timestampInfo.1 {
-////           timer = Timer.scheduledTimer(timeInterval: timestampRefreshRate, target: TransactionCellWrapper(target: self), selector: NSSelectorFromString("timerDidFire"), userInfo: nil, repeats: true)
-////       } else {
-////           timer?.invalidate()
-////       }
-////       timedateLabel.isHidden = !transaction.isValid

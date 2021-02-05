@@ -11,10 +11,10 @@ import SwiftUI
 import LocalAuthentication
 
 private let promptDelay: TimeInterval = 0.6 
-private let timestampRefreshRate: TimeInterval = 10.0
-let kNormalTransactionCellHeight: CGFloat = 50.0
+let kNormalTransactionCellHeight: CGFloat = 65.0
 let kProgressHeaderHeight: CGFloat = 50.0
 let kPromptCellHeight : CGFloat = 120.0
+let kQRImageSide: CGFloat = 110.0
  
 class TransactionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Subscriber, Trackable {
 
@@ -33,6 +33,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
             transactions = allTransactions
         }
     }
+    
     private var rate: Rate? {
         didSet { reload() }
     }
@@ -50,10 +51,10 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
     }
+    
     var isLtcSwapped: Bool? {
         didSet { reload() }
     }
-    
     
     override func viewDidLoad() {
       setup()
@@ -83,110 +84,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         options: nil)?.first as? SyncProgressHeaderView
         completion()
     }
-     
-    private func addSubscriptions() {
-        
-        guard let store = self.store else {
-            NSLog("ERROR: Store not initialized")
-            return
-        }
-         
-        store.subscribe(self, selector: { $0.walletState.transactions != $1.walletState.transactions },
-                       callback: { state in
-           self.allTransactions = state.walletState.transactions
-           self.reload()
-        })
-
-        store.subscribe(self, selector: { $0.isLtcSwapped != $1.isLtcSwapped },
-                       callback: { self.isLtcSwapped = $0.isLtcSwapped })
-        store.subscribe(self, selector: { $0.currentRate != $1.currentRate},
-                       callback: { self.rate = $0.currentRate })
-        store.subscribe(self, selector: { $0.maxDigits != $1.maxDigits }, callback: {_ in
-           self.reload()
-        })
-         
-        store.subscribe(self, selector: { $0.walletState.syncProgress != $1.walletState.syncProgress },
-                        callback: { state in
-            store.subscribe(self, name:.showStatusBar) { (didShowStatusBar) in
-               self.reload() //May fix where the action view persists after confirming pin
-            }
-                            
-            if state.walletState.isRescanning {
-                 self.initSyncingHeaderView(completion: {
-                    self.syncingHeaderView?.isRescanning = state.walletState.isRescanning
-                    self.syncingHeaderView?.progress = CGFloat(state.walletState.syncProgress)
-                    self.syncingHeaderView?.headerMessage = state.walletState.syncState
-                    self.syncingHeaderView?.noSendImageView.alpha = 1.0
-                    self.syncingHeaderView?.timestamp = state.walletState.lastBlockTimestamp
-                    self.shouldBeSyncing = true
-                 })
-            } else if state.walletState.syncProgress > 0.95 {
-                self.shouldBeSyncing = false
-                self.syncingHeaderView = nil
-            } else {
-                self.initSyncingHeaderView(completion: {
-                    self.syncingHeaderView?.progress = CGFloat(state.walletState.syncProgress)
-                    self.syncingHeaderView?.headerMessage = state.walletState.syncState
-                    self.syncingHeaderView?.timestamp = state.walletState.lastBlockTimestamp
-                    self.syncingHeaderView?.noSendImageView.alpha = 0.0
-                    self.shouldBeSyncing = true
-                })
-            }
-        self.reload()
-        })
-        
-        store.subscribe(self, selector: { $0.walletState.syncState != $1.walletState.syncState },
-                     callback: { state in
-            guard let _ = self.walletManager?.peerManager else {
-              assertionFailure("PEER MANAGER Not initialized")
-            return
-            }
-         
-            if state.walletState.syncState == .success {
-            self.shouldBeSyncing = false
-            self.syncingHeaderView = nil
-            }
-            self.reload()
-       })
-   
-        store.subscribe(self, selector: { $0.recommendRescan != $1.recommendRescan }, callback: { _ in
-            self.attemptShowPrompt()
-        })
-        store.subscribe(self, selector: { $0.walletState.syncState != $1.walletState.syncState }, callback: { _ in
-            self.reload()
-        })
-        store.subscribe(self, name: .didUpgradePin, callback: { _ in
-            if self.currentPromptType == .upgradePin {
-                self.currentPromptType = nil
-            }
-        })
-        store.subscribe(self, name: .didEnableShareData, callback: { _ in
-            if self.currentPromptType == .shareData {
-                self.currentPromptType = nil
-            }
-        })
-        store.subscribe(self, name: .didWritePaperKey, callback: { _ in
-            if self.currentPromptType == .paperKey {
-                self.currentPromptType = nil
-            }
-        })
-        
-       store.subscribe(self, name: .didUpgradePin, callback: { _ in
-          print("DidUpgragePIN")
-       })
- 
-       store.subscribe(self, name: .didWritePaperKey, callback: { _ in
-          print("DidWritePaperKey")
-       })
-       store.subscribe(self, name: .txMemoUpdated(""), callback: {
-           guard let trigger = $0 else { return }
-           if case .txMemoUpdated(let txHash) = trigger {
-               self.updateTransactions(txHash: txHash)
-           }
-       })
-       reload()
-    }
-    
+      
     private func attemptShowPrompt() {
         guard let walletManager = walletManager else { return }
         guard let store = self.store else {
@@ -214,65 +112,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
             self.tableView.reloadData()
         }
     }
-    
-    /// Update displayed transactions. Used mainly when the database needs an update
-    /// - Parameter txHash: String reprsentation of the TX
-    private func updateTransactions(txHash: String) {
-        self.transactions.enumerated().forEach { i, tx in
-            if tx.hash == txHash {
-                DispatchQueue.main.async {
-                    self.tableView.beginUpdates()
-                    
-                    self.tableView.reloadRows(at: [IndexPath(row: i, section: self.hasExtraSection ? 1 : 0)], with: .automatic)
-                    self.tableView.endUpdates()
-                }
-            }
-        }
-    }
      
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        if shouldBeSyncing {
-            return self.syncingHeaderView
-        }
-        return nil
-    }
-     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if shouldBeSyncing { return kProgressHeaderHeight }
-        return 5.0
-    }
-    
-    // MARK: - Table view data source
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return hasExtraSection ? 2 : 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-          
-        if hasExtraSection && section == 0 {
-            return 1
-        } else {
-            if transactions.count > 0  {
-                self.tableView.backgroundView = nil
-                return transactions.count
-            } else {
-                self.tableView.backgroundView = emptyMessageView()
-                self.tableView.separatorStyle = .none
-                return 0
-            }
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if hasExtraSection && indexPath.section == 0 {
-            return kPromptCellHeight
-        } else {
-            return kNormalTransactionCellHeight
-        }
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          
         if hasExtraSection && indexPath.section == 0 {
@@ -296,7 +136,6 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
             return cell
         }
     }
-    
     
     private func configurePromptCell(promptType: PromptType?, indexPath: IndexPath) -> PromptTableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PromptTVC2", for: indexPath) as? PromptTableViewCell else {
@@ -326,13 +165,6 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         return cell
     }
   
-      
-    private func cellIsSelected(indexPath: IndexPath) -> Bool {
-        
-        let cellIsSelected = selectedIndexes[indexPath] as? Bool ?? false
-        return  cellIsSelected
-    }
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let transaction = transactions[indexPath.row]
@@ -340,14 +172,16 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         if let rate = rate,
            let store = self.store,
            let isLtcSwapped = self.isLtcSwapped {
-            let viewModel = TransactionCellViewModel(transaction: transaction, isLtcSwapped: isLtcSwapped, rate: rate, maxDigits: store.state.maxDigits, isSyncing: store.state.walletState.syncState != .success)
-            let hostingController = UIHostingController(rootView: TransactionModalView(viewModel: viewModel))
             
-            hostingController.modalPresentationStyle = .formSheet
+              let viewModel = TransactionCellViewModel(transaction: transaction, isLtcSwapped: isLtcSwapped, rate: rate, maxDigits: store.state.maxDigits, isSyncing: store.state.walletState.syncState != .success)
             
-            self.present(hostingController, animated: true) {
-                tableView.cellForRow(at: indexPath)?.isSelected = false
-            }
+              let hostingController = UIHostingController(rootView: TransactionModalView(viewModel: viewModel))
+            
+                  hostingController.modalPresentationStyle = .formSheet
+            
+                self.present(hostingController, animated: true) {
+                    tableView.cellForRow(at: indexPath)?.isSelected = false
+                }
         }
     }
     
@@ -364,4 +198,168 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         self.tableView.separatorStyle = .none
         return messageLabel
     }
+}
+
+extension TransactionsViewController {
+     
+    // MARK: - Table view delegate source
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if hasExtraSection && indexPath.section == 0 {
+            return kPromptCellHeight
+        } else {
+            return kNormalTransactionCellHeight
+        }
+    }
+     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if shouldBeSyncing {
+            return self.syncingHeaderView
+        }
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if shouldBeSyncing { return kProgressHeaderHeight }
+        return 5.0
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return hasExtraSection ? 2 : 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if hasExtraSection && section == 0 {
+            return 1
+        } else {
+            if transactions.count > 0  {
+                self.tableView.backgroundView = nil
+                return transactions.count
+            } else {
+                self.tableView.backgroundView = emptyMessageView()
+                self.tableView.separatorStyle = .none
+                return 0
+            }
+        }
+    }
+    
+    /// Update displayed transactions. Used mainly when the database needs an update
+    /// - Parameter txHash: String reprsentation of the TX
+    private func updateTransactions(txHash: String) {
+        self.transactions.enumerated().forEach { i, tx in
+            if tx.hash == txHash {
+                DispatchQueue.main.async {
+                    self.tableView.beginUpdates()
+                    
+                    self.tableView.reloadRows(at: [IndexPath(row: i, section: self.hasExtraSection ? 1 : 0)], with: .automatic)
+                    self.tableView.endUpdates()
+                }
+            }
+        }
+    }
+    
+    // MARK: - Subscription Methods
+    private func addSubscriptions() {
+        
+        guard let store = self.store else {
+            NSLog("ERROR: Store not initialized")
+            return
+        }
+        
+        store.subscribe(self, selector: { $0.walletState.transactions != $1.walletState.transactions },
+                        callback: { state in
+                            self.allTransactions = state.walletState.transactions
+                            self.reload()
+                        })
+        
+        store.subscribe(self, selector: { $0.isLtcSwapped != $1.isLtcSwapped },
+                        callback: { self.isLtcSwapped = $0.isLtcSwapped })
+        store.subscribe(self, selector: { $0.currentRate != $1.currentRate},
+                        callback: { self.rate = $0.currentRate })
+        store.subscribe(self, selector: { $0.maxDigits != $1.maxDigits }, callback: {_ in
+            self.reload()
+        })
+        
+        store.subscribe(self, selector: { $0.walletState.syncProgress != $1.walletState.syncProgress },
+                        callback: { state in
+                            store.subscribe(self, name:.showStatusBar) { (didShowStatusBar) in
+                                self.reload() //May fix where the action view persists after confirming pin
+                            }
+                            
+                            if state.walletState.isRescanning {
+                                self.initSyncingHeaderView(completion: {
+                                    self.syncingHeaderView?.isRescanning = state.walletState.isRescanning
+                                    self.syncingHeaderView?.progress = CGFloat(state.walletState.syncProgress)
+                                    self.syncingHeaderView?.headerMessage = state.walletState.syncState
+                                    self.syncingHeaderView?.noSendImageView.alpha = 1.0
+                                    self.syncingHeaderView?.timestamp = state.walletState.lastBlockTimestamp
+                                    self.shouldBeSyncing = true
+                                })
+                            } else if state.walletState.syncProgress > 0.95 {
+                                self.shouldBeSyncing = false
+                                self.syncingHeaderView = nil
+                            } else {
+                                self.initSyncingHeaderView(completion: {
+                                    self.syncingHeaderView?.progress = CGFloat(state.walletState.syncProgress)
+                                    self.syncingHeaderView?.headerMessage = state.walletState.syncState
+                                    self.syncingHeaderView?.timestamp = state.walletState.lastBlockTimestamp
+                                    self.syncingHeaderView?.noSendImageView.alpha = 0.0
+                                    self.shouldBeSyncing = true
+                                })
+                            }
+                            self.reload()
+                        })
+        
+        store.subscribe(self, selector: { $0.walletState.syncState != $1.walletState.syncState },
+                        callback: { state in
+                            guard let _ = self.walletManager?.peerManager else {
+                                assertionFailure("PEER MANAGER Not initialized")
+                                return
+                            }
+                            
+                            if state.walletState.syncState == .success {
+                                self.shouldBeSyncing = false
+                                self.syncingHeaderView = nil
+                            }
+                            self.reload()
+                        })
+        
+        store.subscribe(self, selector: { $0.recommendRescan != $1.recommendRescan }, callback: { _ in
+            self.attemptShowPrompt()
+        })
+        
+        store.subscribe(self, selector: { $0.walletState.syncState != $1.walletState.syncState }, callback: { _ in
+            self.reload()
+        })
+        
+        store.subscribe(self, name: .didUpgradePin, callback: { _ in
+            if self.currentPromptType == .upgradePin {
+                self.currentPromptType = nil
+            }
+        })
+        
+        store.subscribe(self, name: .didEnableShareData, callback: { _ in
+            if self.currentPromptType == .shareData {
+                self.currentPromptType = nil
+            }
+        })
+        
+        store.subscribe(self, name: .didWritePaperKey, callback: { _ in
+            if self.currentPromptType == .paperKey {
+                self.currentPromptType = nil
+            }
+        })
+         
+        store.subscribe(self, name: .txMemoUpdated(""), callback: {
+            guard let trigger = $0 else { return }
+            if case .txMemoUpdated(let txHash) = trigger {
+                self.updateTransactions(txHash: txHash)
+            }
+        })
+        reload()
+    }
+    
 }

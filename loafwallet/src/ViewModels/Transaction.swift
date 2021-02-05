@@ -106,7 +106,7 @@ class Transaction {
             }
         }
 
-        return "\(amountString)\n\n\(startingString)\n\(endingString)\n\n\(exchangeRateInfo)"
+        return "\(amountString)\n\(startingString)\n\(endingString)\n\(exchangeRateInfo)"
     }
     
     func amountDetailsAmountString(isLtcSwapped: Bool, rate: Rate, rates: [Rate], maxDigits: Int) -> String {

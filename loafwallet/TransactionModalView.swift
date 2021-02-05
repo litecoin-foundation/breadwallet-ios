@@ -9,7 +9,7 @@
 import SwiftUI
 import UIKit
 
-private let qrImageSize = 120.0
+private let qrImageSize = 180.0
 
 struct TransactionModalView: View {
     
@@ -18,6 +18,11 @@ struct TransactionModalView: View {
     
     let dataRowHeight: CGFloat = 65.0
     
+    @State
+    var isDisplayed: Bool = false
+    
+    @State
+    var didCopy: Bool = false
     
     init(viewModel: TransactionCellViewModel) {
         self.viewModel = viewModel
@@ -25,51 +30,50 @@ struct TransactionModalView: View {
     var body: some View {
         
         VStack(spacing: 1.0) {
-            Text("Transaction Details")
+            HStack {
+                Text("Transaction Details")
                 .font(Font(UIFont.barlowSemiBold(size: 18.0)))
-                .foregroundColor(.black)
+                .foregroundColor(.white)
+                .frame(minWidth: 0, maxWidth: .infinity)
                 .padding()
+            }
+            .edgesIgnoringSafeArea(.all)
+            .background(Color(UIColor.liteWalletBlue))
+            
  
-            standardDivider()
-            
-            
-            // staticAmountDetailLabel.text = S.Transaction.amountDetailLabel.lowercased()
-            
-            
+            //MARK: Amount data
             Group {
                 
                 VStack(alignment: .leading, spacing: 1.0) {
-
-                    Text("Amount:")
+                
+                    Text(S.Transaction.amountDetailLabel)
                         .font(Font(UIFont.barlowSemiBold(size: 16.0)))
                         .foregroundColor(Color(UIColor.darkGray))
                         .padding(.leading, 20.0)
-
+ 
                     HStack {
-                        
-                        Text(viewModel.amountText)
+                         
+                        Text(viewModel.feeText)
                             .font(Font(UIFont.barlowRegular(size: 15.0)))
+                            .lineLimit(3)
+                            .scaledToFill()
                             .foregroundColor(Color(UIColor.darkGray))
                             .padding(.leading, 20.0)
-                        
-                        Text(String(format: "(Ł6%d fee)", viewModel.transaction.fee))
-                            .font(Font(UIFont.barlowLight(size: 15.0)))
-                            .foregroundColor(Color(UIColor.darkGray))
-                            .padding(.leading, 20.0)
+                            .padding(.top, 10.0)
                         
                         Spacer()
-                        
-                        copyButtonView(idString: viewModel.amountText)
+
+                        CopyButtonView(idString: viewModel.amountText)
                             .padding(.trailing, 20.0)
                     }
-                    .padding(.bottom, 2.0)
-                standardDivider()
+                    StandardDividerView()
                 }
-                .frame(height: dataRowHeight)
+                .padding(.bottom, 2.0)
+
                 
                 VStack(alignment: .leading, spacing: 1.0) {
                     
-                    Text(S.Transaction.txIDLabel)
+                    Text(S.Confirmation.staticAddressLabel.capitalized(with: Locale.current))
                         .font(Font(UIFont.barlowSemiBold(size: 16.0)))
                         .foregroundColor(Color(UIColor.darkGray))
                         .padding(.leading, 20.0)
@@ -84,17 +88,18 @@ struct TransactionModalView: View {
                         
                         Spacer()
                         
-                        copyButtonView(idString: viewModel.addressText)
+                        CopyButtonView(idString: viewModel.addressText)
                             .padding(.trailing, 20.0)
                     }
                     .padding(.bottom, 2.0)
-                    standardDivider()
+                    StandardDividerView()
                 }
                 .frame(height: dataRowHeight)
             }
             
+            //MARK: Transaction data
             Group {
-                 
+                
                 VStack(alignment: .leading, spacing: 1.0) {
                     
                     Text(S.Transaction.txIDLabel)
@@ -106,45 +111,19 @@ struct TransactionModalView: View {
                     HStack {
                         
                         Text(viewModel.transaction.hash)
-                            .font(Font(UIFont.barlowLight(size: 12.0)))
+                            .font(Font(UIFont.barlowLight(size: 9.0)))
                             .foregroundColor(Color(UIColor.darkGray))
                             .padding(.leading, 20.0)
-                            .padding(.trailing, 60.0)
- 
+                            .padding(.trailing, 40.0)
+                        
                         Spacer()
                         
-                        copyButtonView(idString: viewModel.transaction.hash)
+                        CopyButtonView(idString: viewModel.transaction.hash)
                             .padding(.trailing, 20.0)
                     }
                     .padding(.bottom, 2.0)
                     
-                    standardDivider()
-                }
-                .frame(height: dataRowHeight)
-                
-                VStack(alignment: .leading, spacing: 1.0) {
-                    
-                    Text(S.Transaction.blockHeightLabel)
-                        .font(Font(UIFont.barlowSemiBold(size: 16.0)))
-                        .foregroundColor(Color(UIColor.darkGray))
-                        .padding(.leading, 20.0)
-                        .padding(.top, 5.0)
-                    
-                    HStack {
-                        
-                        Text(viewModel.transaction.blockHeight)
-                            .font(Font(UIFont.barlowRegular(size: 15.0)))
-                            .foregroundColor(Color(UIColor.darkGray))
-                            .padding(.leading, 20.0)
-                        
-                        Spacer()
-                        
-                        copyButtonView(idString: viewModel.transaction.blockHeight)
-                            .padding(.trailing, 20.0)
-                    }
-                    .padding(.bottom, 2.0)
-                    
-                    standardDivider()
+                    StandardDividerView()
                 }
                 .frame(height: dataRowHeight)
                 
@@ -158,6 +137,34 @@ struct TransactionModalView: View {
                     
                     HStack {
                         
+                        Text(viewModel.memoString)
+                            .font(Font(UIFont.barlowRegular(size: 15.0)))
+                            .foregroundColor(Color(UIColor.darkGray))
+                            .padding(.leading, 20.0)
+                        
+                        Spacer()
+                        
+                        if viewModel.memoString != "" {
+                            CopyButtonView(idString: viewModel.memoString)
+                                .padding(.trailing, 20.0)
+                        }
+                    }
+                    .padding(.bottom, 2.0)
+                    
+                    StandardDividerView()
+                }
+                .frame(height: dataRowHeight)
+                
+                VStack(alignment: .leading, spacing: 1.0) {
+                    
+                    Text(S.TransactionDetails.blockHeightLabel + ":")
+                        .font(Font(UIFont.barlowSemiBold(size: 16.0)))
+                        .foregroundColor(Color(UIColor.darkGray))
+                        .padding(.leading, 20.0)
+                        .padding(.top, 5.0)
+                    
+                    HStack {
+                        
                         Text(viewModel.transaction.blockHeight)
                             .font(Font(UIFont.barlowRegular(size: 15.0)))
                             .foregroundColor(Color(UIColor.darkGray))
@@ -165,59 +172,41 @@ struct TransactionModalView: View {
                         
                         Spacer()
                         
-                        copyButtonView(idString: viewModel.transaction.blockHeight)
+                        CopyButtonView(idString: viewModel.transaction.blockHeight)
                             .padding(.trailing, 20.0)
                     }
                     .padding(.bottom, 2.0)
                     
-                    standardDivider()
+                    StandardDividerView()
                 }
                 .frame(height: dataRowHeight)
+            }
+            
+            //MARK: QR Image
+            Group {
                 
-                
+                Spacer()
+
+                VStack(alignment: .center, spacing: 1.0) {
+                     
+                    Image(uiImage: viewModel.qrImage)
+                        .frame(width: kQRImageSide,
+                               height: kQRImageSide,
+                               alignment: .center).padding(.all, 2.0)
+                    
+                    Text(viewModel.addressText)
+                        .font(Font(UIFont.barlowLight(size: 13.0)))
+                        .foregroundColor(.black)
+                        .frame(alignment: .center).padding(.all, 2.0)
+                }
+                .padding(.all, 8.0)
+               
+                Spacer() 
             }
             
             Spacer()
-            
         }
         
     }
 }
-//
-
-struct standardDivider: View {
-    var body: some View {
-        Divider()
-            .frame(height: 2.0)
-            .foregroundColor(.black)
-            .padding([.leading, .trailing], 20)
-    }
-}
-
-struct copyButtonView: View {
-    
-    var idString: String
-    
-    init(idString: String) {
-        self.idString = idString
-    }
-    var body: some View {
-        
-        Button(action: {
-            UIPasteboard.general.string = idString
-        }) {
-            Image(systemName: "doc.on.doc")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 15.0,
-                       height: 30,
-                       alignment: .center)
-                .foregroundColor(Color(UIColor.darkGray))
-        }
-        
-    }
-}
-
-
-
 
