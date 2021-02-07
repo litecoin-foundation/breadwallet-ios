@@ -70,10 +70,10 @@ class TransactionCellViewModel: ObservableObject {
         
         if self.transaction.direction == .sent {
             directionImageText = "arrowtriangle.up.circle.fill"
-            directionArrowColor = Color(UIColor.litecoinGreen)
+            directionArrowColor = Color(UIColor.litecoinOrange)
         } else if self.transaction.direction == .received {
             directionImageText = "arrowtriangle.down.circle.fill"
-            directionArrowColor = Color(UIColor.litecoinOrange) 
+            directionArrowColor = Color(UIColor.litecoinGreen)
         }
         
         let timestampInfo = transaction.timeSince

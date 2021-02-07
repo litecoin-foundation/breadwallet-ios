@@ -1114,6 +1114,12 @@
 /* Memo section header */
 "TransactionDetails.commentsHeader" = "Vermerk";
 
+/* Copied */
+"TransactionDetails.copiedAll" = "Kopiert";
+
+/* Copy all details */
+"TransactionDetails.copyAllDetails" = "Kopieren Sie alle Details";
+
 /* Empty transaction list message. */
 "TransactionDetails.emptyMessage" = "Hier werden deine Transaktionen angezeigt.";
 

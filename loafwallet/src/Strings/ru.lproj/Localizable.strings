@@ -1114,6 +1114,12 @@
 /* Memo section header */
 "TransactionDetails.commentsHeader" = "Записка";
 
+/* Copied */
+"TransactionDetails.copiedAll" = "Скопировано";
+
+/* Copy all details */
+"TransactionDetails.copyAllDetails" = "Скопируйте все детали";
+
 /* Empty transaction list message. */
 "TransactionDetails.emptyMessage" = "Ваши транзакции будут отображаться здесь.";
 

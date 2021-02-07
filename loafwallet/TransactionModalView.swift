@@ -24,6 +24,9 @@ struct TransactionModalView: View {
     @State
     var didCopy: Bool = false
     
+    @State
+    var copiedData: String = ""
+    
     init(viewModel: TransactionCellViewModel) {
         self.viewModel = viewModel
     }
@@ -44,13 +47,14 @@ struct TransactionModalView: View {
             //MARK: Amount data
             Group {
                 
-                VStack(alignment: .leading, spacing: 1.0) {
-                
+                VStack(alignment: .leading) {
+                   
                     Text(S.Transaction.amountDetailLabel)
                         .font(Font(UIFont.barlowSemiBold(size: 16.0)))
                         .foregroundColor(Color(UIColor.darkGray))
                         .padding(.leading, 20.0)
- 
+                        .padding(.top, 5.0)
+
                     HStack {
                          
                         Text(viewModel.feeText)
@@ -61,11 +65,14 @@ struct TransactionModalView: View {
                             .padding(.leading, 20.0)
                             .padding(.top, 10.0)
                         
-                        Spacer()
+                       Spacer()
 
                         CopyButtonView(idString: viewModel.amountText)
                             .padding(.trailing, 20.0)
                     }
+                    .padding(.top, 1.0)
+                    .padding(.bottom, 5.0)
+
                     StandardDividerView()
                 }
                 .padding(.bottom, 2.0)
@@ -202,6 +209,37 @@ struct TransactionModalView: View {
                 .padding(.all, 8.0)
                
                 Spacer() 
+            }
+            
+            //MARK: Copy All Button
+            Group {
+                
+                Spacer()
+                
+                VStack(alignment: .center, spacing: 1.0) {
+                    
+                    Button(action: {
+                        copiedData = "Amount:\(viewModel.amountText)\n\nFee:\(viewModel.feeText)\n\nAddress:\(viewModel.addressText)\n\nTxID: \(viewModel.transaction.hash)"
+                        UIPasteboard.general.string = copiedData
+                        
+                    }) {
+                    
+                        Text(copiedData == "" ? S.TransactionDetails.copyAllDetails : S.TransactionDetails.copiedAll)
+                        .animation(.easeInOut(duration: 1.0))
+                        .font(Font(UIFont.barlowSemiBold(size: 20.0)))
+                        .padding(.all, 10.0)
+                        .foregroundColor(.white)
+                        .background(Color(UIColor.liteWalletBlue))
+                        .cornerRadius(4.0)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 4.0)
+                                .stroke(Color(UIColor.liteWalletBlue))
+                        )
+                    }
+                }
+                .padding(.all, 8.0)
+                
+                Spacer()
             }
             
             Spacer()

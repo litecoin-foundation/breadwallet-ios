@@ -1114,6 +1114,12 @@
 /* Memo section header */
 "TransactionDetails.commentsHeader" = "メモ";
 
+/* Copied */
+"TransactionDetails.copiedAll" = "コピー";
+
+/* Copy all details */
+"TransactionDetails.copyAllDetails" = "すべての詳細をコピーする";
+
 /* Empty transaction list message. */
 "TransactionDetails.emptyMessage" = "あなたの取引はこちらに表示されます。";
 

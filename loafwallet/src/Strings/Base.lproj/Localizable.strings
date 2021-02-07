@@ -1353,3 +1353,9 @@
 
 /* Failed Login */
 "LitecoinCard.failed.login" = "Login failed";
+
+/* Copied */
+"TransactionDetails.copiedAll" = "Copied";
+
+/* Copy all details */
+"TransactionDetails.copyAllDetails" = "Copy all details";

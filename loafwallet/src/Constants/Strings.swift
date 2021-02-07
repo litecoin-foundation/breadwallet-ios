@@ -238,6 +238,8 @@ enum S {
         static let notConfirmedBlockHeightLabel = NSLocalizedString("TransactionDetails.notConfirmedBlockHeightLabel", value: "**Not Confirmed**", comment: "eg. Confirmed in Block: Not Confirmed")
         static let staticTXIDLabel = NSLocalizedString("TransactionDetails.staticTXLabel", value: "**TXID:**", comment: "Label for TXID")
         static let priceTimeStampLabel = NSLocalizedString("TransactionDetails.priceTimeStampPrefix", value: "**as of**", comment: "Prefix for price")
+        static let copyAllDetails = NSLocalizedString("TransactionDetails.copyAllDetails", value: "**Copy all details**", comment: "Copy all details")
+        static let copiedAll = NSLocalizedString("TransactionDetails.copiedAll", value: "**Copied**", comment: "Copied")
     }
     
     //MARK: - Buy Center

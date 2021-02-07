@@ -1114,6 +1114,12 @@
 /* Memo section header */
 "TransactionDetails.commentsHeader" = "Memo";
 
+/* Copied */
+"TransactionDetails.copiedAll" = "Gekopieerd";
+
+/* Copy all details */
+"TransactionDetails.copyAllDetails" = "Kopieer alle details";
+
 /* Empty transaction list message. */
 "TransactionDetails.emptyMessage" = "Je transacties zullen hier verschijnen.";
 

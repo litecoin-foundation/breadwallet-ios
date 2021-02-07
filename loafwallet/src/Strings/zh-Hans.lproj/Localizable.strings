@@ -382,6 +382,9 @@
 /* Register */
 "LitecoinCard.registerCard" = "寄存器";
 
+/* Register for Litecoin Card */
+"LitecoinCard.registerCardPhrase" = "注册莱特币卡";
+
 /* Registering user... */
 "LitecoinCard.registering.user" = "正在注册用户...";
 
@@ -399,6 +402,9 @@
 
 /* First name */
 "LitecoinCard.Registration.firstName" = "名字";
+
+/* identification */
+"LitecoinCard.Registration.identification" = "身份证明";
 
 /* kycIDNumber */
 "LitecoinCard.Registration.kycIDNumber" = "了解你的顾客 证件类型";
@@ -1108,6 +1114,12 @@
 /* Memo section header */
 "TransactionDetails.commentsHeader" = "备忘录";
 
+/* Copied */
+"TransactionDetails.copiedAll" = "复制的";
+
+/* Copy all details */
+"TransactionDetails.copyAllDetails" = "复制所有详细信息";
+
 /* Empty transaction list message. */
 "TransactionDetails.emptyMessage" = "您的交易将显示在这里。";
 
@@ -1329,9 +1341,3 @@
 
 /* 1 of 3 */
 "WritePaperPhrase.step" = "%1$d / %2$d";
-
-/* Register for Litecoin Card */
-"LitecoinCard.registerCardPhrase" = "";
-
-/* identification */
-"LitecoinCard.Registration.identification" = "";

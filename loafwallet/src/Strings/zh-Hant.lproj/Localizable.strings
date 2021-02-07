@@ -1114,6 +1114,12 @@
 /* Memo section header */
 "TransactionDetails.commentsHeader" = "備註";
 
+/* Copied */
+"TransactionDetails.copiedAll" = "複製的";
+
+/* Copy all details */
+"TransactionDetails.copyAllDetails" = "複製所有詳細信息";
+
 /* Empty transaction list message. */
 "TransactionDetails.emptyMessage" = "您的交易會顯示於此。";
 

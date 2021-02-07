@@ -1114,6 +1114,12 @@
 /* Memo section header */
 "TransactionDetails.commentsHeader" = "Memo";
 
+/* Copied */
+"TransactionDetails.copiedAll" = "Kopierad";
+
+/* Copy all details */
+"TransactionDetails.copyAllDetails" = "Kopiera alla detaljer";
+
 /* Empty transaction list message. */
 "TransactionDetails.emptyMessage" = "Dina transaktioner visas här.";
 

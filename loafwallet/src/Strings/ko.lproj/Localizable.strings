@@ -1114,6 +1114,12 @@
 /* Memo section header */
 "TransactionDetails.commentsHeader" = "메모";
 
+/* Copied */
+"TransactionDetails.copiedAll" = "복사 됨";
+
+/* Copy all details */
+"TransactionDetails.copyAllDetails" = "모든 세부 사항 복사";
+
 /* Empty transaction list message. */
 "TransactionDetails.emptyMessage" = "귀하의 트랜잭션이 여기에 표시됩니다.";
 
