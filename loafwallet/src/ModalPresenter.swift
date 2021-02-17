@@ -9,6 +9,8 @@
 import UIKit
 import LocalAuthentication
 import SwiftUI
+import SafariServices
+
 
 class ModalPresenter : Subscriber, Trackable {
     
@@ -344,25 +346,26 @@ class ModalPresenter : Subscriber, Trackable {
                 self?.presentSecurityCenter()
             }
         }
+        
         menu.didTapSupport = { [weak self, weak menu] in
             menu?.dismiss(animated: true, completion: {
-                self?.messagePresenter.presenter = self?.topViewController
-                self?.messagePresenter.presentSupportCompose()
+                
+                let urlString = "https://litecoinfoundation.zendesk.com/hc/en-us"
+                
+                guard let url = URL(string: urlString) else { return }
+                 
+                let vc = SFSafariViewController(url: url)
+                self?.topViewController?.present(vc, animated: true, completion: nil)
             })
+
         }
-        
-        menu.didTapSupportLF = { [weak self, weak menu] in
-            menu?.dismiss(animated: true, completion: {
-                self?.messagePresenter.presenter = self?.topViewController
-                self?.messagePresenter.presentSupportCompose()
-            })
-        }
-        
-        menu.didTapSupportLF = { [weak self, weak menu] in
+
+        menu.didTapGiveSupportLF = { [weak self, weak menu] in
             menu?.dismiss(animated: true, completion: {
                 self?.presentSupportLF()
             })
         }
+        
         menu.didTapLock = { [weak self, weak menu] in
             menu?.dismiss(animated: true) {
                 self?.store.trigger(name: .lock)
