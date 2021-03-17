@@ -180,7 +180,10 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
                   hostingController.modalPresentationStyle = .formSheet
             
                 self.present(hostingController, animated: true) {
-                    tableView.cellForRow(at: indexPath)?.isSelected = false
+                    
+                    if indexPath.row < self.transactions.count {
+                        tableView.cellForRow(at: indexPath)?.isSelected = false
+                    }
                 }
         }
     }
