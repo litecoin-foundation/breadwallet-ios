@@ -112,6 +112,15 @@
                                             <outlet property="titleLabel" destination="Q2a-mL-MNS" id="ofX-fX-N1f"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="EmptyTVC" rowHeight="1" id="GfL-sK-N8q" userLabel="EmptyTVC" customClass="EmptyTableViewCell" customModule="loafwallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="148" width="414" height="1"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GfL-sK-N8q" id="8YK-ov-V5F">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.20539733769999999" green="0.36322331429999999" blue="0.61663442850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="XfV-N2-tFK" id="0M3-5b-hue"/>

@@ -10,9 +10,9 @@ import UIKit
 import SwiftUI
 import LocalAuthentication
 
-private let promptDelay: TimeInterval = 0.6 
 let kNormalTransactionCellHeight: CGFloat = 65.0
 let kProgressHeaderHeight: CGFloat = 50.0
+let kDormantHeaderHeight: CGFloat = 1.0
 let kPromptCellHeight : CGFloat = 120.0
 let kQRImageSide: CGFloat = 110.0
  
@@ -38,10 +38,6 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         didSet { reload() }
     }
     
-    private var hasExtraSection: Bool {
-        return  currentPromptType != nil
-    }
-    
     private var currentPromptType: PromptType? {
         didSet {
             if currentPromptType != nil && oldValue == nil {
@@ -65,16 +61,15 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         
         guard let _ = walletManager else {
              NSLog("ERROR - Wallet manager not initialized")
-             assertionFailure("PEER MAANAGER Not initialized")
+             assertionFailure("PEER MANAGER Not initialized")
              return
         }
         self.tableView.register(HostingTransactionCell<TransactionCellView>.self, forCellReuseIdentifier: "HostingTransactionCell<TransactionCellView>")
         self.transactions = TransactionManager.sharedInstance.transactions
         self.rate = TransactionManager.sharedInstance.rate
         
-        
         tableView.backgroundColor = .liteWalletBlue
-        initSyncingHeaderView(completion: {})
+        initSyncingHeaderView(completion: { })
         attemptShowPrompt()
     }
     
@@ -114,26 +109,32 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
     }
      
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         
-        if hasExtraSection && indexPath.section == 0 {
-            return configurePromptCell(promptType: currentPromptType, indexPath: indexPath)
-        } else {
-            let transaction = transactions[indexPath.row]
-            
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "HostingTransactionCell<TransactionCellView>", for: indexPath) as? HostingTransactionCell<TransactionCellView> else {
-                NSLog("ERROR No cell found")
-                return UITableViewCell()
-            }
-             
-            if let rate = rate,
-               let store = self.store,
-               let isLtcSwapped = self.isLtcSwapped {
-                let viewModel = TransactionCellViewModel(transaction: transaction, isLtcSwapped: isLtcSwapped, rate: rate, maxDigits: store.state.maxDigits, isSyncing: store.state.walletState.syncState != .success)
-                cell.set(rootView: TransactionCellView(viewModel: viewModel), parentController: self)
-                cell.selectionStyle = .default
-            }
-            
-            return cell
+        
+        switch  indexPath.section {
+            case 0:
+                
+                if currentPromptType != nil {
+                    return configurePromptCell(promptType: currentPromptType, indexPath: indexPath)
+                }
+               return EmptyTableViewCell()
+                
+            default:
+                let transaction = transactions[indexPath.row]
+                
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "HostingTransactionCell<TransactionCellView>", for: indexPath) as? HostingTransactionCell<TransactionCellView> else {
+                    NSLog("ERROR No cell found")
+                    return UITableViewCell()
+                }
+                 
+                if let rate = rate,
+                   let store = self.store,
+                   let isLtcSwapped = self.isLtcSwapped {
+                    let viewModel = TransactionCellViewModel(transaction: transaction, isLtcSwapped: isLtcSwapped, rate: rate, maxDigits: store.state.maxDigits, isSyncing: store.state.walletState.syncState != .success)
+                    cell.set(rootView: TransactionCellView(viewModel: viewModel), parentController: self)
+                    cell.selectionStyle = .default
+                }
+                
+                return cell
         }
     }
     
@@ -167,24 +168,30 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let transaction = transactions[indexPath.row]
-        
-        if let rate = rate,
-           let store = self.store,
-           let isLtcSwapped = self.isLtcSwapped {
+        if indexPath.section == 1 {
+            let transaction = transactions[indexPath.row]
             
-              let viewModel = TransactionCellViewModel(transaction: transaction, isLtcSwapped: isLtcSwapped, rate: rate, maxDigits: store.state.maxDigits, isSyncing: store.state.walletState.syncState != .success)
-            
-              let hostingController = UIHostingController(rootView: TransactionModalView(viewModel: viewModel))
-            
-                  hostingController.modalPresentationStyle = .formSheet
-            
-                self.present(hostingController, animated: true) {
-                    
-                    if indexPath.row < self.transactions.count {
-                        tableView.cellForRow(at: indexPath)?.isSelected = false
+            if let rate = rate,
+               let store = self.store,
+               let isLtcSwapped = self.isLtcSwapped {
+                
+                  let viewModel = TransactionCellViewModel(transaction: transaction, isLtcSwapped: isLtcSwapped, rate: rate, maxDigits: store.state.maxDigits, isSyncing: store.state.walletState.syncState != .success)
+                
+                  let hostingController = UIHostingController(rootView: TransactionModalView(viewModel: viewModel))
+                
+                      hostingController.modalPresentationStyle = .formSheet
+                        
+                    self.present(hostingController, animated: true) {
+                        
+                        
+                        // Notes of bugfix: https://github.com/litecoin-foundation/loafwallet-ios/pull/247
+                        // Refactored the class to have two section and make sure the row never extends outside the transaction count.
+                        
+                        if indexPath.row < self.transactions.count {
+                            tableView.cellForRow(at: indexPath)?.isSelected = false
+                        }
                     }
-                }
+            }
         }
     }
     
@@ -201,16 +208,13 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         self.tableView.separatorStyle = .none
         return messageLabel
     }
-}
-
-extension TransactionsViewController {
-     
+    
     // MARK: - Table view delegate source
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if hasExtraSection && indexPath.section == 0 {
-            return kPromptCellHeight
+        if indexPath.section == 0 {
+            return currentPromptType != nil ? kPromptCellHeight : kDormantHeaderHeight
         } else {
             return kNormalTransactionCellHeight
         }
@@ -218,25 +222,31 @@ extension TransactionsViewController {
      
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        if shouldBeSyncing {
+        if shouldBeSyncing && section == 0 {
             return self.syncingHeaderView
         }
         return nil
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if shouldBeSyncing { return kProgressHeaderHeight }
-        return 0.0
+        
+        var sectionHeight = 0.0
+        switch section {
+            case 0:
+                sectionHeight = Double(shouldBeSyncing ? kProgressHeaderHeight : kDormantHeaderHeight)
+                return CGFloat(sectionHeight)
+            default: return 0.0
+        }
     }
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return hasExtraSection ? 2 : 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if hasExtraSection && section == 0 {
+        if section == 0 {
             return 1
         } else {
             if transactions.count > 0  {
@@ -257,8 +267,7 @@ extension TransactionsViewController {
             if tx.hash == txHash {
                 DispatchQueue.main.async {
                     self.tableView.beginUpdates()
-                    
-                    self.tableView.reloadRows(at: [IndexPath(row: i, section: self.hasExtraSection ? 1 : 0)], with: .automatic)
+                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 1)], with: .automatic)
                     self.tableView.endUpdates()
                 }
             }
