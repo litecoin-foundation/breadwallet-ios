@@ -893,7 +893,7 @@
 "Send.toLabel" = "至";
 
 /* Lookup */
-"Send.UnstoppableDomains.lookup" = "抬头";
+"Send.UnstoppableDomains.lookup" = "查找";
 
 /* LookupDomainError */
 "Send.UnstoppableDomains.lookupDomainError" = "抱歉，找不到域。 [错误: %2$d]";
