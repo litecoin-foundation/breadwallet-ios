@@ -70,7 +70,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         guard let reduxState = self.store?.state else {
             return
         }
-        
+
         self.tableView.register(HostingTransactionCell<TransactionCellView>.self, forCellReuseIdentifier: "HostingTransactionCell<TransactionCellView>")
         self.transactions = TransactionManager.sharedInstance.transactions
         self.rate = TransactionManager.sharedInstance.rate
@@ -97,8 +97,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         
         completion()
     }
-    
-    /// Checks to see if Prompt can be shown
+	
     private func attemptShowPrompt() {
         guard let walletManager = walletManager else { return }
         guard let store = self.store else {
@@ -283,7 +282,6 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
     }
      
     // MARK: - UITableView Support Methods
-
     private func configurePromptCell(promptType: PromptType?, indexPath: IndexPath) -> PromptTableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PromptTVC2", for: indexPath) as? PromptTableViewCell else {
             NSLog("ERROR No cell found")
@@ -442,5 +440,4 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         
         reload()
     }
-    
 }

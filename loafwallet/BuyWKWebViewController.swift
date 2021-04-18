@@ -29,8 +29,8 @@ class BuyWKWebViewController: UIViewController, WKNavigationDelegate, WKScriptMe
  
     var appInstallDate: Date = Date()
  
-    private let wkProcessPool = WKProcessPool()
-     
+    private let wkProcessPool = WKProcessPool() 
+	
     var currencyCode: String = "USD"
     
     override func viewDidLoad() {

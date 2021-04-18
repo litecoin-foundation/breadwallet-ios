@@ -357,7 +357,7 @@ class ModalPresenter : Subscriber, Trackable {
         sendVC.onResolutionFailure = { [weak self] failureMessage in
             self?.presentFailureAlert(.failedResolution, errorMessage: failureMessage, completion: {})
         }
-        
+		
         return root
     }
     

@@ -93,7 +93,7 @@ func ==(lhs: AlertType, rhs: AlertType) -> Bool {
 }
 
 class AlertView : UIView, SolidColorDrawable {
-    
+
     private let type: AlertType
     private let header = UILabel()
     private let subheader = UILabel()
@@ -105,7 +105,6 @@ class AlertView : UIView, SolidColorDrawable {
     init(type: AlertType) {
         self.type = type
         self.icon = type.icon
-        
         super.init(frame: .zero)
         layer.cornerRadius = 6.0
         layer.masksToBounds = true

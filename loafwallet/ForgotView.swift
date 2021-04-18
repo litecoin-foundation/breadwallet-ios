@@ -11,7 +11,7 @@ struct ForgotAlertView<Presenting>: View where Presenting: View {
     //MARK: - Combine Variables
     @ObservedObject
     var viewModel = ForgotAlertViewModel()
-    
+
     @Binding
     var isShowingForgot: Bool
     
@@ -27,7 +27,7 @@ struct ForgotAlertView<Presenting>: View where Presenting: View {
     
     @State
     var didCheckEmailAddress: Bool = false
-     
+
     var body: some View {
         GeometryReader { (deviceSize: GeometryProxy) in
             HStack{
@@ -102,7 +102,6 @@ struct ForgotAlertView<Presenting>: View where Presenting: View {
                                     .padding([.leading, .trailing], 20)
                                     .padding([.top,.bottom], 10)
                             }
-                            
                         }
                     }
                     .padding()
@@ -138,8 +137,4 @@ struct ForgotAlertView_Previews: PreviewProvider {
         }
     }
 }
-
-
-
-
 

@@ -72,7 +72,7 @@ class CardViewController: UIViewController {
             self.viewModel.fetchCardWalletDetails {
                 print("Logged in updated wallet values")
             }
-            
+			
             self.updateLoginStatusFromViewModel()
         }
          

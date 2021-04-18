@@ -170,7 +170,7 @@ class RegistrationViewModel: ObservableObject {
         
         guard passwordString.count >= 6 else {
             return false
-        } 
+        }
         
         if try! NSRegularExpression(pattern: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$", options: .caseInsensitive)
             .firstMatch(in: passwordString, options: [],
@@ -205,5 +205,3 @@ class RegistrationViewModel: ObservableObject {
         }
     }
 }
-
-
